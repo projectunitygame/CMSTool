@@ -1,0 +1,26 @@
+INFO 2018-10-07 02:16:11 – https://cms.datphuprinting.vn/Authen/oauth2callback.aspx?state=state_parameter_passthrough_value&code=4/cAB7hbSj2Jgmh91-Z82jfdYLqd2Z8hH0hrBpbQoPT0dHZmYqqtZ-U3wiJlOHwHVcjd3xo5p-fpBItiDinpyfSzY&scope=https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/plus.me%20https://www.googleapis.com/auth/userinfo.profile
+UrlReferrer: https://accounts.google.com/signin/oauth/oauthchooseaccount?client_id=983373798777-4g51i680oq8gq0pj1otnfesjqse1vsp0.apps.googleusercontent.com&as=b2WN-JZJ86Wo9uvUxqeo_Q&destination=https:%2F%2Fcms.datphuprinting.vn&approval_state=!ChRLQkZ1NWVsdlQ2bWJQcXRxaE1iQhIfUXk4Zy16cUoxcjhmNEJxcmlYbTVkb25pamV5c1pCWQ·ANKMe1QAAAAAW7pbbYet4xjCqrFs0ZG9mFwlBVVEgeW_&oauthgdpr=1&xsrfsig=AHgIfE8AURKYdpDAJvHL5GmU5iSFXss4ZA&flowName=GeneralOAuthFlow
+IP: 116.109.239.65
+Code: 4/cAB7hbSj2Jgmh91-Z82jfdYLqd2Z8hH0hrBpbQoPT0dHZmYqqtZ-U3wiJlOHwHVcjd3xo5p-fpBItiDinpyfSzY
+INFO 2018-10-07 02:16:15 – {"DATE_LOGS":"2018-10-07T02:16:12.3467026+07:00","INFO_LOGS":"TokenGG: {\n  \"error\": \"redirect_uri_mismatch\",\n  \"error_description\": \"Bad Request\"\n}"}
+INFO 2018-10-07 02:18:56 – https://cms.datphuprinting.vn/Authen/oauth2callback.aspx?state=state_parameter_passthrough_value&code=4/cAB7hbSj2Jgmh91-Z82jfdYLqd2Z8hH0hrBpbQoPT0dHZmYqqtZ-U3wiJlOHwHVcjd3xo5p-fpBItiDinpyfSzY&scope=https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/plus.me%20https://www.googleapis.com/auth/userinfo.profile
+UrlReferrer: 
+IP: 116.109.239.65
+Code: 4/cAB7hbSj2Jgmh91-Z82jfdYLqd2Z8hH0hrBpbQoPT0dHZmYqqtZ-U3wiJlOHwHVcjd3xo5p-fpBItiDinpyfSzY
+INFO 2018-10-07 02:19:01 – {"DATE_LOGS":"2018-10-07T02:18:57.2572176+07:00","INFO_LOGS":"TokenGG: {\n  \"error\": \"invalid_grant\",\n  \"error_description\": \"Bad Request\"\n}"}
+INFO 2018-10-07 02:25:19 – https://cms.datphuprinting.vn/Authen/oauth2callback.aspx?state=state_parameter_passthrough_value&code=4/cAB7hbSj2Jgmh91-Z82jfdYLqd2Z8hH0hrBpbQoPT0dHZmYqqtZ-U3wiJlOHwHVcjd3xo5p-fpBItiDinpyfSzY&scope=https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/plus.me%20https://www.googleapis.com/auth/userinfo.profile
+UrlReferrer: 
+IP: 116.109.239.65
+Code: 4/cAB7hbSj2Jgmh91-Z82jfdYLqd2Z8hH0hrBpbQoPT0dHZmYqqtZ-U3wiJlOHwHVcjd3xo5p-fpBItiDinpyfSzY
+INFO 2018-10-07 02:25:24 – {"DATE_LOGS":"2018-10-07T02:25:20.4436002+07:00","INFO_LOGS":"TokenGG: {\n  \"error\": \"invalid_grant\",\n  \"error_description\": \"Bad Request\"\n}"}
+INFO 2018-10-07 02:27:59 – https://cms.datphuprinting.vn/Authen/oauth2callback.aspx?state=state_parameter_passthrough_value&code=4/cADIkz7m0ahlyU9N_9zuXZ7YC2_gBbQuewBmBgi2C8PFQ5YLzFsjOw4sgY5Y9SCMMPEValMtJU9Ert6anY656CM&scope=https://www.googleapis.com/auth/userinfo.email%20https://www.googleapis.com/auth/plus.me%20https://www.googleapis.com/auth/userinfo.profile
+UrlReferrer: https://accounts.google.com/signin/oauth/oauthchooseaccount?client_id=983373798777-4g51i680oq8gq0pj1otnfesjqse1vsp0.apps.googleusercontent.com&as=gzgHzzGqrzVIdRwqnbyOYA&destination=https:%2F%2Fcms.datphuprinting.vn&approval_state=!ChRUUFlDT0lSSG9SNnRkZ0g0M19kbhIfUTk4YUQzQUpabThjNEJxcmlYbTVkb21DVlphdFpCWQ·ANKMe1QAAAAAW7peJYhP5KRRAGMJ8CXYuwOV8oO9wokW&oauthgdpr=1&xsrfsig=AHgIfE_YkRu9tH0MRITxzlyQyM8126mS5A&flowName=GeneralOAuthFlow
+IP: 116.109.239.65
+Code: 4/cADIkz7m0ahlyU9N_9zuXZ7YC2_gBbQuewBmBgi2C8PFQ5YLzFsjOw4sgY5Y9SCMMPEValMtJU9Ert6anY656CM
+INFO 2018-10-07 02:28:04 – {"DATE_LOGS":"2018-10-07T02:28:00.3365686+07:00","INFO_LOGS":"TokenGG: {\n  \"error\": \"redirect_uri_mismatch\",\n  \"error_description\": \"Bad Request\"\n}"}
+INFO 2018-10-07 02:31:24 – https://cms.datphuprinting.vn/Authen/oauth2callback.aspx?state=state_parameter_passthrough_value&code=4/cADAVjUjnzgmX5xlfpXY71oyMNomioj3b6o3Oj5QOqK7WLAJuYbpuvzOb2Zu4BUdc8rmIQbOD3ZY9Rj-kCQMUp0&scope=https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/plus.me%20https://www.googleapis.com/auth/userinfo.email
+UrlReferrer: https://accounts.google.com/signin/oauth/oauthchooseaccount?client_id=983373798777-4g51i680oq8gq0pj1otnfesjqse1vsp0.apps.googleusercontent.com&as=7VDxoVMWsaaJGfX2DejT8w&destination=https:%2F%2Fcms.datphuprinting.vn&approval_state=!ChR6UTRRdEtWR183THFwZGtubHoxYhIfczRfMFlQSG9VdXdUNEJxcmlYbTVkb21TQzh5dFpCWQ·ANKMe1QAAAAAW7pfAfMJDhn3vcItSPcPhjhjslGBvFoP&oauthgdpr=1&xsrfsig=AHgIfE-CuCeUC0l_NdoqRkzKw1rN0xpN5g&flowName=GeneralOAuthFlow
+IP: 116.109.239.65
+Code: 4/cADAVjUjnzgmX5xlfpXY71oyMNomioj3b6o3Oj5QOqK7WLAJuYbpuvzOb2Zu4BUdc8rmIQbOD3ZY9Rj-kCQMUp0
+INFO 2018-10-07 02:31:28 – {"DATE_LOGS":"2018-10-07T02:31:24.3252799+07:00","INFO_LOGS":"GetAccessToken: https://www.googleapis.com/oauth2/v3/token\r\nPost Data: code=4/cADAVjUjnzgmX5xlfpXY71oyMNomioj3b6o3Oj5QOqK7WLAJuYbpuvzOb2Zu4BUdc8rmIQbOD3ZY9Rj-kCQMUp0&client_id=983373798777-4g51i680oq8gq0pj1otnfesjqse1vsp0.apps.googleusercontent.com&client_secret=bgJ_b5VUwba37Dn6RZQT_o2K&redirect_uri=http://localhost:51572/Authen/oauth2callback.aspx&grant_type=authorization_code"}
+INFO 2018-10-07 02:31:28 – {"DATE_LOGS":"2018-10-07T02:31:25.0130651+07:00","INFO_LOGS":"TokenGG: {\n  \"error\": \"redirect_uri_mismatch\",\n  \"error_description\": \"Bad Request\"\n}"}

@@ -1,0 +1,23 @@
+INFO 2018-11-11 07:45:18 – {"DATE_LOGS":"11/11/2018 07:45:18","INFO_LOGS":"***** SERVER START *****"}
+INFO 2018-11-11 07:46:18 – {"DATE_LOGS":"11/11/2018 07:45:20","INFO_LOGS":"LoginWithToken: 3f87c730aad3859960b06ff16a291286,::1"}
+INFO 2018-11-11 07:46:18 – {"DATE_LOGS":"11/11/2018 07:45:20","INFO_LOGS":"LoginWithToken: 3f87c730aad3859960b06ff16a291286,IP ::1"}
+INFO 2018-11-11 07:46:18 – {"DATE_LOGS":"11/11/2018 07:45:20","INFO_LOGS":"Result: 1\r\n[{\"AccountId\":8,\"Email\":\"truongdien99@gmail.com\",\"UserName\":\"truongdien99@gmail.com\",\"Avatar\":\"\",\"Token\":\"3f87c730aad3859960b06ff16a291286\",\"TokenOld\":\"\",\"PublisherId\":1}]"}
+INFO 2018-11-11 07:46:18 – {"DATE_LOGS":"11/11/2018 07:45:20","INFO_LOGS":"Result LoginWithToken: 1"}
+INFO 2018-11-11 07:46:18 – {"DATE_LOGS":"11/11/2018 07:45:20","INFO_LOGS":"LoginWithToken: 3f87c730aad3859960b06ff16a291286,IP ::1"}
+INFO 2018-11-11 07:46:18 – {"DATE_LOGS":"11/11/2018 07:45:20","INFO_LOGS":"Result: 1\r\n[{\"AccountId\":8,\"Email\":\"truongdien99@gmail.com\",\"UserName\":\"truongdien99@gmail.com\",\"Avatar\":\"\",\"Token\":\"3f87c730aad3859960b06ff16a291286\",\"TokenOld\":\"\",\"PublisherId\":1}]"}
+INFO 2018-11-11 07:46:18 – {"DATE_LOGS":"11/11/2018 07:45:57","INFO_LOGS":"LoginWithToken: 3f87c730aad3859960b06ff16a291286,IP ::1"}
+INFO 2018-11-11 07:46:18 – {"DATE_LOGS":"11/11/2018 07:45:57","INFO_LOGS":"Result: -1\r\n[]"}
+INFO 2018-11-11 07:48:11 – {"DATE_LOGS":"11/11/2018 07:48:11","INFO_LOGS":"***** SERVER START *****"}
+INFO 2018-11-11 08:11:11 – {"DATE_LOGS":"11/11/2018 08:11:10","INFO_LOGS":"LoginWithToken: 5891f393ec9fe4ff283e6224d149d2fb,IP ::1"}
+INFO 2018-11-11 08:11:11 – {"DATE_LOGS":"11/11/2018 08:11:10","INFO_LOGS":"Result: 1\r\n[{\"AccountId\":8,\"Email\":\"truongdien99@gmail.com\",\"UserName\":\"truongdien99@gmail.com\",\"Avatar\":\"\",\"Token\":\"5891f393ec9fe4ff283e6224d149d2fb\",\"TokenOld\":\"\",\"PublisherId\":1}]"}
+INFO 2018-11-11 08:14:26 – {"DATE_LOGS":"11/11/2018 08:14:26","INFO_LOGS":"***** SERVER START *****"}
+INFO 2018-11-11 08:15:26 – {"DATE_LOGS":"11/11/2018 08:14:27","INFO_LOGS":"LoginWithToken: 5891f393ec9fe4ff283e6224d149d2fb,IP ::1"}
+INFO 2018-11-11 08:15:26 – {"DATE_LOGS":"11/11/2018 08:14:27","INFO_LOGS":"Result: 1\r\n[{\"AccountId\":8,\"Email\":\"truongdien99@gmail.com\",\"UserName\":\"truongdien99@gmail.com\",\"Avatar\":\"\",\"Token\":\"5891f393ec9fe4ff283e6224d149d2fb\",\"TokenOld\":\"\",\"PublisherId\":1}]"}
+INFO 2018-11-11 08:15:35 – {"DATE_LOGS":"11/11/2018 08:15:34","INFO_LOGS":"***** SERVER START *****"}
+INFO 2018-11-11 09:22:39 – {"DATE_LOGS":"11/11/2018 09:22:39","INFO_LOGS":"***** SERVER START *****"}
+INFO 2018-11-11 09:23:49 – {"DATE_LOGS":"11/11/2018 09:22:45","INFO_LOGS":"LoginWithToken: 5891f393ec9fe4ff283e6224d149d2fb,::1"}
+INFO 2018-11-11 09:23:49 – {"DATE_LOGS":"11/11/2018 09:22:45","INFO_LOGS":"LoginWithToken: 5891f393ec9fe4ff283e6224d149d2fb,IP ::1"}
+INFO 2018-11-11 09:23:49 – {"DATE_LOGS":"11/11/2018 09:22:45","INFO_LOGS":"Result: 1\r\n[{\"AccountId\":8,\"Email\":\"truongdien99@gmail.com\",\"UserName\":\"truongdien99@gmail.com\",\"Avatar\":\"\",\"Token\":\"5891f393ec9fe4ff283e6224d149d2fb\",\"TokenOld\":\"\",\"PublisherId\":1}]"}
+INFO 2018-11-11 09:23:49 – {"DATE_LOGS":"11/11/2018 09:22:45","INFO_LOGS":"Result LoginWithToken: 1"}
+INFO 2018-11-11 09:23:49 – {"DATE_LOGS":"11/11/2018 09:22:45","INFO_LOGS":"LoginWithToken: 5891f393ec9fe4ff283e6224d149d2fb,IP ::1"}
+INFO 2018-11-11 09:23:49 – {"DATE_LOGS":"11/11/2018 09:22:45","INFO_LOGS":"Result: 1\r\n[{\"AccountId\":8,\"Email\":\"truongdien99@gmail.com\",\"UserName\":\"truongdien99@gmail.com\",\"Avatar\":\"\",\"Token\":\"5891f393ec9fe4ff283e6224d149d2fb\",\"TokenOld\":\"\",\"PublisherId\":1}]"}

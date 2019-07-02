@@ -1,0 +1,14 @@
+INFO 2019-06-20 12:04:13 – {"DATE_LOGS":"20/06/2019 12:04:13","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-06-20 12:06:50 – {"DATE_LOGS":"20/06/2019 12:06:50","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-06-20 12:10:14 – {"DATE_LOGS":"20/06/2019 12:10:14","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-06-20 12:12:47 – {"DATE_LOGS":"20/06/2019 12:12:47","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-06-20 12:19:39 – {"DATE_LOGS":"20/06/2019 12:19:31","INFO_LOGS":"UPDATE tbl_publisher SET publishername=@publishername,description=@description,images=@images,status=@status,datecreate=@datecreate WHERE publisherid= @publisherid"}
+INFO 2019-06-20 12:19:49 – {"DATE_LOGS":"20/06/2019 12:19:42","INFO_LOGS":"UPDATE tbl_publisher SET publishername=@publishername,description=@description,images=@images,status=@status,datecreate=@datecreate WHERE publisherid= @publisherid"}
+INFO 2019-06-20 12:21:09 – {"DATE_LOGS":"20/06/2019 12:21:06","INFO_LOGS":"VetifyResetPassword info: devproduction.vn@gmail.com|1560990006|::1|1"}
+INFO 2019-06-20 03:28:17 – {"DATE_LOGS":"20/06/2019 03:28:17","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-06-20 05:35:17 – {"DATE_LOGS":"20/06/2019 05:35:15","INFO_LOGS":"LoginWithToken: 61913ed0c691e8083bcc44633486588c,IP ::1"}
+INFO 2019-06-20 05:57:59 – {"DATE_LOGS":"20/06/2019 05:57:59","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-06-20 05:58:09 – {"DATE_LOGS":"20/06/2019 05:58:01","INFO_LOGS":"LoginWithToken: 61913ed0c691e8083bcc44633486588c,IP ::1"}
+INFO 2019-06-20 08:11:45 – {"DATE_LOGS":"20/06/2019 08:11:37","INFO_LOGS":"LoginWithToken: 61913ed0c691e8083bcc44633486588c,IP ::1"}
+INFO 2019-06-20 09:10:15 – {"DATE_LOGS":"20/06/2019 09:10:06","INFO_LOGS":"LoginWithToken: 61913ed0c691e8083bcc44633486588c,IP ::1"}
+INFO 2019-06-21 12:30:05 – {"DATE_LOGS":"21/06/2019 12:29:58","INFO_LOGS":"LoginWithToken: 61913ed0c691e8083bcc44633486588c,IP ::1"}

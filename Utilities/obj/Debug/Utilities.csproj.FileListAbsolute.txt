@@ -1,0 +1,6 @@
+C:\Users\Dien Nguyen\Dropbox\Project\TUPHU\CMS_Tools\Utilities\bin\Debug\Utilities.dll
+C:\Users\Dien Nguyen\Dropbox\Project\TUPHU\CMS_Tools\Utilities\bin\Debug\Utilities.pdb
+C:\Users\Dien Nguyen\Dropbox\Project\TUPHU\CMS_Tools\Utilities\obj\Debug\Utilities.csprojAssemblyReference.cache
+C:\Users\Dien Nguyen\Dropbox\Project\TUPHU\CMS_Tools\Utilities\obj\Debug\Utilities.csproj.CoreCompileInputs.cache
+C:\Users\Dien Nguyen\Dropbox\Project\TUPHU\CMS_Tools\Utilities\obj\Debug\Utilities.dll
+C:\Users\Dien Nguyen\Dropbox\Project\TUPHU\CMS_Tools\Utilities\obj\Debug\Utilities.pdb
