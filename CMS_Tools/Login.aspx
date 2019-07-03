@@ -89,7 +89,7 @@
         <div class="user-login-5">
             <div class="row bs-reset">
                 <div class="col-md-6 login-container bs-reset">
-                    <img style="width: 140px;" class="login-logo login-6" src="assets/layouts/layout2/img/logo.png"/>
+                    <img style="width: 250px;margin-left: -45px;" class="login-logo login-6" src="assets/layouts/layout2/img/logo.jpg"/>
                     <div class="login-content">
                         <div class="divLoading" style="display:none;">                            
                             <div class="lds-default">

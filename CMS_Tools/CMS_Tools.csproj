@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -214,6 +215,8 @@
     <Content Include="assets\pages\css\kieuthung_print.css" />
     <Content Include="assets\pages\css\kieuthung.css" />
     <Content Include="assets\pages\img\cms.png" />
+    <Content Include="assets\pages\img\login\bg1.jpg" />
+    <Content Include="assets\pages\img\login\bg2.jpg" />
     <Content Include="assets\pages\scripts\AccountManage.js" />
     <Content Include="assets\pages\scripts\ajax.js" />
     <Content Include="assets\pages\scripts\app.js" />
@@ -265,6 +268,7 @@
     <Content Include="img\icon-color-close.png" />
     <Content Include="img\icon-color.png" />
     <Content Include="img\loading.gif" />
+    <Content Include="assets\layouts\layout2\img\logo.jpg" />
     <Content Include="img\overlay-icon.png" />
     <Content Include="img\portlet-collapse-icon-white.png" />
     <Content Include="img\portlet-collapse-icon.png" />
@@ -670,11 +674,9 @@
     <Folder Include="assets\global\plugins\simple-line-icons\fonts\" />
     <Folder Include="assets\layouts\global\scripts\" />
     <Folder Include="assets\layouts\layout2\css\themes\" />
-    <Folder Include="assets\layouts\layout2\img\" />
     <Folder Include="assets\layouts\layout2\scripts\" />
     <Folder Include="assets\layouts\layout3\img\" />
     <Folder Include="assets\layouts\layout\img\" />
-    <Folder Include="assets\pages\img\login\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

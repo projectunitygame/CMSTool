@@ -101,7 +101,7 @@
             <!-- BEGIN LOGO -->
             <div class="page-logo">
                 <a class="" href="/Dashboard.aspx">
-                    <img src="../assets/layouts/layout2/img/logo.png" alt="logo" class="logo-default" />
+                    <img src="../assets/layouts/layout2/img/logo.jpg" alt="logo" class="logo-default" />
                 </a>
                 <div class="menu-toggler sidebar-toggler">
                     <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
