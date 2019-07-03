@@ -4,3 +4,9 @@ C:\Users\Dien Nguyen\Dropbox\Project\TUPHU\CMS_Tools\Utilities\obj\Debug\Utiliti
 C:\Users\Dien Nguyen\Dropbox\Project\TUPHU\CMS_Tools\Utilities\obj\Debug\Utilities.csproj.CoreCompileInputs.cache
 C:\Users\Dien Nguyen\Dropbox\Project\TUPHU\CMS_Tools\Utilities\obj\Debug\Utilities.dll
 C:\Users\Dien Nguyen\Dropbox\Project\TUPHU\CMS_Tools\Utilities\obj\Debug\Utilities.pdb
+C:\Users\Seeker\Documents\GitHub\CMSTool\Utilities\bin\Debug\Utilities.dll
+C:\Users\Seeker\Documents\GitHub\CMSTool\Utilities\bin\Debug\Utilities.pdb
+C:\Users\Seeker\Documents\GitHub\CMSTool\Utilities\obj\Debug\Utilities.dll
+C:\Users\Seeker\Documents\GitHub\CMSTool\Utilities\obj\Debug\Utilities.pdb
+C:\Users\Seeker\Documents\GitHub\CMSTool\Utilities\obj\Debug\Utilities.csprojAssemblyReference.cache
+C:\Users\Seeker\Documents\GitHub\CMSTool\Utilities\obj\Debug\Utilities.csproj.CoreCompileInputs.cache

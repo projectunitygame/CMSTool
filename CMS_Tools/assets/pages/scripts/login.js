@@ -85,7 +85,7 @@
     }
     return {
         init: function () {
-            r(), $(".login-bg").backstretch(["assets/pages/img/login/bg1.jpg", "assets/pages/img/login/bg2.jpg", "assets/pages/img/login/bg3.jpg"], {
+            r(), $(".login-bg").backstretch(["assets/pages/img/login/bg1.jpg", "assets/pages/img/login/bg2.jpg"], {
                 fade: 1e3,
                 duration: 8e3
             }), $(".forget-form").hide()
