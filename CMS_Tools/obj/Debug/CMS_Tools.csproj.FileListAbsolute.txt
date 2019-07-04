@@ -248,6 +248,7 @@ C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMS_Tools\obj\Deb
 C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMS_Tools\obj\Debug\CMS_Tools.dll
 C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMS_Tools\obj\Debug\CMS_Tools.pdb
 <<<<<<< HEAD
+<<<<<<< HEAD
 C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMSTool\CMS_Tools\bin\CMS_Tools.dll.config
 C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMSTool\CMS_Tools\bin\CMS_Tools.dll
 C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMSTool\CMS_Tools\bin\CMS_Tools.pdb
@@ -312,6 +313,8 @@ C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMSTool\CMS_Tools
 C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.dll
 C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.pdb
 =======
+=======
+>>>>>>> 84349075d156755db14a894dd95987340d602d7e
 C:\Users\Seeker\Documents\GitHub\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.dll
 C:\Users\Seeker\Documents\GitHub\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.pdb
 C:\Users\Seeker\Documents\GitHub\CMSTool\CMS_Tools\bin\CMS_Tools.dll.config
@@ -373,4 +376,7 @@ C:\Users\Seeker\Documents\GitHub\CMSTool\CMS_Tools\bin\Microsoft.CodeDom.Provide
 C:\Users\Seeker\Documents\GitHub\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.csprojAssemblyReference.cache
 C:\Users\Seeker\Documents\GitHub\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.csproj.CoreCompileInputs.cache
 C:\Users\Seeker\Documents\GitHub\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.csproj.CopyComplete
+<<<<<<< HEAD
+>>>>>>> 84349075d156755db14a894dd95987340d602d7e
+=======
 >>>>>>> 84349075d156755db14a894dd95987340d602d7e
