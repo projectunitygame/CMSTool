@@ -641,9 +641,9 @@ namespace CMS_Tools.Apis
                 {
                     Model.ManagerDAO managerDao = new Model.ManagerDAO();
                     int code = managerDao.MenuModel.RemoveMenu(menuId);
-                    if (code > 0)
+                    if (code == 0)
                     {
-                        result.msg = "Xóa " + code + " menu thành công";
+                        result.msg = "Xóa " + code + " menu thành công!";
                         result.status = Constants.NUMBER_CODE.SUCCESS;
                     }
                     else
