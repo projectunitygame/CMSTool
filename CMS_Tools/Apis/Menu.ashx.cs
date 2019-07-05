@@ -643,7 +643,7 @@ namespace CMS_Tools.Apis
                     int code = managerDao.MenuModel.RemoveMenu(menuId);
                     if (code == 0)
                     {
-                        result.msg = "Xóa " + code + " menu thành công!";
+                        result.msg = "Xóa " + code + " menu thành công";
                         result.status = Constants.NUMBER_CODE.SUCCESS;
                     }
                     else

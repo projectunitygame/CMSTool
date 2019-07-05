@@ -20,7 +20,7 @@ namespace CMS_Tools
         protected void Page_Load(object sender, EventArgs e)
         {
             int debug = 0;
-            this.copyRight.InnerHtml = "<p>Copyright &copy; team mysystem.com.vn " + DateTime.Now.Year + "</p>";
+            this.copyRight.InnerHtml = "<p>Copyright &copy; "+ Lib.Constants.COPY_RIGHT + " " + DateTime.Now.Year + "</p>";
             //Lib.Mail.SendEmail("test mail", "cmstools", "devproduction.vn@gmail.com");
             //Lib.Logs.logSendMail.Error("test send mail log4 .NET", new Exception("test"));
             try

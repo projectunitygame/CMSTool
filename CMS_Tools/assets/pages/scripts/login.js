@@ -9,7 +9,10 @@
                     required: true
                 },
                 password: {
-                    required: true,
+                    required: true
+                },
+                captcha: {
+                    required: true
                 },
                 remember: {
                     required: false
@@ -21,6 +24,9 @@
                 },
                 password: {
                     required: "Vui lòng nhập mật khẩu."
+                },
+                captcha: {
+                    required: "Vui lòng nhập captcha."
                 }
             },
             invalidHandler: function (label, e) {
@@ -45,6 +51,7 @@
                     type: 0,
                     id: r.username.value,
                     pass: r.password.value,
+                    captcha: r.captcha.value,
                     remember: r.remember.checked
                 };
                 POST_DATA("Apis/Account.ashx", param, function (res) {
@@ -55,6 +62,7 @@
                     else {
                         $('.msg').html(res.msg);
                         $(".alert-danger", $(".login-form")).show();
+                        refresh_captcha();
                     }
                     $('.divLoading').fadeOut(0);
                 });
@@ -71,18 +79,18 @@
     },
         resetPassword = function () {
             $('.divLoading').fadeIn(0);
-        var param = {
-            type: 3,
-            email: $('#txtEmail').val(),
-        };
-        POST_DATA("Apis/Account.ashx", param, function (data) {
-            bootbox.alert(data.msg);
-            if (data.status == 0) {
-                $('#txtEmail').val("");
-            }       
-            $('.divLoading').fadeOut(0);
-        });
-    }
+            var param = {
+                type: 3,
+                email: $('#txtEmail').val(),
+            };
+            POST_DATA("Apis/Account.ashx", param, function (data) {
+                bootbox.alert(data.msg);
+                if (data.status == 0) {
+                    $('#txtEmail').val("");
+                }
+                $('.divLoading').fadeOut(0);
+            });
+        }
     return {
         init: function () {
             r(), $(".login-bg").backstretch(["assets/pages/img/login/bg1.jpg", "assets/pages/img/login/bg2.jpg"], {
@@ -98,3 +106,10 @@
 jQuery(document).ready(function () {
     Login.init();
 });
+
+function refresh_captcha() {
+    $(".login-form").trigger('reset');
+    var today = new Date();
+    var time = today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
+    $('#captcha').attr("src", "../../Apis/Captcha.ashx?t=" + time);
+}
