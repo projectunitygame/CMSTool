@@ -156,7 +156,9 @@ namespace CMS_Tools.Lib
             COUNTRY_IS_NULL,
             KM_INVALID,
             REQUEST_TYPE_NOT_FOUND,
-            NUMBER_INVALID
+            NUMBER_INVALID,
+            CAPTCHA_NULL,
+            CAPTCHA_ERROR
         }
 
         public enum REQUEST_TYPE: int

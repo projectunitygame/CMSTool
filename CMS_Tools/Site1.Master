@@ -7,7 +7,7 @@
 <html>
 <head runat="server">
     <meta charset="utf-8" />
-        <title>mysystem.com.vn</title>
+        <title>id.uwin369.net</title>
         <meta name='robots' content='noindex,follow' />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -100,6 +100,7 @@
         <div class="page-header-inner ">
             <!-- BEGIN LOGO -->
             <div class="page-logo">
+                <a class="title-cms" href="/Dashboard.aspx"><h1>CMS TOOL</h1></a>
                 <a class="" href="/Dashboard.aspx">
                     <img src="../assets/layouts/layout2/img/logo.jpg" alt="logo" class="logo-default" />
                 </a>

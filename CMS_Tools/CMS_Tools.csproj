@@ -217,6 +217,7 @@
     <Content Include="assets\pages\img\cms.png" />
     <Content Include="assets\pages\img\login\bg1.jpg" />
     <Content Include="assets\pages\img\login\bg2.jpg" />
+    <Content Include="assets\pages\img\login\reload.png" />
     <Content Include="assets\pages\scripts\AccountManage.js" />
     <Content Include="assets\pages\scripts\ajax.js" />
     <Content Include="assets\pages\scripts\app.js" />
@@ -362,6 +363,9 @@
     </Compile>
     <Compile Include="Apis\API_Order.ashx.cs">
       <DependentUpon>API_Order.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Apis\Captcha.ashx.cs">
+      <DependentUpon>Captcha.ashx</DependentUpon>
     </Compile>
     <Compile Include="Apis\Categories.ashx.cs">
       <DependentUpon>Categories.ashx</DependentUpon>
@@ -639,6 +643,7 @@
     <Content Include="css\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="css\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="css\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Apis\Captcha.ashx" />
     <None Include="packages.config" />
     <Content Include="Site1.Master" />
     <Content Include="Server\ServerHandler.ashx" />

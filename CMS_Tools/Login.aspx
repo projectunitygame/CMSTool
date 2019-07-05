@@ -124,6 +124,19 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-xs-8">
+                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Nhập Captcha" name="captcha" required/>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="col-xs-8">
+                                        <img style="float:right;margin-right:5px;" id="captcha" src="Apis/Captcha.ashx">
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <img style="float:right;width:28px;margin-top:5px;cursor: pointer;" onclick="refresh_captcha();" src="assets/pages/img/login/reload.png">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-4">
                                     <label class="rememberme mt-checkbox mt-checkbox-outline">
                                         <input type="checkbox" name="remember" value="1" /> Nhớ mật khẩu
@@ -202,7 +215,7 @@
         <script src="assets/global/scripts/app.min.js" type="text/javascript"></script>
         <!-- END THEME GLOBAL SCRIPTS -->
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="assets/pages/scripts/login.js" type="text/javascript"></script>
+        <script src="assets/pages/scripts/login.js?v1" type="text/javascript"></script>
         <script src="assets/pages/scripts/ajax.js"></script>
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->

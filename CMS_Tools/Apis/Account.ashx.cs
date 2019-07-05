@@ -369,6 +369,7 @@ namespace CMS_Tools.Apis
         {
             string id = context.Request.Form["id"];
             string pass = context.Request.Form["pass"];
+            string captcha = context.Request.Form["captcha"];
             try
             {
                 bool remember = Convert.ToBoolean(context.Request.Form["remember"]);
@@ -382,48 +383,65 @@ namespace CMS_Tools.Apis
                     result.status = Constants.NUMBER_CODE.PASS_IS_NULL;
                     result.msg = "Vui lòng nhập mật khẩu!";
                 }
+                else if (string.IsNullOrEmpty(captcha))
+                {
+                    result.status = Constants.NUMBER_CODE.CAPTCHA_NULL;
+                    result.msg = "Vui lòng nhập captcha!";
+                }
                 else
                 {
                     id = id.Trim();
                     int? code = 0;
-                    var userData = manage.AccountModel.LoginID(new Model.LoginInfo()
-                    {
-                        deviceId = "",
-                        deviceName = "",
-                        ip = UtilClass.GetIPAddress(),
-                        loginId = id,
-                        loginType = (byte)Constants.LOGIN_TYPE.SINGLEID,
-                        password = pass
-                    }, ref code);
 
-                    if (code == 1)//login success
+                    if(captcha != context.Session["captcha"].ToString())
                     {
-                        context.Session["account"] = userData;
-                        if (remember) {
-                            UtilClass.AddCookie(context, "accountToken", userData.Token);
-                        }
-                        string menuId = "";
-                        string menuRule = "";
-                        int groupID = 0;
-                        int r = manage.AccountModel.GetRuleByAccountId(userData.AccountId, ref menuId, ref menuRule, ref groupID);
-                        if (r == 0)
+                        result.status = Constants.NUMBER_CODE.CAPTCHA_ERROR;
+                        result.msg = "Mã captcha không đúng!";
+                    }
+                    else
+                    {
+                        var userData = manage.AccountModel.LoginID(new Model.LoginInfo()
                         {
-                            userData.GroupID = groupID;
-                            context.Session["menuId"] = JsonConvert.DeserializeObject<List<int>>(menuId);
-                            context.Session["menuRule"] = JsonConvert.DeserializeObject<List<List<int>>>(menuRule);
+                            deviceId = "",
+                            deviceName = "",
+                            ip = UtilClass.GetIPAddress(),
+                            loginId = id,
+                            loginType = (byte)Constants.LOGIN_TYPE.SINGLEID,
+                            password = pass
+                        }, ref code);
+
+                        if (code == 1)//login success
+                        {
                             context.Session["account"] = userData;
+                            if (remember)
+                            {
+                                UtilClass.AddCookie(context, "accountToken", userData.Token);
+                            }
+                            string menuId = "";
+                            string menuRule = "";
+                            int groupID = 0;
+                            int r = manage.AccountModel.GetRuleByAccountId(userData.AccountId, ref menuId, ref menuRule, ref groupID);
+                            if (r == 0)
+                            {
+                                userData.GroupID = groupID;
+                                context.Session["menuId"] = JsonConvert.DeserializeObject<List<int>>(menuId);
+                                context.Session["menuRule"] = JsonConvert.DeserializeObject<List<List<int>>>(menuRule);
+                                context.Session["account"] = userData;
+                            }
+                            result.status = Constants.NUMBER_CODE.SUCCESS;
+                            result.msg = "Đăng nhập thành công";
+                            if (groupID == 6)
+                                result.data = "Page.aspx?m=9";
+                            else
+                                result.data = "Dashboard.aspx";
                         }
-                        result.status = Constants.NUMBER_CODE.SUCCESS;
-                        result.msg = "Đăng nhập thành công";
-                        if (groupID == 6)
-                            result.data = "Page.aspx?m=9";
                         else
-                            result.data = "Dashboard.aspx";
+                        {
+                            result.status = (Constants.NUMBER_CODE)code;
+                            result.msg = "Đăng nhập không thành công!";
+                        }
                     }
-                    else {
-                        result.status = (Constants.NUMBER_CODE)code;
-                        result.msg = "Đăng nhập không thành công!";
-                    }
+                    
                 }
             }
             catch (Exception ex)
