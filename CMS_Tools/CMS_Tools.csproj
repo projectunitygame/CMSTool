@@ -360,6 +360,9 @@
     <Compile Include="Apis\Account.ashx.cs">
       <DependentUpon>Account.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Apis\API_Agency.ashx.cs">
+      <DependentUpon>API_Agency.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Apis\API_Customer.ashx.cs">
       <DependentUpon>API_Customer.ashx</DependentUpon>
     </Compile>
@@ -653,6 +656,7 @@
     <Content Include="css\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="css\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="Apis\Captcha.ashx" />
+    <Content Include="Apis\API_Agency.ashx" />
     <None Include="packages.config" />
     <Content Include="Site1.Master" />
     <Content Include="Server\ServerHandler.ashx" />

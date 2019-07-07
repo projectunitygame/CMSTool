@@ -37,3 +37,10 @@ CMS_Tools/Web.config
 UploadFile/obj/Debug/UploadFile.csproj.CoreCompileInputs.cache
 UploadFile/obj/Debug/UploadFile.csprojAssemblyReference.cache
 .vs/CMS_Tools/v15/Server/sqlite3/storage.ide-shm
+CMS_Tools/bin/CMS_Tools.dll
+CMS_Tools/bin/CMS_Tools.pdb
+CMS_Tools/obj/Debug/CMS_Tools.csproj.CoreCompileInputs.cache
+CMS_Tools/obj/Debug/CMS_Tools.dll
+CMS_Tools/obj/Debug/CMS_Tools.pdb
+CMS_Tools/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+CMS_Tools/bin/CMS_Tools.dll
