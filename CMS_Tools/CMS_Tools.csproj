@@ -337,10 +337,12 @@
     <Content Include="ResetPassword.aspx" />
     <Content Include="RuleManage.aspx" />
     <Content Include="Test.aspx" />
+    <Content Include="test.html" />
     <Content Include="TestFunc.aspx" />
     <Content Include="TestPage.aspx" />
     <Content Include="Tools.aspx" />
     <Content Include="VetifyResetPassword.aspx" />
+    <Content Include="VSTst.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -599,6 +601,13 @@
     <Compile Include="VetifyResetPassword.aspx.designer.cs">
       <DependentUpon>VetifyResetPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="VSTst.aspx.cs">
+      <DependentUpon>VSTst.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VSTst.aspx.designer.cs">
+      <DependentUpon>VSTst.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -682,6 +691,7 @@
     <Folder Include="assets\layouts\layout2\scripts\" />
     <Folder Include="assets\layouts\layout3\img\" />
     <Folder Include="assets\layouts\layout\img\" />
+    <Folder Include="test_layout\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
