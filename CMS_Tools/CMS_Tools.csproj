@@ -340,9 +340,9 @@
     <Content Include="test.html" />
     <Content Include="TestFunc.aspx" />
     <Content Include="TestPage.aspx" />
+    <Content Include="Test_Thongtindaily.aspx" />
     <Content Include="Tools.aspx" />
     <Content Include="VetifyResetPassword.aspx" />
-    <Content Include="VSTst.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -590,6 +590,13 @@
     <Compile Include="TestPage.aspx.designer.cs">
       <DependentUpon>TestPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Test_Thongtindaily.aspx.cs">
+      <DependentUpon>Test_Thongtindaily.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_Thongtindaily.aspx.designer.cs">
+      <DependentUpon>Test_Thongtindaily.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Tools.aspx.cs">
       <DependentUpon>Tools.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -603,13 +610,6 @@
     </Compile>
     <Compile Include="VetifyResetPassword.aspx.designer.cs">
       <DependentUpon>VetifyResetPassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="VSTst.aspx.cs">
-      <DependentUpon>VSTst.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="VSTst.aspx.designer.cs">
-      <DependentUpon>VSTst.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>

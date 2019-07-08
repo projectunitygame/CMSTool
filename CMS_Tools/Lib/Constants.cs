@@ -245,7 +245,10 @@ namespace CMS_Tools.Lib
 
         public enum REQUEST_AGENCY_TYPE: int
         {
-            CREATE_AGENCY = 1
+            CREATE_AGENCY = 1,
+            LOCK_AGENCY,
+            UNLOCK_AGENCY,
+            BUY_CASH
         }
 
         public enum WEBSOCKET_STATUS: int

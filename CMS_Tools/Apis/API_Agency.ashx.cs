@@ -40,6 +40,12 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_AGENCY_TYPE.CREATE_AGENCY:
                         CREATE_AGENCY(context);
                         break;
+                    case Constants.REQUEST_AGENCY_TYPE.LOCK_AGENCY:
+                        LOCK_AGENCY(context);
+                        break;
+                    case Constants.REQUEST_AGENCY_TYPE.UNLOCK_AGENCY:
+                        UNLOCK_AGENCY(context);
+                        break;
                     default:
                         break;
                 }
@@ -52,6 +58,122 @@ namespace CMS_Tools.Apis
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
         }
+        /// <summary>
+        /// Mở khóa đại lý
+        /// </summary>
+        /// <param name="context"></param>
+        private void UNLOCK_AGENCY(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["UNLOCK_AGENCY"] == null || ((DateTime)context.Session["UNLOCK_AGENCY"] - DateTime.Now).TotalMilliseconds < Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        var jsonData = JsonConvert.DeserializeObject<UnLockAgencyEntity>(json);
+                        if (jsonData != null)
+                        {
+                            Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+                            if (string.IsNullOrEmpty(jsonData.agencyID))
+                            {
+                                result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
+                                result.msg = "Mã đại lý không được trống!";
+                            }
+                            else
+                            {
+                                jsonData.creatorID = accountInfo.AccountId;
+                                jsonData.creatorName = accountInfo.UserName;
+
+                                PayloadApi p = new PayloadApi()
+                                {
+                                    clientIP = UtilClass.GetIPAddress(),
+                                    data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                                };
+                                var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/UnLockAgency");
+                                context.Response.Write(responseData);
+                                return;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR UNLOCK_AGENCY: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["UNLOCK_AGENCY"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+        /// <summary>
+        /// Khóa đại lý
+        /// </summary>
+        /// <param name="context"></param>
+        private void LOCK_AGENCY(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["LOCK_AGENCY"] == null || ((DateTime)context.Session["LOCK_AGENCY"] - DateTime.Now).TotalMilliseconds < Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        var jsonData = JsonConvert.DeserializeObject<LockAgencyEntity>(json);
+                        if (jsonData != null)
+                        {
+                            Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+                            if (string.IsNullOrEmpty(jsonData.agencyID))
+                            {
+                                result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
+                                result.msg = "Mã đại lý không được trống!";
+                            }
+                            else
+                            {
+                                jsonData.creatorID = accountInfo.AccountId;
+                                jsonData.creatorName = accountInfo.UserName;
+
+                                PayloadApi p = new PayloadApi()
+                                {
+                                    clientIP = UtilClass.GetIPAddress(),
+                                    data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                                };
+                                var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/LockAgency");
+                                context.Response.Write(responseData);
+                                return;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR LOCK_AGENCY: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["LOCK_AGENCY"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
 
         /// <summary>
         /// Tạo đại lý cấp 1 mới
@@ -190,6 +312,9 @@ namespace CMS_Tools.Apis
         }
     }
 
+
+
+    #region EnityClass
     public class AgencyEntity
     {
         public string agencyCode;
@@ -204,4 +329,22 @@ namespace CMS_Tools.Apis
         public int creatorID;
         public string creatorName;
     }
+
+    public class LockAgencyEntity
+    {
+        public string agencyID;
+        public string note; //ghi chú khi khoa tai khoan của đại lý
+        public int creatorID;
+        public string creatorName;
+    }
+
+    public class UnLockAgencyEntity
+    {
+        public string agencyID;
+        public int creatorID;
+        public string creatorName;
+    }
+    #endregion
+
+
 }
