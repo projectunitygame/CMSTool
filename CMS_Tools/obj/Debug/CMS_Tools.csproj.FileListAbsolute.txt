@@ -371,3 +371,125 @@ C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMSTool\CMS_Tools
 C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.csproj.CopyComplete
 C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.dll
 C:\Users\Dien Nguyen\Google Drive\DEV_CODE\GAME_SLOT\CMS_Tools\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.pdb
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\CMS_Tools.dll.config
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\CMS_Tools.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\CMS_Tools.pdb
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csc.exe
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csc.exe.config
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csc.rsp
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csi.exe
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csi.exe.config
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csi.rsp
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.Win32.Primitives.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.AppContext.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Collections.Immutable.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Console.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Diagnostics.Process.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.IO.Compression.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.IO.FileSystem.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.IO.Pipes.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Reflection.Metadata.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.AccessControl.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Claims.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Principal.Windows.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Threading.Thread.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.ValueTuple.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Xml.XmlDocument.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Xml.XPath.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\vbc.exe
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\vbc.exe.config
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\vbc.rsp
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\VBCSCompiler.exe
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\roslyn\VBCSCompiler.exe.config
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\AegisImplicitMail.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\Newtonsoft.Json.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\Newtonsoft.Json.xml
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.csprojAssemblyReference.cache
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.csproj.CoreCompileInputs.cache
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.csproj.CopyComplete
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.dll
+E:\Uwin_ Cms_Source\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.pdb
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\CMS_Tools.dll.config
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\CMS_Tools.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\CMS_Tools.pdb
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csc.exe
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csc.exe.config
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csc.rsp
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csi.exe
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csi.exe.config
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\csi.rsp
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\Microsoft.Win32.Primitives.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.AppContext.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Collections.Immutable.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Console.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Diagnostics.Process.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.IO.Compression.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.IO.FileSystem.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.IO.Pipes.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Reflection.Metadata.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.AccessControl.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Claims.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Security.Principal.Windows.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Threading.Thread.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.ValueTuple.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Xml.XmlDocument.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Xml.XPath.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\vbc.exe
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\vbc.exe.config
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\vbc.rsp
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\VBCSCompiler.exe
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\roslyn\VBCSCompiler.exe.config
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\AegisImplicitMail.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\Newtonsoft.Json.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\Newtonsoft.Json.xml
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.csprojAssemblyReference.cache
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.csproj.CoreCompileInputs.cache
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.csproj.CopyComplete
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.dll
+E:\Uwin_Cms_Source\CMSTool\CMS_Tools\obj\Debug\CMS_Tools.pdb

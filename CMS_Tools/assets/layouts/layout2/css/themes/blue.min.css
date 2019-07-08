@@ -6,18 +6,22 @@
     background-position: 50%;
     background-color: #021938;
 }
-
+.title-cms {
+    text-decoration: none;
+}
 .title-cms h1 {
     text-align: center;
     font-size: 22px;
-    background: -webkit-linear-gradient(#fefef4 15%,#fce616 35%,#fa6b01 56%,#f9bc0c 64%);
+    background: -webkit-linear-gradient(#fefef4 15%,#18ccbc 35%,#19b498 56%,#19b192 64%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 0;
     filter: drop-shadow(2px 2px 2px #333);
     font-weight: bold;
     line-height: 30px;
+    text-decoration:none;
 }
+
 
 .page-sidebar-closed .title-cms {
     display: none !important;

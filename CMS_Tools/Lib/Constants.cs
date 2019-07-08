@@ -8,7 +8,7 @@ namespace CMS_Tools.Lib
 {
     public static class Constants
     {
-        public const int TIME_REQUEST = 500;
+        public const int TIME_REQUEST = 50;
         public const int TIMOUT_CONNECT_SQL = 60000;
         public static string STR_CONNECT_IDENTITY = WebConfigurationManager.AppSettings["CONNECT_IDENTITY"];
         public readonly static string GG_JSON_FILE = WebConfigurationManager.AppSettings["GG_ClientJSON"];
@@ -25,6 +25,11 @@ namespace CMS_Tools.Lib
         public readonly static string API_PUBLICKEY = WebConfigurationManager.AppSettings["PUBLICKEY"];
         public readonly static string API_SECRETKEY = WebConfigurationManager.AppSettings["SECRETKEY"];
         public readonly static short API_SERVICEID = short.Parse(WebConfigurationManager.AppSettings["SERVICEID"]);
+
+
+        public const decimal limitTransaction = 50000000;
+        public const decimal limitTransactionDaily = 500000000;
+
         public static List<USER_PERMISSTIONS> GET_PERMISSTIONS() {
             if (PERMISSTIONS.Count == 0)
             {
@@ -158,7 +163,8 @@ namespace CMS_Tools.Lib
             REQUEST_TYPE_NOT_FOUND,
             NUMBER_INVALID,
             CAPTCHA_NULL,
-            CAPTCHA_ERROR
+            CAPTCHA_ERROR,
+            INFO_CREATE_AGENCY_VALI
         }
 
         public enum REQUEST_TYPE: int
@@ -235,6 +241,11 @@ namespace CMS_Tools.Lib
             API_UPDATE_DONHANG_SANXUAT,
             API_NHAP_KHO_SX,
             API_PHAN_HOI_SX
+        }
+
+        public enum REQUEST_AGENCY_TYPE: int
+        {
+            CREATE_AGENCY = 1
         }
 
         public enum WEBSOCKET_STATUS: int
