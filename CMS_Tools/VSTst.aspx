@@ -52,7 +52,6 @@
                             aria-describedby="sample_1_info">
                             <thead>
                                 <tr role="row">
-                                    <td>No</td>
                                     <td>AgencyID</td>
                                     <td>AgencyCode</td>
                                     <td>Email</td>
@@ -65,7 +64,7 @@
                                     <td>DateCreated</td>
                                     <td>DateActive</td>
                                     <td>LastUpdate</td>
-                                    <td>LastUpdate</td>
+                                    <td>Balance</td>
                                     <td>Balance_Bonus</td>
                                     <td>Balance_Lock</td>
                                     <td>LimitTransaction</td>
@@ -309,38 +308,37 @@
                             if (data.status == 0) {
                                 if (oTable != null) {
                                     oTable.fnDestroy();
-                                    //$('#tbl_datatable thead').html("<tr role='row'>" +
-                                    //    "<td>No</td>" +
-                                    //    "<td style='width:40px'>AgencyID</td>" +
-                                    //    "<td>AgencyCode</td>" +
-                                    //    "<td>Email</td>" +
-                                    //    "<td>Phone</td>" +
-                                    //    "<td>DisplayName</td>" +
-                                    //    "<td>OwnerID</td>" +
-                                    //    "<td>Email</td>" +
-                                    //    "<td>Status</td>" +
-                                    //    "<td>IsActive</td>" +
-                                    //    "<td>IsLock</td>" +
-                                    //    "<td>DateCreated</td>" +
-                                    //    "<td>DateActive</td>" +
-                                    //    "<td>LastUpdate</td>" +
-                                    //    "<td>Balance_Bonus</td>" +
-                                    //    "<td>Balance_Lock</td>" +
-                                    //    "<td>LimitTransaction</td>" +
-                                    //    "<td>LimitTransactionDaily</td>" +
-                                    //    "<td>IsOTP</td>" +
-                                    //    "<td>IP</td>" +
-                                    //    "<td>EmailActive</td>" +
-                                    //    "<td>PhoneActive</td>" +
-                                    //    "<td>WrongPassword</td>" +
-                                    //    "<td>LockTimeLogin</td>" +
-                                    //    "<td>DateLogin</td>" +
-                                    //    "<td>CreatorID</td>" +
-                                    //    "<td>CreatorName</td>" +
-                                    //    "<td style='width:200px'>Chỉnh sửa</td></tr>");
-                                    //$('#tbl_datatable tbody').html("");
-                                    //$('#tbl_datatable').on('click', ' tbody td .row-details', function () {
-                                    //}).unbind('click');
+                                    $('#tbl_datatable thead').html("<tr role='row'>" +
+                                        "<td style='width:40px'>AgencyID</td>" +
+                                        "<td>AgencyCode</td>" +
+                                        "<td>Email</td>" +
+                                        "<td>Phone</td>" +
+                                        "<td>DisplayName</td>" +
+                                        "<td>OwnerID</td>" +
+                                        "<td>Status</td>" +
+                                        "<td>IsActive</td>" +
+                                        "<td>IsLock</td>" +
+                                        "<td>DateCreated</td>" +
+                                        "<td>DateActive</td>" +
+                                        "<td>LastUpdate</td>" +
+                                        "<td>Balance</td>" +
+                                        "<td>Balance_Bonus</td>" +
+                                        "<td>Balance_Lock</td>" +
+                                        "<td>LimitTransaction</td>" +
+                                        "<td>LimitTransactionDaily</td>" +
+                                        "<td>IsOTP</td>" +
+                                        "<td>IP</td>" +
+                                        "<td>EmailActive</td>" +
+                                        "<td>PhoneActive</td>" +
+                                        "<td>WrongPassword</td>" +
+                                        "<td>LockTimeLogin</td>" +
+                                        "<td>DateLogin</td>" +
+                                        "<td>CreatorID</td>" +
+                                        "<td>CreatorName</td>" +
+                                        "<td style='width:200px'>Chỉnh sửa</td></tr>");
+                                    $('#tbl_datatable tbody').html("");
+                                    $('#tbl_datatable').on('click', ' tbody td .row-details', function () {
+                                    }).unbind('click');
                                 }
                                 var _dataColumn = data.columnName;
                                 if (colFilter == null) {
@@ -355,61 +353,67 @@
                                 }
                                 _dataTable = [];
                                 for (var i = 0; i < data.data.length; i++) {
-                                    //var obj = data.data[i];
-                                    //$('#tbl_datatable tbody').append("<tr>" +
-                                    //    "<td>" + obj[0] + "</td>" +
-                                    //    "<td>" + obj[1] + "</td>" +
-                                    //    "<td>" + obj[2] + "</td>" +
-                                    //    "<td>" + obj[3] + "</td>" +
-                                    //    "<td>" + obj[4] + "</td>" +
-                                    //    "<td>" + obj[5] + "</td>" +
-                                    //    "<td>" + obj[6] + "</td>" +
-                                    //    "<td>" + obj[7] + "</td>" +
-                                    //    "<td>" + obj[8] + "</td>" +
-                                    //    "<td>" + obj[9] + "</td>" +
-                                    //    "<td>" + obj[10] + "</td>" +
-                                    //    "<td>" + (obj[11] == '1' ? "Kích Hoạt" : "Khóa") + "</td>" +
-                                    //    "<td>" + obj[12] + "</td>" +
-                                    //    "<td>" + obj[13] + "</td>" +
-                                    //    "<td>" + obj[14] + "</td>" +
-                                    //    "<td>" + obj[15] + "</td>" +
-                                    //    "<td>" + obj[16] + "</td>" +
-                                    //    "<td>" + obj[17] + "</td>" +
-                                    //    "<td>" + obj[18] + "</td>" +
-                                    //    "<td>" + obj[19] + "</td>" +
-                                    //    "<td>" + obj[20] + "</td>" +
-                                    //    "<td><a class='btn btn-xs blue edit' onclick='LockAgency(" + obj[0] + ");'> Khóa</a> " +
-                                    //    "<a class='btn btn-xs green edit' onclick='GetURL(this);'> Xem</a></td>" +
-                                    //    "</tr>");
+                                    var obj = data.data[i];
+                                    $('#tbl_datatable tbody').append("<tr>" +
+                                        "<td>" + obj[0] + "</td>" +
+                                        "<td>" + obj[1] + "</td>" +
+                                        "<td>" + obj[2] + "</td>" +
+                                        "<td>" + obj[3] + "</td>" +
+                                        "<td>" + obj[4] + "</td>" +
+                                        "<td>" + obj[5] + "</td>" +
+                                        "<td>" + obj[6] + "</td>" +
+                                        "<td>" + obj[7] + "</td>" +
+                                        "<td>" + obj[8] + "</td>" +
+                                        "<td>" + obj[9] + "</td>" +
+                                        "<td>" + obj[10] + "</td>" +
+                                        "<td>" + obj[11] +"</td>" +
+                                        "<td>" + obj[12] + "</td>" +
+                                        "<td>" + obj[13] + "</td>" +
+                                        "<td>" + obj[14] + "</td>" +
+                                        "<td>" + obj[15] + "</td>" +
+                                        "<td>" + obj[16] + "</td>" +
+                                        "<td>" + obj[17] + "</td>" +
+                                        "<td>" + obj[18] + "</td>" +
+                                        "<td>" + obj[19] + "</td>" +
+                                        "<td>" + obj[20] + "</td>" +
+                                        "<td>" + obj[21] + "</td>" +
+                                        "<td>" + obj[22] + "</td>" +
+                                        "<td>" + obj[23] + "</td>" +
+                                        "<td>" + obj[24] + "</td>" +
+                                        "<td>" + obj[25] + "</td>" +
+                                        "<td><a class='btn btn-xs blue edit' onclick='LockAgency(" + obj[0] + ");'> Khóa</a> " +
+                                        "<a class='btn btn-xs green edit' onclick='GetURL(this);'> Xem</a></td>" +
+                                        "</tr>");
                                 }
 
                                 function fnFormatDetails(oTable, nTr) {
                                     var aData = oTable.fnGetData(nTr);
                                     var sOut = '<table>';
-                                    //sOut += '<tr><td colspan=2 style="text-align: center; background: #ccc;">THÔNG TIN KHÁCH HÀNG</td></tr>';
-                                    //sOut += '<tr><td><i>ID:</i></td><td>' + aData[1] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Mã KH:</i></td><td>' + aData[2] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Tên CTY:</i></td><td>' + aData[3] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Mã Số Thuế:</i></td><td>' + aData[4] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Email:</i></td><td>' + aData[8] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Số Điện Thoại:</i></td><td>' + aData[9] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Liên Hệ:</i></td><td>' + aData[10] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Ngày Tạo:</i></td><td>' + aData[11] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Trạng Thái:</i></td><td>' + aData[12] + '</td></tr>';
-                                    //sOut += '<tr><td colspan=2 style="text-align: center; background: #ccc;">ĐỊA CHỈ GIAO HÀNG:</td></tr>';
-                                    //sOut += '<tr><td><i>Địa Chỉ 1:</i></td><td>' + aData[5] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Tỉnh Thành 1:</i></td><td>' + aData[6] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Quốc Gia 1:</i></td><td>' + aData[7] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Số KM 1:</i></td><td>' + aData[19] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Địa Chỉ 2:</i></td><td>' + aData[13] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Tỉnh Thành 2:</i></td><td>' + aData[14] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Quốc Gia 2:</i></td><td>' + aData[15] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Số KM 2:</i></td><td>' + aData[20] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Địa Chỉ 3:</i></td><td>' + aData[16] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Tỉnh Thành 3:</i></td><td>' + aData[17] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Quốc Gia 3:</i></td><td>' + aData[18] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Số KM 3:</i></td><td>' + aData[21] + '</td></tr>';
-                                    //sOut += '</table>';
+                                    sOut += '<tr><td colspan=2 style="text-align: center; background: #ccc;">THÔNG TIN ĐẠI LÝ</td></tr>';
+                                    sOut += '<tr><td><i>Mã đại lý:</i></td><td>' + aData[1] + '</td></tr>';
+                                    sOut += '<tr><td><i>OwnerID:</i></td><td>' + aData[6] + '</td></tr>';
+                                    sOut += '<tr><td><i>Trạng thái:</i></td><td>' + aData[7] + '</td></tr>';
+                                    sOut += '<tr><td><i>Trạng thái kích hoạt:</i></td><td>' + (aData[8]==1?"Đã kích hoạt":"Chưa kích hoạt") + '</td></tr>';
+                                    sOut += '<tr><td><i>Khóa tài khoản:</i></td><td>' + aData[9]==1?"Đã khóa":"Không khóa" + '</td></tr>';
+                                    sOut += '<tr><td><i>Ngày tạo:</i></td><td>' + aData[10] + '</td></tr>';
+                                    sOut += '<tr><td><i>Ngày kích hoạt:</i></td><td>' + aData[11] + '</td></tr>';
+                                    sOut += '<tr><td><i>Ngày cập nhật:</i></td><td>' + aData[12] + '</td></tr>';
+                                    sOut += '<tr><td><i>Tiền thưởng:</i></td><td>' + aData[14] + '</td></tr>';
+                                    sOut += '<tr><td><i>Số tiền không giao dịch được:</i></td><td>' + aData[15] + '</td></tr>';
+                                    sOut += '<tr><td><i>IP:</i></td><td>' + aData[19] + '</td></tr>';
+                                    sOut += '<tr><td><i>Email kích hoạt:</i></td><td>' + (aData[20] == "False" ? "Chưa có" : aData[20]) + '</td></tr>';
+                                    sOut += '<tr><td><i>Số điện thoại kích hoạt:</i></td><td>' + (aData[21] == "False" ? "Chưa có" : aData[21]) + '</td></tr>';
+                                    sOut += '<tr><td><i>Số lần đăng nhập sai:</i></td><td>' + aData[22] + '</td></tr>';
+                                    sOut += '<tr><td><i>Thời gian khóa:</i></td><td>' + aData[23] + '</td></tr>';
+                                    sOut += '<tr><td><i>Ngày đăng nhập:</i></td><td>' + aData[24] + '</td></tr>';
+                                    sOut += '<tr><td><i>ID người tạo:</i></td><td>' + aData[25] + '</td></tr>';
+                                    sOut += '<tr><td><i>Tài khoản người tạo:</i></td><td>' + aData[26] + '</td></tr>';
+                                    sOut += '<tr><td colspan=2 style="text-align: center; background: #ccc;">HẠN MỨC GIAO DỊCH:</td></tr>';
+                                    sOut += '<tr><td><i>Hạn mức mỗi lần:</i></td><td>' + aData[16] + '</td></tr>';
+                                    sOut += '<tr><td><i>Hạn mức mỗi ngày:</i></td><td>' + aData[17] + '</td></tr>';
+                                    sOut += '<tr><td><i>Xác thực OTP:</i></td><td>' + (aData[18]==1?"Có":"Không") + '</td></tr>';
+                                    
+                                    sOut += '</table>';
                                     return sOut;
                                 }
                                 var nCloneTh = document.createElement('th');
@@ -463,9 +467,46 @@
                                 });
 
                                 //an column
-                                //var bVis = oTable.fnSettings().aoColumns[4].bVisible;
-                                //oTable.fnSetColumnVis(4, bVis ? false : true);
-
+                                var bVis = oTable.fnSettings().aoColumns[1].bVisible;
+                                oTable.fnSetColumnVis(1, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[6].bVisible;
+                                oTable.fnSetColumnVis(6, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[7].bVisible;
+                                oTable.fnSetColumnVis(7, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[8].bVisible;
+                                oTable.fnSetColumnVis(8, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[9].bVisible;
+                                oTable.fnSetColumnVis(9, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[10].bVisible;
+                                oTable.fnSetColumnVis(10, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[11].bVisible;
+                                oTable.fnSetColumnVis(11, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[12].bVisible;
+                                oTable.fnSetColumnVis(12, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[14].bVisible;
+                                oTable.fnSetColumnVis(14, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[15].bVisible;
+                                oTable.fnSetColumnVis(15, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[16].bVisible;
+                                oTable.fnSetColumnVis(16, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[17].bVisible;
+                                oTable.fnSetColumnVis(17, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[18].bVisible;
+                                oTable.fnSetColumnVis(18, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[19].bVisible;
+                                oTable.fnSetColumnVis(19, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[20].bVisible;
+                                oTable.fnSetColumnVis(20, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[21].bVisible;
+                                oTable.fnSetColumnVis(21, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[22].bVisible;
+                                oTable.fnSetColumnVis(22, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[23].bVisible;
+                                oTable.fnSetColumnVis(23, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[24].bVisible;
+                                oTable.fnSetColumnVis(24, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[25].bVisible;
+                                oTable.fnSetColumnVis(25, bVis ? false : true);
 
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
@@ -515,17 +556,26 @@
                     rules: {
                         AgencyCode: {
                             minlength: 6,
+                            maxlength: 10,
                             required: !0
                         },
                         password: {
+                            minlength: 6,
+                            maxlength: 20,
                             required: !0
+                        },
+                        email: {
+                            maxlength: 80,
                         },
                         Phone: {
                             maxlength: 10,
+                            minlength: 10,
                             number: !0,
                             required: !0
                         },
                         AgencyName: {
+                            minlength: 6,
+                            maxlength: 150,
                             required: !0
                         }
                         //province: {
@@ -577,26 +627,24 @@
         function SubmitFormAgency() {
             $('.divLoading').fadeIn();
             var json = {
-                "CustomerID": $('#customerID').val(),
-                "CompanyName": $('#txtCompanyName').val(),
-                "TaxCode": $('#txtTaxCode').val(),
-                "Address": $('#txtAddress').val(),
-                "City": $('#selectProvince').val(),
-                "Country": $('#selectCountry').val()
+                "agencyCode": $('#txtAgencyCode').val(),
+                "password": $('#txtPassword').val(),
+                "email": $('#txtEmail').val(),
+                "phone": $('#txtPhone').val(),
+                "displayName": $('#txtAgencyName').val(),
             };
             $.ajax({
                 type: "POST",
-                url: "Apis/API_Customer.ashx",
+                url: "Apis/API_Agency.ashx",
                 data: {
-                    type: $('#customerID').val() == 0 ? 4000 : 4001,
-                    mid: AppManage.getURLParameter('m'),
-                    json: JSON.stringify(json)
+                    json: JSON.stringify(json),
+                    type:1
                 },
                 dataType: 'json',
                 success: function (data) {
                     $(".divLoading").fadeOut(500);
                     $('#modal_customer').modal('hide');
-                    if (data.status == 0) {
+                    if (data.status == 1) {
                         TableEditable.init();
                     }
                     else {
@@ -660,42 +708,8 @@
         }
 
         function ResetForm() {
-            //$('#customerID').val(0);
-            //$('#txtCompanyName').val("");
-            //$('#txtTaxCode').val("");
-            //$('#txtAddress').val("");
-            //$('#selectProvince').val(0);
-            //$('#selectCountry').val(84);
-            //$('#txtAddress1').val("");
-            //$('#selectProvince1').val(0);
-            //$('#selectCountry1').val(84);
-            //$('#txtAddress2').val("");
-            //$('#selectProvince2').val(0);
-            //$('#selectCountry2').val(84);
-            //$('#txtEmail').val("");
-            //$('#txtPhone').val("");
-            //$('#txtContact').val("");
-            //$('#txtKM').val(0);
-            //$('#txtKM1').val(0);
-            //$('#txtKM2').val(0);
-            //$('#selectLoaiDon').val(0);
-            //$('#selectLoaiHinhSX').val(0);
-            //$('#selectStatus').val(1);
-            //$('.selectProvince').select2({
-            //    showSearchInput: true
-            //});
-            //$('.selectCountry').select2({
-            //    showSearchInput: true
-            //});
-            //$('#selectLoaiDon').select2({
-            //    showSearchInput: true
-            //});
-            //$('#selectLoaiHinhSX').select2({
-            //    showSearchInput: true
-            //});
-
             $('#form_Agency').trigger('reset');
-
+            $('.form-group').val('');
             $('.form-group').removeClass('has-success').removeClass('has-error');
             $('.form-group i').removeClass('fa-warning').removeClass('fa-check');
         }
