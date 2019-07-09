@@ -46,6 +46,12 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_AGENCY_TYPE.UNLOCK_AGENCY:
                         UNLOCK_AGENCY(context);
                         break;
+                    case Constants.REQUEST_AGENCY_TYPE.AUTO_COMPLETE_SEARCH:
+                        AUTO_COMPLETE_SEARCH(context);
+                        break;
+                    case Constants.REQUEST_AGENCY_TYPE.BUY_CASH:
+                        BUY_CASH(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -61,6 +67,121 @@ namespace CMS_Tools.Apis
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
         }
+
+        private void BUY_CASH(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["BUY_CASH"] == null || (DateTime.Now - (DateTime)context.Session["BUY_CASH"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        var jsonData = JsonConvert.DeserializeObject<AddMoneyAgencyEntity>(json);
+                        if (jsonData != null)
+                        {
+                            Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+                            if (string.IsNullOrEmpty(jsonData.agencyID))
+                            {
+                                result.status = Constants.NUMBER_CODE.DATA_NULL;
+                                result.msg = "Mã đại lý không được trống!";
+                            }
+                            else if (jsonData.amount <= 0 )
+                            {
+                                result.status = Constants.NUMBER_CODE.DATA_NULL;
+                                result.msg = "Số tiền không hợp lệ!";
+                            }
+                            else
+                            {
+                                jsonData.IP = UtilClass.GetIPAddress();
+                                jsonData.creatorID = accountInfo.AccountId;
+                                jsonData.creatorName = accountInfo.UserName;
+
+                                PayloadApi p = new PayloadApi()
+                                {
+                                    clientIP = UtilClass.GetIPAddress(),
+                                    data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                                };
+                                var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/AddMoneyAgency");
+                                context.Response.Write(responseData);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            result.status = Constants.NUMBER_CODE.DATA_NULL;
+                            result.msg = Constants.NUMBER_CODE.DATA_NULL.ToString();
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR BUY_CASH: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["BUY_CASH"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+        private void AUTO_COMPLETE_SEARCH(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["AUTO_COMPLETE_SEARCH"] == null || (DateTime.Now - (DateTime)context.Session["AUTO_COMPLETE_SEARCH"]).TotalMilliseconds > 200)
+                {
+                    FindAgencyEntity findAgencyEntity = new FindAgencyEntity();
+                    findAgencyEntity.param = context.Request.Form["param"];
+                    findAgencyEntity.topN = 20;
+                    Logs.SaveLog(JsonConvert.SerializeObject(findAgencyEntity));
+                    if (string.IsNullOrEmpty(findAgencyEntity.param))
+                    {
+                        result.status = Constants.NUMBER_CODE.DATA_NULL;
+                        result.msg = "Không có từ khóa tìm kiếm được nhập!";
+                    }
+                    else
+                    {
+                        PayloadApi p = new PayloadApi()
+                        {
+                            clientIP = UtilClass.GetIPAddress(),
+                            data = Encryptor.EncryptString(JsonConvert.SerializeObject(findAgencyEntity), Constants.API_SECRETKEY)
+                        };
+                        var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/FindAgency");
+                        var d = JsonConvert.DeserializeObject<ResultSearchAgrency>(responseData);
+                        //{ "status":0,"msg":null,"data":[{"AgencyID":9,"DisplayName":"Đại Lý 1","AgencyCode":"daily1","Phone":"0962474560"}]}
+                        //[{"CustomerID":31,"CustomerCode":"HC1900031","CompanyName":"MR-VIET CO LTD","CompanyName2":"MR-VIET CO LTD","TaxCode":"","Email":"","Phone":"","Contact":"TUAN","Contact2":"TUAN","CreateDate":"2019-07-03T08:59:03.983","Status":1,"Address":"21/1E NGUYEN ANH THU BA DIEM HOC MON","City":56,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":0,"LoaiHinhSX_ID":0,"LastUpdate":"2019-07-03T08:59:03.983"},{"CustomerID":30,"CustomerCode":"BD1900030","CompanyName":"MINH LONG","CompanyName2":"MINH LONG","TaxCode":"","Email":"","Phone":"","Contact":"TUAN","Contact2":"TUAN","CreateDate":"2019-07-02T09:24:20.28","Status":1,"Address":"KCN VIETNAM SINGAGPORE","City":8,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":0,"LastUpdate":"2019-07-02T09:24:20.28"},{"CustomerID":29,"CustomerCode":"BD1900029","CompanyName":"APPAREL","CompanyName2":"APPAREL","TaxCode":"","Email":"","Phone":"","Contact":"TUẤN","Contact2":"TUAN","CreateDate":"2019-07-01T17:03:25.523","Status":1,"Address":"46 DAI LO TU DO VSIP,THUAN AN ,BD","City":8,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":0,"LastUpdate":"2019-07-01T17:03:25.523"},{"CustomerID":28,"CustomerCode":"DN1900028","CompanyName":"NANGYANG","CompanyName2":"NANGYANG","TaxCode":"","Email":"","Phone":"","Contact":"TUẤN","Contact2":"TUAN","CreateDate":"2019-06-25T14:00:23.617","Status":1,"Address":"BLOCK C LONG KHANH,DONG NAI","City":17,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":0,"LoaiHinhSX_ID":2,"LastUpdate":"2019-06-25T14:00:23.617"},{"CustomerID":27,"CustomerCode":"BT1900027","CompanyName":"HOANG LOAN","CompanyName2":"HOANG LOAN","TaxCode":"","Email":"","Phone":"","Contact":"TUAN","Contact2":"TUAN","CreateDate":"2019-06-22T14:07:46.897","Status":0,"Address":"","City":7,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":2,"LastUpdate":"2019-06-22T14:29:22.227"},{"CustomerID":26,"CustomerCode":"BT1900026","CompanyName":"HOÀNG LOAN","CompanyName2":"HOANG LOAN","TaxCode":"","Email":"","Phone":"","Contact":"TUAN","Contact2":"TUAN","CreateDate":"2019-06-22T13:57:47.35","Status":1,"Address":"GIỒNG TRÔM ,BỂN TRE","City":7,"Country":84,"KM":0,"Address1":"","City1":7,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":2,"LastUpdate":"2019-06-22T14:28:58.757"},{"CustomerID":22,"CustomerCode":"HC1900022","CompanyName":"TRANG VANG","CompanyName2":"TRANG VANG","TaxCode":"","Email":"","Phone":"","Contact":"TUẤN","Contact2":"TUAN","CreateDate":"2019-06-13T09:55:48.3","Status":1,"Address":"26/1ATRẦN QUÝ CÁP ,BÌNH THẠNH","City":56,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":2,"LastUpdate":"2019-06-13T09:55:48.3"},{"CustomerID":19,"CustomerCode":"TG1900019","CompanyName":"ITOCHU(HỒNG ÂN)","CompanyName2":"ITOCHU(HONG AN)","TaxCode":"","Email":"","Phone":"","Contact":"TUẤN","Contact2":"TUAN","CreateDate":"2019-06-08T11:58:34.03","Status":1,"Address":"CAI LẬY,TIỀN GIANG","City":51,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":2,"LastUpdate":"2019-06-08T11:58:34.03"},{"CustomerID":13,"CustomerCode":"HC1900013","CompanyName":"TUYẾN HIỆP LỢI","CompanyName2":"TUYEN HIEP LOI","TaxCode":"","Email":"","Phone":"","Contact":"Ms HOA","Contact2":"Ms HOA","CreateDate":"2019-05-31T14:16:57.62","Status":1,"Address":"Ap 3, xã Phạm Văn Cội, Huyện Củ Chi, TP. HCM","City":56,"Country":84,"KM":130,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":1,"LastUpdate":"2019-05-31T14:17:20.997"},{"CustomerID":6,"CustomerCode":"HC1900006","CompanyName":"CTY TNHH TM DV TÚ PHÚ","CompanyName2":"CTY TNHH TM DV TU PHU","TaxCode":"0333345774","Email":"","Phone":"0988867676","Contact":"Anh Tú","Contact2":"Anh Tu","CreateDate":"2019-04-07T14:47:45.453","Status":1,"Address":"268 To Hien Thanh","City":56,"Country":84,"KM":10,"Address1":"80/23 Trinh Dinh Thao","City1":1,"Country1":84,"KM1":200,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":1,"LastUpdate":"2019-06-01T00:59:40.683"}]
+                        context.Response.Write(JsonConvert.SerializeObject(d.data));
+                        return;
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR AUTO_COMPLETE_SEARCH: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["AUTO_COMPLETE_SEARCH"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
         /// <summary>
         /// Mở khóa đại lý
         /// </summary>
@@ -69,7 +190,7 @@ namespace CMS_Tools.Apis
         {
             try
             {
-                if (context.Session["UNLOCK_AGENCY"] == null || ((DateTime)context.Session["UNLOCK_AGENCY"] - DateTime.Now).TotalMilliseconds < Constants.TIME_REQUEST)
+                if (context.Session["UNLOCK_AGENCY"] == null || (DateTime.Now -(DateTime)context.Session["UNLOCK_AGENCY"]).TotalMilliseconds > Constants.TIME_REQUEST)
                 {
                     string json = context.Request.Form["json"];
                     if (!string.IsNullOrEmpty(json))
@@ -80,7 +201,7 @@ namespace CMS_Tools.Apis
                             Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
                             if (string.IsNullOrEmpty(jsonData.agencyID))
                             {
-                                result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
+                                result.status = Constants.NUMBER_CODE.DATA_NULL;
                                 result.msg = "Mã đại lý không được trống!";
                             }
                             else
@@ -127,7 +248,7 @@ namespace CMS_Tools.Apis
         {
             try
             {
-                if (context.Session["LOCK_AGENCY"] == null || ((DateTime)context.Session["LOCK_AGENCY"] - DateTime.Now).TotalMilliseconds < Constants.TIME_REQUEST)
+                if (context.Session["LOCK_AGENCY"] == null || (DateTime.Now- (DateTime)context.Session["LOCK_AGENCY"]).TotalMilliseconds > Constants.TIME_REQUEST)
                 {
                     string json = context.Request.Form["json"];
                     if (!string.IsNullOrEmpty(json))
@@ -138,7 +259,7 @@ namespace CMS_Tools.Apis
                             Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
                             if (string.IsNullOrEmpty(jsonData.agencyID))
                             {
-                                result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
+                                result.status = Constants.NUMBER_CODE.DATA_NULL;
                                 result.msg = "Mã đại lý không được trống!";
                             }
                             else
@@ -187,7 +308,7 @@ namespace CMS_Tools.Apis
             short debug = 0;
             try
             {
-                if (context.Session["CREATE_AGENCY"] == null || ((DateTime)context.Session["CREATE_AGENCY"] - DateTime.Now).TotalMilliseconds < Constants.TIME_REQUEST)
+                if (context.Session["CREATE_AGENCY"] == null || (DateTime.Now - (DateTime)context.Session["CREATE_AGENCY"]).TotalMilliseconds > Constants.TIME_REQUEST)
                 {
                     debug = 1;
                     string json = context.Request.Form["json"];
@@ -318,6 +439,25 @@ namespace CMS_Tools.Apis
 
 
     #region EnityClass
+    public class AddMoneyAgencyEntity
+    {
+        public AddMoneyAgencyEntity()
+        {
+            amount = 0;
+        }
+        public string agencyID;
+        public string IP;
+        public decimal amount; // menh gia nap
+        public decimal bonus; // tam thời chưa sd đến
+        public int creatorID;
+        public string creatorName;
+        public string reason; // nội dung nạp tiền
+    }
+    public class FindAgencyEntity
+    {
+        public string param;
+        public int topN;
+    }
     public class AgencyEntity
     {
         public string agencyCode;

@@ -8,7 +8,7 @@ namespace CMS_Tools.Lib
 {
     public static class Constants
     {
-        public const int TIME_REQUEST = 50;
+        public const int TIME_REQUEST = 1000;
         public const int TIMOUT_CONNECT_SQL = 60000;
         public static string STR_CONNECT_IDENTITY = WebConfigurationManager.AppSettings["CONNECT_IDENTITY"];
         public readonly static string GG_JSON_FILE = WebConfigurationManager.AppSettings["GG_ClientJSON"];
@@ -248,6 +248,7 @@ namespace CMS_Tools.Lib
             CREATE_AGENCY = 1,
             LOCK_AGENCY,
             UNLOCK_AGENCY,
+            AUTO_COMPLETE_SEARCH,
             BUY_CASH
         }
 

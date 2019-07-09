@@ -591,6 +591,19 @@ namespace CMS_Tools.Apis
         public object data { get; set; }
     }
 
+    public class ResultSearchAgrency
+    {
+        public Constants.NUMBER_CODE status { get; set; }
+        public string msg { get; set; }
+        public List<AgencyInfo> data { get; set; }
+    }
+
+    public class AgencyInfo
+    {
+        public string AgencyID;
+        public string DisplayName;
+    }
+
     public class Account_List
     {
         public Constants.NUMBER_CODE status { get; set; }
