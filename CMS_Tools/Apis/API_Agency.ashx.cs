@@ -47,6 +47,9 @@ namespace CMS_Tools.Apis
                         UNLOCK_AGENCY(context);
                         break;
                     default:
+                        result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
+                        result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
+                        context.Response.Write(JsonConvert.SerializeObject(result));
                         break;
                 }
             }
