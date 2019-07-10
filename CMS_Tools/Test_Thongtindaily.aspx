@@ -1,48 +1,31 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_Thongtindaily.aspx.cs" Inherits="CMS_Tools.Test_Thongtindaily" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .easy-autocomplete-container ul li, .easy-autocomplete-container ul .eac-category {
+        .avatar_u{
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 50% !important;
+        }
+        .form-section {
+            margin: 20px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            font-size: 12px;
+            color: #333;
+            text-transform: uppercase;
+        }
+        .btn-group-xs>.btn, .btn-xs{
+	        font-size:11x !important;
+        }
+        .table td, .table th {
             font-size: 12px !important;
         }
-
-        .loading1 {
-            width: 29px;
-            position: relative;
-            float: left;
-            left: -40px;
-            top: 3px;
+        .select2-container--bootstrap .select2-selection, .form-control, output{
+	        font-size: 12px !important;
         }
 
-        .loading1 img {
-            max-width: 100%;
-        }
-
-        .easy-autocomplete {
-            float: left;
-            margin-right: 10px;
-            width:100% !important;
-        }
-        
-        .add-cash-title{
-            margin-bottom: 5px;
-            background: #d9e7f9;
-        }
-        .add-cash-title h2{
-            text-align:center;
-            font-weight:bold;
-            color: darkslategrey;
-        }
-        
-        #tbl-menh-gia thead tr{
-            background: #cec18e;
-        }
-        #tbl-menh-gia tbody tr{
-            background:#fff7d8;
-            cursor:pointer;
-        }
-        #tbl-menh-gia tbody tr.activeVal{
-            background:#940000;
-            color:#eee;
+        .control-label{
+	        text-align:left !important;
         }
     </style>
 </asp:Content>
@@ -56,7 +39,11 @@
             <div class="portlet box blue ">
                 <div class="portlet-title">
                     <div class="caption">
-                        Nạp Tiền Đại Lý
+                        Khách Hàng
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+                        <a href="javascript:;" class="reload" data-original-title="" title=""></a>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -77,113 +64,63 @@
                         </div>
                         <span>Đang xử lý...</span>
                     </div>
-                    <form action="javascript:" id="form_Agency" class="form-horizontal" novalidate="novalidate">
-                    <input type="hidden" id="customerID"/>
-                    <div class="modal-body">
-                        <div class="form-body">
-                            <div class="alert alert-danger display-hide">
-                                <button class="close" data-close="alert"></button>
-                                Vui lòng kiểm tra và nhập đầy đủ thông tin!
-                            </div>
-                            <div class="alert alert-success display-hide">
-                                <button class="close" data-close="alert"></button>
-                                Nhập thông tin hợp lệ
-                            </div>
-                            <div class="row">
-                            	<div class="col-md-10 col-md-offset-1" style="margin-bottom:10px">
-                                    <div class="col-md-6">
-                                        <div class="row add-cash-title">
-                                            <h2>Thông tin nạp tiền</h2>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="control-label col-md-3">
-                                                Mã đại lý: <span class="required" aria-required="true">* </span>
-                                            </label>
-                                            <div class="col-md-9">
-                                                <div class="input-icon right">
-                                                    <i class="fa"></i>
-                                                    <input id="txtAgencyID" type="text" class="form-control" name="AgencyID" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="control-label col-md-3">
-                                                Mệnh giá nạp: <span class="required" aria-required="true">* </span>
-                                            </label>
-                                            <div class="col-md-9">
-                                                <div class="input-icon right">
-                                                    <i class="fa"></i>
-                                                    <select class="form-control" id="txt_MenhGia" name="MenhGia" required="">
-                                                        <option value="">Chọn mệnh giá...</option>
-                                                        <option value="20000000" money="16000000">20,000,000</option>
-                                                        <option value="50000000" money="40000000">50,000,000</option>
-                                                        <option value="100000000"  money="80000000">100,000,000</option>
-                                                        <option value="200000000"  money="160000000">200,000,000</option>
-                                                        <option value="500000000"  money="400000000">500,000,000</option>
-                                                        <option value="1000000000"  money="800000000">1,000,000,000</option>
-                                                   </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="control-label col-md-3">
-                                                Nội dung:
-                                            </label>
-                                            <div class="col-md-9">
-                                                <div class="input-icon right">
-                                                    <i class="fa"></i>
-                                                    <textarea id="txtNode" class="form-control" style="resize: none" rows="7" cols="1"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6" style="border-left: 1px solid currentColor;">
-                                        <div class="row add-cash-title">
-                                            <h2>Bảng quy đổi</h2>
-                                        </div>
-                                        <table class="table" id="tbl-menh-gia">
-                                            <thead>
-                                                <tr>
-                                                    <td><b>Mệnh giá</b></td>
-                                                    <td><b>Gold</b></td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>20,000,000</td>
-                                                    <td>16,000,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>50,000,000</td>
-                                                    <td>40,000,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>100,000,000</td>
-                                                    <td>80,000,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>200,000,000</td>
-                                                    <td>160,000,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>500,000,000</td>
-                                                    <td>400,000,000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1,000,000,000</td>
-                                                    <td>800,000,000</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-4" style="margin-bottom: 10px;">
+                            <div class="input-group" id="dateRangeEvent">
+                                <input type="text" class="form-control" placeholder="Date Range(MM/DD/YYYY)" disabled />
+                                <span class="input-group-btn">
+                                    <button class="btn default date-range-toggle" type="button"><i class="fa fa-calendar"></i></button>
+                                </span>
                             </div>
                         </div>
+                        <div class="col-md-3" style="margin-bottom: 10px;">
+                            <select id="filterColumn" class="form-control"></select>
+                        </div>
+                        <div class="col-md-3" style="margin-bottom: 10px;">
+                            <input type="text" class="form-control" id="txtFindData" placeholder="Search..." />
+                        </div>
+                        <div class="col-md-2" style="margin-bottom: 10px;">
+                            <button id="btnFindData" type="button" class="btn green form-control"><i class="icon-magnifier"></i>Search</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn green">Nạp Tiền</button>
+                    <div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                        <table class="table table-striped table-bordered table-hover dataTable" id="tbl_datatable"
+                            aria-describedby="sample_1_info">
+                            <thead>
+                                <tr role="row">
+                                    <td>Idx</td>
+                                    <td>TransactionID</td>
+                                    <td>SenderID</td>
+                                    <td>SenderName</td>
+                                    <td>RecipientID</td>
+                                    <td>RecipientName</td>
+                                    <td>Amount</td>
+                                    <td>Encrypt_Amount</td>
+                                    <td>Balance_Before</td>
+                                    <td>Balance_After</td>
+                                    <td>Balance_Bonus_Before</td>
+                                    <td>Balance_Bonus_After</td>
+                                    <td>Balance_Lock_Before</td>
+                                    <td>Balance_Lock_After</td>
+                                    <td>Encrypt_Balance_Before</td>
+                                    <td>Encrypt_Balance_After</td>
+                                    <td>Encrypt_Balance_Bonus_Before</td>
+                                    <td>Encrypt_Balance_Bonus_After</td>
+                                    <td>Encrypt_Balance_Lock_Before</td>
+                                    <td>Encrypt_Balance_Lock_After</td>
+                                    <td>Reason</td>
+                                    <td>DateCreated</td>
+                                    <td>LastUpdate</td>
+                                    <td>Status</td>
+                                    <td>IP</td>
+                                    <td>CreatorID</td>
+                                    <td>CreatorName</td>
+                                    <td>HashCode</td>
+                                </tr>
+                            </thead>
+                            <tbody role="alert" aria-live="polite" aria-relevant="all"></tbody>
+                        </table>
                     </div>
-                </form>
                 </div>
             </div>
         </div>
@@ -191,183 +128,229 @@
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">
     <script src="assets/global/plugins/Base64JS.js"></script>
-    <script src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>s
-    <script>
-        $(function () {
-            $('#btnAddAction').hide();
-            var agencyID = AppManage.getURLParameter('agencyid');
-            if (agencyID != null)
-                $("#txtAgencyID").val(Base64.decode(agencyID));
-
-            var options = {
-                url: function (param) {
-                    return "Apis/API_Agency.ashx";
-                },
-                getValue: function (element) {
-                    $('.loading1').fadeOut(10);
-                    return element.AgencyID + '-' + element.DisplayName;
-                },
-                ajaxSettings: {
-                    dataType: "json",
-                    method: "POST",
-                    data: {
-                        type: 4,
-                        mid: AppManage.getURLParameter('m')
-                    }
-                },
-                preparePostData: function (data) {
-                    $('.loading1').fadeIn();
-                    data.param = $("#txtAgencyID").val();
-                    return data;
-                },
-                requestDelay: 500
-            };
-            $("#txtAgencyID").easyAutocomplete(options);
-        })
-
+    <script src="assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+    <script src="assets/global/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="assets/global/plugins/datatables/DT_bootstrap.js"></script>
+    <script type="text/javascript">
+        var colFilter = null;
         jQuery(document).ready(function () {
-            FormValidation.init();
-        
+            $('#txtFindData').on('keyup', function (e) {
+                if (e.keyCode == 13) {
+                    TableEditable.init();
+                }
+            });
+
+            $('#btnFindData').click(function () {
+                if ($('#txtFindData').val() != "")
+                    TableEditable.init();
+            });
+
+            $('#filterColumn').on('change', function () {
+                if ($('#txtFindData').val() != "")
+                    TableEditable.init();
+            });
+
+            //load danh sach dai ly
+            TableEditable.init();
+            $('body').on('click', '.portlet > .portlet-title > .tools > a.reload', function (e) {
+                TableEditable.init();
+            });
+            ComponentsPickers.init();
         });
+
+        var _dateStart = null;
+        var _dateEnd = null;
+        var ComponentsPickers = function () {
+            var handleDateRangePickers = function () {
+                if (!jQuery().daterangepicker) {
+                    return;
+                }
+
+                $('#dateRangeEvent').daterangepicker({
+                    opens: (App.isRTL() ? 'left' : 'right'),
+                    format: 'MM/DD/YYYY',
+                    separator: ' to ',
+                    startDate: moment().subtract('year', 2),
+                    endDate: moment(),
+                    minDate: moment().subtract('year', 5).format('MM/DD/YYYY'),
+                    maxDate: moment().format('MM/DD/YYYY'),
+                },
+                    function (start, end) {
+                        _dateStart = start.format('YYYY/MM/DD');
+                        _dateEnd = end.format('YYYY/MM/DD');
+                        console.log("Callback has been called!");
+                        $('#dateRangeEvent input').val(start.format('MM/DD/YYYY') + ' - ' + end.format('MM/DD/YYYY'));
+                        TableEditable.init();
+                    }
+                );
+                _dateStart = moment().subtract('year', 2).format('YYYY/MM/DD');
+                _dateEnd = moment().format('YYYY/MM/DD');
+                $('#dateRangeEvent input').val(_dateStart + ' - ' + _dateEnd);
+            };
+            
+            return {
+                init: function () {
+                    handleDateRangePickers();
+                }
+            };
+        }();
+
+        var oTable = null;
+        var _pageSize = 10;
+        var _dataColumn = null;
+        var TableEditable = function () {
+            var handleTable = function () {
+                var table = $('#tbl_datatable');
+                loadTable();
+                function loadTable() {
+                    $('.divLoading').fadeIn();
+                    if (_dateStart == null)
+                        _dateStart = moment().subtract('year', 2).format('YYYY/MM/DD');
+                    if (_dateEnd == null)
+                        _dateEnd = moment().format('YYYY/MM/DD');
+                    var param = [];
+                    param.push(_dateStart);//@0
+                    param.push(_dateEnd);//@1
+                    param.push($('#filterColumn').val() != null ? $('#filterColumn').val() : 'DateCreated');//@2
+                    param.push($('#txtFindData').val());//@3
+                    $.ajax({
+                        type: "POST",
+                        url: "Apis/Menu.ashx",
+                        data: {
+                            type: 13,
+                            mid: AppManage.getURLParameter('m'),
+                            p: JSON.stringify(param)
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.status == 5005) {
+                                window.location.assign("login.aspx");
+                                return;
+                            }
+                            if (data.status == 0) {
+                                if (oTable != null) {
+                                    oTable.fnDestroy();
+                                }
+                                if (_dataColumn == null) {
+                                    _dataColumn = data.columnName;
+                                    var selectCol = "<option value=''>Select...</option>";
+                                    $.each(_dataColumn, function (key, obj) {
+                                        if (key < _dataColumn.length - 1) {
+                                            if (key != 0 && key != 2 && key != 3 && key != 7 && key != 14 && key != 15 && key != 16 && key != 17 && key != 18 && key != 19 && key != 22 && key != 23 && key != 24 && key != 27 && key != 10 && key != 11 && key != 12 && key != 13 ) {
+                                                selectCol += "<option value='" + obj + "'>" + obj + "</option>";
+                                            }
+                                        }
+                                    });
+                                    $('#filterColumn').html(selectCol);
+                                    if ($('#filterColumn').val() == "")
+                                        $('#filterColumn').val("DateCreated");
+                                }
+                                var colHiden = [];
+                                oTable = table.dataTable({
+                                    "data": data.data,
+                                    "lengthMenu": [
+                                        [10, 50, 100, 500, -1],
+                                        [10, 50, 100, 500, "All"]
+                                    ],
+                                    "pageLength": _pageSize,
+                                    "language": {
+                                        "lengthMenu": " _MENU_ records"
+                                    },
+                                    "columnDefs": [{
+                                        'orderable': true,
+                                        'targets': colHiden
+                                    }, {
+                                        "searchable": true,
+                                        "targets": [0]
+                                    }],
+                                    "order": [
+                                        [0, "desc"]
+                                    ]
+                                });
+
+                                //an column
+                                var bVis = oTable.fnSettings().aoColumns[0].bVisible;
+                                oTable.fnSetColumnVis(0, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[2].bVisible;
+                                oTable.fnSetColumnVis(2, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[3].bVisible;
+                                oTable.fnSetColumnVis(3, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[7].bVisible;
+                                oTable.fnSetColumnVis(7, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[14].bVisible;
+                                oTable.fnSetColumnVis(14, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[15].bVisible;
+                                oTable.fnSetColumnVis(15, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[16].bVisible;
+                                oTable.fnSetColumnVis(16, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[17].bVisible;
+                                oTable.fnSetColumnVis(17, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[18].bVisible;
+                                oTable.fnSetColumnVis(18, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[19].bVisible;
+                                oTable.fnSetColumnVis(19, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[22].bVisible;
+                                oTable.fnSetColumnVis(22, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[23].bVisible;
+                                oTable.fnSetColumnVis(23, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[24].bVisible;
+                                oTable.fnSetColumnVis(24, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[26].bVisible;
+                                oTable.fnSetColumnVis(26, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[27].bVisible;
+                                oTable.fnSetColumnVis(27, bVis ? false : true);
+                                //bonus
+                                var bVis = oTable.fnSettings().aoColumns[10].bVisible;
+                                oTable.fnSetColumnVis(10, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[11].bVisible;
+                                oTable.fnSetColumnVis(11, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[12].bVisible;
+                                oTable.fnSetColumnVis(12, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[13].bVisible;
+                                oTable.fnSetColumnVis(13, bVis ? false : true);
+
+                                var tableWrapper = $("#tbl_datatable_wrapper");
+                                jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
+                                jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
+                                jQuery('#tbl_datatable_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+
+                                tableWrapper.find(".dataTables_length select").select2({
+                                    showSearchInput: false
+                                });
+                            }
+                            else {
+                                bootbox.alert({
+                                    message: data.msg,
+                                    callback: function () {
+                                    }
+                                });
+                            }
+                        },
+                        complete: function () {
+                            $(".divLoading").fadeOut(500);
+                        }
+                    });
+                }
+            }
+
+            return {
+                //main function to initiate the module
+                init: function () {
+                    handleTable();
+                },
+                reloadTable: function () {
+                    handleTable();
+                }
+            };
+        }();
+
+
+
         function formatMoney(num) {
             if (num > 0)
                 return num.toLocaleString('en-US');
             else
                 return num;
         }
-
-        function AddCash() {
-            bootbox.confirm("Xác nhận nạp " + $('#txt_MenhGia').val() + " vào tài khoản " + $('#txtAgencyID').val(), function (r) {
-                if (r)
-                    PerformAddCash();
-            });
-        }
-
-        function PerformAddCash() {
-            $(".divLoading").fadeIn();
-            var uwinID = $('#txtAgencyID').val().split('-')[0];
-            var json = {
-                agencyID: uwinID.split('.')[1],
-                amount: formatMoney($('#txt_MenhGia').val()),
-                //amount: formatMoney($("#txt_MenhGia").find(':selected').attr('money')),
-                reason: $('#txtNode').val()
-            }
-            $.ajax({
-                type: "POST",
-                url: "Apis/API_Agency.ashx",
-                data: {
-                    json: JSON.stringify(json),
-                    type: 5
-                },
-                dataType: 'json',
-                success: function (data) {
-                    $(".divLoading").fadeOut(500);
-                    $('#modal_customer').modal('hide');
-                    if (data.status == 1) {
-                        bootbox.alert({
-                            message: data.msg,
-                            callback: function () {
-                            }
-                        });
-                        ResetForm();
-                        $('#tbl-menh-gia tbody tr').removeClass('activeVal');
-                    }
-                    else {
-                        bootbox.alert({
-                            message: data.msg,
-                            callback: function () {
-                            }
-                        });
-                    }
-                }
-            });
-        }
-
-        var FormValidation = function () {
-            var r = function () {
-                var e = $("#form_Agency"),
-                    r = $(".alert-danger", e),
-                    i = $(".alert-success", e);
-                e.validate({
-                    errorElement: "span",
-                    errorClass: "help-block help-block-error",
-                    focusInvalid: !1,
-                    ignore: "",
-                    rules: {
-                        AgencyID: {
-                            required: !0
-                        },
-                        MenhGia: {
-                            required: !0
-                        }
-                        //province: {
-                        //    required: !0
-                        //},
-                        //country: {
-                        //    required: !0
-                        //}
-                        //digits: {
-                        //    required: !0,
-                        //    digits: !0
-                        //},
-                        //creditcard: {
-                        //    required: !0,
-                        //    creditcard: !0
-                        //}
-                    },
-                    invalidHandler: function (e, t) {
-                        i.hide(), r.show(), App.scrollTo(r, -200)
-                    },
-                    errorPlacement: function (e, r) {
-                        var i = $(r).parent(".input-icon").children("i");
-                        i.removeClass("fa-check").addClass("fa-warning"), i.attr("data-original-title", e.text()).tooltip({
-                            container: "body"
-                        })
-                    },
-                    highlight: function (e) {
-                        $(e).closest(".form-group").removeClass("has-success").addClass("has-error")
-                    },
-                    unhighlight: function (e) { },
-                    success: function (e, r) {
-                        var i = $(r).parent(".input-icon").children("i");
-                        $(r).closest(".form-group").removeClass("has-error").addClass("has-success"), i.removeClass("fa-warning").addClass("fa-check");
-                    },
-                    submitHandler: function (e) {
-                        //i.show(), 
-                        r.hide(),
-                            AddCash();
-                    }
-                })
-            }
-            return {
-                init: function () {
-                    r()
-                }
-            }
-        }();
-
-        function ResetForm() {
-            $('#form_Agency').trigger('reset');
-            $('.form-group').removeClass('has-success').removeClass('has-error');
-            $('.form-group i').removeClass('fa-warning').removeClass('fa-check');
-        }
-
-        $(document).ready(function () {
-            $('#txt_MenhGia').change(function () {
-                if ($("#txt_MenhGia")[0].selectedIndex > 0) {
-                    $('#tbl-menh-gia tbody tr').removeClass('activeVal');
-                    $('#tbl-menh-gia tbody tr').eq($("#txt_MenhGia")[0].selectedIndex - 1).addClass('activeVal');
-                }
-
-            });
-        });
-        $(document).ready(function () {
-            $('#tbl-menh-gia tbody tr').click(function () {
-                if ($(this).hasClass('activeVal')) { return; }
-                $('#tbl-menh-gia tbody tr').removeClass('activeVal');
-                $(this).addClass('activeVal');
-                $('#txt_MenhGia option').eq($(this).index() + 1).prop('selected', true);
-            });
-        });
 </script>
 </asp:Content>
