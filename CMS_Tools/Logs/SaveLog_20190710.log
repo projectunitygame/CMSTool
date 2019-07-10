@@ -46,3 +46,60 @@ INFO 2019-07-10 02:04:13 – {"DATE_LOGS":"10/07/2019 02:04:07","INFO_LOGS":"{\"pa
 INFO 2019-07-10 02:04:13 – {"DATE_LOGS":"10/07/2019 02:04:07","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/FindAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"5r7lH4+LJz6uvXdG9mcqEMxegTWcXnj0g+9peQUskqA=\",\"clientIP\":\"::1\",\"sign\":\"032cfd5cc045f87341e88f5dd260a684\"}\r\nResponse Data: {\"status\":0,\"msg\":null,\"data\":[{\"AgencyID\":9,\"DisplayName\":\"Ð?i Lý 1\",\"AgencyCode\":\"daily1\",\"Phone\":\"0962474560\"}]}"}
 INFO 2019-07-10 02:04:23 – {"DATE_LOGS":"10/07/2019 02:04:16","INFO_LOGS":"{\"agencyID\":\"9\",\"IP\":null,\"amount\":16000000.0,\"bonus\":0.0,\"creatorID\":0,\"creatorName\":null,\"reason\":\"1\"}"}
 INFO 2019-07-10 02:04:23 – {"DATE_LOGS":"10/07/2019 02:04:16","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/AddMoneyAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"Y7gh2A+nzbYeU5P0M6Pk/EAzrD4yQxNTyFFhxM8wkrubPUAJ9K0c3uzl6BRkw1D0i2hGVGZ4EqsVyU1cFpt9FvZSvP8zVahaBFwTBUkdchDouZEC/8qsIdwsUIJ1nncf0SkEdAIczWm87uOaIlIbHw==\",\"clientIP\":\"::1\",\"sign\":\"f5a5361d542025b44861175208d5d2f6\"}\r\nResponse Data: {\"status\":-1000,\"msg\":\"S? ti?n n?p không h?p l?\",\"data\":null}"}
+INFO 2019-07-10 07:56:29 – {"DATE_LOGS":"10/07/2019 07:56:28","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-07-10 08:23:09 – {"DATE_LOGS":"10/07/2019 08:23:02","INFO_LOGS":"{\"param\":\"123\",\"topN\":20}"}
+INFO 2019-07-10 08:23:31 – {"DATE_LOGS":"10/07/2019 08:23:03","INFO_LOGS":"{\"param\":\"\",\"topN\":20}"}
+INFO 2019-07-10 08:23:31 – {"DATE_LOGS":"10/07/2019 08:23:05","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:24:01 – {"DATE_LOGS":"10/07/2019 08:23:12","INFO_LOGS":"{\"param\":\"\",\"topN\":20}"}
+INFO 2019-07-10 08:24:01 – {"DATE_LOGS":"10/07/2019 08:23:14","INFO_LOGS":"{\"param\":\"d\",\"topN\":20}"}
+INFO 2019-07-10 08:24:21 – {"DATE_LOGS":"10/07/2019 08:23:25","INFO_LOGS":"{\"param\":\"dai\",\"topN\":20}"}
+INFO 2019-07-10 08:24:52 – {"DATE_LOGS":"10/07/2019 08:24:04","INFO_LOGS":"{\"param\":\"123\",\"topN\":20}"}
+INFO 2019-07-10 08:25:12 – {"DATE_LOGS":"10/07/2019 08:24:05","INFO_LOGS":"{\"param\":\"\",\"topN\":20}"}
+INFO 2019-07-10 08:25:12 – {"DATE_LOGS":"10/07/2019 08:24:06","INFO_LOGS":"{\"param\":\"123\",\"topN\":20}"}
+INFO 2019-07-10 08:25:32 – {"DATE_LOGS":"10/07/2019 08:24:12","INFO_LOGS":"{\"param\":\"\",\"topN\":20}"}
+INFO 2019-07-10 08:25:32 – {"DATE_LOGS":"10/07/2019 08:24:13","INFO_LOGS":"{\"param\":\"tha\",\"topN\":20}"}
+INFO 2019-07-10 08:25:54 – {"DATE_LOGS":"10/07/2019 08:24:16","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:26:14 – {"DATE_LOGS":"10/07/2019 08:24:26","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:26:35 – {"DATE_LOGS":"10/07/2019 08:24:47","INFO_LOGS":"{\"param\":\"daily01\",\"topN\":20}"}
+INFO 2019-07-10 08:27:05 – {"DATE_LOGS":"10/07/2019 08:25:08","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:27:25 – {"DATE_LOGS":"10/07/2019 08:25:37","INFO_LOGS":"{\"param\":\"\",\"topN\":20}"}
+INFO 2019-07-10 08:27:25 – {"DATE_LOGS":"10/07/2019 08:25:40","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:27:45 – {"DATE_LOGS":"10/07/2019 08:25:46","INFO_LOGS":"{\"param\":\"d\",\"topN\":20}"}
+INFO 2019-07-10 08:28:06 – {"DATE_LOGS":"10/07/2019 08:25:48","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:28:26 – {"DATE_LOGS":"10/07/2019 08:25:51","INFO_LOGS":"{\"param\":\"dai\",\"topN\":20}"}
+INFO 2019-07-10 08:28:47 – {"DATE_LOGS":"10/07/2019 08:26:06","INFO_LOGS":"{\"param\":\"\",\"topN\":20}"}
+INFO 2019-07-10 08:28:47 – {"DATE_LOGS":"10/07/2019 08:26:08","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:29:07 – {"DATE_LOGS":"10/07/2019 08:26:20","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:29:39 – {"DATE_LOGS":"10/07/2019 08:27:38","INFO_LOGS":"{\"param\":\"\",\"topN\":20}"}
+INFO 2019-07-10 08:29:39 – {"DATE_LOGS":"10/07/2019 08:27:45","INFO_LOGS":"{\"param\":\"d\",\"topN\":20}"}
+INFO 2019-07-10 08:30:17 – {"DATE_LOGS":"10/07/2019 08:30:17","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-07-10 08:30:27 – {"DATE_LOGS":"10/07/2019 08:30:20","INFO_LOGS":"LoginWithToken: 9a5c574161539547da843baa16a41e50,IP ::1"}
+INFO 2019-07-10 08:30:27 – {"DATE_LOGS":"10/07/2019 08:30:27","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:31:36 – {"DATE_LOGS":"10/07/2019 08:31:36","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-07-10 08:31:46 – {"DATE_LOGS":"10/07/2019 08:31:40","INFO_LOGS":"LoginWithToken: 9a5c574161539547da843baa16a41e50,IP ::1"}
+INFO 2019-07-10 08:31:46 – {"DATE_LOGS":"10/07/2019 08:31:40","INFO_LOGS":"LoginWithToken: 9a5c574161539547da843baa16a41e50,IP ::1"}
+INFO 2019-07-10 08:31:56 – {"DATE_LOGS":"10/07/2019 08:31:46","INFO_LOGS":"{\"param\":\"\",\"topN\":20}"}
+INFO 2019-07-10 08:31:56 – {"DATE_LOGS":"10/07/2019 08:31:49","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:38:27 – {"DATE_LOGS":"10/07/2019 08:38:21","INFO_LOGS":"{\"param\":\"\",\"topN\":20}"}
+INFO 2019-07-10 08:38:27 – {"DATE_LOGS":"10/07/2019 08:38:22","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:39:07 – {"DATE_LOGS":"10/07/2019 08:38:44","INFO_LOGS":"{\"param\":\"dai\",\"topN\":20}"}
+INFO 2019-07-10 08:41:08 – {"DATE_LOGS":"10/07/2019 08:41:06","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 08:41:08 – {"DATE_LOGS":"10/07/2019 08:41:06","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/FindAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"dZ63Y4n+XKGEmLyLEHnO+FQ6tyimPPp4f1tufpmw7qc=\",\"clientIP\":\"::1\",\"sign\":\"6ae65ad509be1a8a8bf0982c00495e1e\"}\r\nResponse Data: {\"status\":0,\"msg\":null,\"data\":[{\"DisplayName\":\"Ð?i Lý 01\",\"AgencyCode\":\"daily01\",\"Phone\":\"0933533783\",\"AgencyID\":\"UWIN.00000011\"}]}"}
+INFO 2019-07-10 08:41:28 – {"DATE_LOGS":"10/07/2019 08:41:19","INFO_LOGS":"{\"agencyID\":\"00000011\",\"IP\":null,\"amount\":20000000.0,\"bonus\":0.0,\"creatorID\":0,\"creatorName\":null,\"reason\":\"\"}"}
+INFO 2019-07-10 08:41:28 – {"DATE_LOGS":"10/07/2019 08:41:19","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/AddMoneyAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"sTduiFJ+4SXzXeMSDGq8ZTRiFgxyDIDNlEhX4bKNgacmvs8jpeCE2R3C6/qozWhRPRprkERGFVFlvEYMERsY6kqCXHBIQCxMBeQze36nynv+AtxKs6mzIubHczVuanD0hCgPbLph8v3Xhij3/sF9Csg4p+dwdDzD59+1Ghqa7Bg=\",\"clientIP\":\"::1\",\"sign\":\"a22e79166e3238d50de07ffb7508bc3f\"}\r\nResponse Data: {\"status\":1,\"msg\":\"N?p ti?n d?i lý thành công\",\"data\":null}"}
+INFO 2019-07-10 08:41:38 – {"DATE_LOGS":"10/07/2019 08:41:30","INFO_LOGS":"{\"agencyID\":\"00000011\",\"IP\":null,\"amount\":20000000.0,\"bonus\":0.0,\"creatorID\":0,\"creatorName\":null,\"reason\":\"\"}"}
+INFO 2019-07-10 08:41:38 – {"DATE_LOGS":"10/07/2019 08:41:30","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/AddMoneyAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"sTduiFJ+4SXzXeMSDGq8ZTRiFgxyDIDNlEhX4bKNgacmvs8jpeCE2R3C6/qozWhRPRprkERGFVFlvEYMERsY6kqCXHBIQCxMBeQze36nynv+AtxKs6mzIubHczVuanD0hCgPbLph8v3Xhij3/sF9Csg4p+dwdDzD59+1Ghqa7Bg=\",\"clientIP\":\"::1\",\"sign\":\"a22e79166e3238d50de07ffb7508bc3f\"}\r\nResponse Data: {\"status\":1,\"msg\":\"N?p ti?n d?i lý thành công\",\"data\":null}"}
+INFO 2019-07-10 08:44:28 – {"DATE_LOGS":"10/07/2019 08:44:24","INFO_LOGS":"{\"param\":\"th\",\"topN\":20}"}
+INFO 2019-07-10 08:44:28 – {"DATE_LOGS":"10/07/2019 08:44:24","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/FindAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"CpSWo97Vk/T1bZhVTmNY1fGNiR6jLHep3Kg4SHsbyus=\",\"clientIP\":\"::1\",\"sign\":\"a0931e775f107e59458bf094d483266c\"}\r\nResponse Data: {\"status\":0,\"msg\":null,\"data\":[]}"}
+INFO 2019-07-10 08:44:28 – {"DATE_LOGS":"10/07/2019 08:44:26","INFO_LOGS":"{\"param\":\"kt\",\"topN\":20}"}
+INFO 2019-07-10 08:44:28 – {"DATE_LOGS":"10/07/2019 08:44:26","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/FindAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"cYywOE4uWtYE3qFvxDEnsAWVD+rxDTOVPv8Ns1BbRK8=\",\"clientIP\":\"::1\",\"sign\":\"6e0d6dc419d15fac831ce703b894054f\"}\r\nResponse Data: {\"status\":0,\"msg\":null,\"data\":[{\"DisplayName\":\"Ð?i Lý 01\",\"AgencyCode\":\"daily01\",\"Phone\":\"0933533783\",\"AgencyID\":\"UWIN.00000011\"}]}"}
+INFO 2019-07-10 08:44:48 – {"DATE_LOGS":"10/07/2019 08:44:40","INFO_LOGS":"{\"agencyID\":\"00000011\",\"IP\":null,\"amount\":20000000.0,\"bonus\":0.0,\"creatorID\":0,\"creatorName\":null,\"reason\":\"n?p ti?n\"}"}
+INFO 2019-07-10 08:44:48 – {"DATE_LOGS":"10/07/2019 08:44:40","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/AddMoneyAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"sTduiFJ+4SXzXeMSDGq8ZTRiFgxyDIDNlEhX4bKNgacmvs8jpeCE2R3C6/qozWhRPRprkERGFVFlvEYMERsY6kqCXHBIQCxMBeQze36nynv+AtxKs6mzIubHczVuanD0hCgPbLph8v3Xhij3/sF9ClPO3AvrwuxSkm1uALFdL+l4zmQO6e5A6Twg52brevd5\",\"clientIP\":\"::1\",\"sign\":\"295699810c6acc03b55bc97999c2fecf\"}\r\nResponse Data: {\"status\":1,\"msg\":\"N?p ti?n d?i lý thành công\",\"data\":null}"}
+INFO 2019-07-10 09:08:20 – {"DATE_LOGS":"10/07/2019 09:08:18","INFO_LOGS":"{\"param\":\"da\",\"topN\":20}"}
+INFO 2019-07-10 09:08:20 – {"DATE_LOGS":"10/07/2019 09:08:20","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/FindAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"dZ63Y4n+XKGEmLyLEHnO+FQ6tyimPPp4f1tufpmw7qc=\",\"clientIP\":\"::1\",\"sign\":\"6ae65ad509be1a8a8bf0982c00495e1e\"}\r\nResponse Data: {\"status\":0,\"msg\":null,\"data\":[{\"DisplayName\":\"Ð?i Lý 01\",\"AgencyCode\":\"daily01\",\"Phone\":\"0933533783\",\"AgencyID\":\"UWIN.00000011\"}]}"}
+INFO 2019-07-10 09:08:30 – {"DATE_LOGS":"10/07/2019 09:08:20","INFO_LOGS":"{\"param\":\"d\",\"topN\":20}"}
+INFO 2019-07-10 09:08:30 – {"DATE_LOGS":"10/07/2019 09:08:20","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/FindAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"ZyvrmTgqAI+ZSNg+9F8UljvWPwkpmQsHmIYEMXJFATo=\",\"clientIP\":\"::1\",\"sign\":\"17575eedc1617c48b59805796f0c09a4\"}\r\nResponse Data: {\"status\":0,\"msg\":null,\"data\":[{\"DisplayName\":\"Ð?i Lý 01\",\"AgencyCode\":\"daily01\",\"Phone\":\"0933533783\",\"AgencyID\":\"UWIN.00000011\"},{\"DisplayName\":\"DIEN NT\",\"AgencyCode\":\"hcm-6969\",\"Phone\":\"0988005509\",\"AgencyID\":\"UWIN.00000010\"}]}"}
+INFO 2019-07-10 09:08:30 – {"DATE_LOGS":"10/07/2019 09:08:26","INFO_LOGS":"{\"agencyID\":\"00000011\",\"IP\":null,\"amount\":200000000.0,\"bonus\":0.0,\"creatorID\":0,\"creatorName\":null,\"reason\":\"\"}"}
+INFO 2019-07-10 09:08:30 – {"DATE_LOGS":"10/07/2019 09:08:26","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/AddMoneyAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"sTduiFJ+4SXzXeMSDGq8ZTRiFgxyDIDNlEhX4bKNgacmvs8jpeCE2R3C6/qozWhRykeZrlS9S6D+4K1PmAaolV5EXDX3YK2zXUXFU7otumHaUc/31mmDAycMNmIiy/MqppY/GMVMH1XJfN9pcBYL0K5o9V8wibjqi2szQlPSklw=\",\"clientIP\":\"::1\",\"sign\":\"0863cdcf8533e5d64335465ff1e4d46f\"}\r\nResponse Data: {\"status\":1,\"msg\":\"N?p ti?n d?i lý thành công\",\"data\":null}"}
+INFO 2019-07-10 09:37:14 – {"DATE_LOGS":"10/07/2019 09:37:14","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-07-10 09:37:24 – {"DATE_LOGS":"10/07/2019 09:37:21","INFO_LOGS":"LoginWithToken: 9a5c574161539547da843baa16a41e50,IP ::1"}

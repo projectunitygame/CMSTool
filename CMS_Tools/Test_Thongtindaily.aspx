@@ -51,7 +51,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="PageBar" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageContent" runat="server">
-   <div class="row">
+    <div class="row">
         <div class="col-md-12">
             <div class="portlet box blue ">
                 <div class="portlet-title">
@@ -77,7 +77,7 @@
                         </div>
                         <span>Đang xử lý...</span>
                     </div>
-                    <form action="javascript:AddCash();" id="form_Agency" class="form-horizontal" novalidate="novalidate">
+                    <form action="javascript:" id="form_Agency" class="form-horizontal" novalidate="novalidate">
                     <input type="hidden" id="customerID"/>
                     <div class="modal-body">
                         <div class="form-body">
@@ -102,7 +102,7 @@
                                             <div class="col-md-9">
                                                 <div class="input-icon right">
                                                     <i class="fa"></i>
-                                                    <input id="txtAgencyID" type="text" class="form-control" name="" />
+                                                    <input id="txtAgencyID" type="text" class="form-control" name="AgencyID" />
                                                 </div>
                                             </div>
                                         </div>
@@ -113,7 +113,7 @@
                                             <div class="col-md-9">
                                                 <div class="input-icon right">
                                                     <i class="fa"></i>
-                                                    <select class="form-control" id="txt_MenhGia" required="">
+                                                    <select class="form-control" id="txt_MenhGia" name="MenhGia" required="">
                                                         <option value="">Chọn mệnh giá...</option>
                                                         <option value="20000000" money="16000000">20,000,000</option>
                                                         <option value="50000000" money="40000000">50,000,000</option>
@@ -190,10 +190,14 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">
+    <script src="assets/global/plugins/Base64JS.js"></script>
+    <script src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>s
     <script>
         $(function () {
             $('#btnAddAction').hide();
-
+            var agencyID = AppManage.getURLParameter('agencyid');
+            if (agencyID != null)
+                $("#txtAgencyID").val(Base64.decode(agencyID));
 
             var options = {
                 url: function (param) {
@@ -201,8 +205,7 @@
                 },
                 getValue: function (element) {
                     $('.loading1').fadeOut(10);
-                    console.log(element);
-                    return element.AgencyID + ' - ' + element.DisplayName;
+                    return element.AgencyID + '-' + element.DisplayName;
                 },
                 ajaxSettings: {
                     dataType: "json",
@@ -222,6 +225,10 @@
             $("#txtAgencyID").easyAutocomplete(options);
         })
 
+        jQuery(document).ready(function () {
+            FormValidation.init();
+        
+        });
         function formatMoney(num) {
             if (num > 0)
                 return num.toLocaleString('en-US');
@@ -230,9 +237,17 @@
         }
 
         function AddCash() {
+            bootbox.confirm("Xác nhận nạp " + $('#txt_MenhGia').val() + " vào tài khoản " + $('#txtAgencyID').val(), function (r) {
+                if (r)
+                    PerformAddCash();
+            });
+        }
+
+        function PerformAddCash() {
             $(".divLoading").fadeIn();
+            var uwinID = $('#txtAgencyID').val().split('-')[0];
             var json = {
-                agencyID: $('#txtAgencyID').val().substring(0, 1),
+                agencyID: uwinID.split('.')[1],
                 amount: formatMoney($('#txt_MenhGia').val()),
                 //amount: formatMoney($("#txt_MenhGia").find(':selected').attr('money')),
                 reason: $('#txtNode').val()
@@ -249,7 +264,13 @@
                     $(".divLoading").fadeOut(500);
                     $('#modal_customer').modal('hide');
                     if (data.status == 1) {
-                        TableEditable.init();
+                        bootbox.alert({
+                            message: data.msg,
+                            callback: function () {
+                            }
+                        });
+                        ResetForm();
+                        $('#tbl-menh-gia tbody tr').removeClass('activeVal');
                     }
                     else {
                         bootbox.alert({
@@ -261,19 +282,88 @@
                 }
             });
         }
+
+        var FormValidation = function () {
+            var r = function () {
+                var e = $("#form_Agency"),
+                    r = $(".alert-danger", e),
+                    i = $(".alert-success", e);
+                e.validate({
+                    errorElement: "span",
+                    errorClass: "help-block help-block-error",
+                    focusInvalid: !1,
+                    ignore: "",
+                    rules: {
+                        AgencyID: {
+                            required: !0
+                        },
+                        MenhGia: {
+                            required: !0
+                        }
+                        //province: {
+                        //    required: !0
+                        //},
+                        //country: {
+                        //    required: !0
+                        //}
+                        //digits: {
+                        //    required: !0,
+                        //    digits: !0
+                        //},
+                        //creditcard: {
+                        //    required: !0,
+                        //    creditcard: !0
+                        //}
+                    },
+                    invalidHandler: function (e, t) {
+                        i.hide(), r.show(), App.scrollTo(r, -200)
+                    },
+                    errorPlacement: function (e, r) {
+                        var i = $(r).parent(".input-icon").children("i");
+                        i.removeClass("fa-check").addClass("fa-warning"), i.attr("data-original-title", e.text()).tooltip({
+                            container: "body"
+                        })
+                    },
+                    highlight: function (e) {
+                        $(e).closest(".form-group").removeClass("has-success").addClass("has-error")
+                    },
+                    unhighlight: function (e) { },
+                    success: function (e, r) {
+                        var i = $(r).parent(".input-icon").children("i");
+                        $(r).closest(".form-group").removeClass("has-error").addClass("has-success"), i.removeClass("fa-warning").addClass("fa-check");
+                    },
+                    submitHandler: function (e) {
+                        //i.show(), 
+                        r.hide(),
+                            AddCash();
+                    }
+                })
+            }
+            return {
+                init: function () {
+                    r()
+                }
+            }
+        }();
+
+        function ResetForm() {
+            $('#form_Agency').trigger('reset');
+            $('.form-group').removeClass('has-success').removeClass('has-error');
+            $('.form-group i').removeClass('fa-warning').removeClass('fa-check');
+        }
+
         $(document).ready(function () {
             $('#txt_MenhGia').change(function () {
                 if ($("#txt_MenhGia")[0].selectedIndex > 0) {
                     $('#tbl-menh-gia tbody tr').removeClass('activeVal');
                     $('#tbl-menh-gia tbody tr').eq($("#txt_MenhGia")[0].selectedIndex - 1).addClass('activeVal');
                 }
-                
+
             });
         });
         $(document).ready(function () {
             $('#tbl-menh-gia tbody tr').click(function () {
-                if ($(this).hasClass('activeVal')) { return;}
-                $('#tbl-menh-gia tbody tr').removeClass('activeVal');
+                if ($(this).hasClass('activeVal')) { return; }
                 $('#tbl-menh-gia tbody tr').removeClass('activeVal');
                 $(this).addClass('activeVal');
                 $('#txt_MenhGia option').eq($(this).index() + 1).prop('selected', true);

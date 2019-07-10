@@ -142,3 +142,7 @@ a label {
 .dataTables_wrapper .dataTables_paginate .ellipsis {
     padding: 0 1em
 }
+
+.modal-body{
+    padding:15px !important;
+}

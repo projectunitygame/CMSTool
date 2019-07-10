@@ -108,7 +108,8 @@ jQuery(document).ready(function () {
 });
 
 function refresh_captcha() {
-    $(".login-form").trigger('reset');
+    //$(".login-form").trigger('reset');
+    $('.form-control[name="captcha"]').val('');
     var today = new Date();
     var time = today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
     $('#captcha').attr("src", "../../Apis/Captcha.ashx?t=" + time);

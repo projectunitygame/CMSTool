@@ -164,7 +164,8 @@ namespace CMS_Tools.Lib
             NUMBER_INVALID,
             CAPTCHA_NULL,
             CAPTCHA_ERROR,
-            INFO_CREATE_AGENCY_VALI
+            INFO_CREATE_AGENCY_VALI,
+            AMOUNT_WRONG
         }
 
         public enum REQUEST_TYPE: int

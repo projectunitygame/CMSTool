@@ -75,6 +75,7 @@ namespace CMS_Tools.Apis
                 if (context.Session["BUY_CASH"] == null || (DateTime.Now - (DateTime)context.Session["BUY_CASH"]).TotalMilliseconds > Constants.TIME_REQUEST)
                 {
                     string json = context.Request.Form["json"];
+                    decimal[] rulerAmount = { 20000000,50000000, 100000000, 200000000, 500000000 , 1000000000 };
                     if (!string.IsNullOrEmpty(json))
                     {
                         var jsonData = JsonConvert.DeserializeObject<AddMoneyAgencyEntity>(json);
@@ -86,9 +87,9 @@ namespace CMS_Tools.Apis
                                 result.status = Constants.NUMBER_CODE.DATA_NULL;
                                 result.msg = "Mã đại lý không được trống!";
                             }
-                            else if (jsonData.amount <= 0 )
+                            else if (!rulerAmount.Contains(jsonData.amount))
                             {
-                                result.status = Constants.NUMBER_CODE.DATA_NULL;
+                                result.status = Constants.NUMBER_CODE.AMOUNT_WRONG;
                                 result.msg = "Số tiền không hợp lệ!";
                             }
                             else
@@ -110,14 +111,14 @@ namespace CMS_Tools.Apis
                         else
                         {
                             result.status = Constants.NUMBER_CODE.DATA_NULL;
-                            result.msg = Constants.NUMBER_CODE.DATA_NULL.ToString();
+                            result.msg = "Thông tin không được để trống";
                         }
                     }
                 }
                 else
                 {
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                    result.msg = "Không thể kết nối";
                 }
             }
             catch (Exception ex)
@@ -173,7 +174,7 @@ namespace CMS_Tools.Apis
             {
                 Logs.SaveError("ERROR AUTO_COMPLETE_SEARCH: " + ex);
                 result.status = Constants.NUMBER_CODE.ERROR_EX;
-                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+                result.msg = ex.ToString();
             }
             finally
             {
@@ -231,7 +232,7 @@ namespace CMS_Tools.Apis
             {
                 Logs.SaveError("ERROR UNLOCK_AGENCY: " + ex);
                 result.status = Constants.NUMBER_CODE.ERROR_EX;
-                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+                result.msg = ex.ToString();
             }
             finally
             {

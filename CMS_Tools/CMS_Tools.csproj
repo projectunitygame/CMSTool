@@ -87,6 +87,7 @@
   <ItemGroup>
     <Content Include="AccountManage.aspx" />
     <Content Include="Article.aspx" />
+    <Content Include="assets\global\plugins\Base64.js" />
     <Content Include="assets\global\plugins\nouislider\nouislider.min.css" />
     <Content Include="assets\global\plugins\nouislider\nouislider.pips.css" />
     <Content Include="assets\global\css\print\print.css" />
