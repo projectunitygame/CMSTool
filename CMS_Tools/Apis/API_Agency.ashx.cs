@@ -52,6 +52,9 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_AGENCY_TYPE.BUY_CASH:
                         BUY_CASH(context);
                         break;
+                    case Constants.REQUEST_AGENCY_TYPE.VERIFIRE_CAPTCHA:
+                        VERIFIRE_CAPTCHA(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -66,6 +69,47 @@ namespace CMS_Tools.Apis
                 result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
+        }
+
+        private void VERIFIRE_CAPTCHA(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["VERIFIRE_CAPTCHA"] == null || (DateTime.Now - (DateTime)context.Session["VERIFIRE_CAPTCHA"]).TotalMilliseconds > 200)
+                {
+                    string captcha = context.Request.Form["captcha"];
+                    if (context.Session["captcha"] == null)
+                    {
+                        context.Session["captcha"] = "";
+                    }
+                    if (captcha != context.Session["captcha"].ToString())
+                    {
+                        result.status = Constants.NUMBER_CODE.CAPTCHA_ERROR;
+                        result.msg = "Mã captcha không đúng!";
+                    }
+                    else
+                    {
+                        result.status = Constants.NUMBER_CODE.SUCCESS;
+                        result.msg = "Verifire success!";
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Không thể kết nối";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR BUY_CASH: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["VERIFIRE_CAPTCHA"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
         }
 
         private void BUY_CASH(HttpContext context)

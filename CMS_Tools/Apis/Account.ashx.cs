@@ -392,7 +392,10 @@ namespace CMS_Tools.Apis
                 {
                     id = id.Trim();
                     int? code = 0;
-
+                    if(context.Session["captcha"] == null)
+                    {
+                        context.Session["captcha"] = "";
+                    }
                     if(captcha != context.Session["captcha"].ToString())
                     {
                         result.status = Constants.NUMBER_CODE.CAPTCHA_ERROR;

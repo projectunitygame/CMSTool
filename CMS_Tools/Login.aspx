@@ -124,10 +124,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-8">
+                                <div class="col-xs-6">
                                     <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Nhập Captcha" name="captcha" required/>
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-xs-6">
                                     <div class="col-xs-8">
                                         <img style="float:right;margin-right:5px;" id="captcha" src="Apis/Captcha.ashx">
                                     </div>

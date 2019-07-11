@@ -250,7 +250,8 @@ namespace CMS_Tools.Lib
             LOCK_AGENCY,
             UNLOCK_AGENCY,
             AUTO_COMPLETE_SEARCH,
-            BUY_CASH
+            BUY_CASH,
+            VERIFIRE_CAPTCHA
         }
 
         public enum WEBSOCKET_STATUS: int
