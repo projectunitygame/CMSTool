@@ -146,3 +146,10 @@ a label {
 .modal-body{
     padding:15px !important;
 }
+
+.portlet.blue, .portlet.box.blue > .portlet-title, .portlet > .portlet-body.blue {
+    background-color: #135f5b;
+}
+.portlet.box.blue {
+    border: 1px solid #30a09b;
+}
