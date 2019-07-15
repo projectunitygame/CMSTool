@@ -502,6 +502,7 @@ namespace CMS_Tools.Apis
     {
         public string param;
         public int topN;
+        public string uwinID="";
     }
     public class AgencyEntity
     {
@@ -510,7 +511,7 @@ namespace CMS_Tools.Apis
         public string email;
         public string phone;
         public string displayName;
-        public int ownerID;
+        public string ownerID="";
         public string IP;
         public decimal limitTransaction;
         public decimal limitTransactionDaily;

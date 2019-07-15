@@ -116,10 +116,10 @@
                                 <span class="msg">Vui lòng điền đầy đủ thông tin bên dưới. </span>
                             </div>
                             <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-md-6">
                                     <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email hoặc số điện thoại" name="username" required/> 
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-md-6">
                                     <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="Password" name="password" required/>
                                 </div>
                             </div>

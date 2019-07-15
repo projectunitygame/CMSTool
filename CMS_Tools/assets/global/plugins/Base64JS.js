@@ -102,11 +102,12 @@
                 result += padding + padding;
             }
         }
-        return result.replace(/\//g, "~");
+        return replaceAll(result.replace(/\//g, "~"), '=', '@*!?');
     }
 
     function decode(data) {
         try {
+            data = replaceAll(data, '@*!?', '=')
             var myString = data.replace(/~/g, "/");
             var value, code, idx = 0,
             bytes = [],
@@ -148,6 +149,14 @@
         } catch (e) {
             return "";
         }
+    }
+
+    function escapeRegExp(str) {
+        return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    }
+
+    function replaceAll(str, find, replace) {
+        return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
     }
 
     global.Base64 = { encode: encode, decode: decode };
