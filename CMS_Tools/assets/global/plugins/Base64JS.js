@@ -107,7 +107,7 @@
 
     function decode(data) {
         try {
-            data = replaceAll(data, '@*!?', '=')
+            data = replaceAll(data, '@*!?', '=');
             var myString = data.replace(/~/g, "/");
             var value, code, idx = 0,
             bytes = [],
