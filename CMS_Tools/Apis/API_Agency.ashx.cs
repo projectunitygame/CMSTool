@@ -370,11 +370,11 @@ namespace CMS_Tools.Apis
                                 result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
                                 result.msg = "Mã đại lý không được bỏ trống!";
                             }
-                            else if(jsonData.agencyCode.Length < 6 || jsonData.agencyCode.Length >20)
+                            else if(jsonData.agencyCode.Length < 6 || jsonData.agencyCode.Length >10)
                             {
                                 debug = 302;
                                 result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
-                                result.msg = "Mã đại lý phải từ 6-20 ký tự";
+                                result.msg = "Mã đại lý phải từ 6-10 ký tự";
                             }
                             else if (string.IsNullOrEmpty(jsonData.password))
                             {
