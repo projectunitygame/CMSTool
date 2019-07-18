@@ -37,33 +37,34 @@
             color: #403f3f;
             font-weight: bold;
         }
-    #tbl-menh-gia tbody tr: hover{
-                background: #efefef;
-                color: #403f3f;
-                font-weight: bold;
-            }
-		    .input-icon > i{
-                z-index:0 !important;
-            }
-    #add-cash-panel{
-        border-radius: 15px !important;
-        background: rgba(24, 205, 196, 0.22);
-        padding: 20px;
-        border: 1px solid #18cdc4;
-    }
-    .img-verifire-captcha{
-	    position:absolute;
-        right:15px;
-        top:0;
-        background: rgba(0,0,0,.1);
-    }
-    .btnTopup{
-	    width: 130px;
-  	    text-align:center;
-    }
-    table.table {
-        border: 1px solid #eee;
-    }
+#tbl-menh-gia tbody tr: hover{
+            background: #efefef;
+            color: #403f3f;
+            font-weight: bold;
+        }
+		.input-icon > i{
+            z-index:0 !important;
+        }
+#add-cash-panel{
+    border-radius: 15px !important;
+    background: rgba(24, 205, 196, 0.22);
+    padding: 20px;
+    border: 1px solid #18cdc4;
+}
+.img-verifire-captcha{
+	position:absolute;
+    right:15px;
+    top:0;
+    background: rgba(0,0,0,.1);
+}
+.btnTopup{
+	width: 130px;
+  	text-align:center;
+}
+table.table {
+    border: 1px solid #eee;
+}
+
 
     </style>
 </asp:Content>
@@ -180,8 +181,8 @@
                                             </label>
                                             <div class="col-md-8">
                                             	<div class="input-icon right">
-                                                      <i class="fa" style='right:125px'></i>
-                                                      <input id="txtCaptcha" type="text" class="form-control" name="Captcha" autocomplete="off" style='padding-right: 150px;'>
+                                                      <i class="fa"></i>
+                                                      <input id="txtCaptcha" type="text" class="form-control" name="Captcha" autocomplete="off" >
                                                   </div>
                                             </div>
                                         </div>
@@ -223,12 +224,12 @@
         $(function () {
             $('#btnAddAction').hide();
             var agencyID = AppManage.getURLParameter('agencyid');
-            if (agencyID != null){
-              var infoAgency = Base64.decode(agencyID).split('-');
-            	$("#txtAgencyID").val(infoAgency[0]);
-              $("#txtAgencyName").val(infoAgency[1]);
+            if (agencyID != null) {
+                var infoAgency = Base64.decode(agencyID).split('-');
+                $("#txtAgencyID").val(infoAgency[0]);
+                $("#txtAgencyName").val(infoAgency[1]);
             }
-                
+
 
             var options = {
                 url: function (param) {
@@ -462,6 +463,6 @@
             var time = today.getHours() + "" + today.getMinutes() + "" + today.getSeconds();
             $('#captcha').attr("src", "../../Apis/Captcha.ashx?t=" + time);
         }
-    
+
 </script>
 </asp:Content>

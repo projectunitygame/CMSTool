@@ -148,8 +148,13 @@ a label {
 }
 
 .portlet.blue, .portlet.box.blue > .portlet-title, .portlet > .portlet-body.blue {
-    background-color: #135f5b;
+    background-color: #26344b;
 }
 .portlet.box.blue {
-    border: 1px solid #30a09b;
+    border: 1px solid #26344b;
+}
+#tbl_datatable thead tr{
+	background: #1871af;
+    color: #FFF;
+    border: 1px solid #1871af;
 }
