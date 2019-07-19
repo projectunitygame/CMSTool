@@ -194,8 +194,8 @@ table.table {
                                         <table class="table" id="tbl-menh-gia">
                                             <thead>
                                                 <tr>
-                                                    <td><b>Mệnh giá</b></td>
-                                                    <td><b>Gold</b></td>
+                                                    <td><b>Mệnh giá(VNĐ)</b></td>
+                                                    <td><b>Tiền Win</b></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -294,7 +294,7 @@ table.table {
                     var strHtml = '';
                     var strListOT = "";
                     $.each(data.data, function (i, obj) {
-                        strHtml += '<tr><td>' + parseInt(obj[0]).format() + '</td><td>' + parseInt(obj[1]).format() + '</td></tr>';
+                        strHtml += '<tr><td>' + parseInt(obj[1]).format()+ '</td><td>' + parseInt(obj[0]).format() + '</td></tr>';
                         strListOT += '<option value="' + obj[0] + '"  money="' + obj[1] + '">' + parseInt(obj[0]).format() + '</option>';
                     });
                     $('#tbl-menh-gia tbody').append(strHtml);

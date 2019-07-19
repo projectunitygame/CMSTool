@@ -43,7 +43,9 @@
                 $('#m_' + menuId).parent().parent().addClass("active open");
                 var e = document.createElement('span');
                 e.classList.add('selected');
-                $('#m_' + menuId).parent().parent().find("a")[0].append(e);
+                if ($('#m_' + menuId).parent().parent().find("a").length > 0) {
+                    $('#m_' + menuId).parent().parent().find("a")[0].append(e);
+                }
             }
         });
     </script>

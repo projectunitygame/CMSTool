@@ -39,7 +39,7 @@
             <div class="portlet box blue ">
                 <div class="portlet-title">
                     <div class="caption">
-                        Khách Hàng
+                        Lịch sử giao dịch
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -152,7 +152,7 @@
                     opens: (App.isRTL() ? 'left' : 'right'),
                     format: 'MM/DD/YYYY',
                     separator: ' to ',
-                    startDate: moment().subtract('year', 2),
+                    startDate: moment().subtract('month', 3),
                     endDate: moment(),
                     minDate: moment().subtract('year', 5).format('MM/DD/YYYY'),
                     maxDate: moment().format('MM/DD/YYYY'),
@@ -165,7 +165,7 @@
                         TableEditable.init();
                     }
                 );
-                _dateStart = moment().subtract('year', 2).format('YYYY/MM/DD');
+                _dateStart = moment().subtract('month', 3).format('YYYY/MM/DD');
                 _dateEnd = moment().format('YYYY/MM/DD');
                 $('#dateRangeEvent input').val(_dateStart + ' - ' + _dateEnd);
             };
@@ -187,7 +187,7 @@
                 function loadTable() {
                     $('.divLoading').fadeIn();
                     if (_dateStart == null)
-                        _dateStart = moment().subtract('year', 2).format('YYYY/MM/DD');
+                        _dateStart = moment().subtract('month', 3).format('YYYY/MM/DD');
                     if (_dateEnd == null)
                         _dateEnd = moment().format('YYYY/MM/DD');
                     var param = [];
