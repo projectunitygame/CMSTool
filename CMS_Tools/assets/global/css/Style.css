@@ -153,8 +153,24 @@ a label {
 .portlet.box.blue {
     border: 1px solid #26344b;
 }
-#tbl_datatable thead tr{
-	background: #1871af;
+#tbl_datatable thead tr, #tbl_datatable tfoot tr {
+    background: #1871af;
     color: #FFF;
     border: 1px solid #1871af;
+    font-weight: 600;
 }
+
+#tbl_datatable tbody tr {
+    cursor: pointer;
+}
+
+    #tbl_datatable tbody tr.active td {
+        background: #859fcc !important;
+        color: #eee;
+        font-weight: normal;
+    }
+
+    #tbl_datatable tbody tr td {
+        vertical-align: middle;
+        white-space: nowrap;
+    }

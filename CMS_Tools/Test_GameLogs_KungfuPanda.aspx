@@ -1,32 +1,32 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_LichSuGiaoDich.aspx.cs" Inherits="CMS_Tools.Test_LichSuGiaoDich" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GameLogs_KungfuPanda.aspx.cs" Inherits="CMS_Tools.GameLog_KungfuPanda" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .avatar_u{
-            height: 50px;
-            border: 1px solid #ddd;
-            border-radius: 50% !important;
-        }
-        .form-section {
-            margin: 20px 0;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #eee;
-            font-size: 12px;
-            color: #333;
-            text-transform: uppercase;
-        }
-        .btn-group-xs>.btn, .btn-xs{
-	        font-size:11x !important;
-        }
-        .table td, .table th {
-            font-size: 12px !important;
-        }
-        .select2-container--bootstrap .select2-selection, .form-control, output{
-	        font-size: 12px !important;
-        }
+    height: 50px;
+    border: 1px solid #ddd;
+    border-radius: 50% !important;
+}
+.form-section {
+    margin: 20px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+    color: #333;
+    text-transform: uppercase;
+}
+.btn-group-xs>.btn, .btn-xs{
+	font-size:11x !important;
+}
+.table td, .table th {
+    font-size: 12px !important;
+}
+.select2-container--bootstrap .select2-selection, .form-control, output{
+	font-size: 12px !important;
+}
 
-        .control-label{
-	        text-align:left !important;
-        }
+.control-label{
+	text-align:left !important;
+}
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
@@ -39,11 +39,7 @@
             <div class="portlet box blue ">
                 <div class="portlet-title">
                     <div class="caption">
-                        Lịch sử giao dịch
-                    </div>
-                    <div class="tools">
-                        <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
-                        <a href="javascript:;" class="reload" data-original-title="" title=""></a>
+                        Lịch sử chơi game
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -66,36 +62,38 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4" style="margin-bottom: 10px;">
-                            <label class="control-label label-balance">Chọn ngày kết xuất dữ liệu</label>
                             <div class="input-group" id="dateRangeEvent">
+                            	<label class="control-label label-balance">Chọn ngày kết xuất dữ liệu</label>
                                 <input type="text" class="form-control" placeholder="Date Range(MM/DD/YYYY)" disabled />
-                                <span class="input-group-btn">
+                                <span class="input-group-btn" style='position: relative; top: 10px; left: 1px;'>
                                     <button class="btn default date-range-toggle" type="button"><i class="fa fa-calendar"></i></button>
                                 </span>
                             </div>
                         </div>
                         <div class="col-md-3" style="margin-bottom: 10px;">
-                            <label class="control-label label-balance">Chọn lọc dữ liệu theo cột</label>
+                        	<label class="control-label label-balance">Chọn lọc dữ liệu theo cột</label>
                             <select id="filterColumn" class="form-control">
-                                <option value='MA_GIAO_DICH'>Mã giao dịch</option>
-                            	<option value='TK_NGUOI_GUI'>Tài khoản người gửi</option>
-                                <option value='TK_NGUOI_NHAN'>Tài khoản người nhận</option>
-                                
+                                <option value='AccountID'>AccountID</option>
+                            	<option value='UserName'>UserName</option>
+                                <option value='RoomID'>RoomID</option>
                             </select>
                         </div>
                         <div class="col-md-3" style="margin-bottom: 10px;">
-                            <label class="control-label label-balance">Nhập từ khóa tìm kiếm</label>
+                        	<label class="control-label label-balance">Nhập từ khóa tìm kiếm</label>
                             <input type="text" class="form-control" id="txtFindData" placeholder="Search..." />
                         </div>
                         <div class="col-md-2" style="margin-bottom: 10px;">
-                            <label class="control-label label-balance">Tìm kiếm</label>
-                            <button id="btnFindData" type="button" class="btn green form-control"><i class="icon-magnifier"></i>Search</button>
+                        	<label class="control-label label-balance">Tìm kiếm</label>
+                            <button id="btnFindData" type="button" class="btn green form-control"> <i class="icon-magnifier"></i> Tìm kiếm</button>
                         </div>
                     </div>
                     <div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
                         <table class="table table-striped table-bordered table-hover dataTable" id="tbl_datatable"
                             aria-describedby="sample_1_info">
-                           <thead><tr role="row"></tr></thead>
+                            <thead>
+                                <tr role="row">
+                                </tr>
+                            </thead>
                             <tbody role="alert" aria-live="polite" aria-relevant="all"></tbody>
                             <tfoot><tr role="row"></tr></tfoot>
                         </table>
@@ -104,24 +102,128 @@
             </div>
         </div>
     </div>
+    <!-----From update customer------>
+    <div id="modal_customer" class="modal fade" data-backdrop="static" data-keyboard="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="javascript:;" id="form_Agency" class="form-horizontal" novalidate="novalidate">
+                    <input type="hidden" id="customerID"/>
+                    <div class="modal-body">
+                    	<div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            </button>
+                            <h4 class="modal-title" id="title_task">
+                                <i class="fa fa-edit"></i> QUẢN LÝ THÔNG TIN KHÁCH HÀNG</h4>
+                        </div>
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                Vui lòng kiểm tra và nhập đầy đủ thông tin!
+                            </div>
+                            <div class="alert alert-success display-hide">
+                                <button class="close" data-close="alert"></button>
+                                Nhập thông tin hợp lệ
+                            </div>
+                            <div class=row>
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group  margin-top-20">
+                                        <label class="control-label col-md-3">
+                                            Mã đại lý: <span class="required" aria-required="true">* </span>
+                                        </label>
+                                        <div class="col-md-9">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input id="txtAgencyCode" type="text" class="form-control" name="AgencyCode" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Mật khẩu: <span class="required" aria-required="true">* </span>
+                                        </label>
+                                        <div class="col-md-6">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input id="txtPassword" type="text" class="form-control" name="password" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a class="btn btn-primary" onclick="javascript:generate()"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Tạo mới</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Email:
+                                        </label>
+                                        <div class="col-md-9">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input id="txtEmail" type="text" class="form-control" name="email"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Số điện thoại: <span class="required" aria-required="true">* </span>
+                                        </label>
+                                        <div class="col-md-9">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" style="width:100%;" id="txtPhone" class="form-control" name="Phone" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Tên đại lý: <span class="required" aria-required="true">* </span>
+                                        </label>
+                                        <div class="col-md-9">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" style="width:100%;" id="txtAgencyName" class="form-control" name="AgencyName" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span id="msg-error-create-agency" style="color:red;display:block;text-align:center"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn dark btn-outline">Hủy</button>
+                        <button type="submit" class="btn green">Đăng Ký</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>  
+
 </asp:Content>
-<asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">\
+<asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">
     <script src="assets/global/plugins/Base64JS.js"></script>
     <script src="assets/global/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="assets/global/plugins/datatables/DT_bootstrap.js"></script>
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
-            $('.page-toolbar').remove();
-
-          	var d = AppManage.getURLParameter('agencyid');
-            console.log(d);  
-            if (d != null){
-                var s = Base64.decode(d).split('-')[0];
-                $("#txtFindData").val(s);
-                $('#filterColumn').val('TK_NGUOI_NHAN');
-            }
-            $('#txtFindData').on('keyup', function (e) {
+           $('.page-toolbar').remove();
+          	$('#txtFindData').on('keyup', function (e) {
                 if (e.keyCode == 13) {
                     TableEditable.init();
                 }
@@ -136,8 +238,6 @@
                 if ($('#txtFindData').val() != "")
                     TableEditable.init();
             });
-
-            //load danh sach dai ly
             TableEditable.init();
             $('body').on('click', '.portlet > .portlet-title > .tools > a.reload', function (e) {
                 TableEditable.init();
@@ -157,9 +257,9 @@
                     opens: (App.isRTL() ? 'left' : 'right'),
                     format: 'MM/DD/YYYY',
                     separator: ' to ',
-                    startDate: moment().subtract('month', 3),
+                    startDate: moment().subtract('day', 30),
                     endDate: moment(),
-                    minDate: moment().subtract('year', 5).format('MM/DD/YYYY'),
+                    minDate: moment().subtract('year', 1).format('MM/DD/YYYY'),
                     maxDate: moment().format('MM/DD/YYYY'),
                 },
                     function (start, end) {
@@ -170,7 +270,7 @@
                         TableEditable.init();
                     }
                 );
-                _dateStart = moment().subtract('month', 3).format('YYYY/MM/DD');
+                _dateStart = moment().subtract('year', 1).format('YYYY/MM/DD');
                 _dateEnd = moment().format('YYYY/MM/DD');
                 $('#dateRangeEvent input').val(_dateStart + ' - ' + _dateEnd);
             };
@@ -192,7 +292,7 @@
                 function loadTable() {
                     $('.divLoading').fadeIn();
                     if (_dateStart == null)
-                        _dateStart = moment().subtract('month', 3).format('YYYY/MM/DD');
+                        _dateStart = moment().subtract('day', 7).format('YYYY/MM/DD');
                     if (_dateEnd == null)
                         _dateEnd = moment().format('YYYY/MM/DD');
                     var param = [];
@@ -250,7 +350,7 @@
                                         "targets": [0]
                                     }],
                                     "order": [
-                                        [0, "desc"]
+                                        [0, "asc"]
                                     ]
                                 });
                                 var tableWrapper = $("#tbl_datatable_wrapper");

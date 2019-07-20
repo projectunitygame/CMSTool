@@ -1,33 +1,32 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_Thongtindaily.aspx.cs" Inherits="CMS_Tools.Test_Thongtindaily" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_TaiKhoanGame.aspx.cs" Inherits="CMS_Tools.Test_TaiKhoanGame" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .avatar_u{
-    height: 50px;
-    border: 1px solid #ddd;
-    border-radius: 50% !important;
-}
-.form-section {
-    margin: 20px 0;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #eee;
-    font-size: 12px;
-    color: #333;
-    text-transform: uppercase;
-}
-.btn-group-xs>.btn, .btn-xs{
-	font-size:11x !important;
-}
-.table td, .table th {
-    font-size: 12px !important;
-}
-.select2-container--bootstrap .select2-selection, .form-control, output{
-	font-size: 12px !important;
-}
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 50% !important;
+        }
+        .form-section {
+            margin: 20px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            font-size: 12px;
+            color: #333;
+            text-transform: uppercase;
+        }
+        .btn-group-xs>.btn, .btn-xs{
+	        font-size:11x !important;
+        }
+        .table td, .table th {
+            font-size: 12px !important;
+        }
+        .select2-container--bootstrap .select2-selection, .form-control, output{
+	        font-size: 12px !important;
+        }
 
-.control-label{
-	text-align:left !important;
-}
-
+        .control-label{
+	        text-align:left !important;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
@@ -40,7 +39,7 @@
             <div class="portlet box blue ">
                 <div class="portlet-title">
                     <div class="caption">
-                        Khách Hàng
+                        Thông tin player
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -68,7 +67,7 @@
                     <div class="row">
                         <div class="col-md-4" style="margin-bottom: 10px;">
                             <div class="input-group" id="dateRangeEvent">
-                            	<label class="class="col-md-12">Chọn ngày kết xuất dữ liệu</label>
+                            	<label class="control-label label-balance">Chọn ngày kết xuất dữ liệu</label>
                                 <input type="text" class="form-control" placeholder="Date Range(MM/DD/YYYY)" disabled />
                                 <span class="input-group-btn" style='position: relative; top: 10px; left: 1px;'>
                                     <button class="btn default date-range-toggle" type="button"><i class="fa fa-calendar"></i></button>
@@ -76,21 +75,16 @@
                             </div>
                         </div>
                         <div class="col-md-3" style="margin-bottom: 10px;">
-                        	<label class="class="col-md-12">Chọn lọc dữ liệu theo cột</label>
+                        	<label class="control-label label-balance">Chọn lọc dữ liệu theo cột</label>
                             <select id="filterColumn" class="form-control">
-                                <option value="UWIN_ID">Mã tài khoản</option>
-                                <option value="AgencyCode">Mã đại lý</option>
-                                <option value="Email">Email</option>
-                                <option value="Phone">Số điện thoại</option>
-                                <option value="DisplayName">Tên hiển thị</option> 
                             </select>
                         </div>
                         <div class="col-md-3" style="margin-bottom: 10px;">
-                        	<label class="class="col-md-12">Nhập từ khóa tìm kiếm</label>
+                        	<label class="control-label label-balance">Nhập từ khóa tìm kiếm</label>
                             <input type="text" class="form-control" id="txtFindData" placeholder="Search..." />
                         </div>
                         <div class="col-md-2" style="margin-bottom: 10px;">
-                        	<label class="class="col-md-12">Tìm kiếm</label>
+                        	<label class="control-label label-balance">Tìm kiếm</label>
                             <button id="btnFindData" type="button" class="btn green form-control"><i class="icon-magnifier"></i> Search</button>
                         </div>
                     </div>
@@ -99,36 +93,10 @@
                             aria-describedby="sample_1_info">
                             <thead>
                                 <tr role="row">
-                                    <td>AgencyID</td>
-                                    <td>AgencyCode</td>
-                                    <td>Email</td>
-                                    <td>Phone</td>
-                                    <td>DisplayName</td>
-                                    <td>OwnerID</td>
-                                    <td>Status</td>
-                                    <td>IsActive</td>
-                                    <td>IsLock</td>
-                                    <td>DateCreated</td>
-                                    <td>DateActive</td>
-                                    <td>LastUpdate</td>
-                                    <td>Balance</td>
-                                    <td>Balance_Bonus</td>
-                                    <td>Balance_Lock</td>
-                                    <td>LimitTransaction</td>
-                                    <td>LimitTransactionDaily</td>
-                                    <td>IsOTP</td>
-                                    <td>IP</td>
-                                    <td>EmailActive</td>
-                                    <td>PhoneActive</td>
-                                    <td>WrongPassword</td>
-                                    <td>LockTimeLogin</td>
-                                    <td>DateLogin</td>
-                                    <td>CreatorID</td>
-                                    <td>CreatorName</td>
-                                    <td>Edit</td>
                                 </tr>
                             </thead>
                             <tbody role="alert" aria-live="polite" aria-relevant="all"></tbody>
+                            <tfoot><tr role="row"></tr></tfoot>
                         </table>
                     </div>
                 </div>
@@ -256,6 +224,7 @@
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
+          	$('#btnAddAction').remove();
             $('#btnAddNew').html("<i class='fa fa-plus'></  i> Tạo KH Mới");
             FormValidation.init();
             $('#btnAddNew').click(function () {
@@ -324,7 +293,7 @@
         }();
 
         var oTable = null;
-        var _pageSize = 10;
+        var _pageSize = 50;
         var _dataColumn = null;
         var TableEditable = function () {
             var handleTable = function () {
@@ -339,7 +308,7 @@
                     var param = [];
                     param.push(_dateStart);//@0
                     param.push(_dateEnd);//@1
-                    param.push($('#filterColumn').val() != null ? $('#filterColumn').val() : 'UWIN_ID');//@2
+                    param.push($('#filterColumn').val() != null ? $('#filterColumn').val() : 'AccountID');//@2
                     param.push($('#txtFindData').val());//@3
                     $.ajax({
                         type: "POST",
@@ -358,161 +327,37 @@
                             if (data.status == 0) {
                                 if (oTable != null) {
                                     oTable.fnDestroy();
-                                    $('#tbl_datatable thead').html("<tr role='row'>" +
-                                        "<td style='width:40px'>AgencyID</td>" +
-                                        "<td>AgencyCode</td>" +
-                                        "<td>Email</td>" +
-                                        "<td>Phone</td>" +
-                                        "<td>DisplayName</td>" +
-                                        "<td>OwnerID</td>" +
-                                        "<td>Status</td>" +
-                                        "<td>IsActive</td>" +
-                                        "<td>IsLock</td>" +
-                                        "<td>DateCreated</td>" +
-                                        "<td>DateActive</td>" +
-                                        "<td>LastUpdate</td>" +
-                                        "<td>Balance</td>" +
-                                        "<td>Balance_Bonus</td>" +
-                                        "<td>Balance_Lock</td>" +
-                                        "<td>LimitTransaction</td>" +
-                                        "<td>LimitTransactionDaily</td>" +
-                                        "<td>IsOTP</td>" +
-                                        "<td>IP</td>" +
-                                        "<td>EmailActive</td>" +
-                                        "<td>PhoneActive</td>" +
-                                        "<td>WrongPassword</td>" +
-                                        "<td>LockTimeLogin</td>" +
-                                        "<td>DateLogin</td>" +
-                                        "<td>CreatorID</td>" +
-                                        "<td>CreatorName</td>" +
-                                        "<td style='width:200px'>Chỉnh sửa</td></tr>");
-                                    $('#tbl_datatable tbody').html("");
-                                    $('#tbl_datatable').on('click', ' tbody td .row-details', function () {
-                                    }).unbind('click');
                                 }
                                 if (_dataColumn == null) {
-                                    //_dataColumn = data.columnName;
-                                    //var selectCol = "<option value=''>Select...</option>";
+                                    _dataColumn = data.columnName;
+                                    var selectCol = "<option value=''>Select...</option>";
+                                  	$('#tbl_datatable thead tr').html("");
                                     //$.each(_dataColumn, function (key, obj) {
-                                    //if (key < _dataColumn.length - 1)
-                                    // selectCol += "<option value='" + obj + "'>" + obj + "</option>";
+                                    //    $('#tbl_datatable thead tr').append("<th>" + obj + "</th>");
+                                    //	if (key < _dataColumn.length - 1)
+                                    //		selectCol += "<option value='" + obj + "'>" + obj + "</option>";
                                     //});
-                                    //$('#filterColumn').html(selectCol);
-                                    //if ($('#filterColumn').val() == "")
-                                    //$('#filterColumn').val("DateCreated");
+                                    var strHtmlColName = "";
+                                    $.each(_dataColumn, function (key, obj) {
+                                        strHtmlColName += "<td>" + obj + "</td>";
+                                        if (key < _dataColumn.length - 1)
+                                            selectCol += "<option value='" + obj + "'>" + obj + "</option>";
+                                    });
+                                    $('#tbl_datatable thead tr').append(strHtmlColName);
+                                    if (data.data.length > 20) {
+                                        $('#tbl_datatable tfoot tr').append(strHtmlColName);
+                                    }
+                                    $('#filterColumn').html(selectCol);
+                                    if ($('#filterColumn').val() == "")
+                                    	$('#filterColumn').val("AccountID");
                                 }
                                 _dataTable = [];
-                                for (var i = 0; i < data.data.length; i++) {
-                                    var obj = data.data[i];
-                                    var linkLock = "<a class='btn btn-xs red btn-circle btn-outline' onclick='LockAgency(" + obj[0].replace('uwin.', '') + ");'> Khóa</a>";
-                                    var base64Str = Base64.encode(obj[0] + '-' + obj[4]);
-                                    if (obj[8] == "True")
-                                        linkLock = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnLockAgency(" + obj[0].replace('uwin.', '') + ");'> Mở khóa</a>";
-                                    $('#tbl_datatable tbody').append("<tr>" +
-                                        "<td>" + obj[0] + "</td>" +
-                                        "<td>" + obj[1] + "</td>" +
-                                        "<td>" + obj[2] + "</td>" +
-                                        "<td>" + obj[3] + "</td>" +
-                                        "<td>" + obj[4] + "</td>" +
-                                        "<td>" + obj[5] + "</td>" +
-                                        "<td>" + obj[6] + "</td>" +
-                                        "<td>" + obj[7] + "</td>" +
-                                        "<td>" + obj[8] + "</td>" +
-                                        "<td>" + obj[9] + "</td>" +
-                                        "<td>" + obj[10] + "</td>" +
-                                        "<td>" + obj[11] + "</td>" +
-                                        "<td>" + obj[12] + "</td>" +
-                                        "<td>" + obj[13] + "</td>" +
-                                        "<td>" + obj[14] + "</td>" +
-                                        "<td>" + obj[15] + "</td>" +
-                                        "<td>" + obj[16] + "</td>" +
-                                        "<td>" + obj[17] + "</td>" +
-                                        "<td>" + obj[18] + "</td>" +
-                                        "<td>" + obj[19] + "</td>" +
-                                        "<td>" + obj[20] + "</td>" +
-                                        "<td>" + obj[21] + "</td>" +
-                                        "<td>" + obj[22] + "</td>" +
-                                        "<td>" + obj[23] + "</td>" +
-                                        "<td>" + obj[24] + "</td>" +
-                                        "<td>" + obj[25] + "</td>" +
-                                        "<td>" + linkLock +
-                                        "<a class='btn btn-xs blue btn-circle btn-outline' href='Page.aspx?m=30&agencyid=" + base64Str + "' target='_blank'> Lịch sử giao dịch</a>" +
-                                        "<a class='btn btn-xs green btn-circle btn-outline' href='Page.aspx?m=27&agencyid=" + base64Str + "' target='_blank'> Nạp tiền</a></td > " +
-                                        "</tr>");
-                                }
-
-                                function fnFormatDetails(oTable, nTr) {
-                                    var aData = oTable.fnGetData(nTr);
-                                    var status = "Chưa kích hoạt";
-                                    if (aData[8] == "True") {
-                                        status = "Đã kích hoạt";
-                                    }
-                                    else {
-                                        if (aData[9] == "True") {
-                                            status = "Khóa tài khoản";
-                                        }
-                                    }
-                                    var sOut = '<table>';
-                                    sOut += '<tr><td colspan=2 style="text-align: center; background: #ccc;">THÔNG TIN ĐẠI LÝ</td></tr>';
-                                    sOut += '<tr><td><i>Số tài khoản:</i></td><td>' + aData[1] + '</td></tr>';
-                                    sOut += '<tr><td><i>OwnerID:</i></td><td>' + aData[6] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Trạng thái:</i></td><td>' + (aData[7] == 1 ? "Kích hoạt" : "Tài khoản đang tạm khóa vui lòng liên hệ hỗ trợ") + '</td></tr>';
-                                    sOut += '<tr><td><i>Trạng thái:</i></td><td>' + status + '</td></tr>';
-                                    //sOut += '<tr><td><i>Khóa tài khoản:</i></td><td>' + (aData[9] == "True" ? "Đang hoạt động":"Tài khoản đang bị khóa" ) + '</td></tr>';
-                                    sOut += '<tr><td><i>Ngày tạo:</i></td><td>' + aData[10] + '</td></tr>';
-                                    sOut += '<tr><td><i>Ngày kích hoạt:</i></td><td>' + aData[11] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Ngày cập nhật:</i></td><td>' + aData[12] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Tiền thưởng:</i></td><td>' + aData[14] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Số tiền không giao dịch được:</i></td><td>' + aData[15] + '</td></tr>';
-                                    sOut += '<tr><td><i>IP:</i></td><td>' + aData[19] + '</td></tr>';
-                                    //sOut += '<tr><td><i>Email kích hoạt:</i></td><td>' + (aData[20] == "False" ? "Chưa có" : aData[20]) + '</td></tr>';
-                                    sOut += '<tr><td><i>Số điện thoại kích hoạt:</i></td><td>' + (aData[21] == "False" ? "Chưa có" : aData[21]) + '</td></tr>';
-                                    sOut += '<tr><td><i>Số lần đăng nhập sai:</i></td><td>' + aData[22] + '</td></tr>';
-                                    sOut += '<tr><td><i>Thời gian khóa:</i></td><td>' + aData[23] + '</td></tr>';
-                                    sOut += '<tr><td><i>Ngày đăng nhập:</i></td><td>' + aData[24] + '</td></tr>';
-                                    sOut += '<tr><td><i>ID người tạo:</i></td><td>' + aData[25] + '</td></tr>';
-                                    sOut += '<tr><td><i>Tài khoản người tạo:</i></td><td>' + aData[26] + '</td></tr>';
-                                    sOut += '<tr><td colspan=2 style="text-align: center; background: #ccc;">HẠN MỨC GIAO DỊCH:</td></tr>';
-                                    sOut += '<tr><td><i>Hạn mức mỗi lần:</i></td><td>' + aData[16] + '</td></tr>';
-                                    sOut += '<tr><td><i>Hạn mức mỗi ngày:</i></td><td>' + aData[17] + '</td></tr>';
-                                    sOut += '<tr><td><i>Xác thực OTP:</i></td><td>' + (aData[18] == 1 ? "Có" : "Không") + '</td></tr>';
-
-                                    sOut += '</table>';
-                                    return sOut;
-                                }
-                                var nCloneTh = document.createElement('th');
-                                var nCloneTd = document.createElement('td');
-                                nCloneTd.innerHTML = '<span class="row-details row-details-close"></span>';
-
-                                $('#tbl_datatable thead tr').each(function () {
-                                    this.insertBefore(nCloneTh, this.childNodes[0]);
-                                });
-
-                                $('#tbl_datatable tbody tr').each(function () {
-                                    this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
-                                });
-
-                                $('#tbl_datatable').on('click', ' tbody td .row-details', function () {
-                                    var nTr = $(this).parents('tr')[0];
-                                    if (oTable.fnIsOpen(nTr)) {
-                                        $(this).addClass("row-details-close").removeClass("row-details-open");
-                                        oTable.fnClose(nTr);
-                                    }
-                                    else {
-                                        $(this).addClass("row-details-open").removeClass("row-details-close");
-                                        oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
-                                    }
-                                    tableWrapper.find(".dataTables_length select").select2({
-                                        showSearchInput: false
-                                    });
-                                });
-
-
                                 var colHiden = [];
                                 oTable = table.dataTable({
+                                  	"data": data.data,
                                     "lengthMenu": [
-                                        [10, 50, 100, 500, -1],
-                                        [10, 50, 100, 500, "All"]
+                                        [50, 100, 500, -1],
+                                        [50, 100, 500, "All"]
                                     ],
                                     "pageLength": _pageSize,
                                     "language": {
@@ -529,51 +374,6 @@
                                         [0, "desc"]
                                     ]
                                 });
-
-                                //an column
-                                var bVis = oTable.fnSettings().aoColumns[1].bVisible;
-                                oTable.fnSetColumnVis(1, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[6].bVisible;
-                                oTable.fnSetColumnVis(6, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[7].bVisible;
-                                oTable.fnSetColumnVis(7, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[8].bVisible;
-                                oTable.fnSetColumnVis(8, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[9].bVisible;
-                                oTable.fnSetColumnVis(9, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[10].bVisible;
-                                oTable.fnSetColumnVis(10, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[11].bVisible;
-                                oTable.fnSetColumnVis(11, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[12].bVisible;
-                                oTable.fnSetColumnVis(12, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[14].bVisible;
-                                oTable.fnSetColumnVis(14, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[15].bVisible;
-                                oTable.fnSetColumnVis(15, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[16].bVisible;
-                                oTable.fnSetColumnVis(16, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[17].bVisible;
-                                oTable.fnSetColumnVis(17, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[18].bVisible;
-                                oTable.fnSetColumnVis(18, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[19].bVisible;
-                                oTable.fnSetColumnVis(19, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[20].bVisible;
-                                oTable.fnSetColumnVis(20, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[21].bVisible;
-                                oTable.fnSetColumnVis(21, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[22].bVisible;
-                                oTable.fnSetColumnVis(22, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[23].bVisible;
-                                oTable.fnSetColumnVis(23, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[24].bVisible;
-                                oTable.fnSetColumnVis(24, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[25].bVisible;
-                                oTable.fnSetColumnVis(25, bVis ? false : true);
-                                var bVis = oTable.fnSettings().aoColumns[26].bVisible;
-                                oTable.fnSetColumnVis(26, bVis ? false : true);
-
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
@@ -775,7 +575,12 @@
                     $(".divLoading").fadeOut(500);
                     $('#modal_customer').modal('hide');
                     if (data.status == 1) {
-                        TableEditable.init();
+                       bootbox.alert({
+                            message: data.msg,
+                            callback: function () {
+                              TableEditable.init();
+                            }
+                        });    
                     }
                     else {
                         bootbox.alert({
@@ -865,9 +670,6 @@
             else
                 return num;
         }
-<<<<<<< HEAD
-
-=======
         function escapeRegExp(str) {
             return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
         }
@@ -875,6 +677,5 @@
         function replaceAll(str, find, replace) {
             return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
         }
->>>>>>> 4c52d77b82c81465a613614c178d8fcb987d2b92
 </script>
 </asp:Content>

@@ -40,4 +40,10 @@ var AccountManage = function () {
 
 $(document).ready(function () {
     AccountManage.init();
+    $('#tbl_datatable').delegate('tbody tr', 'click', function () {
+        if ($(this).hasClass('active')) { return; } else {
+            $('#tbl_datatable tbody tr').removeClass('active');
+            $(this).addClass('active');
+        }
+    });
 });
