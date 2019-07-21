@@ -259,6 +259,8 @@
     <Content Include="Dashboard.aspx" />
     <Content Include="DragDrop.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="Test_BaoCaoThongKe.aspx" />
+    <Content Include="Test_GameData_GameID.aspx" />
     <Content Include="Test_GameLogs_KungfuPanda.aspx" />
     <Content Include="Global.asax" />
     <Content Include="HtmlPage1.html" />
@@ -465,6 +467,20 @@
     <Compile Include="Entity\ErrorLogs.cs" />
     <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\SaveLogs.cs" />
+    <Compile Include="Test_BaoCaoThongKe.aspx.cs">
+      <DependentUpon>Test_BaoCaoThongKe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_BaoCaoThongKe.aspx.designer.cs">
+      <DependentUpon>Test_BaoCaoThongKe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameData_GameID.aspx.cs">
+      <DependentUpon>Test_GameData_GameID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameData_GameID.aspx.designer.cs">
+      <DependentUpon>Test_GameData_GameID.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Test_GameLogs_KungfuPanda.aspx.cs">
       <DependentUpon>Test_GameLogs_KungfuPanda.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

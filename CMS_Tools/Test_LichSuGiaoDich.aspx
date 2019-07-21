@@ -15,7 +15,7 @@
             text-transform: uppercase;
         }
         .btn-group-xs>.btn, .btn-xs{
-	        font-size:11x !important;
+	        font-size:11px !important;
         }
         .table td, .table th {
             font-size: 12px !important;
@@ -219,17 +219,26 @@
                                     oTable.fnDestroy();
                                 }
                                 _dataColumn = data.columnName;
-                              	if (colFilter == null) {
+                                if (colFilter == null) {
                                     $('#tbl_datatable thead tr').html("");
                                     colFilter = _dataColumn;
+                                    var strHtmlColName = "";
+                                    $.each(_dataColumn, function (key, obj) {
+                                        strHtmlColName += "<td>" + obj + "</td>";
+                                    });
+                                    $('#tbl_datatable thead tr').append(strHtmlColName);
+                                    if (data.data.length > 20) {
+                                        $('#tbl_datatable tfoot tr').append(strHtmlColName);
+                                    }
+                                } else {
+                                    $('#tbl_datatable tfoot tr').empty();
+                                    if (data.data.length > 20) {
                                         var strHtmlColName = "";
                                         $.each(_dataColumn, function (key, obj) {
                                             strHtmlColName += "<td>" + obj + "</td>";
                                         });
-                                        $('#tbl_datatable thead tr').append(strHtmlColName);
-                                        if (data.data.length > 20) {
-                                            $('#tbl_datatable tfoot tr').append(strHtmlColName);
-                                        }
+                                        $('#tbl_datatable tfoot tr').append(strHtmlColName);
+                                    }
                                 }
                                 var colHiden = [];
                                 oTable = table.dataTable({

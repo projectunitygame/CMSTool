@@ -129,7 +129,7 @@
                                 </tr>
                             </thead>
                             <tbody role="alert" aria-live="polite" aria-relevant="all"></tbody>
-                            <tfoot><tr role="row"></tr></tfoot>
+                        	<tfoot><tr role="row"></tr></tfoot>
                         </table>
                     </div>
                 </div>
@@ -245,8 +245,7 @@
                 </form>
             </div>
         </div>
-    </div>  
-
+    </div>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">
     <script src="assets/global/plugins/Base64JS.js"></script>
@@ -357,39 +356,45 @@
                                 return;
                             }
                             if (data.status == 0) {
+                                var strHtmlColName = "<td style='width:40px'>AgencyID</td>" +
+                                    "<td>AgencyCode</td>" +
+                                    "<td>Email</td>" +
+                                    "<td>Phone</td>" +
+                                    "<td>DisplayName</td>" +
+                                    "<td>OwnerID</td>" +
+                                    "<td>Status</td>" +
+                                    "<td>IsActive</td>" +
+                                    "<td>IsLock</td>" +
+                                    "<td>DateCreated</td>" +
+                                    "<td>DateActive</td>" +
+                                    "<td>LastUpdate</td>" +
+                                    "<td>Balance</td>" +
+                                    "<td>Balance_Bonus</td>" +
+                                    "<td>Balance_Lock</td>" +
+                                    "<td>LimitTransaction</td>" +
+                                    "<td>LimitTransactionDaily</td>" +
+                                    "<td>IsOTP</td>" +
+                                    "<td>IP</td>" +
+                                    "<td>EmailActive</td>" +
+                                    "<td>PhoneActive</td>" +
+                                    "<td>WrongPassword</td>" +
+                                    "<td>LockTimeLogin</td>" +
+                                    "<td>DateLogin</td>" +
+                                    "<td>CreatorID</td>" +
+                                    "<td>CreatorName</td>" +
+                                    "<td style='width:200px'>Chỉnh sửa</td>";
                                 if (oTable != null) {
                                     oTable.fnDestroy();
-                                    $('#tbl_datatable thead').html("<tr role='row'>" +
-                                        "<td style='width:40px'>AgencyID</td>" +
-                                        "<td>AgencyCode</td>" +
-                                        "<td>Email</td>" +
-                                        "<td>Phone</td>" +
-                                        "<td>DisplayName</td>" +
-                                        "<td>OwnerID</td>" +
-                                        "<td>Status</td>" +
-                                        "<td>IsActive</td>" +
-                                        "<td>IsLock</td>" +
-                                        "<td>DateCreated</td>" +
-                                        "<td>DateActive</td>" +
-                                        "<td>LastUpdate</td>" +
-                                        "<td>Balance</td>" +
-                                        "<td>Balance_Bonus</td>" +
-                                        "<td>Balance_Lock</td>" +
-                                        "<td>LimitTransaction</td>" +
-                                        "<td>LimitTransactionDaily</td>" +
-                                        "<td>IsOTP</td>" +
-                                        "<td>IP</td>" +
-                                        "<td>EmailActive</td>" +
-                                        "<td>PhoneActive</td>" +
-                                        "<td>WrongPassword</td>" +
-                                        "<td>LockTimeLogin</td>" +
-                                        "<td>DateLogin</td>" +
-                                        "<td>CreatorID</td>" +
-                                        "<td>CreatorName</td>" +
-                                        "<td style='width:200px'>Chỉnh sửa</td></tr>");
+                                    $('#tbl_datatable thead').html("<tr role='row'>" + strHtmlColName +"</tr>");
                                     $('#tbl_datatable tbody').html("");
                                     $('#tbl_datatable').on('click', ' tbody td .row-details', function () {
                                     }).unbind('click');
+                                    if (data.data.length > 20) {
+                                        $('#tbl_datatable tfoot tr').html("<td></td>"+ strHtmlColName);
+                                    }
+                                }
+                                if (data.data.length > 20) {
+                                    $('#tbl_datatable tfoot tr').html("<td></td>" + strHtmlColName);
                                 }
                                 if (_dataColumn == null) {
                                     //_dataColumn = data.columnName;

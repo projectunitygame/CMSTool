@@ -102,7 +102,10 @@ namespace CMS_Tools.Apis
                         {
                             result.status = Constants.NUMBER_CODE.SUCCESS;
                             result.msg = "Cập nhật mật khẩu mới thành công";
-                            context.Session["resetpassword"] = null;
+                            context.Session.Clear();
+                            context.Session.Abandon();
+                            UtilClass.RemoveCookie(context, "accountToken");
+
                         }
                         else
                         {

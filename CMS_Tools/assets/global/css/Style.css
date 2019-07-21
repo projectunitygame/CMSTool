@@ -165,8 +165,7 @@ a label {
 }
 
     #tbl_datatable tbody tr.active td {
-        background: #859fcc !important;
-        color: #eee;
+        background: #e7ecf1 !important;
         font-weight: normal;
     }
 

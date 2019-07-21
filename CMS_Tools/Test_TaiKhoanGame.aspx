@@ -15,7 +15,7 @@
             text-transform: uppercase;
         }
         .btn-group-xs>.btn, .btn-xs{
-	        font-size:11x !important;
+	        font-size:11px !important;
         }
         .table td, .table th {
             font-size: 12px !important;
@@ -217,8 +217,6 @@
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">
     <script src="assets/global/plugins/Base64JS.js"></script>
-    <script src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
-    <script src="assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
     <script src="assets/global/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="assets/global/plugins/datatables/DT_bootstrap.js"></script>
     <script type="text/javascript">
@@ -226,11 +224,6 @@
         jQuery(document).ready(function () {
           	$('#btnAddAction').remove();
             $('#btnAddNew').html("<i class='fa fa-plus'></  i> Tạo KH Mới");
-            FormValidation.init();
-            $('#btnAddNew').click(function () {
-                ResetForm();
-                $('#modal_customer').modal('show');
-            });
             $('#txtFindData').on('keyup', function (e) {
                 if (e.keyCode == 13) {
                     TableEditable.init();
@@ -331,7 +324,7 @@
                                 if (_dataColumn == null) {
                                     _dataColumn = data.columnName;
                                     var selectCol = "<option value=''>Select...</option>";
-                                  	$('#tbl_datatable thead tr').html("");
+                                    $('#tbl_datatable thead tr').html("");
                                     //$.each(_dataColumn, function (key, obj) {
                                     //    $('#tbl_datatable thead tr').append("<th>" + obj + "</th>");
                                     //	if (key < _dataColumn.length - 1)
@@ -344,12 +337,23 @@
                                             selectCol += "<option value='" + obj + "'>" + obj + "</option>";
                                     });
                                     $('#tbl_datatable thead tr').append(strHtmlColName);
+                                    console.log(data.data.length);
                                     if (data.data.length > 20) {
                                         $('#tbl_datatable tfoot tr').append(strHtmlColName);
                                     }
                                     $('#filterColumn').html(selectCol);
                                     if ($('#filterColumn').val() == "")
-                                    	$('#filterColumn').val("AccountID");
+                                        $('#filterColumn').val("AccountID");
+                                }
+                                else {
+                                    $('#tbl_datatable tfoot tr').empty();
+                                    if (data.data.length > 20) {
+                                        var strHtmlColName = "";
+                                        $.each(_dataColumn, function (key, obj) {
+                                            strHtmlColName += "<td>" + obj + "</td>";
+                                        });
+                                        $('#tbl_datatable tfoot tr').append(strHtmlColName);
+                                    }
                                 }
                                 _dataTable = [];
                                 var colHiden = [];
@@ -409,257 +413,6 @@
             };
         }();
 
-        var FormValidation = function () {
-            var r = function () {
-                var e = $("#form_Agency"),
-                    r = $(".alert-danger", e),
-                    i = $(".alert-success", e);
-                e.validate({
-                    errorElement: "span",
-                    errorClass: "help-block help-block-error",
-                    focusInvalid: !1,
-                    ignore: "",
-                    rules: {
-                        AgencyCode: {
-                            minlength: 6,
-                            maxlength: 10,
-                            required: !0
-                        },
-                        password: {
-                            minlength: 6,
-                            maxlength: 20,
-                            required: !0
-                        },
-                        email: {
-                            maxlength: 80,
-                        },
-                        Phone: {
-                            maxlength: 10,
-                            minlength: 10,
-                            number: !0,
-                            required: !0
-                        },
-                        AgencyName: {
-                            minlength: 6,
-                            maxlength: 150,
-                            required: !0
-                        }
-                        //province: {
-                        //    required: !0
-                        //},
-                        //country: {
-                        //    required: !0
-                        //}
-                        //digits: {
-                        //    required: !0,
-                        //    digits: !0
-                        //},
-                        //creditcard: {
-                        //    required: !0,
-                        //    creditcard: !0
-                        //}
-                    },
-                    invalidHandler: function (e, t) {
-                        i.hide(), r.show(), App.scrollTo(r, -200)
-                    },
-                    errorPlacement: function (e, r) {
-                        var i = $(r).parent(".input-icon").children("i");
-                        i.removeClass("fa-check").addClass("fa-warning"), i.attr("data-original-title", e.text()).tooltip({
-                            container: "body"
-                        })
-                    },
-                    highlight: function (e) {
-                        $(e).closest(".form-group").removeClass("has-success").addClass("has-error")
-                    },
-                    unhighlight: function (e) { },
-                    success: function (e, r) {
-                        var i = $(r).parent(".input-icon").children("i");
-                        $(r).closest(".form-group").removeClass("has-error").addClass("has-success"), i.removeClass("fa-warning").addClass("fa-check");
-                    },
-                    submitHandler: function (e) {
-                        //i.show(), 
-                        r.hide(),
-                            SubmitFormAgency();
-                    }
-                })
-            }
-            return {
-                init: function () {
-                    r()
-                }
-            }
-        }();
-
-
-        function LockAgency(AgencyId) {
-            bootbox.prompt({
-                title: "Ghi chú nội dung khóa!",
-                centerVertical: true,
-                callback: function (result) {
-                    if (result === null) {
-                        // Prompt dismissed
-                    } else {
-                        // result has a value
-                        $('.divLoading').fadeIn();
-                        var json = {
-                            "agencyID": AgencyId,
-                            "note": result,
-                        };
-                        $.ajax({
-                            type: "POST",
-                            url: "Apis/API_Agency.ashx",
-                            data: {
-                                json: JSON.stringify(json),
-                                type: 2
-                            },
-                            dataType: 'json',
-                            success: function (data) {
-                                $(".divLoading").fadeOut(500);
-                                if (data.status == 1)
-                                    TableEditable.init();
-                                else
-                                    bootbox.alert(data.msg);
-                            }
-                        });
-                    }
-
-                }
-            });
-        }
-
-        function UnLockAgency(AgencyId) {
-            bootbox.confirm("Xác nhận mở khóa tài khoản?", function (result) {
-                if (result) {
-                    $('.divLoading').fadeIn();
-                    var json = {
-                        "agencyID": AgencyId
-                    };
-                    $.ajax({
-                        type: "POST",
-                        url: "Apis/API_Agency.ashx",
-                        data: {
-                            json: JSON.stringify(json),
-                            type: 3
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            $(".divLoading").fadeOut(500);
-                            if (data.status == 1)
-                                TableEditable.init();
-                            else
-                                bootbox.alert(data.msg);
-                        }
-                    });
-                }
-            });
-        }
-        function SubmitFormAgency() {
-            $('.divLoading').fadeIn();
-            var json = {
-                "agencyCode": $('#txtAgencyCode').val(),
-                "password": $('#txtPassword').val(),
-                "email": $('#txtEmail').val(),
-                "phone": $('#txtPhone').val(),
-                "displayName": $('#txtAgencyName').val(),
-            };
-
-            $.ajax({
-                type: "POST",
-                url: "Apis/API_Agency.ashx",
-                data: {
-                    json: JSON.stringify(json),
-                    type: 1
-                },
-                dataType: 'json',
-                success: function (data) {
-                    $(".divLoading").fadeOut(500);
-                    $('#modal_customer').modal('hide');
-                    if (data.status == 1) {
-                       bootbox.alert({
-                            message: data.msg,
-                            callback: function () {
-                              TableEditable.init();
-                            }
-                        });    
-                    }
-                    else {
-                        bootbox.alert({
-                            message: data.msg,
-                            callback: function () {
-                            }
-                        });
-                    }
-                }
-            });
-        }
-
-
-
-        //function Update(customerID) {
-
-        //    GetAgency(agencyID, function (agencyInfo) {
-        //        if (agencyInfo.status == 0) {
-        //            var data = agencyInfo.data[0];
-        //            $('#customerID').val(data.CustomerID);
-        //            $('#txtCompanyName').val(data.CompanyName);
-        //            $('#txtTaxCode').val(data.TaxCode);
-        //            $('#txtAddress').val(data.Address);
-        //            $('#selectProvince').val(data.City);
-        //            $('#selectCountry').val(data.Country);
-        //            $('#txtAddress1').val(data.Address1);
-        //            $('#selectProvince1').val(data.City1);
-        //            $('#selectCountry1').val(data.Country1);
-        //            $('#txtAddress2').val(data.Address2);
-        //            $('#selectProvince2').val(data.City2);
-        //            $('#selectCountry2').val(data.Country2);
-        //            $('#txtEmail').val(data.Email);
-        //            $('#txtPhone').val(data.Phone);
-        //            $('#txtContact').val(data.Contact);
-        //            $('#selectStatus').val(data.Status);
-        //            $('#txtKM').val(data.KM);
-        //            $('#txtKM1').val(data.KM1);
-        //            $('#txtKM2').val(data.KM2);
-        //            $('#selectLoaiDon').val(data.LoaiDon_ID);
-        //            $('#selectLoaiHinhSX').val(data.LoaiHinhSX_ID);
-        //            $('#modal_customer').modal('show');
-        //            if (data.Country1 == 0)
-        //                $('#selectCountry1').val(84);
-        //            if (data.Country2 == 0)
-        //                $('#selectCountry2').val(84);
-        //            $('.selectProvince').select2({
-        //                showSearchInput: true
-        //            });
-        //            $('.selectCountry').select2({
-        //                showSearchInput: true
-        //            });
-        //            $('#selectLoaiDon').select2({
-        //                showSearchInput: true
-        //            });
-        //            $('#selectLoaiHinhSX').select2({
-        //                showSearchInput: true
-        //            });
-        //        }
-        //        else
-        //            bootbox.alert(customerInfo.msg);
-        //    });
-        //}
-
-        function ResetForm() {
-            $('#form_Agency').trigger('reset');
-            $('.form-group').val('');
-            $('.form-group').removeClass('has-success').removeClass('has-error');
-            $('.form-group i').removeClass('fa-warning').removeClass('fa-check');
-        }
-        function randomPassword(length) {
-            //var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
-            var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP1234567890";
-            var pass = "";
-            for (var x = 0; x < length; x++) {
-                var i = Math.floor(Math.random() * chars.length);
-                pass += chars.charAt(i);
-            }
-            return pass;
-        }
         function generate() {
             $('#txtPassword').val(randomPassword(8));
         }

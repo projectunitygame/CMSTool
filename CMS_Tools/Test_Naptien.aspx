@@ -25,7 +25,7 @@
         
         #tbl-menh-gia thead tr{
             background: #135f5b;
-    		color: #ffff;
+    		color: #fff;
     		text-transform: uppercase;
         }
         #tbl-menh-gia tbody tr{
@@ -123,14 +123,15 @@ table.table {
                                             <div class="col-md-8">
                                                 <div class="input-icon right">
                                                     <i class="fa"></i>
-                                                    <input id="txtAgencyID" type="text" class="form-control" name="AgencyID" />
+                                                    <input id="txtAgencyID" type="text" class="form-control" name="AgencyID"/>
+                                                    <span class="control-label"><i>Nhập mã đại lí/ tên đại lý/ số điện thoại</i></span>
                                                     <span class="loading1" style="display: none;width: 29px;position: absolute;right: 1px;top: 3px;"><img style='max-width: 100%;' src="assets/global/img/loading_spinner.gif"></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="control-label col-md-4">
-                                                Tên đại lý:</span>
+                                                Tên đại lý:
                                             </label>
                                             <div class="col-md-8">
                                                 <div class="input-icon right">

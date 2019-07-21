@@ -69,7 +69,10 @@ namespace CMS_Tools.Lib
             TASK_ADD,
             TASK_UPDATE,
             TASK_DELETE,
-            TASK_OWNER
+            TASK_OWNER,
+            NAP_TIEN_DAILY_C1,
+            CHUYEN_TIEN_DAILY,
+            CHUYEN_TIEN_USERS
         }
 
         public enum USER_STATUS : int
