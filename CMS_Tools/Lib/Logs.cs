@@ -21,7 +21,7 @@ namespace CMS_Tools.Lib
         /// <param name="msg"></param>
         /// <param name="ex"></param>
         /// <param name="sendMail"></param>
-        public static void SaveError(string msg, Exception ex = null) {
+        public static void SaveError(string msg, Exception ex = null, bool sendMail = true) {
             try
             {
                 Entity.SaveLogs.AddLogs(new Entity.LogInfo()
@@ -29,7 +29,13 @@ namespace CMS_Tools.Lib
                     logType = Constants.LOG_TYPE.ERROR_LOGS,
                     msgLogs = (ex == null ? msg : msg + ": " + ex)
                 });
-
+                if (sendMail)
+                {
+                    if(ex == null)
+                        logSendMail.Error("["+Constants.SERVER_TYPE+"]" + msg, new Exception(msg));
+                    else
+                        logSendMail.Error("[" + Constants.SERVER_TYPE + "]" + msg, ex);
+                }
                 //if (sendMail)
                 //{
                 //    Entity.ErrorLogsClass.AddErrorLogs(new Entity.ErrorLogs()
