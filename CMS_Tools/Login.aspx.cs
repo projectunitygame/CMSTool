@@ -95,10 +95,11 @@ namespace CMS_Tools
                         debug = 5;
                         if (userData != null)
                         {
-                            if (userData.GroupID == 6)
-                                Response.Redirect("Page.aspx?m=9");
-                            else
-                                Response.Redirect("Dashboard.aspx");
+                            Response.Redirect("Page.aspx?m=10");
+                            //if (userData.GroupID == 6)
+                            //    Response.Redirect("Page.aspx?m=10");
+                            //else
+                            //    Response.Redirect("Dashboard.aspx");
                         }
                         //Model.AccountModel acc = new Model.AccountModel();
                         //int? code = 0;
