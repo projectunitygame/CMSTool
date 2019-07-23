@@ -385,12 +385,12 @@
                                     "<td style='width:200px'>Chỉnh sửa</td>";
                                 if (oTable != null) {
                                     oTable.fnDestroy();
-                                    $('#tbl_datatable thead').html("<tr role='row'>" + strHtmlColName +"</tr>");
+                                    $('#tbl_datatable thead').html("<tr role='row'>" + strHtmlColName + "</tr>");
                                     $('#tbl_datatable tbody').html("");
                                     $('#tbl_datatable').on('click', ' tbody td .row-details', function () {
                                     }).unbind('click');
                                     if (data.data.length > 20) {
-                                        $('#tbl_datatable tfoot tr').html("<td></td>"+ strHtmlColName);
+                                        $('#tbl_datatable tfoot tr').html("<td></td>" + strHtmlColName);
                                     }
                                 }
                                 if (data.data.length > 20) {
@@ -410,10 +410,10 @@
                                 _dataTable = [];
                                 for (var i = 0; i < data.data.length; i++) {
                                     var obj = data.data[i];
-                                    var linkLock = "<a class='btn btn-xs red btn-circle btn-outline' onclick='LockAgency(" + obj[0].replace('uwin.', '') + ");'> Khóa</a>";
+                                    var linkLock = "<a class='btn btn-xs red btn-circle btn-outline' onclick='LockAgency(\"" + obj[0].replace('uwin.', '') + "\");'> Khóa</a>";
                                     var base64Str = Base64.encode(obj[0] + '-' + obj[4]);
                                     if (obj[8] == "True")
-                                        linkLock = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnLockAgency(" + obj[0].replace('uwin.', '') + ");'> Mở khóa</a>";
+                                        linkLock = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnLockAgency(\"" + obj[0].replace('uwin.', '') + "\");'> Mở khóa</a>";
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
@@ -537,8 +537,8 @@
                                 });
 
                                 //an column
-                                var bVis = oTable.fnSettings().aoColumns[1].bVisible;
-                                oTable.fnSetColumnVis(1, bVis ? false : true);
+                                //var bVis = oTable.fnSettings().aoColumns[1].bVisible;
+                                //oTable.fnSetColumnVis(1, bVis ? false : true);
                                 var bVis = oTable.fnSettings().aoColumns[6].bVisible;
                                 oTable.fnSetColumnVis(6, bVis ? false : true);
                                 var bVis = oTable.fnSettings().aoColumns[7].bVisible;

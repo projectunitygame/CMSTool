@@ -2,31 +2,31 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .avatar_u{
-            height: 50px;
-            border: 1px solid #ddd;
-            border-radius: 50% !important;
-        }
-        .form-section {
-            margin: 20px 0;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #eee;
-            font-size: 12px;
-            color: #333;
-            text-transform: uppercase;
-        }
-        .btn-group-xs>.btn, .btn-xs{
-	        font-size:11px !important;
-        }
-        .table td, .table th {
-            font-size: 12px !important;
-        }
-        .select2-container--bootstrap .select2-selection, .form-control, output{
-	        font-size: 12px !important;
-        }
+    height: 50px;
+    border: 1px solid #ddd;
+    border-radius: 50% !important;
+}
+.form-section {
+    margin: 20px 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+    color: #333;
+    text-transform: uppercase;
+}
+.btn-group-xs>.btn, .btn-xs{
+	font-size:11x !important;
+}
+.table td, .table th {
+    font-size: 12px !important;
+}
+.select2-container--bootstrap .select2-selection, .form-control, output{
+	font-size: 12px !important;
+}
 
-        .control-label{
-	        text-align:left !important;
-        }
+.control-label{
+	text-align:left !important;
+}
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
@@ -79,7 +79,9 @@
                             <select id="filterColumn" class="form-control">
                                 <option value='MA_GIAO_DICH'>Mã giao dịch</option>
                             	<option value='TK_NGUOI_GUI'>Tài khoản người gửi</option>
+                                <option value='TEN_NGUOI_GUI'>Tên người gửi</option>
                                 <option value='TK_NGUOI_NHAN'>Tài khoản người nhận</option>
+                                <option value='TEN_NGUOI_NHAN'>Tên người nhận</option>
                                 
                             </select>
                         </div>
@@ -114,9 +116,9 @@
         jQuery(document).ready(function () {
             $('.page-toolbar').remove();
 
-          	var d = AppManage.getURLParameter('agencyid');
-            console.log(d);  
-            if (d != null){
+            var d = AppManage.getURLParameter('agencyid');
+            console.log(d);
+            if (d != null) {
                 var s = Base64.decode(d).split('-')[0];
                 $("#txtFindData").val(s);
                 $('#filterColumn').val('TK_NGUOI_NHAN');
@@ -174,7 +176,7 @@
                 _dateEnd = moment().format('YYYY/MM/DD');
                 $('#dateRangeEvent input').val(_dateStart + ' - ' + _dateEnd);
             };
-            
+
             return {
                 init: function () {
                     handleDateRangePickers();
@@ -305,6 +307,6 @@
             else
                 return num;
         }
-		
+
 </script>
 </asp:Content>
