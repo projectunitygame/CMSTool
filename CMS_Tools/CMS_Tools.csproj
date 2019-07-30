@@ -345,10 +345,12 @@
     <Content Include="TestFunc.aspx" />
     <Content Include="TestPage.aspx" />
     <Content Include="Test_GameLogs_LichSuChoi.aspx" />
+    <Content Include="Test_GiftCodeThongKe.aspx" />
     <Content Include="Test_LichSuGiaoDich.aspx" />
     <Content Include="Test_Naptien.aspx" />
     <Content Include="Test_Taikhoandaily.aspx" />
     <Content Include="Test_TaiKhoanGame.aspx" />
+    <Content Include="Test_TheNapThongKe.aspx" />
     <Content Include="Tools.aspx" />
     <Content Include="VetifyResetPassword.aspx" />
     <Content Include="Web.config">
@@ -626,6 +628,13 @@
     <Compile Include="Test_GameLogs_LichSuChoi.aspx.designer.cs">
       <DependentUpon>Test_GameLogs_LichSuChoi.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Test_GiftCodeThongKe.aspx.cs">
+      <DependentUpon>Test_GiftCodeThongKe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GiftCodeThongKe.aspx.designer.cs">
+      <DependentUpon>Test_GiftCodeThongKe.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Test_LichSuGiaoDich.aspx.cs">
       <DependentUpon>Test_LichSuGiaoDich.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -653,6 +662,13 @@
     </Compile>
     <Compile Include="Test_TaiKhoanGame.aspx.designer.cs">
       <DependentUpon>Test_TaiKhoanGame.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_TheNapThongKe.aspx.cs">
+      <DependentUpon>Test_TheNapThongKe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_TheNapThongKe.aspx.designer.cs">
+      <DependentUpon>Test_TheNapThongKe.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tools.aspx.cs">
       <DependentUpon>Tools.aspx</DependentUpon>

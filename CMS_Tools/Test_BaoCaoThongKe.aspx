@@ -210,7 +210,7 @@ border-radius: 5px !important;
                     </div>
                 </div>
                 <div class="portlet-body">
-                     <div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                     <div class="dataTables_wrapper form-inline" role="grid">
                         <table class="table table-striped table-bordered table-hover dataTable" id="tbl_datatable"
                             aria-describedby="sample_1_info">
                             <thead>
@@ -241,7 +241,7 @@ border-radius: 5px !important;
                     </div>
                 </div>
                 <div class="portlet-body">
-                     <div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                     <div class="dataTables_wrapper form-inline" role="grid">
                         <table class="table table-striped table-bordered table-hover dataTable" id="tbl_datatable2"
                             aria-describedby="sample_1_info">
                             <thead>
@@ -272,7 +272,7 @@ border-radius: 5px !important;
                     </div>
                 </div>
                 <div class="portlet-body">
-                     <div id="sample_1_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                     <div class="dataTables_wrapper form-inline" role="grid">
                         <table class="table table-striped table-bordered table-hover dataTable" id="tbl_datatable3"
                             aria-describedby="sample_1_info">
                             <thead>
@@ -291,6 +291,37 @@ border-radius: 5px !important;
             </div>
         </div>
         <!--------- end ccu 24h report------------>
+        <!--------- top dai gia report----------->
+        <div class="col-md-12" style="margin-bottom: 10px;">
+            <div class="portlet box blue ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-bar-chart"></i> Top Đại Gia Report
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                     <div class="dataTables_wrapper form-inline" role="grid">
+                        <table class="table table-striped table-bordered table-hover dataTable" id="tbl_datatable4"
+                            aria-describedby="sample_1_info">
+                            <thead>
+                                <tr role="row"></tr>
+                            </thead>
+                            <tbody role="alert" aria-live="polite" aria-relevant="all"></tbody>
+                            <tfoot>
+                                <tr role="row"></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br />
+                    <div id="chartdiv4" class='chartdiv'></div>
+                </div>
+            </div>
+        </div>
+        <!--------- end top dai gia report------------>
     </div>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">
@@ -308,6 +339,7 @@ border-radius: 5px !important;
 
             ComponentsPickers.init();
             TableEditable.init();
+            
         });
 
         var _dateStart = null;
@@ -352,6 +384,7 @@ border-radius: 5px !important;
         var oTable = null;
         var oTable2 = null;
         var oTable3 = null;
+        var oTable4 = null;
         var _pageSize = 10;
         var _dataColumn = null;
         var colFilter = null;
@@ -361,6 +394,8 @@ border-radius: 5px !important;
         var colFilter3 = null;
         var _dataColumn3 = null;
         var colFilter3 = null;
+        var _dataColumn4 = null;
+        var colFilter4 = null;
         var TableEditable = function () {
             var NAU_Table = function () {
                 var table_NAU = $('#tbl_datatable');
@@ -713,6 +748,7 @@ border-radius: 5px !important;
                                             "chartName": "CCU 24h"
                                         });
                                     }
+                                    
                                     //console.log(dataReport);
                                     var colHiden = [];
                                     oTable3 = table_CCU_24H.dataTable({
@@ -759,6 +795,116 @@ border-radius: 5px !important;
                             }
                         });
                     }
+                },
+                Top_Dai_Gia_Table = function () {
+                    var table_Top_Dai_Gia = $('#tbl_datatable4');
+                    loadTable4();
+                    function loadTable4() {
+                        //$('.divLoading').fadeIn();
+                        $.ajax({
+                            type: "POST",
+                            url: "Apis/Menu.ashx",
+                            data: {
+                                type: 13,
+                                mid: 59, //top đại gia
+                                p: ""
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                if (data.status == 5005) {
+                                    window.location.assign("login.aspx");
+                                    return;
+                                }
+                                if (data.status == 0) {
+                                    if (oTable4 != null) {
+                                        oTable4.fnDestroy();
+                                        colFilter4 = null;
+                                        console.log("fnDestroy TOP_DAI_GIA");
+                                    }
+                                    _dataColumn4 = data.columnName;
+                                    var columnLength = data.columnName.length;
+                                    if (colFilter4 == null) {
+                                        $('#tbl_datatable4 thead tr').html("");
+                                        colFilter4 = _dataColumn4;
+                                        var strHtmlColName = "";
+                                        _dataColumn4.splice(_dataColumn4.length - 1, 1);
+                                        $.each(_dataColumn4, function (key, obj) {
+                                            strHtmlColName += "<td>" + obj + "</td>";
+                                        });
+                                        $('#tbl_datatable4 thead tr').append(strHtmlColName);
+                                        if (data.data.length > 20 && _pageSize > 10) {
+                                            $('#tbl_datatable4 tfoot tr').append(strHtmlColName);
+                                        }
+                                    }
+                                    else {
+                                        $('#tbl_datatable4 thead tr').empty();
+                                        var strHtmlColName = "";
+                                        $.each(_dataColumn, function (key, obj) {
+                                            strHtmlColName += "<td>" + obj + "</td>";
+                                        });
+                                        if (data.data.length > 20 && _pageSize > 10) {
+                                            $('#tbl_datatable4 tfoot tr').append(strHtmlColName);
+                                        }
+                                    }
+                                    var dataReport = data.data;
+                                    var chartData = [];
+                                    var countRow = dataReport.length;
+                                    for (var i = 0; i < countRow; i++) {
+                                        dataReport[i].splice(columnLength - 1, 1);
+                                        chartData.push({
+                                            "displayname": data.data[i][3],
+                                            "gold": data.data[i][4],
+                                            "chartName": "Top Đại Gia"
+                                        });
+                                        //if (i == 41) { break; }
+                                    }
+                                    console.log(chartData);
+                                    //console.log(dataReport);
+                                    var colHiden = [];
+                                    oTable4 = table_Top_Dai_Gia.dataTable({
+                                        "data": dataReport,
+                                        "lengthMenu": [
+                                            [10, 50, 100, 500, -1],
+                                            [10, 50, 100, 500, "All"]
+                                        ],
+                                        "pageLength": _pageSize,
+                                        "language": {
+                                            "lengthMenu": " _MENU_ records"
+                                        },
+                                        "columnDefs": [{
+                                            'orderable': true,
+                                            'targets': colHiden
+                                        }, {
+                                            "searchable": true,
+                                            "targets": [0]
+                                        }],
+                                        "order": [
+                                            [4, "desc"]
+                                        ]
+                                    });
+                                    var tableWrapper = $("#tbl_datatable4_wrapper");
+                                    jQuery('#tbl_datatable4_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
+                                    jQuery('#tbl_datatable4_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
+                                    jQuery('#tbl_datatable4_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+
+                                    tableWrapper.find(".dataTables_length select").select2({
+                                        showSearchInput: false
+                                    });
+                                    loadTopDaiGia_Chart(chartData, 'chartdiv4');
+                                }
+                                else {
+                                    bootbox.alert({
+                                        message: data.msg,
+                                        callback: function () {
+                                        }
+                                    });
+                                }
+                            },
+                            complete: function () {
+                                //$(".divLoading").fadeOut(500);
+                            }
+                        });
+                    }
                 }
 
             return {
@@ -769,6 +915,7 @@ border-radius: 5px !important;
                     PCCU_Table();
                     TotalUsers_Table();
                     CCU_24h_Table();
+                    Top_Dai_Gia_Table();
                 },
                 reloadTable: function () {
                     NAU_Table();
@@ -776,6 +923,7 @@ border-radius: 5px !important;
                     PCCU_Table();
                     TotalUsers_Table();
                     CCU_24h_Table();
+                    Top_Dai_Gia_Table();
                 }
             };
         }();
@@ -902,6 +1050,68 @@ border-radius: 5px !important;
                 CCUSeries.strokeWidth = 2;
                 CCUSeries.propertyFields.strokeDasharray = "dashLength";
                 CCUSeries.tooltipText = "Users: {valueY}";
+
+                var CCUBullet = CCUSeries.bullets.push(new am4charts.Bullet());
+                var CCURectangle = CCUBullet.createChild(am4core.Rectangle);
+                CCURectangle.horizontalCenter = "middle";
+                CCURectangle.verticalCenter = "middle";
+                CCURectangle.width = 1;
+                CCURectangle.height = 1;
+                CCURectangle.width = 1;
+                CCURectangle.height = 1;
+
+                var CCUState = CCUBullet.states.create("hover");
+                CCUState.properties.scale = 1.2;
+                // Add legend
+                chart.legend = new am4charts.Legend();
+
+                // Add cursor
+                chart.cursor = new am4charts.XYCursor();
+                chart.cursor.fullWidthLineX = true;
+                chart.cursor.xAxis = categoryAxis;
+                chart.cursor.lineX.strokeOpacity = 0;
+                chart.cursor.lineX.fill = am4core.color("#000");
+                chart.cursor.lineX.fillOpacity = 0.1;
+
+            }); // end am4core.ready()
+        }
+
+        function loadTopDaiGia_Chart(dataChart, ChartID) {
+            am4core.ready(function () {
+                am4core.useTheme(am4themes_animated);
+                var chart = am4core.create(ChartID, am4charts.XYChart);
+                chart.data = dataChart;
+                chart.colors.step = 2;
+                chart.maskBullets = false;
+
+                var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+                categoryAxis.dataFields.category = "displayname";
+                categoryAxis.renderer.grid.template.location = 0;
+                categoryAxis.renderer.minGridDistance = 30;
+                categoryAxis.renderer.labels.template.rotation = 90;
+                // Create axes
+                var distanceAxis = chart.yAxes.push(new am4charts.ValueAxis());
+                distanceAxis.title.text = "Top đại gia";
+                distanceAxis.renderer.grid.template.disabled = true;
+                // Create series
+                //var CCUSeries = chart.series.push(new am4charts.LineSeries());
+                //CCUSeries.dataFields.valueY = "gold";
+                //CCUSeries.dataFields.categoryX = "displayname";
+                //CCUSeries.yAxis = distanceAxis;
+                //CCUSeries.name = "Số Gold";
+                //CCUSeries.strokeWidth = 2;
+                //CCUSeries.propertyFields.strokeDasharray = "dashLength";
+                //CCUSeries.tooltipText = "Số gold: {valueY}";
+
+                var CCUSeries = chart.series.push(new am4charts.ColumnSeries());
+                CCUSeries.dataFields.valueY = "gold";
+                CCUSeries.dataFields.categoryX = "displayname";
+                CCUSeries.yAxis = distanceAxis;
+                CCUSeries.name = "Số Gold";
+                CCUSeries.columns.template.fillOpacity = 0.7;
+                CCUSeries.columns.template.propertyFields.strokeDasharray = "dashLength";
+                CCUSeries.columns.template.propertyFields.fillOpacity = "alpha";
+
 
                 var CCUBullet = CCUSeries.bullets.push(new am4charts.Bullet());
                 var CCURectangle = CCUBullet.createChild(am4core.Rectangle);

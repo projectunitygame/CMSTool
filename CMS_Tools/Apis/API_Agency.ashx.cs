@@ -360,6 +360,17 @@ namespace CMS_Tools.Apis
                     if (!string.IsNullOrEmpty(json))
                     {
                         debug = 2;
+                        try
+                        {
+                            JsonConvert.DeserializeObject<AgencyEntity>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
                         var jsonData = JsonConvert.DeserializeObject<AgencyEntity>(json);
                         if (jsonData != null)
                         {
@@ -417,6 +428,18 @@ namespace CMS_Tools.Apis
                                 debug = 309;
                                 result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
                                 result.msg = "Tên hiển thị phải nhiều hơn 5 ký tự";
+                            }
+                            else if (string.IsNullOrEmpty(jsonData.infomation))
+                            {
+                                debug = 308;
+                                result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
+                                result.msg = "Thông tin đại lý không được để trống";
+                            }
+                            else if (jsonData.infomation.Length > 250)
+                            {
+                                debug = 309;
+                                result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
+                                result.msg = "Thông tin đại lý phải ít hơn 250 ký tự";
                             }
                             else {
                                 debug = 310;
@@ -511,12 +534,16 @@ namespace CMS_Tools.Apis
         public string email;
         public string phone;
         public string displayName;
-        public string ownerID="";
+        public string ownerID;
         public string IP;
         public decimal limitTransaction;
         public decimal limitTransactionDaily;
         public int creatorID;
         public string creatorName;
+        public string infomation;
+        // mới
+        public bool display;
+        //mới
     }
 
     public class LockAgencyEntity

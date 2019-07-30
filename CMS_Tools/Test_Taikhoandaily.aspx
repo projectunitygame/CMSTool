@@ -15,7 +15,7 @@
     text-transform: uppercase;
 }
 .btn-group-xs>.btn, .btn-xs{
-	font-size:11x !important;
+	font-size:11px !important;
 }
 .table td, .table th {
     font-size: 12px !important;
@@ -33,6 +33,30 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="PageBar" runat="server">
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="icon-home"></i>
+                <a href="Home.aspx">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <span><label id="PageBar_lblMenuName">Tài khoản đại lý</label></span>
+            </li>
+        </ul>
+        <div class="page-toolbar">
+            <div class="btn-group pull-right">
+                <button id="btnAddAction" type="button" class="btn btn-fit-height blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false">
+                    Chức năng <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li>
+                        <a href="javascript:;" id="btnAddNew"><i class="fa fa-plus"><!--  i--> Tạo KH Mới</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageContent" runat="server">
     <div class="row">
@@ -161,10 +185,10 @@
                             <div class=row>
                             	<div class="col-xs-10 col-xs-offset-1">
                                 	<div class="form-group  margin-top-20">
-                                        <label class="control-label col-md-3">
+                                        <label class="control-label col-md-4">
                                             Mã đại lý: <span class="required" aria-required="true">* </span>
                                         </label>
-                                        <div class="col-md-9">
+                                        <div class="col-md-8">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
                                                 <input id="txtAgencyCode" type="text" class="form-control" name="AgencyCode" />
@@ -176,10 +200,10 @@
                             <div class="row">
                             	<div class="col-xs-10 col-xs-offset-1">
                                 	<div class="form-group">
-                                        <label class="control-label col-md-3">
+                                        <label class="control-label col-md-4">
                                             Mật khẩu: <span class="required" aria-required="true">* </span>
                                         </label>
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
                                                 <input id="txtPassword" type="text" class="form-control" name="password" />
@@ -194,10 +218,10 @@
                             <div class="row">
                             	<div class="col-xs-10 col-xs-offset-1">
                                 	<div class="form-group">
-                                        <label class="control-label col-md-3">
+                                        <label class="control-label col-md-4">
                                             Email:
                                         </label>
-                                        <div class="col-md-9">
+                                        <div class="col-md-8">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
                                                 <input id="txtEmail" type="text" class="form-control" name="email"/>
@@ -209,10 +233,10 @@
                             <div class="row">
                             	<div class="col-xs-10 col-xs-offset-1">
                                 	<div class="form-group">
-                                        <label class="control-label col-md-3">
+                                        <label class="control-label col-md-4">
                                             Số điện thoại: <span class="required" aria-required="true">* </span>
                                         </label>
-                                        <div class="col-md-9">
+                                        <div class="col-md-8">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
                                                 <input type="text" style="width:100%;" id="txtPhone" class="form-control" name="Phone" />
@@ -224,13 +248,46 @@
                             <div class="row">
                             	<div class="col-xs-10 col-xs-offset-1">
                                 	<div class="form-group">
-                                        <label class="control-label col-md-3">
+                                        <label class="control-label col-md-4">
                                             Tên đại lý: <span class="required" aria-required="true">* </span>
                                         </label>
-                                        <div class="col-md-9">
+                                        <div class="col-md-8">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
                                                 <input type="text" style="width:100%;" id="txtAgencyName" class="form-control" name="AgencyName" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group">
+                                        <label class="control-label col-md-4">
+                                            Thông tin đại lý: <span class="required" aria-required="true">* </span>
+                                        </label>
+                                        <div class="col-md-8">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" style="width:100%;" id="txtAgencyInfo" class="form-control" name="AgencyInfo" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group">
+                                        <label class="control-label col-md-4">
+                                            Hiển thị thông tin:
+                                        </label>
+                                        <div class="col-md-8">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <select style="width:100%;" id="slDisplayInfo" class="form-control" name="DisplayInfo" >
+                                                    <option value="flase">Không hiển thị</option>
+                                                    <option value="true">Hiển thị</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -649,6 +706,11 @@
                             minlength: 6,
                             maxlength: 150,
                             required: !0
+                        },
+                        AgencyInfo: {
+                            minlength: 6,
+                            maxlength: 250,
+                            required: !0
                         }
                         //province: {
                         //    required: !0
@@ -767,6 +829,8 @@
                 "email": $('#txtEmail').val(),
                 "phone": $('#txtPhone').val(),
                 "displayName": $('#txtAgencyName').val(),
+                "infomation": $('#txtAgencyInfo').val(),
+                "display": $('#slDisplayInfo').val()
             };
 
             $.ajax({
