@@ -345,7 +345,8 @@
     <Content Include="TestFunc.aspx" />
     <Content Include="TestPage.aspx" />
     <Content Include="Test_GameLogs_LichSuChoi.aspx" />
-    <Content Include="Test_GiftCodeThongKe.aspx" />
+    <Content Include="Test_GiftcodeEvent.aspx" />
+    <Content Include="Test_GiftCodeThongTin.aspx" />
     <Content Include="Test_LichSuGiaoDich.aspx" />
     <Content Include="Test_Naptien.aspx" />
     <Content Include="Test_Taikhoandaily.aspx" />
@@ -628,12 +629,19 @@
     <Compile Include="Test_GameLogs_LichSuChoi.aspx.designer.cs">
       <DependentUpon>Test_GameLogs_LichSuChoi.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_GiftCodeThongKe.aspx.cs">
-      <DependentUpon>Test_GiftCodeThongKe.aspx</DependentUpon>
+    <Compile Include="Test_GiftcodeEvent.aspx.cs">
+      <DependentUpon>Test_GiftcodeEvent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_GiftCodeThongKe.aspx.designer.cs">
-      <DependentUpon>Test_GiftCodeThongKe.aspx</DependentUpon>
+    <Compile Include="Test_GiftcodeEvent.aspx.designer.cs">
+      <DependentUpon>Test_GiftcodeEvent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GiftCodeThongTin.aspx.cs">
+      <DependentUpon>Test_GiftCodeThongTin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GiftCodeThongTin.aspx.designer.cs">
+      <DependentUpon>Test_GiftCodeThongTin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_LichSuGiaoDich.aspx.cs">
       <DependentUpon>Test_LichSuGiaoDich.aspx</DependentUpon>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GiftCodeThongKe.aspx.cs" Inherits="CMS_Tools.Test_GiftCodeThongKe" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GiftCodeThongTin.aspx.cs" Inherits="CMS_Tools.Test_GiftCodeThongKe" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .avatar_u{
@@ -15,7 +15,7 @@
     text-transform: uppercase;
 }
 .btn-group-xs>.btn, .btn-xs{
-	font-size:11x !important;
+	font-size:11px !important;
 }
 .table td, .table th {
     font-size: 12px !important;
@@ -39,7 +39,7 @@
             <div class="portlet box blue ">
                 <div class="portlet-title">
                     <div class="caption">
-                        Lịch sử giao dịch
+                        Thông tin Giftcode
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -77,12 +77,11 @@
                         <div class="col-md-3" style="margin-bottom: 10px;">
                             <label class="control-label label-balance">Chọn lọc dữ liệu theo cột</label>
                             <select id="filterColumn" class="form-control">
-                                <option value='MA_GIAO_DICH'>Mã giao dịch</option>
-                            	<option value='TK_NGUOI_GUI'>Tài khoản người gửi</option>
-                                <option value='TEN_NGUOI_GUI'>Tên người gửi</option>
-                                <option value='TK_NGUOI_NHAN'>Tài khoản người nhận</option>
-                                <option value='TEN_NGUOI_NHAN'>Tên người nhận</option>
-                                
+                                <option value='Code'>Mã giftcode</option>
+                            	<option value='Gold'>Giá trị</option>
+                                <option value='AccountId'>Id sử dụng</option>
+                                <option value='EventID'>Mã event</option>
+                                <option value='AccountName'>Tài khoản sử dụng</option>
                             </select>
                         </div>
                         <div class="col-md-3" style="margin-bottom: 10px;">
@@ -116,12 +115,11 @@
         jQuery(document).ready(function () {
             $('.page-toolbar').remove();
 
-            var d = AppManage.getURLParameter('agencyid');
+            var d = AppManage.getURLParameter('eventid');
             console.log(d);
             if (d != null) {
-                var s = Base64.decode(d).split('-')[0];
-                $("#txtFindData").val(s);
-                $('#filterColumn').val('TK_NGUOI_NHAN');
+                $("#txtFindData").val(d);
+                $('#filterColumn').val('EventID');
             }
             $('#txtFindData').on('keyup', function (e) {
                 if (e.keyCode == 13) {
@@ -261,7 +259,7 @@
                                         "targets": [0]
                                     }],
                                     "order": [
-                                        [0, "desc"]
+                                        [2, "desc"]
                                     ]
                                 });
                                 var tableWrapper = $("#tbl_datatable_wrapper");
