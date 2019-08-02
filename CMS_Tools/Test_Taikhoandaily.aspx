@@ -264,7 +264,7 @@
                             	<div class="col-xs-10 col-xs-offset-1">
                                 	<div class="form-group">
                                         <label class="control-label col-md-4">
-                                            Thông tin đại lý: <span class="required" aria-required="true">* </span>
+                                            Thông tin đại lý:
                                         </label>
                                         <div class="col-md-8">
                                             <div class="input-icon right">
@@ -720,11 +720,6 @@
                         AgencyName: {
                             minlength: 6,
                             maxlength: 150,
-                            required: !0
-                        },
-                        AgencyInfo: {
-                            minlength: 6,
-                            maxlength: 250,
                             required: !0
                         }
                         //province: {

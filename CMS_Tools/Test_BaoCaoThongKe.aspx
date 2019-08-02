@@ -853,7 +853,7 @@ border-radius: 5px !important;
                                         dataReport[i].splice(columnLength - 1, 1);
                                         chartData.push({
                                             "displayname": data.data[i][3],
-                                            "gold": data.data[i][4],
+                                            "gold": parseInt(data.data[i][4]),
                                             "chartName": "Top Đại Gia"
                                         });
                                         //if (i == 41) { break; }
@@ -1112,6 +1112,15 @@ border-radius: 5px !important;
                 CCUSeries.columns.template.propertyFields.strokeDasharray = "dashLength";
                 CCUSeries.columns.template.propertyFields.fillOpacity = "alpha";
 
+                // Create series
+                //var CCUSeries = chart.series.push(new am4charts.LineSeries());
+                //CCUSeries.dataFields.valueY = "ccu";
+                //CCUSeries.dataFields.categoryX = "time";
+                //CCUSeries.yAxis = distanceAxis;
+                //CCUSeries.name = "CCU";
+                //CCUSeries.strokeWidth = 2;
+                //CCUSeries.propertyFields.strokeDasharray = "dashLength";
+                //CCUSeries.tooltipText = "Users: {valueY}";
 
                 var CCUBullet = CCUSeries.bullets.push(new am4charts.Bullet());
                 var CCURectangle = CCUBullet.createChild(am4core.Rectangle);

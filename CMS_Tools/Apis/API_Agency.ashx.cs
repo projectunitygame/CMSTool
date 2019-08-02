@@ -96,7 +96,7 @@ namespace CMS_Tools.Apis
                 else
                 {
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = "Không thể kết nối";
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
@@ -162,7 +162,7 @@ namespace CMS_Tools.Apis
                 else
                 {
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = "Không thể kết nối";
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
@@ -211,7 +211,7 @@ namespace CMS_Tools.Apis
                 else
                 {
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
@@ -269,7 +269,7 @@ namespace CMS_Tools.Apis
                 else
                 {
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
@@ -327,7 +327,7 @@ namespace CMS_Tools.Apis
                 else
                 {
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
@@ -425,22 +425,23 @@ namespace CMS_Tools.Apis
                             }
                             else if (jsonData.displayName.Length < 6)
                             {
-                                debug = 309;
+                                debug = 3091;
                                 result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
                                 result.msg = "Tên hiển thị phải nhiều hơn 5 ký tự";
                             }
-                            else if (string.IsNullOrEmpty(jsonData.infomation))
+                            else if (jsonData.infomation.Length >= 250)
                             {
-                                debug = 308;
-                                result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
-                                result.msg = "Thông tin đại lý không được để trống";
-                            }
-                            else if (jsonData.infomation.Length > 250)
-                            {
-                                debug = 309;
+                                debug = 3092;
                                 result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
                                 result.msg = "Thông tin đại lý phải ít hơn 250 ký tự";
                             }
+                            else if (jsonData.FB.Length >= 250)
+                            {
+                                debug = 3093;
+                                result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
+                                result.msg = "Đường link facebook phải ít hơn 250 ký tự";
+                            }
+
                             else {
                                 debug = 310;
 
@@ -478,7 +479,7 @@ namespace CMS_Tools.Apis
                 {
                     debug = 6;
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
