@@ -285,9 +285,24 @@
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
                                                 <select style="width:100%;" id="slDisplayInfo" class="form-control" name="DisplayInfo" >
-                                                    <option value="flase">Không hiển thị</option>
+                                                    <option value="false">Không hiển thị</option>
                                                     <option value="true">Hiển thị</option>
                                                 </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group">
+                                        <label class="control-label col-md-4">
+                                            Facebook link:
+                                        </label>
+                                        <div class="col-md-8">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" style="width:100%;" id="txtFB" class="form-control" name="FB" />
                                             </div>
                                         </div>
                                     </div>
@@ -830,7 +845,8 @@
                 "phone": $('#txtPhone').val(),
                 "displayName": $('#txtAgencyName').val(),
                 "infomation": $('#txtAgencyInfo').val(),
-                "display": $('#slDisplayInfo').val()
+                "display": $('#slDisplayInfo').val(),
+                "FB": $('#txtFB').val()
             };
 
             $.ajax({

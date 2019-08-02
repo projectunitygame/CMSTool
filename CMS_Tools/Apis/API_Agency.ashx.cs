@@ -529,6 +529,10 @@ namespace CMS_Tools.Apis
     }
     public class AgencyEntity
     {
+        public AgencyEntity()
+        {
+            FB = "";
+        }
         public string agencyCode;
         public string password;
         public string email;
@@ -541,9 +545,8 @@ namespace CMS_Tools.Apis
         public int creatorID;
         public string creatorName;
         public string infomation;
-        // mới
         public bool display;
-        //mới
+        public string FB;
     }
 
     public class LockAgencyEntity
