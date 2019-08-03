@@ -56,7 +56,8 @@
                 };
                 POST_DATA("Apis/Account.ashx", param, function (res) {
                     if (res.status == 0) {
-                        window.location.href = "Dashboard.aspx";
+                        //window.location.href = "Dashboard.aspx";
+                        window.location.href = "Page.aspx?m=10";
                         return;
                     }
                     else {

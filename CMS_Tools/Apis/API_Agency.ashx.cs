@@ -96,7 +96,7 @@ namespace CMS_Tools.Apis
                 else
                 {
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = "Không thể kết nối";
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
@@ -162,7 +162,7 @@ namespace CMS_Tools.Apis
                 else
                 {
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = "Không thể kết nối";
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
@@ -211,7 +211,7 @@ namespace CMS_Tools.Apis
                 else
                 {
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
@@ -269,7 +269,7 @@ namespace CMS_Tools.Apis
                 else
                 {
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
@@ -327,7 +327,7 @@ namespace CMS_Tools.Apis
                 else
                 {
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
@@ -360,6 +360,17 @@ namespace CMS_Tools.Apis
                     if (!string.IsNullOrEmpty(json))
                     {
                         debug = 2;
+                        try
+                        {
+                            JsonConvert.DeserializeObject<AgencyEntity>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
                         var jsonData = JsonConvert.DeserializeObject<AgencyEntity>(json);
                         if (jsonData != null)
                         {
@@ -414,10 +425,23 @@ namespace CMS_Tools.Apis
                             }
                             else if (jsonData.displayName.Length < 6)
                             {
-                                debug = 309;
+                                debug = 3091;
                                 result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
                                 result.msg = "Tên hiển thị phải nhiều hơn 5 ký tự";
                             }
+                            else if (jsonData.infomation.Length >= 250)
+                            {
+                                debug = 3092;
+                                result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
+                                result.msg = "Thông tin đại lý phải ít hơn 250 ký tự";
+                            }
+                            else if (jsonData.FB.Length >= 250)
+                            {
+                                debug = 3093;
+                                result.status = Constants.NUMBER_CODE.INFO_CREATE_AGENCY_VALI;
+                                result.msg = "Đường link facebook phải ít hơn 250 ký tự";
+                            }
+
                             else {
                                 debug = 310;
 
@@ -455,7 +479,7 @@ namespace CMS_Tools.Apis
                 {
                     debug = 6;
                     result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                    result.msg = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER.ToString();
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
                 }
             }
             catch (Exception ex)
@@ -506,17 +530,24 @@ namespace CMS_Tools.Apis
     }
     public class AgencyEntity
     {
+        public AgencyEntity()
+        {
+            FB = "";
+        }
         public string agencyCode;
         public string password;
         public string email;
         public string phone;
         public string displayName;
-        public string ownerID="";
+        public string ownerID;
         public string IP;
         public decimal limitTransaction;
         public decimal limitTransactionDaily;
         public int creatorID;
         public string creatorName;
+        public string infomation;
+        public bool display;
+        public string FB;
     }
 
     public class LockAgencyEntity
