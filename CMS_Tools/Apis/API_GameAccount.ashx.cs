@@ -44,6 +44,12 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_GAME_ACOUNT_TYPE.UNLOCK_GAME_ACCOUNT:
                         UNLOCK_GAME_ACCOUNT(context);
                         break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.LOCK_CHAT_GAME_ACCOUNT:
+                        LOCK_CHAT_GAME_ACCOUNT(context);
+                        break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.UNLOCK_CHAT_GAME_ACCOUNT:
+                        UNLOCK_CHAT_GAME_ACCOUNT(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -58,6 +64,131 @@ namespace CMS_Tools.Apis
                 result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
+        }
+
+        /// <summary>
+        /// Mở khóa chat game
+        /// </summary>
+        /// <param name="context"></param>
+        private void UNLOCK_CHAT_GAME_ACCOUNT(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["UNLOCK_CHAT_GAME_ACCOUNT"] == null || (DateTime.Now - (DateTime)context.Session["UNLOCK_CHAT_GAME_ACCOUNT"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<UnlockChatAccountGameEnity>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<UnlockChatAccountGameEnity>(json);
+                        if (jsonData != null)
+                        {
+                            jsonData.Author = accountInfo.AccountId;
+                            jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/UnlockChatAccountGame");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR UNLOCK_CHAT_GAME_ACCOUNT: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["UNLOCK_CHAT_GAME_ACCOUNT"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+        /// <summary>
+        /// Khóa chat game
+        /// </summary>
+        /// <param name="context"></param>
+        private void LOCK_CHAT_GAME_ACCOUNT(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["LOCK_CHAT_GAME_ACCOUNT"] == null || (DateTime.Now - (DateTime)context.Session["LOCK_CHAT_GAME_ACCOUNT"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<LockChatAccountGameEnity>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<LockChatAccountGameEnity>(json);
+                        if (jsonData != null)
+                        {
+                            jsonData.Author = accountInfo.AccountId;
+                            jsonData.Reason = "Tài khoản khóa chat: " + accountInfo.UserName + ", Ghi chú: " + jsonData.Reason;
+                            Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/LockChatAccountGame");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR LOCK_CHAT_GAME_ACCOUNT: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["LOCK_CHAT_GAME_ACCOUNT"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
         }
 
         /// <summary>
@@ -204,6 +335,20 @@ namespace CMS_Tools.Apis
         }
 
         public class UnlockAccountGameEnity
+        {
+            public long AccountID;
+            public string Reason;
+            public int Author;
+        }
+
+        public class LockChatAccountGameEnity
+        {
+            public long AccountID;
+            public string Reason;
+            public int Author;
+        }
+
+        public class UnlockChatAccountGameEnity
         {
             public long AccountID;
             public string Reason;

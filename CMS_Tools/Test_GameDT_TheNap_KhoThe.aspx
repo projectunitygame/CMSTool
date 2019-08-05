@@ -15,7 +15,7 @@
     text-transform: uppercase;
 }
 .btn-group-xs>.btn, .btn-xs{
-	font-size:11x !important;
+	font-size:11px !important;
 }
 .table td, .table th {
     font-size: 12px !important;

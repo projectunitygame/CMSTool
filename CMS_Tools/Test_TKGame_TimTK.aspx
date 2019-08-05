@@ -15,7 +15,7 @@
             text-transform: uppercase;
         }
         .btn-group-xs>.btn, .btn-xs{
-	        font-size:11x !important;
+	        font-size:11px !important;
         }
         .table td, .table th {
             font-size: 12px !important;
@@ -363,6 +363,9 @@
                                     var linkLock = "<a class='btn btn-xs red btn-circle btn-outline' onclick='LockAcountGame(\"" + obj[0] +"\");'> Khóa</a>";
                                     if (obj[8] == "True")
                                         linkLock = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnlockAcountGame(\"" + obj[0] + "\");'> Mở khóa</a>";
+                                    var lockChat = "<a class='btn btn-xs yellow btn-circle btn-outline' onclick='LockChatAcountGame(\"" + obj[0] + "\");'> Khóa chat</a>";
+                                    if (obj[9] == "True")
+                                        lockChat = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnlockChatAcountGame(\"" + obj[0] + "\");'> Mở khóa chat</a>";
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
@@ -373,7 +376,8 @@
                                         "<td>" + obj[6] + "</td>" +
                                         "<td>" + obj[7] + "</td>" +
                                         "<td>" + obj[8] + "</td>" +
-                                        "<td>" + linkLock +"</td>" +
+                                        "<td>" + obj[9] + "</td>" +
+                                        "<td>" + linkLock + lockChat +"</td>" +
                                         "</tr>");
                                 }
                                 var colHiden = [];
@@ -401,6 +405,8 @@
 
                                 var bVis = oTable.fnSettings().aoColumns[8].bVisible;
                                 oTable.fnSetColumnVis(8, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[9].bVisible;
+                                oTable.fnSetColumnVis(9, bVis ? false : true);
 
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
@@ -501,6 +507,66 @@
                         data: {
                             json: JSON.stringify(json),
                             type: 2
+                        },
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.status == 1)
+                                TableEditable.init();
+                            else
+                                bootbox.alert(res.msg);
+                            $(".divLoading").fadeOut(500);
+                        }
+                    });
+                }
+            });
+        } 
+
+        function LockChatAcountGame(accountID) {
+
+            bootbox.prompt({
+                title: "Ghi chú nội dung khóa!",
+                centerVertical: true,
+                callback: function (result) {
+                    if (result === null) {
+                        // Prompt dismissed
+                    } else {
+                        // result has a value
+                        $('.divLoading').fadeIn();
+                        var json = {
+                            "AccountID": accountID,
+                            "Reason": result
+                        }
+                        POST_DATA("Apis/API_GameAccount.ashx", {
+                            type: 3,
+                            json: JSON.stringify(json)
+                        }, function (res) {
+                            if (res.status == 1)
+                                TableEditable.init();
+                            else
+                                bootbox.alert(res.msg);
+                            $(".divLoading").fadeOut(500);
+
+                        });
+                    }
+
+                }
+            });
+
+        }
+
+        function UnlockChatAcountGame(accountID) {
+            bootbox.confirm("Xác nhận mở khóa tài khoản?", function (result) {
+                if (result) {
+                    $('.divLoading').fadeIn();
+                    var json = {
+                        "AccountID": accountID
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "Apis/API_GameAccount.ashx",
+                        data: {
+                            json: JSON.stringify(json),
+                            type: 4
                         },
                         dataType: 'json',
                         success: function (res) {

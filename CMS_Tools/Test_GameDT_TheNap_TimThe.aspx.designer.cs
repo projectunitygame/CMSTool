@@ -11,7 +11,7 @@ namespace CMS_Tools
 {
 
 
-    public partial class Test_TKGame_TKHoatDong
+    public partial class Test_GameDT_TheNap_TImThe
     {
     }
 }

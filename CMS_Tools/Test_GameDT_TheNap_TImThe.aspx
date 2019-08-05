@@ -1,62 +1,37 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_TKGame_TKHoatDong.aspx.cs" Inherits="CMS_Tools.Test_TKGame_TKHoatDong" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GameDT_TheNap_TimThe.aspx.cs" Inherits="CMS_Tools.Test_GameDT_TheNap_TImThe" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .avatar_u{
-    height: 50px;
-    border: 1px solid #ddd;
-    border-radius: 50% !important;
-}
-.form-section {
-    margin: 20px 0;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #eee;
-    font-size: 12px;
-    color: #333;
-    text-transform: uppercase;
-}
-.btn-group-xs>.btn, .btn-xs{
-	font-size:11px !important;
-}
-.table td, .table th {
-    font-size: 12px !important;
-}
-.select2-container--bootstrap .select2-selection, .form-control, output{
-	font-size: 12px !important;
-}
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 50% !important;
+        }
+        .form-section {
+            margin: 20px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            font-size: 12px;
+            color: #333;
+            text-transform: uppercase;
+        }
+        .btn-group-xs>.btn, .btn-xs{
+	        font-size:11px !important;
+        }
+        .table td, .table th {
+            font-size: 12px !important;
+        }
+        .select2-container--bootstrap .select2-selection, .form-control, output{
+	        font-size: 12px !important;
+        }
 
-.control-label{
-	text-align:left !important;
-}
-
+        .control-label{
+	        text-align:left !important;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="PageBar" runat="server">
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="Home.aspx">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span><label id="PageBar_lblMenuName">Sub menu</label></span>
-            </li>
-        </ul>
-        <div class="page-toolbar">
-            <div class="btn-group pull-right">
-                <button id="btnAddAction" type="button" class="btn btn-fit-height blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false">
-                    Chức năng <i class="fa fa-angle-down"></i>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                    <li>
-                        <a href="javascript:;" id="btnAddNew"><i class="fa fa-plus"><!--  i--> Tạo KH Mới</i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageContent" runat="server">
     <div class="row">
@@ -64,7 +39,7 @@
             <div class="portlet box blue ">
                 <div class="portlet-title">
                     <div class="caption">
-                        Event Giftcode
+                        Thông tin player
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -99,8 +74,17 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-md-2 col-md-offset-6" style="margin-bottom: 10px;">
-                            <label class="control-label label-balance">Tìm kiếm</label>
+                        <div class="col-md-3" style="margin-bottom: 10px;">
+                        	<label class="control-label label-balance">Chọn lọc dữ liệu theo cột</label>
+                            <select id="filterColumn" class="form-control">
+                            </select>
+                        </div>
+                        <div class="col-md-3" style="margin-bottom: 10px;">
+                        	<label class="control-label label-balance">Nhập từ khóa tìm kiếm</label>
+                            <input type="text" class="form-control" id="txtFindData" placeholder="Search..." />
+                        </div>
+                        <div class="col-md-2" style="margin-bottom: 10px;">
+                        	<label class="control-label label-balance">Tìm kiếm</label>
                             <button id="btnFindData" type="button" class="btn green form-control"><i class="icon-magnifier"></i> Search</button>
                         </div>
                     </div>
@@ -109,15 +93,6 @@
                             aria-describedby="sample_1_info">
                             <thead>
                                 <tr role="row">
-                                    <td>AccountID</td>
-                                    <td>Username</td>
-                                    <td>UserType</td>
-                                    <td>DisplayName</td>
-                                    <td>Gold</td>
-                                    <td>CreatedTime</td>
-                                    <td>Tel</td>
-                                    <td>LockedGold</td>
-                                    <td style='width:200px'>Chỉnh sửa</td>
                                 </tr>
                             </thead>
                             <tbody role="alert" aria-live="polite" aria-relevant="all"></tbody>
@@ -128,6 +103,8 @@
             </div>
         </div>
     </div>
+  
+
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">
     <script src="assets/global/plugins/Base64JS.js"></script>
@@ -136,8 +113,7 @@
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
-            $('.page-toolbar').remove();
-
+            $('#btnAddAction').remove();
             $('#txtFindData').on('keyup', function (e) {
                 if (e.keyCode == 13) {
                     TableEditable.init();
@@ -215,6 +191,8 @@
                     var param = [];
                     param.push(_dateStart);//@0
                     param.push(_dateEnd);//@1
+                    param.push($('#filterColumn').val() != null ? $('#filterColumn').val() : 'ID');//@2
+                    param.push($('#txtFindData').val());//@3
                     $.ajax({
                         type: "POST",
                         url: "Apis/Menu.ashx",
@@ -230,37 +208,44 @@
                                 return;
                             }
                             if (data.status == 0) {
-                                var strHtmlColName = 
-                                    "<td>AccountID</td>" +
-                                    "<td>Username</td>" +
-                                    "<td>UserType</td>" +
-                                    "<td>DisplayName</td>" +
-                                    "<td>Gold</td>" +
-                                    "<td>CreatedTime</td>"+
-                                    "<td>Tel</td>"+
-                                    "<td>LockedGold</td>"+
-                                    "<td style='width:200px'>Chỉnh sửa</td>";
                                 if (oTable != null) {
                                     oTable.fnDestroy();
-                                    $('#tbl_datatable thead tr').html(strHtmlColName);
                                     $('#tbl_datatable tbody').html("");
-                                    if (data.data.length > 20) {
-                                        $('#tbl_datatable thead tr').html(strHtmlColName);
-                                    }
                                 }
-                                if (data.data.length > 20) {
-                                    $('#tbl_datatable tfoot tr').html(strHtmlColName);
-                                }
+
                                 if (_dataColumn == null) {
-                                    //_dataColumn = data.columnName;
-                                    //var selectCol = "<option value=''>Select...</option>";
+                                    _dataColumn = data.columnName;
+                                    var selectCol = "<option value=''>Select...</option>";
+                                    $('#tbl_datatable thead tr').html("");
                                     //$.each(_dataColumn, function (key, obj) {
-                                    //if (key < _dataColumn.length - 1)
-                                    // selectCol += "<option value='" + obj + "'>" + obj + "</option>";
+                                    //    $('#tbl_datatable thead tr').append("<th>" + obj + "</th>");
+                                    //	if (key < _dataColumn.length - 1)
+                                    //		selectCol += "<option value='" + obj + "'>" + obj + "</option>";
                                     //});
-                                    //$('#filterColumn').html(selectCol);
-                                    //if ($('#filterColumn').val() == "")
-                                    //$('#filterColumn').val("DateCreated");
+                                    var strHtmlColName = "";
+                                    $.each(_dataColumn, function (key, obj) {
+                                        strHtmlColName += "<td>" + obj + "</td>";
+                                        if (key < _dataColumn.length - 1)
+                                            selectCol += "<option value='" + obj + "'>" + obj + "</option>";
+                                    });
+                                    $('#tbl_datatable thead tr').append(strHtmlColName);
+                                    console.log(data.data.length);
+                                    if (data.data.length > 20) {
+                                        $('#tbl_datatable tfoot tr').append(strHtmlColName);
+                                    }
+                                    $('#filterColumn').html(selectCol);
+                                    if ($('#filterColumn').val() == "")
+                                        $('#filterColumn').val("ID");
+                                }
+                                else {
+                                    $('#tbl_datatable tfoot tr').empty();
+                                    if (data.data.length > 20) {
+                                        var strHtmlColName = "";
+                                        $.each(_dataColumn, function (key, obj) {
+                                            strHtmlColName += "<td>" + obj + "</td>";
+                                        });
+                                        $('#tbl_datatable tfoot tr').append(strHtmlColName);
+                                    }
                                 }
                                 _dataTable = [];
                                 for (var i = 0; i < data.data.length; i++) {
@@ -275,12 +260,13 @@
                                         "<td>" + obj[6] + "</td>" +
                                         "<td>" + obj[7] + "</td>" +
                                         "<td>" + obj[8] + "</td>" +
+                                        "<td>" + obj[9] + "</td>" +
+                                        "<td>" + obj[10] + "</td>" +
                                         "</tr>");
                                 }
-
-
                                 var colHiden = [];
                                 oTable = table.dataTable({
+                                    //"data": data.data,
                                     "lengthMenu": [
                                         [50, 100, 500, -1],
                                         [50, 100, 500, "All"]
@@ -297,13 +283,13 @@
                                         "targets": [0]
                                     }],
                                     "order": [
-                                        [5, "desc"]
+                                        [0, "desc"]
                                     ]
                                 });
 
-                                //an column
-                                var bVis = oTable.fnSettings().aoColumns[8].bVisible;
-                                oTable.fnSetColumnVis(8, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[10].bVisible;
+                                oTable.fnSetColumnVis(10, bVis ? false : true);
+
 
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
@@ -340,6 +326,10 @@
             };
         }();
 
+        function generate() {
+            $('#txtPassword').val(randomPassword(8));
+        }
+
         function formatMoney(num) {
             if (num > 0)
                 return num.toLocaleString('en-US');
@@ -353,5 +343,6 @@
         function replaceAll(str, find, replace) {
             return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
         }
+
 </script>
 </asp:Content>

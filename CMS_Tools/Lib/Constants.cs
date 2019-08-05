@@ -262,7 +262,9 @@ namespace CMS_Tools.Lib
         public enum REQUEST_GAME_ACOUNT_TYPE : int
         {
             LOCK_GAME_ACCOUNT = 1,
-            UNLOCK_GAME_ACCOUNT
+            UNLOCK_GAME_ACCOUNT,
+            LOCK_CHAT_GAME_ACCOUNT,
+            UNLOCK_CHAT_GAME_ACCOUNT
         }
 
         public enum WEBSOCKET_STATUS: int
