@@ -856,7 +856,7 @@ border-radius: 5px !important;
                                             "gold": parseInt(data.data[i][4]),
                                             "chartName": "Top Đại Gia"
                                         });
-                                        //if (i == 41) { break; }
+                                        if (i ==19) { break; }
                                     }
                                     console.log(chartData);
                                     //console.log(dataReport);

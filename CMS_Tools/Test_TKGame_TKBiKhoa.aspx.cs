@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace CMS_Tools
 {
-    public partial class Test_BaoCaoThongKe : System.Web.UI.Page
+    public partial class Test_TKGame_TKBiKhoa : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

@@ -350,8 +350,11 @@
     <Content Include="Test_LichSuGiaoDich.aspx" />
     <Content Include="Test_Naptien.aspx" />
     <Content Include="Test_Taikhoandaily.aspx" />
-    <Content Include="Test_TaiKhoanGame.aspx" />
-    <Content Include="Test_TheNapThongKe.aspx" />
+    <Content Include="Test_TKGame_LichSuKhoaTK.aspx" />
+    <Content Include="Test_TKGame_TimTK.aspx" />
+    <Content Include="Test_GameDT_TheNap_KhoThe.aspx" />
+    <Content Include="Test_TKGame_TKBiKhoa.aspx" />
+    <Content Include="Test_TKGame_TKHoatDong.aspx" />
     <Content Include="Tools.aspx" />
     <Content Include="VetifyResetPassword.aspx" />
     <Content Include="Web.config">
@@ -376,6 +379,9 @@
     </Compile>
     <Compile Include="Apis\API_Customer.ashx.cs">
       <DependentUpon>API_Customer.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Apis\API_GameAccount.ashx.cs">
+      <DependentUpon>API_GameAccount.ashx</DependentUpon>
     </Compile>
     <Compile Include="Apis\API_Order.ashx.cs">
       <DependentUpon>API_Order.ashx</DependentUpon>
@@ -664,19 +670,40 @@
     <Compile Include="Test_Taikhoandaily.aspx.designer.cs">
       <DependentUpon>Test_Taikhoandaily.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_TaiKhoanGame.aspx.cs">
-      <DependentUpon>Test_TaiKhoanGame.aspx</DependentUpon>
+    <Compile Include="Test_TKGame_LichSuKhoaTK.aspx.cs">
+      <DependentUpon>Test_TKGame_LichSuKhoaTK.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_TaiKhoanGame.aspx.designer.cs">
-      <DependentUpon>Test_TaiKhoanGame.aspx</DependentUpon>
+    <Compile Include="Test_TKGame_LichSuKhoaTK.aspx.designer.cs">
+      <DependentUpon>Test_TKGame_LichSuKhoaTK.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_TheNapThongKe.aspx.cs">
-      <DependentUpon>Test_TheNapThongKe.aspx</DependentUpon>
+    <Compile Include="Test_TKGame_TimTK.aspx.cs">
+      <DependentUpon>Test_TKGame_TimTK.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_TheNapThongKe.aspx.designer.cs">
-      <DependentUpon>Test_TheNapThongKe.aspx</DependentUpon>
+    <Compile Include="Test_TKGame_TimTK.aspx.designer.cs">
+      <DependentUpon>Test_TKGame_TimTK.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_KhoThe.aspx.cs">
+      <DependentUpon>Test_GameDT_TheNap_KhoThe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_KhoThe.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_TheNap_KhoThe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_TKGame_TKBiKhoa.aspx.cs">
+      <DependentUpon>Test_TKGame_TKBiKhoa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_TKGame_TKBiKhoa.aspx.designer.cs">
+      <DependentUpon>Test_TKGame_TKBiKhoa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_TKGame_TKHoatDong.aspx.cs">
+      <DependentUpon>Test_TKGame_TKHoatDong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_TKGame_TKHoatDong.aspx.designer.cs">
+      <DependentUpon>Test_TKGame_TKHoatDong.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tools.aspx.cs">
       <DependentUpon>Tools.aspx</DependentUpon>
@@ -738,6 +765,7 @@
     <Content Include="css\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="Apis\Captcha.ashx" />
     <Content Include="Apis\API_Agency.ashx" />
+    <Content Include="Apis\API_GameAccount.ashx" />
     <None Include="packages.config" />
     <Content Include="Site1.Master" />
     <Content Include="Server\ServerHandler.ashx" />

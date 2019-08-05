@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_TaiKhoanGame.aspx.cs" Inherits="CMS_Tools.Test_TaiKhoanGame" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_TKGame_TimTK.aspx.cs" Inherits="CMS_Tools.Test_TaiKhoanGame" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .avatar_u{
@@ -15,7 +15,7 @@
             text-transform: uppercase;
         }
         .btn-group-xs>.btn, .btn-xs{
-	        font-size:11px !important;
+	        font-size:11x !important;
         }
         .table td, .table th {
             font-size: 12px !important;
@@ -96,7 +96,7 @@
                                 </tr>
                             </thead>
                             <tbody role="alert" aria-live="polite" aria-relevant="all"></tbody>
-                            <tfoot><tr role="row"></tr></tfoot>
+                        	<tfoot><tr role="row"></tr></tfoot>
                         </table>
                     </div>
                 </div>
@@ -222,7 +222,7 @@
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
-          	$('#btnAddAction').remove();
+            $('#btnAddAction').remove();
             $('#btnAddNew').html("<i class='fa fa-plus'></  i> Tạo KH Mới");
             $('#txtFindData').on('keyup', function (e) {
                 if (e.keyCode == 13) {
@@ -320,7 +320,9 @@
                             if (data.status == 0) {
                                 if (oTable != null) {
                                     oTable.fnDestroy();
+                                    $('#tbl_datatable tbody').html("");
                                 }
+
                                 if (_dataColumn == null) {
                                     _dataColumn = data.columnName;
                                     var selectCol = "<option value=''>Select...</option>";
@@ -356,9 +358,27 @@
                                     }
                                 }
                                 _dataTable = [];
+                                for (var i = 0; i < data.data.length; i++) {
+                                    var obj = data.data[i];
+                                    var linkLock = "<a class='btn btn-xs red btn-circle btn-outline' onclick='LockAcountGame(\"" + obj[0] +"\");'> Khóa</a>";
+                                    if (obj[8] == "True")
+                                        linkLock = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnlockAcountGame(\"" + obj[0] + "\");'> Mở khóa</a>";
+                                    $('#tbl_datatable tbody').append("<tr>" +
+                                        "<td>" + obj[0] + "</td>" +
+                                        "<td>" + obj[1] + "</td>" +
+                                        "<td>" + obj[2] + "</td>" +
+                                        "<td>" + obj[3] + "</td>" +
+                                        "<td>" + obj[4] + "</td>" +
+                                        "<td>" + obj[5] + "</td>" +
+                                        "<td>" + obj[6] + "</td>" +
+                                        "<td>" + obj[7] + "</td>" +
+                                        "<td>" + obj[8] + "</td>" +
+                                        "<td>" + linkLock +"</td>" +
+                                        "</tr>");
+                                }
                                 var colHiden = [];
                                 oTable = table.dataTable({
-                                  	"data": data.data,
+                                    //"data": data.data,
                                     "lengthMenu": [
                                         [50, 100, 500, -1],
                                         [50, 100, 500, "All"]
@@ -378,6 +398,10 @@
                                         [0, "desc"]
                                     ]
                                 });
+
+                                var bVis = oTable.fnSettings().aoColumns[8].bVisible;
+                                oTable.fnSetColumnVis(8, bVis ? false : true);
+
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
@@ -430,5 +454,65 @@
         function replaceAll(str, find, replace) {
             return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
         }
+
+        function LockAcountGame(accountID){
+
+            bootbox.prompt({
+                title: "Ghi chú nội dung khóa!",
+                centerVertical: true,
+                callback: function (result) {
+                    if (result === null) {
+                        // Prompt dismissed
+                    } else {
+                        // result has a value
+                        $('.divLoading').fadeIn();
+                        var json = {
+                            "AccountID": accountID,
+                            "Reason": result
+                        }
+                        POST_DATA("Apis/API_GameAccount.ashx", {
+                            type: 1,
+                            json: JSON.stringify(json)
+                        }, function (res) {
+                                if (res.status == 1)
+                                    TableEditable.init();
+                                else
+                                    bootbox.alert(res.msg);
+                            $(".divLoading").fadeOut(500);
+
+                        });
+                    }
+
+                }
+            });
+            
+        } 
+
+        function UnlockAcountGame(accountID) {
+            bootbox.confirm("Xác nhận mở khóa tài khoản?", function (result) {
+                if (result) {
+                    $('.divLoading').fadeIn();
+                    var json = {
+                        "AccountID": accountID
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "Apis/API_GameAccount.ashx",
+                        data: {
+                            json: JSON.stringify(json),
+                            type: 2
+                        },
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.status == 1)
+                                TableEditable.init();
+                            else
+                                bootbox.alert(res.msg);
+                            $(".divLoading").fadeOut(500);
+                        }
+                    });
+                }
+            });
+        } 
 </script>
 </asp:Content>

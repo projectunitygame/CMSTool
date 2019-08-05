@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_TheNapThongKe.aspx.cs" Inherits="CMS_Tools.Test_TheNapThongKe" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GameDT_TheNap_KhoThe.aspx.cs" Inherits="CMS_Tools.Test_TheNapThongKe" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .avatar_u{
@@ -39,7 +39,7 @@
             <div class="portlet box blue ">
                 <div class="portlet-title">
                     <div class="caption">
-                        Lịch sử giao dịch
+                        Quản lý kho thẻ
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -64,7 +64,7 @@
                         </div>
                         <span>Đang xử lý...</span>
                     </div>
-                    <div class="row">
+                    <div class="row" style="display:none">
                         <div class="col-md-4" style="margin-bottom: 10px;">
                             <label class="control-label label-balance">Chọn ngày kết xuất dữ liệu</label>
                             <div class="input-group" id="dateRangeEvent">
@@ -219,6 +219,7 @@
                             if (data.status == 0) {
                                 if (oTable != null) {
                                     oTable.fnDestroy();
+                                    $('#tbl_datatable tbody').html("");
                                 }
                                 _dataColumn = data.columnName;
                                 if (colFilter == null) {
@@ -242,9 +243,36 @@
                                         $('#tbl_datatable tfoot tr').append(strHtmlColName);
                                     }
                                 }
+
+                                for (var i = 0; i < data.data.length; i++) {
+                                    var obj = data.data[i];
+                                    var typeCard = "";
+                                    switch (obj[1]) {
+                                        case "1":
+                                            typeCard = 'Viettel'
+                                            break;
+                                        case "2":
+                                            typeCard = 'Mobiphone'
+                                            break;
+                                        case "3":
+                                            typeCard = 'Vinaphone'
+                                            break;
+                                        default:
+                                            typeCard = 'Chưa phân loại'
+                                            break;
+                                    }
+
+                                    $('#tbl_datatable tbody').append("<tr>" +
+                                        "<td>" + obj[0] + "</td>" +
+                                        "<td>" + typeCard + "</td>" +
+                                        "<td>" + obj[2] + "</td>" +
+                                        "<td>" + obj[3] + "</td>" +
+                                        "</tr>");
+                                }
+
                                 var colHiden = [];
                                 oTable = table.dataTable({
-                                    "data": data.data,
+                                    //"data": data.data,
                                     "lengthMenu": [
                                         [50, 100, 500, -1],
                                         [50, 100, 500, "All"]
@@ -261,9 +289,13 @@
                                         "targets": [0]
                                     }],
                                     "order": [
-                                        [0, "desc"]
+                                        [1, "asc"]
                                     ]
                                 });
+
+                                var bVis = oTable.fnSettings().aoColumns[3].bVisible;
+                                oTable.fnSetColumnVis(3, bVis ? false : true);
+
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown

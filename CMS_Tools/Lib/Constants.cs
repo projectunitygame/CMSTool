@@ -168,7 +168,8 @@ namespace CMS_Tools.Lib
             CAPTCHA_NULL,
             CAPTCHA_ERROR,
             INFO_CREATE_AGENCY_VALI,
-            AMOUNT_WRONG
+            AMOUNT_WRONG,
+            TRYPARSE_ERROR
         }
 
         public enum REQUEST_TYPE: int
@@ -254,7 +255,14 @@ namespace CMS_Tools.Lib
             UNLOCK_AGENCY,
             AUTO_COMPLETE_SEARCH,
             BUY_CASH,
-            VERIFIRE_CAPTCHA
+            VERIFIRE_CAPTCHA,
+            CHANGE_DISPLAY_AGENCY
+        }
+
+        public enum REQUEST_GAME_ACOUNT_TYPE : int
+        {
+            LOCK_GAME_ACCOUNT = 1,
+            UNLOCK_GAME_ACCOUNT
         }
 
         public enum WEBSOCKET_STATUS: int
