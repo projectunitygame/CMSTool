@@ -50,6 +50,15 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_GAME_ACOUNT_TYPE.UNLOCK_CHAT_GAME_ACCOUNT:
                         UNLOCK_CHAT_GAME_ACCOUNT(context);
                         break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.CREATE_SCHEME_NOTIFICATION:
+                        CREATE_SCHEME_NOTIFICATION(context);
+                        break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.UPDATE_SCHEME_NOTIFICATION:
+                        UPDATE_SCHEME_NOTIFICATION(context);
+                        break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.DELETE_SCHEME_NOTIFICATION:
+                        DELETE_SCHEME_NOTIFICATION(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -65,6 +74,184 @@ namespace CMS_Tools.Apis
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
         }
+
+        private void DELETE_SCHEME_NOTIFICATION(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["DELETE_SCHEME_NOTIFICATION"] == null || (DateTime.Now - (DateTime)context.Session["DELETE_SCHEME_NOTIFICATION"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<DeleteSchemeNotificationGameEnity>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<DeleteSchemeNotificationGameEnity>(json);
+                        if (jsonData != null)
+                        {
+                            //jsonData.Author = accountInfo.AccountId;
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/DeleteSchemeNotificationGame");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR DELETE_SCHEME_NOTIFICATION: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["DELETE_SCHEME_NOTIFICATION"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+        private void UPDATE_SCHEME_NOTIFICATION(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["UPDATE_SCHEME_NOTIFICATION"] == null || (DateTime.Now - (DateTime)context.Session["UPDATE_SCHEME_NOTIFICATION"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<UpdateSchemeNotificationGameEnity>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<UpdateSchemeNotificationGameEnity>(json);
+                        if (jsonData != null)
+                        {
+                            //jsonData.Author = accountInfo.AccountId;
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/UpdateSchemeNotificationGame");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR UPDATE_SCHEME_NOTIFICATION: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["UPDATE_SCHEME_NOTIFICATION"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+        private void CREATE_SCHEME_NOTIFICATION(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["CREATE_SCHEME_NOTIFICATION"] == null || (DateTime.Now - (DateTime)context.Session["CREATE_SCHEME_NOTIFICATION"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<CreateSchemeNotificationGameEnity>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<CreateSchemeNotificationGameEnity>(json);
+                        if (jsonData != null)
+                        {
+                            //jsonData.Author = accountInfo.AccountId;
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/CreateSchemeNotificationGame");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR CREATE_SCHEME_NOTIFICATION: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["CREATE_SCHEME_NOTIFICATION"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
 
         /// <summary>
         /// Mở khóa chat game
@@ -353,6 +540,30 @@ namespace CMS_Tools.Apis
             public long AccountID;
             public string Reason;
             public int Author;
+        }
+
+        public class CreateSchemeNotificationGameEnity
+        {
+            public string Title;
+            public string Message;
+            public string Platform;
+            public DateTime DateSend;
+            public string Loop;
+        }
+
+        public class UpdateSchemeNotificationGameEnity
+        {
+            public int Id;
+            public string Title;
+            public string Message;
+            public string Platform;
+            public DateTime DateSend;
+            public string Loop;
+        }
+
+        public class DeleteSchemeNotificationGameEnity
+        {
+            public int Id;
         }
         #endregion
     }

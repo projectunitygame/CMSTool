@@ -264,7 +264,12 @@ namespace CMS_Tools.Lib
             LOCK_GAME_ACCOUNT = 1,
             UNLOCK_GAME_ACCOUNT,
             LOCK_CHAT_GAME_ACCOUNT,
-            UNLOCK_CHAT_GAME_ACCOUNT
+            UNLOCK_CHAT_GAME_ACCOUNT,
+            CREATE_SCHEME_NOTIFICATION,
+            UPDATE_SCHEME_NOTIFICATION,
+            DELETE_SCHEME_NOTIFICATION
+            
+            
         }
 
         public enum WEBSOCKET_STATUS: int
