@@ -169,7 +169,8 @@ namespace CMS_Tools.Lib
             CAPTCHA_ERROR,
             INFO_CREATE_AGENCY_VALI,
             AMOUNT_WRONG,
-            TRYPARSE_ERROR
+            TRYPARSE_ERROR,
+            NOTIFICATION_VALI
         }
 
         public enum REQUEST_TYPE: int

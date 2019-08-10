@@ -158,6 +158,13 @@ namespace CMS_Tools.Apis
                         var jsonData = JsonConvert.DeserializeObject<UpdateSchemeNotificationGameEnity>(json);
                         if (jsonData != null)
                         {
+                            if (string.IsNullOrEmpty(jsonData.Message))
+                            {
+                                result.status = Constants.NUMBER_CODE.NOTIFICATION_VALI;
+                                result.msg = "Nội dung thông báo không được để trống";
+                                context.Response.Write(JsonConvert.SerializeObject(result));
+                                return;
+                            }
                             //jsonData.Author = accountInfo.AccountId;
                             //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
 
@@ -217,6 +224,14 @@ namespace CMS_Tools.Apis
                         var jsonData = JsonConvert.DeserializeObject<CreateSchemeNotificationGameEnity>(json);
                         if (jsonData != null)
                         {
+
+                            if (string.IsNullOrEmpty(jsonData.Message))
+                            {
+                                result.status = Constants.NUMBER_CODE.NOTIFICATION_VALI;
+                                result.msg = "Nội dung thông báo không được để trống";
+                                context.Response.Write(JsonConvert.SerializeObject(result));
+                                return;
+                            }
                             //jsonData.Author = accountInfo.AccountId;
                             //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
 
@@ -544,21 +559,33 @@ namespace CMS_Tools.Apis
 
         public class CreateSchemeNotificationGameEnity
         {
+            public CreateSchemeNotificationGameEnity()
+            {
+                Title = "";
+                Platform = "ALL";
+            }
             public string Title;
             public string Message;
             public string Platform;
             public DateTime DateSend;
             public string Loop;
+            public string Status;
         }
 
         public class UpdateSchemeNotificationGameEnity
         {
+            public UpdateSchemeNotificationGameEnity()
+            {
+                Title = "";
+                Platform = "ALL";
+            }
             public int Id;
             public string Title;
             public string Message;
             public string Platform;
             public DateTime DateSend;
             public string Loop;
+            public string Status;
         }
 
         public class DeleteSchemeNotificationGameEnity
