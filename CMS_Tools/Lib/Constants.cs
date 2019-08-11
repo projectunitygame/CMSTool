@@ -170,7 +170,9 @@ namespace CMS_Tools.Lib
             INFO_CREATE_AGENCY_VALI,
             AMOUNT_WRONG,
             TRYPARSE_ERROR,
-            NOTIFICATION_VALI
+            LOCK_ACCOUNT_GAME_VALI,
+            NOTIFICATION_VALI,
+            EVENT_GIFTCODE_VALI
         }
 
         public enum REQUEST_TYPE: int
@@ -268,9 +270,11 @@ namespace CMS_Tools.Lib
             UNLOCK_CHAT_GAME_ACCOUNT,
             CREATE_SCHEME_NOTIFICATION,
             UPDATE_SCHEME_NOTIFICATION,
-            DELETE_SCHEME_NOTIFICATION
-            
-            
+            DELETE_SCHEME_NOTIFICATION,
+            CREATE_EVENT_GIFTCODE,
+            UPDATE_EVENT_GIFTCODE,
+            DELETE_EVENT_GIFTCODE,
+            EXCEPT_FUND_GAME
         }
 
         public enum WEBSOCKET_STATUS: int

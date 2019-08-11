@@ -35,38 +35,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="PageBar" runat="server">
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="Home.aspx">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span><label id="PageBar_lblMenuName">Tài khoản đại lý</label></span>
-            </li>
-        </ul>
-        <div class="page-toolbar">
-            <div class="btn-group pull-right">
-                <button id="btnAddAction" type="button" class="btn btn-fit-height blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false">
-                    Chức năng <i class="fa fa-angle-down"></i>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                    <li>
-                        <a href="javascript:;" id="btnAddNew"><i class="fa fa-plus"><!--  i--> Tạo KH Mới</i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="PageContent" runat="server">
     <div class="row">
         <div class="col-md-12">
             <div class="portlet box blue ">
                 <div class="portlet-title">
                     <div class="caption">
-                        Danh sách thống báo
+                        Danh sách thông báo
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -344,7 +318,6 @@
             </div>
         </div>
     </div>  
-
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">
     <script src="assets/global/plugins/Datetime/moment.min.js"></script>     
@@ -468,13 +441,13 @@
                                 _dataTable = [];
                                 for (var i = 0; i < data.data.length; i++) {
                                     var obj = data.data[i];
-                                    var func = 'SetUpdateNotification(' + obj[0] + ',"' + obj[2] + '","' + obj[4] + '","' + obj[7] + '","' + obj[5] +'");';
-                                    var updateNoti = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + func+"'> Chỉnh sửa</a>";
+                                    var func = 'SetUpdateNotification(' + obj[0] + ',"' + obj[2] + '","' + obj[4] + '","' + obj[7] + '","' + obj[5] + '");';
+                                    var updateNoti = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + func + "'> Chỉnh sửa</a>";
                                     var deleteNoti = "<a class='btn btn-xs red btn-circle btn-outline' onclick='DeleteNotification(\"" + obj[0] + "\");'> Xóa</a>";
                                     var loop = "";
                                     switch (obj[7]) {
                                         case "":
-                                            loop= "Chỉ một lần"
+                                            loop = "Chỉ một lần"
                                             break;
                                         case "MINUTE":
                                             loop = "Mỗi phút"
@@ -490,7 +463,7 @@
                                             break;
                                         default:
                                             break;
-                                    }       
+                                    }
                                     var stt = "";
                                     switch (obj[5]) {
                                         case "0":
@@ -597,7 +570,7 @@
         function replaceAll(str, find, replace) {
             return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
         }
-        function SetUpdateNotification(ID, Message , DateSend, Loop, Status) {
+        function SetUpdateNotification(ID, Message, DateSend, Loop, Status) {
             $('#txtID_Update').val(ID);
             $('#txtMessage2').val(Message);
             $('#txtDateSend2').val(DateSend);
@@ -698,7 +671,7 @@
                         }
                     })
                 }
-                   
+
                 $(".divLoading").fadeOut(500);
 
             });

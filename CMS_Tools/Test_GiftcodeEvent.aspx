@@ -121,13 +121,6 @@
                             aria-describedby="sample_1_info">
                             <thead>
                                 <tr role="row">
-                                    <td>EventName</td>
-                                    <td>Total</td>
-                                    <td>Status</td>
-                                    <td>EventID</td>
-                                    <td>CreateDay</td>
-                                    <td>Expired</td>
-                                    <td style='width:200px'>Chỉnh sửa</td>
                                 </tr>
                             </thead>
                             <tbody role="alert" aria-live="polite" aria-relevant="all"></tbody>
@@ -138,18 +131,17 @@
             </div>
         </div>
     </div>
-    <!-----From update customer------>
-    <div id="modal_customer" class="modal fade" data-backdrop="static" data-keyboard="false" style="display: none;">
+    <!-----From create giftcode------>
+    <div id="modal_Create_Giftcode" class="modal fade" data-backdrop="static" data-keyboard="false" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="javascript:;" id="form_Agency" class="form-horizontal" novalidate="novalidate">
-                    <input type="hidden" id="customerID"/>
+                <form action="javascript:;" id="form_Create_Giftcode" class="form-horizontal" novalidate="novalidate">
                     <div class="modal-body">
                     	<div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             </button>
-                            <h4 class="modal-title" id="title_task">
-                                <i class="fa fa-edit"></i> QUẢN LÝ THÔNG TIN KHÁCH HÀNG</h4>
+                            <h4 class="modal-title">
+                                <i class="fa fa-edit"></i> TẠO GIFTCODE MỚI</h4>
                         </div>
                         <div class="form-body">
                             <div class="alert alert-danger display-hide">
@@ -164,12 +156,27 @@
                             	<div class="col-xs-10 col-xs-offset-1">
                                 	<div class="form-group  margin-top-20">
                                         <label class="control-label col-md-4">
-                                            Mã đại lý: <span class="required" aria-required="true">* </span>
+                                            Tên Event: <span class="required" aria-required="true">* </span>
                                         </label>
                                         <div class="col-md-8">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
-                                                <input id="txtAgencyCode" type="text" class="form-control" name="AgencyCode" />
+                                                <input id="txtName" type="text" class="form-control" name="Name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=row>
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group  margin-top-20">
+                                        <label class="control-label col-md-4">
+                                            Tiền tố: <span class="required" aria-required="true">* </span>
+                                        </label>
+                                        <div class="col-md-8">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input id="txtPrefix" type="text" class="form-control" name="Prefix" />
                                             </div>
                                         </div>
                                     </div>
@@ -179,30 +186,12 @@
                             	<div class="col-xs-10 col-xs-offset-1">
                                 	<div class="form-group">
                                         <label class="control-label col-md-4">
-                                            Mật khẩu: <span class="required" aria-required="true">* </span>
-                                        </label>
-                                        <div class="col-md-5">
-                                            <div class="input-icon right">
-                                                <i class="fa"></i>
-                                                <input id="txtPassword" type="text" class="form-control" name="password" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <a class="btn btn-primary" onclick="javascript:generate()"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Tạo mới</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-xs-10 col-xs-offset-1">
-                                	<div class="form-group">
-                                        <label class="control-label col-md-4">
-                                            Email:
+                                            Giá trị: <span class="required" aria-required="true">* </span>
                                         </label>
                                         <div class="col-md-8">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
-                                                <input id="txtEmail" type="text" class="form-control" name="email"/>
+                                                <input type="text" style="width:100%;" id="txtPrice" class="form-control" name="Price" />
                                             </div>
                                         </div>
                                     </div>
@@ -212,66 +201,83 @@
                             	<div class="col-xs-10 col-xs-offset-1">
                                 	<div class="form-group">
                                         <label class="control-label col-md-4">
-                                            Số điện thoại: <span class="required" aria-required="true">* </span>
+                                            Số lượng: <span class="required" aria-required="true">* </span>
                                         </label>
                                         <div class="col-md-8">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
-                                                <input type="text" style="width:100%;" id="txtPhone" class="form-control" name="Phone" />
+                                                <input type="text" style="width:100%;" id="txtQty" class="form-control" name="Qty" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class=row>
                             	<div class="col-xs-10 col-xs-offset-1">
-                                	<div class="form-group">
+                                	<div class="form-group  margin-top-20">
                                         <label class="control-label col-md-4">
-                                            Tên đại lý: <span class="required" aria-required="true">* </span>
-                                        </label>
+                                            Chọn ngày: <span class="required" aria-required="true">* </span>
+                                        </label> 
                                         <div class="col-md-8">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
-                                                <input type="text" style="width:100%;" id="txtAgencyName" class="form-control" name="AgencyName" />
+                                                <input type="text" id="txtExpired" name="Expired" class="form-control" value="" />
+                                                <span class="control-label">Định dạng Tháng/Ngày/Năm</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                            	<div class="col-xs-10 col-xs-offset-1">
-                                	<div class="form-group">
-                                        <label class="control-label col-md-4">
-                                            Thông tin đại lý: <span class="required" aria-required="true">* </span>
-                                        </label>
-                                        <div class="col-md-8">
-                                            <div class="input-icon right">
-                                                <i class="fa"></i>
-                                                <input type="text" style="width:100%;" id="txtAgencyInfo" class="form-control" name="AgencyInfo" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-xs-10 col-xs-offset-1">
-                                	<div class="form-group">
-                                        <label class="control-label col-md-4">
-                                            Hiển thị thông tin:
-                                        </label>
-                                        <div class="col-md-8">
-                                            <div class="input-icon right">
-                                                <i class="fa"></i>
-                                                <select style="width:100%;" id="slDisplayInfo" class="form-control" name="DisplayInfo" >
-                                                    <option value="flase">Không hiển thị</option>
-                                                    <option value="true">Hiển thị</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn dark btn-outline">Hủy</button>
+                        <button type="submit" class="btn green">Đăng Ký</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-----From update giftcode------>
+    <div id="modal_Update_Giftcode" class="modal fade" data-backdrop="static" data-keyboard="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="javascript:;" id="form_Update_Giftcode" class="form-horizontal" novalidate="novalidate">
+                    <div class="modal-body">
+                    	<div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            </button>
+                            <h4 class="modal-title">
+                                <i class="fa fa-edit"></i> CẬP NHẬT NGÀY HẾT HẠN GIFTCODE</h4>
                         </div>
+                        <div class="form-body">
+                            <div class="alert alert-danger2 display-hide">
+                                <button class="close" data-close="alert"></button>
+                                Vui lòng kiểm tra và nhập đầy đủ thông tin!
+                            </div>
+                            <div class="alert alert-success2 display-hide">
+                                <button class="close" data-close="alert"></button>
+                                Nhập thông tin hợp lệ
+                            </div>
+                            <input id="ID_Giftcode" type="hidden"/>
+                            <div class=row>
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group  margin-top-20">
+                                        <label class="control-label col-md-4">
+                                            Chọn ngày: <span class="required" aria-required="true">* </span>
+                                        </label> 
+                                        <div class="col-md-8">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" id="txtExpired2" name="Expired" class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>  
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn dark btn-outline">Hủy</button>
@@ -288,14 +294,46 @@
     <script src="assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
     <script src="assets/global/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="assets/global/plugins/datatables/DT_bootstrap.js"></script>
+    <script src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script src="assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
     <script type="text/javascript">
         var colFilter = null;
+        $(function () {
+            $('#txtExpired').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                format: 'MM/DD/YYYY',
+                startDate: moment().subtract('day', 0).format('MM/DD/YYYY'),
+                minDate: moment().subtract('day', 0).format('MM/DD/YYYY'),
+                maxYear: parseInt(moment().format('YYYY'), 10)
+            }, function (start, end, label) {
+                //var years = moment().diff(start, 'years');
+                //alert("You are " + years + " years old!");
+                });
+            $('#txtExpired2').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                format: 'MM/DD/YYYY',
+                startDate: moment().subtract('day', 0).format('MM/DD/YYYY'),
+                minDate: moment().subtract('day', 0).format('MM/DD/YYYY'),
+                maxYear: parseInt(moment().format('YYYY'), 10)
+            }, function (start, end, label) {
+                //var years = moment().diff(start, 'years');
+                //alert("You are " + years + " years old!");
+            });
+        });
+
+        function ResetForm() {
+            $('#form_Create_Giftcode').trigger('reset');
+        }
         jQuery(document).ready(function () {
-            $('#btnAddNew').html("<i class='fa fa-plus'></  i> Tạo KH Mới");
+            $('#btnAddNew').html("<i class='fa fa-plus'></  i> Tạo GiftCode Mới");
             FormValidation.init();
+            FormValidation2.init();
             $('#btnAddNew').click(function () {
                 ResetForm();
-                $('#modal_customer').modal('show');
+                $('#modal_Create_Giftcode').modal('show');
+                $('#txtExpired').val(moment().subtract('day', 0).format('MM/DD/YYYY'))
             });
             $('#txtFindData').on('keyup', function (e) {
                 if (e.keyCode == 13) {
@@ -391,38 +429,37 @@
                                 return;
                             }
                             if (data.status == 0) {
-                                var strHtmlColName = "<td>EventName</td>" +
-                                    "<td>Total</td>" +
-                                    "<td>Status</td>" +
-                                    "<td>EventID</td>" +
-                                    "<td>CreateDay</td>" +
-                                    "<td>Expired</td>"+
-                                    "<td style='width:200px'>Chỉnh sửa</td>";
                                 if (oTable != null) {
                                     oTable.fnDestroy();
-                                    $('#tbl_datatable thead tr').html(strHtmlColName);
                                     $('#tbl_datatable tbody').html("");
+                                }
+                                _dataColumn = data.columnName;
+                                if (colFilter == null) {
+                                    $('#tbl_datatable thead tr').html("");
+                                    colFilter = _dataColumn;
+                                    var strHtmlColName = "";
+                                    $.each(_dataColumn, function (key, obj) {
+                                        strHtmlColName += "<td>" + obj + "</td>";
+                                    });
+                                    $('#tbl_datatable thead tr').append(strHtmlColName);
                                     if (data.data.length > 20) {
-                                        $('#tbl_datatable thead tr').html(strHtmlColName);
+                                        $('#tbl_datatable tfoot tr').append(strHtmlColName);
                                     }
-                                }
-                                if (data.data.length > 20) {
-                                    $('#tbl_datatable tfoot tr').html(strHtmlColName);
-                                }
-                                if (_dataColumn == null) {
-                                    //_dataColumn = data.columnName;
-                                    //var selectCol = "<option value=''>Select...</option>";
-                                    //$.each(_dataColumn, function (key, obj) {
-                                    //if (key < _dataColumn.length - 1)
-                                    // selectCol += "<option value='" + obj + "'>" + obj + "</option>";
-                                    //});
-                                    //$('#filterColumn').html(selectCol);
-                                    //if ($('#filterColumn').val() == "")
-                                    //$('#filterColumn').val("DateCreated");
+                                } else {
+                                    $('#tbl_datatable tfoot tr').empty();
+                                    if (data.data.length > 20) {
+                                        var strHtmlColName = "";
+                                        $.each(_dataColumn, function (key, obj) {
+                                            strHtmlColName += "<td>" + obj + "</td>";
+                                        });
+                                        $('#tbl_datatable tfoot tr').append(strHtmlColName);
+                                    }
                                 }
                                 _dataTable = [];
                                 for (var i = 0; i < data.data.length; i++) {
                                     var obj = data.data[i];
+                                    var func = 'SetUpdateGiftcode(' + obj[0] + ',"' + obj[3] + '");';
+                                    var updateGiftcode = "<a class='btn btn-xs green btn-circle btn-outline' onclick='" + func + "' >Sửa ngày hết hạn</a>";
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
@@ -430,7 +467,13 @@
                                         "<td>" + obj[3] + "</td>" +
                                         "<td>" + obj[4] + "</td>" +
                                         "<td>" + obj[5] + "</td>" +
-                                        "<td><a class='btn btn-xs blue btn-circle btn-outline' href='Page.aspx?m=66&eventid=" + obj[3] + "' target='_blank'>Xem chi tiết</a></td>" +
+                                        "<td>" + obj[6] + "</td>" +
+                                        "<td>" + obj[7] + "</td>" +
+                                        "<td>" +
+                                        "<a class='btn btn-xs blue btn-circle btn-outline' href='Page.aspx?m=66&eventid=" + obj[0] + "' target='_blank'>Xem chi tiết</a>" +
+                                        updateGiftcode +
+                                        "<a class='btn btn-xs red btn-circle btn-outline' onclick='javascript:DeleteGiftcode(`" + obj[0] + "`);' >Xóa Giftcode</a>" +
+                                        "</td>" +
                                         "</tr>");
                                 }
 
@@ -453,13 +496,13 @@
                                         "targets": [0]
                                     }],
                                     "order": [
-                                        [5, "desc"]
+                                        [0, "desc"]
                                     ]
                                 });
 
                                 //an column
-                                //var bVis = oTable.fnSettings().aoColumns[1].bVisible;
-                                //oTable.fnSetColumnVis(1, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[7].bVisible;
+                                oTable.fnSetColumnVis(7, bVis ? false : true);
 
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
@@ -498,7 +541,7 @@
 
         var FormValidation = function () {
             var r = function () {
-                var e = $("#form_Agency"),
+                var e = $("#form_Create_Giftcode"),
                     r = $(".alert-danger", e),
                     i = $(".alert-success", e);
                 e.validate({
@@ -507,35 +550,26 @@
                     focusInvalid: !1,
                     ignore: "",
                     rules: {
-                        AgencyCode: {
-                            minlength: 6,
-                            maxlength: 10,
-                            required: !0
+                        Name: {
+                            required: !0,
+                            maxlength: 200
                         },
-                        password: {
-                            minlength: 6,
-                            maxlength: 20,
-                            required: !0
+                        Prefix: {
+                            required: !0,
+                            maxlength: 5
                         },
-                        email: {
-                            maxlength: 80,
+                        Price: {
+                            required: !0,
+                            number: !0
                         },
-                        Phone: {
-                            maxlength: 10,
-                            minlength: 10,
-                            number: !0,
-                            required: !0
+                        Qty: {
+                            required: !0,
+                            number: !0
+                            
                         },
-                        AgencyName: {
-                            minlength: 6,
-                            maxlength: 150,
-                            required: !0
+                        Expired: {
+                            required: !0, 
                         },
-                        AgencyInfo: {
-                            minlength: 6,
-                            maxlength: 250,
-                            required: !0
-                        }
                         //province: {
                         //    required: !0
                         //},
@@ -571,7 +605,7 @@
                     submitHandler: function (e) {
                         //i.show(), 
                         r.hide(),
-                            SubmitForm();
+                            CreateGiftcode();
                     }
                 })
             }
@@ -581,6 +615,155 @@
                 }
             }
         }();
+
+        var FormValidation2 = function () {
+            var r = function () {
+                var e = $("#form_Update_Giftcode"),
+                    r = $(".alert-danger2", e),
+                    i = $(".alert-success2", e);
+                e.validate({
+                    errorElement: "span",
+                    errorClass: "help-block help-block-error",
+                    focusInvalid: !1,
+                    ignore: "",
+                    rules: {
+                        Expired: {
+                            required: !0,
+                        }
+                    },
+                    invalidHandler: function (e, t) {
+                        i.hide(), r.show(), App.scrollTo(r, -200)
+                    },
+                    errorPlacement: function (e, r) {
+                        var i = $(r).parent(".input-icon").children("i");
+                        i.removeClass("fa-check").addClass("fa-warning"), i.attr("data-original-title", e.text()).tooltip({
+                            container: "body"
+                        })
+                    },
+                    highlight: function (e) {
+                        $(e).closest(".form-group").removeClass("has-success").addClass("has-error")
+                    },
+                    unhighlight: function (e) { },
+                    success: function (e, r) {
+                        var i = $(r).parent(".input-icon").children("i");
+                        $(r).closest(".form-group").removeClass("has-error").addClass("has-success"), i.removeClass("fa-warning").addClass("fa-check");
+                    },
+                    submitHandler: function (e) {
+                        //i.show(), 
+                        r.hide(),
+                            UpdateGiftcode();
+                    }
+                })
+            }
+            return {
+                init: function () {
+                    r()
+                }
+            }
+        }();
+
+        function SetUpdateGiftcode(ID, Expired) {
+            $('#ID_Giftcode').val(ID);
+            $('#txtExpired2').val(Expired);
+            $('#modal_Update_Giftcode').modal('show');
+        }
+        function UpdateGiftcode(ID) {
+            var json = {
+                "ID": $('#ID_Giftcode').val(),
+                "Expired": $('#txtExpired2').val()
+            }
+            POST_DATA("Apis/API_GameAccount.ashx", {
+                type: 9,
+                json: JSON.stringify(json)
+            }, function (res) {
+                if (res.status == 1) {
+                    bootbox.alert({
+                        title: "Thông báo",
+                        message: res.msg,
+                        callback: function () {
+                            $('#modal_Update_Giftcode').modal('hide');
+                            TableEditable.init();
+                        }
+                    })
+                }
+                else {
+                    bootbox.alert({
+                        title: "Thông báo",
+                        message: res.msg,
+                        callback: function () {
+                            TableEditable.init();
+                        }
+                    })
+                }
+
+                $(".divLoading").fadeOut(500);
+
+            });
+        }
+
+        function CreateGiftcode() {
+            var json = {
+                "Name": $('#txtName').val(),
+                "Prefix": $('#txtPrefix').val(),
+                "Price": $('#txtPrice').val(),
+                "Qty": $('#txtQty').val(),
+                "Expired": $('#txtExpired').val()
+            }
+            POST_DATA("Apis/API_GameAccount.ashx", {
+                type: 8,
+                json: JSON.stringify(json)
+            }, function (res) {
+                if (res.status == 1) {
+                    bootbox.alert({
+                        title: "Thông báo",
+                        message: res.msg,
+                        callback: function () {
+                            $('#modal_Create_Giftcode').modal('hide');
+                            TableEditable.init();
+                        }
+                    })
+                }
+                else {
+                    bootbox.alert({
+                        title: "Thông báo",
+                        message: res.msg,
+                        callback: function () {
+                            TableEditable.init();
+                        }
+                    })
+                }
+
+                $(".divLoading").fadeOut(500);
+
+            });
+        }
+
+        function DeleteGiftcode(ID) {
+            bootbox.confirm("Xác nhận xóa GiftCode?", function (result) {
+                if (result) {
+                    $('.divLoading').fadeIn();
+                    var json = {
+                        "ID": ID
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "Apis/API_GameAccount.ashx",
+                        data: {
+                            json: JSON.stringify(json),
+                            type: 10
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            $(".divLoading").fadeOut(500);
+                            if (data.status == 1)
+                                TableEditable.init();
+                            else
+                                bootbox.alert(data.msg);
+                        }
+                    });
+                }
+            });
+        }
 
         function SubmitForm() {
 
@@ -599,5 +782,7 @@
         function replaceAll(str, find, replace) {
             return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
         }
+
+        
 </script>
 </asp:Content>
