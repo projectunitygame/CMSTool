@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GiftCodeThongTin.aspx.cs" Inherits="CMS_Tools.Test_GiftCodeThongKe" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GiaoDich_GDDaiLy.aspx.cs" Inherits="CMS_Tools.Test_LichSuGiaoDich" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .avatar_u{
@@ -39,7 +39,7 @@
             <div class="portlet box blue ">
                 <div class="portlet-title">
                     <div class="caption">
-                        Thông tin Giftcode
+                        Lịch sử giao dịch
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -77,11 +77,12 @@
                         <div class="col-md-3" style="margin-bottom: 10px;">
                             <label class="control-label label-balance">Chọn lọc dữ liệu theo cột</label>
                             <select id="filterColumn" class="form-control">
-                                <option value='Code'>Mã giftcode</option>
-                            	<option value='Gold'>Giá trị</option>
-                                <option value='AccountId'>Id sử dụng</option>
-                                <option value='EventID'>Mã event</option>
-                                <option value='AccountName'>Tài khoản sử dụng</option>
+                                <option value='MA_GIAO_DICH'>Mã giao dịch</option>
+                            	<option value='TK_NGUOI_GUI'>Tài khoản người gửi</option>
+                                <option value='TEN_NGUOI_GUI'>Tên người gửi</option>
+                                <option value='TK_NGUOI_NHAN'>Tài khoản người nhận</option>
+                                <option value='TEN_NGUOI_NHAN'>Tên người nhận</option>
+                                
                             </select>
                         </div>
                         <div class="col-md-3" style="margin-bottom: 10px;">
@@ -115,11 +116,12 @@
         jQuery(document).ready(function () {
             $('.page-toolbar').remove();
 
-            var d = AppManage.getURLParameter('eventid');
+            var d = AppManage.getURLParameter('agencyid');
             console.log(d);
             if (d != null) {
-                $("#txtFindData").val(d);
-                $('#filterColumn').val('EventID');
+                var s = Base64.decode(d).split('-')[0];
+                $("#txtFindData").val(s);
+                $('#filterColumn').val('TK_NGUOI_NHAN');
             }
             $('#txtFindData').on('keyup', function (e) {
                 if (e.keyCode == 13) {
@@ -217,7 +219,6 @@
                             if (data.status == 0) {
                                 if (oTable != null) {
                                     oTable.fnDestroy();
-                                    $('#tbl_datatable tbody').html("");
                                 }
                                 _dataColumn = data.columnName;
                                 if (colFilter == null) {
@@ -241,26 +242,9 @@
                                         $('#tbl_datatable tfoot tr').append(strHtmlColName);
                                     }
                                 }
-
-                                _dataTable = [];
-                                for (var i = 0; i < data.data.length; i++) {
-                                    var obj = data.data[i];
-                                    $('#tbl_datatable tbody').append("<tr>" +
-                                        "<td>" + obj[0] + "</td>" +
-                                        "<td>" + obj[1] + "</td>" +
-                                        "<td>" + obj[2] + "</td>" +
-                                        "<td>" + (obj[3] =='False'?'Chưa sử dụng':'Đã sử dụng') + "</td>" +
-                                        "<td>" + obj[4] + "</td>" +
-                                        "<td>" + obj[5] + "</td>" +
-                                        "<td>" + obj[6] + "</td>" +
-                                        "<td>" + obj[7] + "</td>" +
-                                        "<td>" + obj[8] + "</td>" +
-                                        "<td></td>" +
-                                        "</tr>");
-                                }
                                 var colHiden = [];
                                 oTable = table.dataTable({
-                                    //"data": data.data,
+                                    "data": data.data,
                                     "lengthMenu": [
                                         [50, 100, 500, -1],
                                         [50, 100, 500, "All"]
@@ -277,12 +261,9 @@
                                         "targets": [0]
                                     }],
                                     "order": [
-                                        [2, "desc"]
+                                        [0, "desc"]
                                     ]
                                 });
-
-                                var bVis = oTable.fnSettings().aoColumns[9].bVisible;
-                                oTable.fnSetColumnVis(9, bVis ? false : true);
 
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input

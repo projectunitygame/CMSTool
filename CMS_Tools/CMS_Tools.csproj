@@ -259,8 +259,10 @@
     <Content Include="Dashboard.aspx" />
     <Content Include="DragDrop.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="SuperNova.aspx" />
     <Content Include="Test_BaoCaoThongKe.aspx" />
     <Content Include="Test_GameData_GameID.aspx" />
+    <Content Include="Test_GameDT_Quythuong_LichSu.aspx" />
     <Content Include="Test_GameDT_TheNap_TimThe.aspx" />
     <Content Include="Test_GameLogs_KungfuPanda.aspx" />
     <Content Include="Global.asax" />
@@ -346,10 +348,12 @@
     <Content Include="TestFunc.aspx" />
     <Content Include="TestPage.aspx" />
     <Content Include="Test_GameLogs_LichSuChoi.aspx" />
+    <Content Include="Test_GiaoDich_GDTrongGame.aspx" />
     <Content Include="Test_GiftcodeEvent.aspx" />
     <Content Include="Test_GiftCodeThongTin.aspx" />
-    <Content Include="Test_LichSuGiaoDich.aspx" />
+    <Content Include="Test_GiaoDich_GDDaiLy.aspx" />
     <Content Include="Test_Naptien.aspx" />
+    <Content Include="Test_GameDT_Quythuong.aspx" />
     <Content Include="Test_Taikhoandaily.aspx" />
     <Content Include="Test_ThongBao.aspx" />
     <Content Include="Test_TKGame_LichSuKhoaTK.aspx" />
@@ -477,6 +481,13 @@
     <Compile Include="Entity\ErrorLogs.cs" />
     <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\SaveLogs.cs" />
+    <Compile Include="SuperNova.aspx.cs">
+      <DependentUpon>SuperNova.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperNova.aspx.designer.cs">
+      <DependentUpon>SuperNova.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Test_BaoCaoThongKe.aspx.cs">
       <DependentUpon>Test_BaoCaoThongKe.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -490,6 +501,13 @@
     </Compile>
     <Compile Include="Test_GameData_GameID.aspx.designer.cs">
       <DependentUpon>Test_GameData_GameID.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_Quythuong_LichSu.aspx.cs">
+      <DependentUpon>Test_GameDT_Quythuong_LichSu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_Quythuong_LichSu.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_Quythuong_LichSu.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_GameDT_TheNap_TimThe.aspx.cs">
       <DependentUpon>Test_GameDT_TheNap_TimThe.aspx</DependentUpon>
@@ -643,6 +661,13 @@
     <Compile Include="Test_GameLogs_LichSuChoi.aspx.designer.cs">
       <DependentUpon>Test_GameLogs_LichSuChoi.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Test_GiaoDich_GDTrongGame.aspx.cs">
+      <DependentUpon>Test_GiaoDich_GDTrongGame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GiaoDich_GDTrongGame.aspx.designer.cs">
+      <DependentUpon>Test_GiaoDich_GDTrongGame.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Test_GiftcodeEvent.aspx.cs">
       <DependentUpon>Test_GiftcodeEvent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -657,12 +682,12 @@
     <Compile Include="Test_GiftCodeThongTin.aspx.designer.cs">
       <DependentUpon>Test_GiftCodeThongTin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_LichSuGiaoDich.aspx.cs">
-      <DependentUpon>Test_LichSuGiaoDich.aspx</DependentUpon>
+    <Compile Include="Test_GiaoDich_GDDaiLy.aspx.cs">
+      <DependentUpon>Test_GiaoDich_GDDaiLy.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_LichSuGiaoDich.aspx.designer.cs">
-      <DependentUpon>Test_LichSuGiaoDich.aspx</DependentUpon>
+    <Compile Include="Test_GiaoDich_GDDaiLy.aspx.designer.cs">
+      <DependentUpon>Test_GiaoDich_GDDaiLy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_Naptien.aspx.cs">
       <DependentUpon>Test_Naptien.aspx</DependentUpon>
@@ -670,6 +695,13 @@
     </Compile>
     <Compile Include="Test_Naptien.aspx.designer.cs">
       <DependentUpon>Test_Naptien.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_Quythuong.aspx.cs">
+      <DependentUpon>Test_GameDT_Quythuong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_Quythuong.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_Quythuong.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_Taikhoandaily.aspx.cs">
       <DependentUpon>Test_Taikhoandaily.aspx</DependentUpon>

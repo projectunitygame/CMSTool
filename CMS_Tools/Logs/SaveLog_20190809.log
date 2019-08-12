@@ -1,2 +1,23 @@
 INFO 2019-08-09 01:17:59 – {"DATE_LOGS":"09/08/2019 01:17:59","INFO_LOGS":"***** SERVER START *****"}
 INFO 2019-08-09 01:18:09 – {"DATE_LOGS":"09/08/2019 01:18:05","INFO_LOGS":"LoginWithToken: 9c7959888ea4de2562d980605b3d78fd,IP ::1"}
+INFO 2019-08-09 08:50:44 – {"DATE_LOGS":"09/08/2019 08:50:44","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-08-09 08:51:04 – {"DATE_LOGS":"09/08/2019 08:51:01","INFO_LOGS":"LoginWithToken: defdd3c49db1ea63d995140a458fbc11,IP ::1"}
+INFO 2019-08-09 08:51:04 – {"DATE_LOGS":"09/08/2019 08:51:03","INFO_LOGS":"LoginWithToken: defdd3c49db1ea63d995140a458fbc11,IP ::1"}
+INFO 2019-08-09 09:35:47 – {"DATE_LOGS":"09/08/2019 09:35:46","INFO_LOGS":"LoginWithToken: defdd3c49db1ea63d995140a458fbc11,IP ::1"}
+INFO 2019-08-09 09:35:47 – {"DATE_LOGS":"09/08/2019 09:35:47","INFO_LOGS":"LoginWithToken: defdd3c49db1ea63d995140a458fbc11,IP ::1"}
+INFO 2019-08-09 09:36:48 – {"DATE_LOGS":"09/08/2019 09:36:48","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-08-09 09:36:58 – {"DATE_LOGS":"09/08/2019 09:36:57","INFO_LOGS":"LoginWithToken: f34a1ca41867b634661ca6ccb9ff30c5,IP ::1"}
+INFO 2019-08-09 09:36:58 – {"DATE_LOGS":"09/08/2019 09:36:58","INFO_LOGS":"LoginWithToken: f34a1ca41867b634661ca6ccb9ff30c5,IP ::1"}
+INFO 2019-08-09 10:22:14 – {"DATE_LOGS":"09/08/2019 10:22:13","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-08-09 10:22:34 – {"DATE_LOGS":"09/08/2019 10:22:25","INFO_LOGS":"LoginWithToken: f34a1ca41867b634661ca6ccb9ff30c5,IP ::1"}
+INFO 2019-08-09 10:22:34 – {"DATE_LOGS":"09/08/2019 10:22:25","INFO_LOGS":"LoginWithToken: f34a1ca41867b634661ca6ccb9ff30c5,IP ::1"}
+INFO 2019-08-09 10:49:54 – {"DATE_LOGS":"09/08/2019 10:49:54","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-08-09 10:50:04 – {"DATE_LOGS":"09/08/2019 10:49:57","INFO_LOGS":"LoginWithToken: f34a1ca41867b634661ca6ccb9ff30c5,IP ::1"}
+INFO 2019-08-09 11:37:43 – {"DATE_LOGS":"09/08/2019 11:37:43","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-08-09 11:38:03 – {"DATE_LOGS":"09/08/2019 11:37:59","INFO_LOGS":"LoginWithToken: f34a1ca41867b634661ca6ccb9ff30c5,IP ::1"}
+INFO 2019-08-09 11:46:03 – {"DATE_LOGS":"09/08/2019 11:46:03","INFO_LOGS":"***** SERVER END *****"}
+INFO 2019-08-09 11:57:51 – {"DATE_LOGS":"09/08/2019 11:57:50","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-08-09 11:58:01 – {"DATE_LOGS":"09/08/2019 11:57:57","INFO_LOGS":"LoginWithToken: f34a1ca41867b634661ca6ccb9ff30c5,IP ::1"}
+INFO 2019-08-10 12:28:41 – {"DATE_LOGS":"10/08/2019 12:28:40","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/GameAccount/CreateSchemeNotificationGame\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"R2PwrssfDOSwjGutVT36j+A6eS4IIuF/+SUQ9PAjqOQZY6rV3t45+NrzOL73q9qsd7ovFYJdd8ecyWQL7kassaSd63/SK0lAJWqg/WmAIlTvTfE4kcfh1doSH+uEO3GzP2idPTqK+bQugiLL8lxKqnG08AGzwt+KFqpmw0ulSfc=\",\"clientIP\":\"::1\",\"sign\":\"6b6a5e03eba9defb27b81947964a8058\"}\r\nResponse Data: {\"status\":-9999,\"msg\":\"The EXECUTE permission was denied on the object 'SP_TOOL_CREATE_SCHEME_NOTIFICATION', database 'GamePortal', schema 'dbo'.\",\"data\":null,\"secreckey\":null}"}
+INFO 2019-08-10 12:30:21 – {"DATE_LOGS":"10/08/2019 12:30:15","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/GameAccount/CreateSchemeNotificationGame\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"R2PwrssfDOSwjGutVT36j+A6eS4IIuF/+SUQ9PAjqOQZY6rV3t45+NrzOL73q9qsd7ovFYJdd8ecyWQL7kassaSd63/SK0lAJWqg/WmAIlTvTfE4kcfh1doSH+uEO3GzP2idPTqK+bQugiLL8lxKqnG08AGzwt+KFqpmw0ulSfc=\",\"clientIP\":\"::1\",\"sign\":\"6b6a5e03eba9defb27b81947964a8058\"}\r\nResponse Data: {\"status\":1,\"msg\":\"T?o thông báo game thành công\",\"data\":null,\"secreckey\":null}"}
+INFO 2019-08-10 12:35:41 – {"DATE_LOGS":"10/08/2019 12:35:37","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/GameAccount/UpdateSchemeNotificationGame\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"4YdEzCuu9TmFoOxY+OGiaBibAznCcOQcDGfAAnyGmsirg7kdVbTKNcBsH/8KkfOOt6sC4IWwxpBh8w8Wjc6oqO0RIv3uQo//XfP1mVphmft1Ty8CC9/v1w3GF4TmkwqK6DQsj8lSq+QlppPPi4PIuNW8gfQ/wb7ENHtYb4WkBesZC+xxY2UAcXlS80ttX1zW\",\"clientIP\":\"::1\",\"sign\":\"e80b54fffb026252e38adc9437d5e2ff\"}\r\nResponse Data: {\"status\":-9999,\"msg\":\"An SqlParameter with ParameterName '@Id' is not contained by this SqlParameterCollection.\",\"data\":null,\"secreckey\":null}"}
