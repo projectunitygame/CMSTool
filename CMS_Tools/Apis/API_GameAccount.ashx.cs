@@ -71,6 +71,15 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_GAME_ACOUNT_TYPE.EXCEPT_FUND_GAME:
                         EXCEPT_FUND_GAME(context);
                         break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.ACCEPT_CARD:
+                        ACCEPT_CARD(context);
+                        break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.DELETE_CASH_OUT_CARD:
+                        DELETE_CASH_OUT_CARD(context);
+                        break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.DELETE_FAIL_TRANSACTION_CARD:
+                        DELETE_FAIL_TRANSACTION_CARD(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -85,6 +94,192 @@ namespace CMS_Tools.Apis
                 result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
+        }
+        /// <summary>
+        /// Xóa giao dịch mua thẻ lỗi
+        /// </summary>
+        /// <param name="context"></param>
+        private void DELETE_FAIL_TRANSACTION_CARD(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["DELETE_FAIL_TRANSACTION_CARD"] == null || (DateTime.Now - (DateTime)context.Session["DELETE_FAIL_TRANSACTION_CARD"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<DeleteFailTransactionCard>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<DeleteFailTransactionCard>(json);
+                        if (jsonData != null)
+                        {
+                            //jsonData.AccountName = accountInfo.UserName;
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/DeleteFailTransactionCard");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR DELETE_FAIL_TRANSACTION_CARD: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["DELETE_FAIL_TRANSACTION_CARD"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+        /// <summary>
+        /// Xóa yêu cầu rút tiền thẻ
+        /// </summary>
+        /// <param name="context"></param>
+        private void DELETE_CASH_OUT_CARD(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["DELETE_CASH_OUT_CARD"] == null || (DateTime.Now - (DateTime)context.Session["DELETE_CASH_OUT_CARD"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<DeleteCashOutCard>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<DeleteCashOutCard>(json);
+                        if (jsonData != null)
+                        {
+                            //jsonData.AccountName = accountInfo.UserName;
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/DeleteCashOutCard");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR DELETE_CASH_OUT_CARD: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["DELETE_CASH_OUT_CARD"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+        /// <summary>
+        /// Duyệt thẻ
+        /// </summary>
+        /// <param name="context"></param>
+        private void ACCEPT_CARD(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["ACCEPT_CARD"] == null || (DateTime.Now - (DateTime)context.Session["ACCEPT_CARD"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<AcceptCard>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<AcceptCard>(json);
+                        if (jsonData != null)
+                        {
+                            //jsonData.AccountName = accountInfo.UserName;
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/AcceptCard");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR ACCEPT_CARD: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["ACCEPT_CARD"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
         }
 
         private void EXCEPT_FUND_GAME(HttpContext context)
@@ -946,7 +1141,18 @@ namespace CMS_Tools.Apis
             public long Value;
             public string AccountName;
         }
-
+        public class AcceptCard
+        {
+            public long CardID;
+        }
+        public class DeleteCashOutCard
+        {
+            public long CardID;
+        }
+        public class DeleteFailTransactionCard
+        {
+            public long ID;
+        }
         #endregion
     }
 }

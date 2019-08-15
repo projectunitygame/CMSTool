@@ -274,7 +274,10 @@ namespace CMS_Tools.Lib
             CREATE_EVENT_GIFTCODE,
             UPDATE_EVENT_GIFTCODE,
             DELETE_EVENT_GIFTCODE,
-            EXCEPT_FUND_GAME
+            EXCEPT_FUND_GAME,
+            ACCEPT_CARD,
+            DELETE_CASH_OUT_CARD,
+            DELETE_FAIL_TRANSACTION_CARD
         }
 
         public enum WEBSOCKET_STATUS: int

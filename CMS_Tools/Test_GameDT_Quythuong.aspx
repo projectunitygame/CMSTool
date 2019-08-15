@@ -1081,8 +1081,8 @@
                                         ]
                                     });
 
-                                    var bVis = oTable7.fnSettings().aoColumns[1].bVisible;
-                                    oTable7.fnSetColumnVis(1, bVis ? false : true);
+                                    var bVis = oTable8.fnSettings().aoColumns[1].bVisible;
+                                    oTable8.fnSetColumnVis(1, bVis ? false : true);
 
                                 }
                                 else {

@@ -32,6 +32,30 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="PageBar" runat="server">
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="icon-home"></i>
+                <a href="Home.aspx">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <span><label id="PageBar_lblMenuName">Tài khoản đại lý</label></span>
+            </li>
+        </ul>
+        <div class="page-toolbar">
+            <div class="btn-group pull-right">
+                <button id="btnAddAction" type="button" class="btn btn-fit-height blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false">
+                    Chức năng <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li>
+                        <a href="javascript:;" id="btnAddNew"><i class="fa fa-plus"><!--  i--> Tạo KH Mới</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageContent" runat="server">
     <div class="row">
@@ -106,6 +130,94 @@
             </div>
         </div>
     </div>
+
+    <!-----From buy card------>
+    <div id="modal_buy_card" class="modal fade" data-backdrop="static" data-keyboard="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="javascript:;" id="form_buy_card" class="form-horizontal" novalidate="novalidate">
+                    <div class="modal-body">
+                    	<div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            </button>
+                            <h4 class="modal-title">
+                                <i class="fa fa-edit"></i> TẠO GIFTCODE MỚI</h4>
+                        </div>
+                        <div class="form-body">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                Vui lòng kiểm tra và nhập đầy đủ thông tin!
+                            </div>
+                            <div class="alert alert-success display-hide">
+                                <button class="close" data-close="alert"></button>
+                                Nhập thông tin hợp lệ
+                            </div>
+                            <div class=row>
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group  margin-top-20">
+                                        <label class="control-label col-md-4">
+                                            Loại thẻ: <span class="required" aria-required="true">* </span>
+                                        </label>
+                                        <div class="col-md-8">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <select name="cardType" class="form-control" id="cardType">
+                                                    <option value="1">Vietel</option>
+                                                    <option value="2">Mobi</option>
+                                                    <option value="3">Vina</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=row>
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group  margin-top-20">
+                                        <label class="control-label col-md-4">
+                                            Mệnh giá: <span class="required" aria-required="true">* </span>
+                                        </label>
+                                        <div class="col-md-8">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <select name="valueCard" class="form-control" id="valueCard">
+                                                    <option value="20000">20,000</option>
+                                                    <option value="50000">50,000</option>
+                                                    <option value="100000">100,000</option>
+                                                    <option value="200000">200,000</option>
+                                                    <option value="500000">500,000</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group margin-top-20">
+                                        <label class="control-label col-md-4">
+                                            Số lượng: <span class="required" aria-required="true">* </span>
+                                        </label>
+                                        <div class="col-md-8">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" style="width:100%;" id="txtPrice" class="form-control" name="Price" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn dark btn-outline">Hủy</button>
+                        <button type="submit" class="btn green">Đăng Ký</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">\
     <script src="assets/global/plugins/Base64JS.js"></script>
@@ -114,8 +226,12 @@
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
-            $('.page-toolbar').remove();
-
+            //$('.page-toolbar').remove();
+            $('#btnAddNew').html("<i class='fa fa-plus'></  i> Mua thẻ");
+            $('#btnAddNew').click(function () {
+                //ResetForm();
+                $('#modal_buy_card').modal('show');
+            });
             var d = AppManage.getURLParameter('agencyid');
             console.log(d);
             if (d != null) {
