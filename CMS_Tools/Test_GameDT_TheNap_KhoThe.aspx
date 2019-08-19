@@ -141,7 +141,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             </button>
                             <h4 class="modal-title">
-                                <i class="fa fa-edit"></i> TẠO GIFTCODE MỚI</h4>
+                                <i class="fa fa-edit"></i> MUA THẺ MỚI</h4>
                         </div>
                         <div class="form-body">
                             <div class="alert alert-danger display-hide">

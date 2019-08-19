@@ -103,7 +103,7 @@
         });
         var colFilter = null;
         jQuery(document).ready(function () {
-            $('#btnAddNew').remove();
+            $('.page-toolbar').remove();
 
             $('#txtFindData').on('keyup', function (e) {
                 if (e.keyCode == 13) {

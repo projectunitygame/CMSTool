@@ -354,13 +354,14 @@
                                     var obj = data.data[i];
                                     var func = 'ExceptFund(1,"' + obj[0] + '");';
                                     var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
-
+                                    var funcJackpot = 'Jackpot(3,"' + obj[0] + '");';
+                                    var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ</a>";
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
                                         "<td>" + obj[2] + "</td>" +
                                         "<td>" + obj[3] + "</td>" +
-                                        "<td>" + updateGiftcode + "</td>" +
+                                        "<td>" + updateGiftcode + Jackpot +  "</td>" +
                                         "</tr>");
                                 }
 
@@ -456,13 +457,14 @@
                                     var obj = data.data[i];
                                     var func = 'ExceptFund(2,"' + obj[0] + '");';
                                     var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
-
+                                    var funcJackpot = 'Jackpot(1,"' + obj[0] + '");';
+                                    var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ</a>";
                                     $('#tbl_datatable2 tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
                                         "<td>" + obj[2] + "</td>" +
                                         "<td>" + obj[3] + "</td>" +
-                                        "<td>" + updateGiftcode + "</td>" +
+                                        "<td>" + updateGiftcode + Jackpot + "</td>" +
                                         "</tr>");
                                 }
 
@@ -559,13 +561,14 @@
                                         var obj = data.data[i];
                                         var func = 'ExceptFund(3,"' + obj[0] + '");';
                                         var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
-
+                                        var funcJackpot = 'Jackpot(2,"' + obj[0] + '");';
+                                        var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ</a>";
                                         $('#tbl_datatable3 tbody').append("<tr>" +
                                             "<td>" + obj[0] + "</td>" +
                                             "<td>" + obj[1] + "</td>" +
                                             "<td>" + obj[2] + "</td>" +
                                             "<td>" + obj[3] + "</td>" +
-                                            "<td>" + updateGiftcode + "</td>" +
+                                            "<td>" + updateGiftcode + Jackpot+ "</td>" +
                                             "</tr>");
                                     }
 
@@ -663,13 +666,14 @@
                                         var obj = data.data[i];
                                         var func = 'ExceptFund(4,"' + obj[0] + '");';
                                         var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
-
+                                        var funcJackpot = 'Jackpot(8,"' + obj[0] + '");';
+                                        var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ</a>";
                                         $('#tbl_datatable4 tbody').append("<tr>" +
                                             "<td>" + obj[0] + "</td>" +
                                             "<td>" + obj[1] + "</td>" +
                                             "<td>" + obj[2] + "</td>" +
                                             "<td>" + obj[3] + "</td>" +
-                                            "<td>" + updateGiftcode + "</td>" +
+                                            "<td>" + updateGiftcode + Jackpot + "</td>" +
                                             "</tr>");
                                     }
 
@@ -766,13 +770,14 @@
                                         var obj = data.data[i];
                                         var func = 'ExceptFund(5,"' + obj[0] + '");';
                                         var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
-
+                                        var funcJackpot = 'Jackpot(4,"' + obj[0] + '");';
+                                        var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ</a>";
                                         $('#tbl_datatable5 tbody').append("<tr>" +
                                             "<td>" + obj[0] + "</td>" +
                                             "<td>" + obj[1] + "</td>" +
                                             "<td>" + obj[2] + "</td>" +
                                             "<td>" + obj[3] + "</td>" +
-                                            "<td>" + updateGiftcode + "</td>" +
+                                            "<td>" + updateGiftcode + Jackpot+ "</td>" +
                                             "</tr>");
                                     }
 
@@ -1158,6 +1163,73 @@
                     }
                 }
             });
+        }
+
+        function Jackpot(type, roomId) {
+            //@_GameId = 1 -- Nong trai
+            //@_GameId = 2 -- Mafia
+            //@_GameId = 3 --minipoker
+            //@_GameId = 4 -- vua bao
+            //@_GameId = 6 --than quat
+            //@_GameId = 8 -- hai vuong
+            bootbox.prompt({
+                size: "small",
+                title: "Nhập tên tài khoản trúng thưởng?",
+                callback: function (result) {
+                    if (result !== null) {
+                        var json = {
+                            "GameId": type,
+                            "RoomId": roomId,
+                            "AccountName": result
+                        }
+                        POST_DATA("Apis/API_GameAccount.ashx", {
+                            type: 17,
+                            json: JSON.stringify(json)
+                        }, function (res) {
+                            //if (res.status == 1) {
+
+                            //}
+                            //else {
+
+                            //}
+
+                            bootbox.alert({
+                                title: "Thông báo",
+                                message: res.msg,
+                                callback: function () {
+                                    TableEditable.init();
+                                }
+                            })
+
+                        });
+                    }
+                }
+            });
+            //bootbox.confirm("Xác nhận đập hủ?", function (result) {
+            //    if (result) {
+            //        $('.divLoading').fadeIn();
+            //        var json = {
+            //            "GameId": type,
+            //            "RoomId": roomId
+            //        }
+            //        $.ajax({
+            //            type: "POST",
+            //            url: "Apis/API_GameAccount.ashx",
+            //            data: {
+            //                json: JSON.stringify(json),
+            //                type: 17
+            //            },
+            //            dataType: 'json',
+            //            success: function (data) {
+            //                $(".divLoading").fadeOut(500);
+            //                if (data.status == 1)
+            //                    TableEditable.init();
+            //                else
+            //                    bootbox.alert(data.msg);
+            //            }
+            //        });
+            //    }
+            //});
         }
 
         function formatMoney(num) {

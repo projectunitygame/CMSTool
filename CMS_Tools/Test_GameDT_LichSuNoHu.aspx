@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GameDT_Quythuong_LichSu.aspx.cs" Inherits="CMS_Tools.Test_GameDT_Quythuong_LichSu" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GameDT_LichSuNoHu.aspx.cs" Inherits="CMS_Tools.Test_GameDT_LichSuNoHu" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .avatar_u{
@@ -64,7 +64,7 @@
             <div class="portlet box blue ">
                 <div class="portlet-title">
                     <div class="caption">
-                        Event Giftcode
+                        Lịch sử nổ hủ
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <div class="divLoading" style="display: none;">
+                    <div class="divLoading" style="display: none;">     
                         <div class="lds-default">
                             <div></div>
                             <div></div>
@@ -270,6 +270,8 @@
                                         "<td>" + obj[5] + "</td>" +
                                         "<td>" + obj[6] + "</td>" +
                                         "<td>" + obj[7] + "</td>" +
+                                        "<td>" + obj[8] + "</td>" +
+                                        "<td>" + obj[9] + "</td>" +
                                         "</tr>");
                                 }
 
@@ -292,13 +294,13 @@
                                         "targets": [0]
                                     }],
                                     "order": [
-                                        [1, "desc"]
+                                        [0, "desc"]
                                     ]
                                 });
 
                                 //an column
-                                var bVis = oTable.fnSettings().aoColumns[7].bVisible;
-                                oTable.fnSetColumnVis(7, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[9].bVisible;
+                                oTable.fnSetColumnVis(9, bVis ? false : true);
 
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input

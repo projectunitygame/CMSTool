@@ -1,6 +1,0 @@
-INFO 2019-04-07 11:20:00 – {"DATE_LOGS":"07/04/2019 11:19:59","INFO_LOGS":"***** SERVER START *****"}
-INFO 2019-04-07 11:21:00 – {"DATE_LOGS":"07/04/2019 11:20:00","INFO_LOGS":"https://www.datphuprinting.vn/ping.aspx?sign=f8aa9247fb9989b7f82791a36b882ecb&p=255&t=d11eb213-73ee-4979-afc4-b773f3a01c14\r\nResponse: "}
-INFO 2019-04-07 11:21:00 – {"DATE_LOGS":"07/04/2019 11:20:03","INFO_LOGS":"LoginWithToken: 0812339ddaded54eb809e6e3a69f84bd,IP ::1"}
-INFO 2019-04-07 11:21:00 – {"DATE_LOGS":"07/04/2019 11:20:03","INFO_LOGS":"LoginWithToken: 0812339ddaded54eb809e6e3a69f84bd,IP ::1"}
-INFO 2019-04-07 11:21:00 – {"DATE_LOGS":"07/04/2019 11:20:03","INFO_LOGS":"Result: 1\r\n[{\"AccountId\":8,\"Email\":\"truongdien99@gmail.com\",\"UserName\":\"truongdien99@gmail.com\",\"Avatar\":\"\",\"Token\":\"0812339ddaded54eb809e6e3a69f84bd\",\"TokenOld\":\"\",\"PublisherId\":1}]"}
-INFO 2019-04-07 11:21:00 – {"DATE_LOGS":"07/04/2019 11:20:03","INFO_LOGS":"Result: 1\r\n[{\"AccountId\":8,\"Email\":\"truongdien99@gmail.com\",\"UserName\":\"truongdien99@gmail.com\",\"Avatar\":\"\",\"Token\":\"0812339ddaded54eb809e6e3a69f84bd\",\"TokenOld\":\"\",\"PublisherId\":1}]"}

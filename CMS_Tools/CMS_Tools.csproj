@@ -57,6 +57,8 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -237,6 +239,28 @@
     <Content Include="bin\AjaxControlToolkit.dll" />
     <Content Include="bin\Telerik.Web.UI.dll" />
     <Content Include="CategoryManage.aspx" />
+    <Content Include="Connected Services\muathe24h\CMS_Tools.muathe24h.APIResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\muathe24h\CMS_Tools.muathe24h.BuyCardsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\muathe24h\CMS_Tools.muathe24h.ChotCaCHEntity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\muathe24h\CMS_Tools.muathe24h.ChotCaCHResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\muathe24h\CMS_Tools.muathe24h.TopupMobileResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\muathe24h\MechantServices.disco" />
+    <None Include="Connected Services\muathe24h\configuration91.svcinfo" />
+    <None Include="Connected Services\muathe24h\configuration.svcinfo" />
+    <None Include="Connected Services\muathe24h\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="CreateJson_Chart.aspx" />
     <Content Include="css\bootstrap-grid.css" />
     <Content Include="css\bootstrap-grid.min.css" />
@@ -260,11 +284,16 @@
     <Content Include="DragDrop.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="SuperNova.aspx" />
+    <Content Include="testNaptien.aspx" />
     <Content Include="Test_BaoCaoThongKe.aspx" />
     <Content Include="Test_GameData_GameID.aspx" />
+    <Content Include="Test_GameDT_CauHinhBotTaiXiu.aspx" />
+    <Content Include="Test_GameDT_LichSuNoHu.aspx" />
     <Content Include="Test_GameDT_Quythuong_LichSu.aspx" />
+    <Content Include="Test_GameDT_TheNap_CauHinhThe.aspx" />
     <Content Include="Test_GameDT_TheNap_DuyetThe.aspx" />
     <Content Include="Test_GameDT_TheNap_MuaTheLoi.aspx" />
+    <Content Include="Test_GameDT_TheNap_ThongKeDoiNap.aspx" />
     <Content Include="Test_GameDT_TheNap_TimThe.aspx" />
     <Content Include="Test_GameLogs_KungfuPanda.aspx" />
     <Content Include="Global.asax" />
@@ -364,6 +393,11 @@
     <Content Include="Test_TKGame_TKBiKhoa.aspx" />
     <Content Include="Tools.aspx" />
     <Content Include="VetifyResetPassword.aspx" />
+    <None Include="Connected Services\muathe24h\MechantServices.wsdl" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -457,6 +491,11 @@
     <Compile Include="CategoryManage.aspx.designer.cs">
       <DependentUpon>CategoryManage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\muathe24h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="CreateJson_Chart.aspx.cs">
       <DependentUpon>CreateJson_Chart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -483,12 +522,24 @@
     <Compile Include="Entity\ErrorLogs.cs" />
     <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\SaveLogs.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="SuperNova.aspx.cs">
       <DependentUpon>SuperNova.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SuperNova.aspx.designer.cs">
       <DependentUpon>SuperNova.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="testNaptien.aspx.cs">
+      <DependentUpon>testNaptien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testNaptien.aspx.designer.cs">
+      <DependentUpon>testNaptien.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_BaoCaoThongKe.aspx.cs">
       <DependentUpon>Test_BaoCaoThongKe.aspx</DependentUpon>
@@ -504,12 +555,33 @@
     <Compile Include="Test_GameData_GameID.aspx.designer.cs">
       <DependentUpon>Test_GameData_GameID.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Test_GameDT_CauHinhBotTaiXiu.aspx.cs">
+      <DependentUpon>Test_GameDT_CauHinhBotTaiXiu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_CauHinhBotTaiXiu.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_CauHinhBotTaiXiu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_LichSuNoHu.aspx.cs">
+      <DependentUpon>Test_GameDT_LichSuNoHu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_LichSuNoHu.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_LichSuNoHu.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Test_GameDT_Quythuong_LichSu.aspx.cs">
       <DependentUpon>Test_GameDT_Quythuong_LichSu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Test_GameDT_Quythuong_LichSu.aspx.designer.cs">
       <DependentUpon>Test_GameDT_Quythuong_LichSu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_CauHinhThe.aspx.cs">
+      <DependentUpon>Test_GameDT_TheNap_CauHinhThe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_CauHinhThe.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_TheNap_CauHinhThe.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_GameDT_TheNap_DuyetThe.aspx.cs">
       <DependentUpon>Test_GameDT_TheNap_DuyetThe.aspx</DependentUpon>
@@ -524,6 +596,13 @@
     </Compile>
     <Compile Include="Test_GameDT_TheNap_MuaTheLoi.aspx.designer.cs">
       <DependentUpon>Test_GameDT_TheNap_MuaTheLoi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_ThongKeDoiNap.aspx.cs">
+      <DependentUpon>Test_GameDT_TheNap_ThongKeDoiNap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_ThongKeDoiNap.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_TheNap_ThongKeDoiNap.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_GameDT_TheNap_TimThe.aspx.cs">
       <DependentUpon>Test_GameDT_TheNap_TimThe.aspx</DependentUpon>
@@ -860,6 +939,15 @@
     <Folder Include="assets\layouts\layout2\scripts\" />
     <Folder Include="assets\layouts\layout3\img\" />
     <Folder Include="assets\layouts\layout\img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\muathe24h\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

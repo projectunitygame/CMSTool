@@ -1,4 +1,0 @@
-INFO 2019-03-30 12:33:57 – {"DATE_LOGS":"30/03/2019 12:33:56","INFO_LOGS":"***** SERVER START *****"}
-INFO 2019-03-30 12:34:59 – {"DATE_LOGS":"30/03/2019 12:33:57","INFO_LOGS":"https://www.datphuprinting.vn/ping.aspx?sign=f8aa9247fb9989b7f82791a36b882ecb&p=255&t=5f47fe48-e138-4247-bbc6-70711828c790\r\nResponse: "}
-INFO 2019-03-30 12:34:59 – {"DATE_LOGS":"30/03/2019 12:34:06","INFO_LOGS":"LoginWithToken: 45bea8c25b5a22f24a753a364c4630a1,IP ::1"}
-INFO 2019-03-30 01:03:56 – {"DATE_LOGS":"30/03/2019 12:35:00","INFO_LOGS":"https://www.datphuprinting.vn/ping.aspx?sign=f8aa9247fb9989b7f82791a36b882ecb&p=255&t=84262670-385e-4d97-9d8b-f13045eedaf4\r\nResponse: "}

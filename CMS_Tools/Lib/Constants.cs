@@ -172,7 +172,8 @@ namespace CMS_Tools.Lib
             TRYPARSE_ERROR,
             LOCK_ACCOUNT_GAME_VALI,
             NOTIFICATION_VALI,
-            EVENT_GIFTCODE_VALI
+            EVENT_GIFTCODE_VALI,
+            ACCOUNT_NAME_VALI
         }
 
         public enum REQUEST_TYPE: int
@@ -277,7 +278,10 @@ namespace CMS_Tools.Lib
             EXCEPT_FUND_GAME,
             ACCEPT_CARD,
             DELETE_CASH_OUT_CARD,
-            DELETE_FAIL_TRANSACTION_CARD
+            DELETE_FAIL_TRANSACTION_CARD,
+            INPUT_CARD,
+            CONFIG_CARD,
+            SET_JACKPOT_PRIZE
         }
 
         public enum WEBSOCKET_STATUS: int

@@ -261,7 +261,7 @@
                                         "<td>" + obj[7] + "</td>" +
                                         "<td>" + obj[8] + "</td>" +
                                         "<td>" + obj[9] + "</td>" +
-                                        "<td>" + obj[10] + "</td>" +
+                                        //"<td>" + obj[10] + "</td>" +
                                         "</tr>");
                                 }
                                 var colHiden = [];
@@ -287,9 +287,10 @@
                                     ]
                                 });
 
-                                var bVis = oTable.fnSettings().aoColumns[10].bVisible;
-                                oTable.fnSetColumnVis(10, bVis ? false : true);
-
+                                var bVis = oTable.fnSettings().aoColumns[9].bVisible;
+                                oTable.fnSetColumnVis(9, bVis ? false : true);
+                                //var bVis = oTable.fnSettings().aoColumns[10].bVisible;
+                                //oTable.fnSetColumnVis(10, bVis ? false : true);
 
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input

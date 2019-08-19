@@ -80,6 +80,15 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_GAME_ACOUNT_TYPE.DELETE_FAIL_TRANSACTION_CARD:
                         DELETE_FAIL_TRANSACTION_CARD(context);
                         break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.INPUT_CARD:
+                        INPUT_CARD(context);
+                        break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.CONFIG_CARD:
+                        CONFIG_CARD(context);
+                        break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.SET_JACKPOT_PRIZE:
+                        SET_JACKPOT_PRIZE(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -95,6 +104,302 @@ namespace CMS_Tools.Apis
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
         }
+
+        private void SET_JACKPOT_PRIZE(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["SET_JACKPOT_PRIZE"] == null || (DateTime.Now - (DateTime)context.Session["SET_JACKPOT_PRIZE"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<SetJackpotPrize>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<SetJackpotPrize>(json);
+                        if (jsonData != null)
+                        {
+                            if (string.IsNullOrEmpty(jsonData.AccountName))
+                            {
+                                result.status = Constants.NUMBER_CODE.DATA_NULL;
+                                result.msg = "Tên tài khoản trúng không được bỏ trống";
+                                context.Response.Write(JsonConvert.SerializeObject(result));
+                                return;
+                            }
+                            else if (jsonData.AccountName.Length>30)
+                            {
+                                result.status = Constants.NUMBER_CODE.ACCOUNT_NAME_VALI;
+                                result.msg = "Tên tài khoản không được quá 30 ký tự";
+                                context.Response.Write(JsonConvert.SerializeObject(result));
+                                return;
+                            }
+                            else
+                            {
+                                //@_GameId = 1 -- Nong trai
+                                //@_GameId = 2 -- Mafia
+                                //@_GameId = 3 --minipoker
+                                //@_GameId = 4 -- vua bao
+                                //@_GameId = 6 --than quat
+                                //@_GameId = 8 -- hai vuong
+
+
+                                //jsonData.AccountName = accountInfo.UserName;
+                                //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                                //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                                PayloadApi p = new PayloadApi()
+                                {
+                                    clientIP = UtilClass.GetIPAddress(),
+                                    data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                                };
+                                var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/SetJackpotPrize");
+                                context.Response.Write(responseData);
+                                return;
+                            }
+                            
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR SET_JACKPOT_PRIZE: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["SET_JACKPOT_PRIZE"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+
+
+        /// <summary>
+        /// Cấu hình thẻ nạp
+        /// </summary>
+        /// <param name="context"></param>
+        private void CONFIG_CARD(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["CONFIG_CARD"] == null || (DateTime.Now - (DateTime)context.Session["CONFIG_CARD"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<ConfigCard>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<ConfigCard>(json);
+                        if (jsonData != null)
+                        {
+                            //jsonData.AccountName = accountInfo.UserName;
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            jsonData.PayOrderConfig = jsonData.Pay + "|0";
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/ConfigCard");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR CONFIG_CARD: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["CONFIG_CARD"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+        /// <summary>
+        /// Nạp thẻ
+        /// </summary>
+        /// <param name="context"></param>
+        private void INPUT_CARD(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["INPUT_CARD"] == null || (DateTime.Now - (DateTime)context.Session["INPUT_CARD"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    //if (!string.IsNullOrEmpty(json))
+                    {
+                        //try
+                        //{
+                        //    JsonConvert.DeserializeObject<DeleteFailTransactionCard>(json);
+                        //}
+                        //catch (Exception)
+                        //{
+                        //    result.status = Constants.NUMBER_CODE.ERROR_EX;
+                        //    result.msg = "Sai thông tin nhập vào";
+                        //    context.Response.Write(JsonConvert.SerializeObject(result));
+                        //    return;
+                        //}
+
+                        int cardType = 1;
+                        int total = 1;
+                        int amount = 20000;
+                        if (cardType != 1 && cardType != 2 && cardType != 3)
+                        {
+                            return;
+                        }
+
+                        int successtransaction = 0;
+                        int errortransaction = 0;
+                       
+                        try
+                        {
+                            string serviceCode = string.Empty;
+
+                            if (cardType == 1)
+                            {
+                                serviceCode = "VTT";
+                            }
+                            else if (cardType == 2)
+                            {
+                                serviceCode = "VMS";
+                            }
+                            else if (cardType == 3)
+                            {
+                                serviceCode = "VNP";
+                            }
+
+                            for (int i = 0; i < total; i++)
+                            {
+                                long transactionId = DateTime.Now.Ticks;
+
+                                int outRes = 0;
+                                string requestId = string.Empty;
+
+                                var service = new muathe24h.MechantServicesSoapClient();
+                                string email = "Boxvn1888@gmail.com";
+                                string pass = "Tinhanhem8668";
+
+                                var res = service.BuyCards(new muathe24h.UserCredentials { userName = email, pass = pass }
+                                  , transactionId.ToString(), serviceCode, amount, 1);
+
+                                Logs.SaveLog("muathe24h res:" + JsonConvert.SerializeObject(res));
+                                string resultCode = res?.RepCode.ToString();
+                                result.data = JsonConvert.SerializeObject(res);
+                                result.msg = "resultCode:" + resultCode;
+
+
+                                //if (res != null && res.RepCode == 0)
+                                //{
+                                //    var seri = JsonConvert.DeserializeObject<List<CardObject>>(res.Data.ToString());
+                                //    if (PayDAO.InsertCard(seri[0].PinCode, seri[0].Serial, amount, string.Empty, cardType, serviceCode, "muathe24h", DateTime.Now, transactionId.ToString(), resultCode, true))
+                                //    {
+                                //        successtransaction++;
+                                //    }
+                                //    else
+                                //    {
+                                //        PayDAO.InsertCard(string.Empty, string.Empty, amount, string.Empty, cardType, serviceCode, "muathe24h", DateTime.Now, requestId, resultCode, false);
+                                //        errortransaction++;
+                                //    }
+                                //}
+                                //else
+                                //{
+                                //    PayDAO.InsertCard(string.Empty, string.Empty, amount, string.Empty, cardType, serviceCode, "muathe24h", DateTime.Now, requestId, resultCode, false);
+
+                                //    errortransaction++;
+                                //}
+                            }
+
+                            //return new
+                            //{
+                            //    suc = successtransaction,
+                            //    err = errortransaction
+                            //};
+                        }
+                        catch (Exception ex)
+                        {
+                            Logs.SaveError("ERROR muathe24h: " + ex);
+                        }
+
+                        //var jsonData = JsonConvert.DeserializeObject<DeleteFailTransactionCard>(json);
+                        //if (jsonData != null)
+                        //{
+                        //    //jsonData.AccountName = accountInfo.UserName;
+                        //    //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                        //    //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                        //    PayloadApi p = new PayloadApi()
+                        //    {
+                        //        clientIP = UtilClass.GetIPAddress(),
+                        //        data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                        //    };
+                        //    var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/DeleteFailTransactionCard");
+                        //    context.Response.Write(responseData);
+                        //    return;
+                        //}
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR INPUT_CARD: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["INPUT_CARD"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
         /// <summary>
         /// Xóa giao dịch mua thẻ lỗi
         /// </summary>
@@ -1152,6 +1457,32 @@ namespace CMS_Tools.Apis
         public class DeleteFailTransactionCard
         {
             public long ID;
+        }
+
+        public class CardObject
+        {
+            public string ProviderCode { get; set; }
+            public string Serial { get; set; }
+            public string PinCode { get; set; }
+            public int Amount { get; set; }
+        }
+        public class ConfigCard
+        {
+            public int ID;
+            public bool Enable;
+            public int Promotion;
+            public int CashoutRate;
+            public bool EnableCashout;
+            public int TopupRate;
+            public int PromotionCashout;
+            public string PayOrderConfig;
+            public int Pay;
+        }
+        public class SetJackpotPrize
+        {
+            public int GameId;
+            public int RoomId;
+            public string AccountName;
         }
         #endregion
     }

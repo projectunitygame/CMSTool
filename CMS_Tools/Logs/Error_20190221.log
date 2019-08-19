@@ -1,1 +1,0 @@
-ERROR2019-02-21 09:16:07 – {"DATE_LOGS":"21/02/2019 09:15:09","INFO_LOGS":"ERROR LOGIN System.NullReferenceException: Object reference not set to an instance of an object.\r\n   at CMS_Tools.Login.Page_Load(Object sender, EventArgs e) in C:\\Users\\Dien Nguyen\\Dropbox\\Project\\DATPHU_PRINTING\\CMS_Tools\\CMS_Tools\\CMS_Tools\\Login.aspx.cs:line 64"}
