@@ -292,6 +292,7 @@
     <Content Include="Test_GameDT_Quythuong_LichSu.aspx" />
     <Content Include="Test_GameDT_TheNap_CauHinhThe.aspx" />
     <Content Include="Test_GameDT_TheNap_DuyetThe.aspx" />
+    <Content Include="Test_GameDT_TheNap_LichSuDuyetThe.aspx" />
     <Content Include="Test_GameDT_TheNap_MuaTheLoi.aspx" />
     <Content Include="Test_GameDT_TheNap_ThongKeDoiNap.aspx" />
     <Content Include="Test_GameDT_TheNap_TimThe.aspx" />
@@ -589,6 +590,13 @@
     </Compile>
     <Compile Include="Test_GameDT_TheNap_DuyetThe.aspx.designer.cs">
       <DependentUpon>Test_GameDT_TheNap_DuyetThe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_LichSuDuyetThe.aspx.cs">
+      <DependentUpon>Test_GameDT_TheNap_LichSuDuyetThe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_LichSuDuyetThe.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_TheNap_LichSuDuyetThe.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_GameDT_TheNap_MuaTheLoi.aspx.cs">
       <DependentUpon>Test_GameDT_TheNap_MuaTheLoi.aspx</DependentUpon>

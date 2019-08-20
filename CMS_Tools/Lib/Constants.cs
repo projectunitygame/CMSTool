@@ -173,7 +173,8 @@ namespace CMS_Tools.Lib
             LOCK_ACCOUNT_GAME_VALI,
             NOTIFICATION_VALI,
             EVENT_GIFTCODE_VALI,
-            ACCOUNT_NAME_VALI
+            ACCOUNT_NAME_VALI,
+            CONFIG_BOT_VALI
         }
 
         public enum REQUEST_TYPE: int
@@ -281,7 +282,8 @@ namespace CMS_Tools.Lib
             DELETE_FAIL_TRANSACTION_CARD,
             INPUT_CARD,
             CONFIG_CARD,
-            SET_JACKPOT_PRIZE
+            SET_JACKPOT_PRIZE,
+            CONFIG_BOT
         }
 
         public enum WEBSOCKET_STATUS: int

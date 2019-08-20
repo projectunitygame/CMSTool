@@ -89,6 +89,9 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_GAME_ACOUNT_TYPE.SET_JACKPOT_PRIZE:
                         SET_JACKPOT_PRIZE(context);
                         break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.CONFIG_BOT:
+                        CONFIG_BOT(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -103,6 +106,87 @@ namespace CMS_Tools.Apis
                 result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
+        }
+
+        private void CONFIG_BOT(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["CONFIG_BOT"] == null || (DateTime.Now - (DateTime)context.Session["CONFIG_BOT"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<UpdateBotConfigLuckDice>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<UpdateBotConfigLuckDice>(json);
+                        if (jsonData != null)
+                        {
+                            if (jsonData.MinBot < 0 || jsonData.MaxBot < 0 || jsonData.NumRichBot < 0 || jsonData.NumNormalBot < 0
+                                || jsonData.NumPoorBot < 0 || jsonData.VipChangeRate < 0 || jsonData.NorChangeRate < 0
+                                || jsonData.PoorChangeRate < 0 || jsonData.MinTimeChange < 0 || jsonData.MaxTimeChange < 0 )
+                            {
+                                result.status = Constants.NUMBER_CODE.CONFIG_BOT_VALI;
+                                result.msg = "Dữ liệu truyền vào phải từ 0 trờ lên";
+                                context.Response.Write(JsonConvert.SerializeObject(result));
+                                return;
+                            }
+                            else if (jsonData.MinBot > jsonData.MaxBot)
+                            {
+                                result.status = Constants.NUMBER_CODE.CONFIG_BOT_VALI;
+                                result.msg = "Minbot không được lớn hơn Maxbot";
+                                context.Response.Write(JsonConvert.SerializeObject(result));
+                                return;
+                            }
+                            else if (jsonData.MaxBot != (jsonData.NumRichBot+jsonData.NumNormalBot + jsonData.NumPoorBot))
+                            {
+                                result.status = Constants.NUMBER_CODE.CONFIG_BOT_VALI;
+                                result.msg = "MaxBot phải bằng NumRichBot + NumNormalBot+ NumPoorBot";
+                                context.Response.Write(JsonConvert.SerializeObject(result));
+                                return;
+                            }
+                            else
+                            {
+                                PayloadApi p = new PayloadApi()
+                                {
+                                    clientIP = UtilClass.GetIPAddress(),
+                                    data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                                };
+                                var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/UpdateBotConfigLuckDice");
+                                context.Response.Write(responseData);
+                                return;
+                            }
+
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR CONFIG_BOT: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["CONFIG_BOT"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
         }
 
         private void SET_JACKPOT_PRIZE(HttpContext context)
@@ -318,8 +402,8 @@ namespace CMS_Tools.Apis
                                 string requestId = string.Empty;
 
                                 var service = new muathe24h.MechantServicesSoapClient();
-                                string email = "Boxvn1888@gmail.com";
-                                string pass = "Tinhanhem8668";
+                                string email = "boxvn1888@gmail.com";
+                                string pass = "tinhanhem8668";
 
                                 var res = service.BuyCards(new muathe24h.UserCredentials { userName = email, pass = pass }
                                   , transactionId.ToString(), serviceCode, amount, 1);
@@ -328,7 +412,12 @@ namespace CMS_Tools.Apis
                                 string resultCode = res?.RepCode.ToString();
                                 result.data = JsonConvert.SerializeObject(res);
                                 result.msg = "resultCode:" + resultCode;
-
+                                int resu = -1;
+                                int.TryParse(resultCode, out resu);
+                                if(resu == 0)
+                                {
+                                    result.status = Constants.NUMBER_CODE.SUCCESS;
+                                }
 
                                 //if (res != null && res.RepCode == 0)
                                 //{
@@ -1484,6 +1573,21 @@ namespace CMS_Tools.Apis
             public int RoomId;
             public string AccountName;
         }
+        public class UpdateBotConfigLuckDice
+        {
+            public int MinBot;
+            public int MaxBot;
+            public int NumRichBot;
+            public int NumNormalBot;
+            public int NumPoorBot;
+            public int VipChangeRate;
+            public int NorChangeRate;
+            public int PoorChangeRate;
+            public int MinTimeChange;
+            public int MaxTimeChange;
+        }
+
+        
         #endregion
     }
 }
