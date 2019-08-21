@@ -213,7 +213,6 @@
                                         "<td>" + obj[11] + "</td>" +
                                         "<td>" + obj[12] + "</td>" +
                                         "<td>" + obj[13] + "</td>" +
-                                        "<td>" + obj[14] + "</td>" +
                                         "<td>" + deleteCard + "</td>" +
                                         "</tr>");
                                 }
@@ -305,7 +304,7 @@
                 if (result) {
                     $('.divLoading').fadeIn();
                     var json = {
-                        "CardID": ID
+                        "ID": ID
                     };
                     $.ajax({
                         type: "POST",

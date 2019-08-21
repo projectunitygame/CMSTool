@@ -14,7 +14,7 @@
                 type: "POST",
                 url: "Apis/API_GameAccount.ashx",
                 data: {
-                    type: 15
+                    type: 19
                 },
                 dataType: 'json',
                 success: function (data) {

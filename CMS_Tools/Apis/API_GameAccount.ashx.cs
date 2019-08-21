@@ -108,6 +108,7 @@ namespace CMS_Tools.Apis
             }
         }
 
+
         private void CONFIG_BOT(HttpContext context)
         {
             try
@@ -352,122 +353,36 @@ namespace CMS_Tools.Apis
                 if (context.Session["INPUT_CARD"] == null || (DateTime.Now - (DateTime)context.Session["INPUT_CARD"]).TotalMilliseconds > Constants.TIME_REQUEST)
                 {
                     string json = context.Request.Form["json"];
-                    //if (!string.IsNullOrEmpty(json))
+                    if (!string.IsNullOrEmpty(json))
                     {
-                        //try
-                        //{
-                        //    JsonConvert.DeserializeObject<DeleteFailTransactionCard>(json);
-                        //}
-                        //catch (Exception)
-                        //{
-                        //    result.status = Constants.NUMBER_CODE.ERROR_EX;
-                        //    result.msg = "Sai thông tin nhập vào";
-                        //    context.Response.Write(JsonConvert.SerializeObject(result));
-                        //    return;
-                        //}
-
-                        int cardType = 1;
-                        int total = 1;
-                        int amount = 20000;
-                        if (cardType != 1 && cardType != 2 && cardType != 3)
-                        {
-                            return;
-                        }
-
-                        int successtransaction = 0;
-                        int errortransaction = 0;
-                       
                         try
                         {
-                            string serviceCode = string.Empty;
-
-                            if (cardType == 1)
-                            {
-                                serviceCode = "VTT";
-                            }
-                            else if (cardType == 2)
-                            {
-                                serviceCode = "VMS";
-                            }
-                            else if (cardType == 3)
-                            {
-                                serviceCode = "VNP";
-                            }
-
-                            for (int i = 0; i < total; i++)
-                            {
-                                long transactionId = DateTime.Now.Ticks;
-
-                                int outRes = 0;
-                                string requestId = string.Empty;
-
-                                var service = new muathe24h.MechantServicesSoapClient();
-                                string email = "boxvn1888@gmail.com";
-                                string pass = "tinhanhem8668";
-
-                                var res = service.BuyCards(new muathe24h.UserCredentials { userName = email, pass = pass }
-                                  , transactionId.ToString(), serviceCode, amount, 1);
-
-                                Logs.SaveLog("muathe24h res:" + JsonConvert.SerializeObject(res));
-                                string resultCode = res?.RepCode.ToString();
-                                result.data = JsonConvert.SerializeObject(res);
-                                result.msg = "resultCode:" + resultCode;
-                                int resu = -1;
-                                int.TryParse(resultCode, out resu);
-                                if(resu == 0)
-                                {
-                                    result.status = Constants.NUMBER_CODE.SUCCESS;
-                                }
-
-                                //if (res != null && res.RepCode == 0)
-                                //{
-                                //    var seri = JsonConvert.DeserializeObject<List<CardObject>>(res.Data.ToString());
-                                //    if (PayDAO.InsertCard(seri[0].PinCode, seri[0].Serial, amount, string.Empty, cardType, serviceCode, "muathe24h", DateTime.Now, transactionId.ToString(), resultCode, true))
-                                //    {
-                                //        successtransaction++;
-                                //    }
-                                //    else
-                                //    {
-                                //        PayDAO.InsertCard(string.Empty, string.Empty, amount, string.Empty, cardType, serviceCode, "muathe24h", DateTime.Now, requestId, resultCode, false);
-                                //        errortransaction++;
-                                //    }
-                                //}
-                                //else
-                                //{
-                                //    PayDAO.InsertCard(string.Empty, string.Empty, amount, string.Empty, cardType, serviceCode, "muathe24h", DateTime.Now, requestId, resultCode, false);
-
-                                //    errortransaction++;
-                                //}
-                            }
-
-                            //return new
-                            //{
-                            //    suc = successtransaction,
-                            //    err = errortransaction
-                            //};
+                            JsonConvert.DeserializeObject<InputCard>(json);
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-                            Logs.SaveError("ERROR muathe24h: " + ex);
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
                         }
+                        var jsonData = JsonConvert.DeserializeObject<InputCard>(json);
+                        if (jsonData != null)
+                        {
+                            //jsonData.AccountName = accountInfo.UserName;
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
 
-                        //var jsonData = JsonConvert.DeserializeObject<DeleteFailTransactionCard>(json);
-                        //if (jsonData != null)
-                        //{
-                        //    //jsonData.AccountName = accountInfo.UserName;
-                        //    //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
 
-                        //    //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
-
-                        //    PayloadApi p = new PayloadApi()
-                        //    {
-                        //        clientIP = UtilClass.GetIPAddress(),
-                        //        data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
-                        //    };
-                        //    var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/DeleteFailTransactionCard");
-                        //    context.Response.Write(responseData);
-                        //    return;
-                        //}
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/InputCard");
+                            context.Response.Write(responseData);
+                            return;
+                        }
                     }
                 }
                 else
@@ -1586,8 +1501,13 @@ namespace CMS_Tools.Apis
             public int MinTimeChange;
             public int MaxTimeChange;
         }
+        public class InputCard
+        {
+            public int CardType;
+            public int Amount;
+            public int Qty;
+        }
 
-        
         #endregion
     }
 }

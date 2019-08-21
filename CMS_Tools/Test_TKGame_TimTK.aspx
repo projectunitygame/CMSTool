@@ -27,6 +27,15 @@
         .control-label{
 	        text-align:left !important;
         }
+        .table-responsive td, .table-responsive th{
+            text-align:center;
+        }
+        table thead tr, table tfoot tr {
+            background: #1871af;
+            color: #FFF;
+            border: 1px solid #1871af;
+            font-weight: 600;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
@@ -104,112 +113,53 @@
         </div>
     </div>
     <!-----From update customer------>
-    <div id="modal_customer" class="modal fade" data-backdrop="static" data-keyboard="false" style="display: none;">
-        <div class="modal-dialog">
+    <div id="modal_history_account" class="modal fade" data-backdrop="static" data-keyboard="false" style="display: none;">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form action="javascript:;" id="form_Agency" class="form-horizontal" novalidate="novalidate">
-                    <input type="hidden" id="customerID"/>
                     <div class="modal-body">
                     	<div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             </button>
                             <h4 class="modal-title" id="title_task">
-                                <i class="fa fa-edit"></i> QUẢN LÝ THÔNG TIN KHÁCH HÀNG</h4>
+                                <i class="fa fa-edit"></i> Lịch sử người chơi</h4>
                         </div>
                         <div class="form-body">
-                            <div class="alert alert-danger display-hide">
-                                <button class="close" data-close="alert"></button>
-                                Vui lòng kiểm tra và nhập đầy đủ thông tin!
-                            </div>
-                            <div class="alert alert-success display-hide">
-                                <button class="close" data-close="alert"></button>
-                                Nhập thông tin hợp lệ
-                            </div>
-                            <div class=row>
-                            	<div class="col-xs-10 col-xs-offset-1">
-                                	<div class="form-group  margin-top-20">
-                                        <label class="control-label col-md-3">
-                                            Mã đại lý: <span class="required" aria-required="true">* </span>
-                                        </label>
-                                        <div class="col-md-9">
-                                            <div class="input-icon right">
-                                                <i class="fa"></i>
-                                                <input id="txtAgencyCode" type="text" class="form-control" name="AgencyCode" />
-                                            </div>
-                                        </div>
-                                    </div>
+                            <ul id="myTabs" class="nav nav-tabs" role="tablist">
+                                    <!--<li role="presentation" class="active"><a href="#hPlay" id="history-play" aria-controls="hPlay" role="tab" data-toggle="tab" aria-expanded="false" >Lịch sử chơi</a></li>
+                                    <li role="presentation" class=""><a href="#hBalance" role="tab" id="history-balance" aria-controls="hBalance" data-toggle="tab" aria-expanded="true">Lịch sử số dư</a></li>
+                                    <li role="presentation" class=""><a href="#hLog" role="tab" id="history-log" aria-controls="hLog" data-toggle="tab" aria-expanded="false" >Lịch sử đăng nhập</a></li>-->
+                                    <li role="presentation" class="active"><a href="#hchargeLog" role="tab" id="history-chargelog" aria-controls="hLog" data-toggle="tab" aria-expanded="false" ">Lịch sử nạp tiền</a></li>
+                                    <li role="presentation" class=""><a href="#hcashoutLog" role="tab" id="history-cashoutlog" aria-controls="hLog" data-toggle="tab" aria-expanded="false"">Lịch sử đổi</a></li>
+                                </ul>
+                             <div id="myTabContent" class="tab-content scrollbar1" style="overflow: hidden; outline: none;" tabindex="5000">
+                                <!--<div role="tabpanel" class="tab-pane fade table-responsive active in" aria-labelledby="history-play" id="hPlay">
+                                        
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane fade table-responsive" aria-labelledby="history-balance" id="hBalance">
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade table-responsive" aria-labelledby="history-log" id="hLog">
+                                        
+                                </div>-->
+                                <div role="tabpanel" class="tab-pane fade table-responsive active in" aria-labelledby="history-chargelog" id="hchargeLog">
+                                    <table id="tbl-hchargeLog" class="table table-responsive">
+                                        <thead></thead>
+                                        <tbody></tbody>
+                                    </table>        
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane fade table-responsive" aria-labelledby="history-cashoutlog" id="hcashoutLog">
+                                    <table id="tbl-hcashoutLog" class="table table-responsive">
+                                        <thead></thead>
+                                        <tbody></tbody>
+                                    </table>  
                                 </div>
                             </div>
-                            <div class="row">
-                            	<div class="col-xs-10 col-xs-offset-1">
-                                	<div class="form-group">
-                                        <label class="control-label col-md-3">
-                                            Mật khẩu: <span class="required" aria-required="true">* </span>
-                                        </label>
-                                        <div class="col-md-6">
-                                            <div class="input-icon right">
-                                                <i class="fa"></i>
-                                                <input id="txtPassword" type="text" class="form-control" name="password" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <a class="btn btn-primary" onclick="javascript:generate()"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Tạo mới</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-xs-10 col-xs-offset-1">
-                                	<div class="form-group">
-                                        <label class="control-label col-md-3">
-                                            Email:
-                                        </label>
-                                        <div class="col-md-9">
-                                            <div class="input-icon right">
-                                                <i class="fa"></i>
-                                                <input id="txtEmail" type="text" class="form-control" name="email"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-xs-10 col-xs-offset-1">
-                                	<div class="form-group">
-                                        <label class="control-label col-md-3">
-                                            Số điện thoại: <span class="required" aria-required="true">* </span>
-                                        </label>
-                                        <div class="col-md-9">
-                                            <div class="input-icon right">
-                                                <i class="fa"></i>
-                                                <input type="text" style="width:100%;" id="txtPhone" class="form-control" name="Phone" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                            	<div class="col-xs-10 col-xs-offset-1">
-                                	<div class="form-group">
-                                        <label class="control-label col-md-3">
-                                            Tên đại lý: <span class="required" aria-required="true">* </span>
-                                        </label>
-                                        <div class="col-md-9">
-                                            <div class="input-icon right">
-                                                <i class="fa"></i>
-                                                <input type="text" style="width:100%;" id="txtAgencyName" class="form-control" name="AgencyName" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn dark btn-outline">Hủy</button>
-                        <button type="submit" class="btn green">Đăng Ký</button>
                     </div>
-                </form>
             </div>
         </div>
     </div>  
@@ -223,7 +173,7 @@
         var colFilter = null;
         jQuery(document).ready(function () {
             $('#btnAddAction').remove();
-            $('#btnAddNew').html("<i class='fa fa-plus'></  i> Tạo KH Mới");
+
             $('#txtFindData').on('keyup', function (e) {
                 if (e.keyCode == 13) {
                     TableEditable.init();
@@ -366,6 +316,7 @@
                                     var lockChat = "<a class='btn btn-xs yellow btn-circle btn-outline' onclick='LockChatAcountGame(\"" + obj[0] + "\");'> Khóa chat</a>";
                                     if (obj[9] == "True")
                                         lockChat = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnlockChatAcountGame(\"" + obj[0] + "\");'> Mở khóa chat</a>";
+                                    var hisAccount = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='ShowHistoryAccount(\"" + obj[0] + "\");'> Xem lịch sử</a>";
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
@@ -377,7 +328,7 @@
                                         "<td>" + obj[7] + "</td>" +
                                         "<td>" + obj[8] + "</td>" +
                                         "<td>" + obj[9] + "</td>" +
-                                        "<td>" + linkLock + lockChat +"</td>" +
+                                        "<td>" + linkLock + lockChat + hisAccount +"</td>" +
                                         "</tr>");
                                 }
                                 var colHiden = [];
@@ -459,6 +410,91 @@
 
         function replaceAll(str, find, replace) {
             return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+        }
+
+        function ShowHistoryAccount(ID) {
+            $('#history-chargelog').click();
+            var paramTopUp = [];
+            var paramCashOut = [];
+            paramTopUp.push(ID);
+            paramCashOut.push(ID);
+            $(".divLoading").fadeIn();
+            $.ajax({
+                type: "POST",
+                url: "Apis/Menu.ashx",
+                data: {
+                    type: 13,
+                    mid: 105,
+                    p: JSON.stringify(paramTopUp)
+                },
+                dataType: 'json',
+                success: function (res) {
+                    if (res.status == 5005) {
+                        window.location.assign("login.aspx");
+                        return;
+                    }
+                    if (res.status == 0) {
+                        $('#tbl-hchargeLog thead').html('');
+                        $('#tbl-hchargeLog tbody').html('');
+                        var strHead = '';
+                        var strBody = '';
+                        $.each(res.columnName, function (i, obj) {
+                            strHead += '<th>' + obj +'</th>';
+                        });
+                        $.each(res.data, function (i, obj) {
+                            strBody += '<tr>';
+                            $.each(obj, function (i, subObj) {
+                                strBody += '<td>' + subObj + '</td>';
+                            });
+                            strBody += '</tr>';
+                        });
+                        $('#tbl-hchargeLog thead').html(strHead);
+                        $('#tbl-hchargeLog tbody').html(strBody);
+                        $('#tbl-hchargeLog tbody tr td:last-child').remove();
+                    }
+                },
+                complete: function () {
+                    $(".divLoading").fadeOut(500);
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "Apis/Menu.ashx",
+                data: {
+                    type: 13,
+                    mid: 106,
+                    p: JSON.stringify(paramCashOut)
+                },
+                dataType: 'json',
+                success: function (res) {
+                    if (res.status == 5005) {
+                        window.location.assign("login.aspx");
+                        return;
+                    }
+                    if (res.status == 0) {
+                        $('#tbl-hcashoutLog thead').html('');
+                        $('#tbl-hcashoutLog tbody').html('');
+                        var strHead = '';
+                        var strBody = '';
+                        $.each(res.columnName, function (i, obj) {
+                            strHead += '<th>' + obj + '</th>';
+                        });
+                        $.each(res.data, function (i, obj) {
+                            strBody += '<tr>';
+                            $.each(obj, function (i, subObj) {
+                                strBody += '<td>' + subObj + '</td>';
+                            });
+                            strBody += '</tr>';
+                        });
+                        $('#tbl-hcashoutLog thead').html(strHead);
+                        $('#tbl-hcashoutLog tbody').html(strBody);
+                        $('th:last-child').remove();
+                        $('#tbl-hcashoutLog tbody tr td:last-child').remove();
+                    }
+                }
+            });
+           
+            $('#modal_history_account').modal('show');
         }
 
         function LockAcountGame(accountID){

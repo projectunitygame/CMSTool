@@ -201,7 +201,7 @@
                                         <div class="col-md-8">
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
-                                                <input type="text" style="width:100%;" id="txtPrice" class="form-control" name="Price" />
+                                                <input type="text" style="width:100%;" id="qtyCard" class="form-control" name="qtyCard" />
                                             </div>
                                         </div>
                                     </div>
@@ -212,7 +212,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn dark btn-outline">Hủy</button>
-                        <button type="submit" class="btn green">Đăng Ký</button>
+                        <button type="submit" class="btn green">Xác nhận</button>
                     </div>
                 </form>
             </div>
@@ -223,13 +223,16 @@
     <script src="assets/global/plugins/Base64JS.js"></script>
     <script src="assets/global/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="assets/global/plugins/datatables/DT_bootstrap.js"></script>
+    <script src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script src="assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
             //$('.page-toolbar').remove();
+            FormValidation.init();
             $('#btnAddNew').html("<i class='fa fa-plus'></  i> Mua thẻ");
             $('#btnAddNew').click(function () {
-                //ResetForm();
+                ResetForm();
                 $('#modal_buy_card').modal('show');
             });
             var d = AppManage.getURLParameter('agencyid');
@@ -447,7 +450,7 @@
             };
         }();
 
-
+        
 
         function formatMoney(num) {
             if (num > 0)
@@ -455,6 +458,114 @@
             else
                 return num;
         }
+        function ResetForm() {
+            $('#form_buy_card').trigger('reset');
+        }
+        function BuyCard() {
+            var json = {
+                "CardType": $('#cardType').val(),
+                "Amount": $('#valueCard').val(),
+                "Qty": $('#qtyCard').val()
+            }
+            POST_DATA("Apis/API_GameAccount.ashx", {
+                type: 15,
+                json: JSON.stringify(json)
+            }, function (res) {
+                bootbox.alert({
+                    title: "Thông báo",
+                    message: res.msg,
+                    callback: function () {
+                        $('#modal_buy_card').modal('show');
+                        TableEditable.init();
+                    }
+                })
 
+                $(".divLoading").fadeOut(500);
+
+            });
+        }
+
+        var FormValidation = function () {
+            var r = function () {
+                var e = $("#form_buy_card"),
+                    r = $(".alert-danger", e),
+                    i = $(".alert-success", e);
+                e.validate({
+                    errorElement: "span",
+                    errorClass: "help-block help-block-error",
+                    focusInvalid: !1,
+                    ignore: "",
+                    rules: {
+                        required: {
+                            number: !0,
+                            required: !0
+                        },
+                        valueCard: {
+                            number: !0,
+                            required: !0
+                        },
+                        qtyCard: {
+                            number: !0,
+                            required: !0
+                        }
+                        //email: {
+                        //    maxlength: 80,
+                        //},
+                        //Phone: {
+                        //    maxlength: 10,
+                        //    minlength: 10,
+                        //    number: !0,
+                        //    required: !0
+                        //},
+                        //AgencyName: {
+                        //    minlength: 6,
+                        //    maxlength: 150,
+                        //    required: !0
+                        //}
+                        //province: {
+                        //    required: !0
+                        //},
+                        //country: {
+                        //    required: !0
+                        //}
+                        //digits: {
+                        //    required: !0,
+                        //    digits: !0
+                        //},
+                        //creditcard: {
+                        //    required: !0,
+                        //    creditcard: !0
+                        //}
+                    },
+                    invalidHandler: function (e, t) {
+                        i.hide(), r.show(), App.scrollTo(r, -200)
+                    },
+                    errorPlacement: function (e, r) {
+                        var i = $(r).parent(".input-icon").children("i");
+                        i.removeClass("fa-check").addClass("fa-warning"), i.attr("data-original-title", e.text()).tooltip({
+                            container: "body"
+                        })
+                    },
+                    highlight: function (e) {
+                        $(e).closest(".form-group").removeClass("has-success").addClass("has-error")
+                    },
+                    unhighlight: function (e) { },
+                    success: function (e, r) {
+                        var i = $(r).parent(".input-icon").children("i");
+                        $(r).closest(".form-group").removeClass("has-error").addClass("has-success"), i.removeClass("fa-warning").addClass("fa-check");
+                    },
+                    submitHandler: function (e) {
+                        //i.show(), 
+                        r.hide(),
+                            BuyCard();
+                    }
+                })
+            }
+            return {
+                init: function () {
+                    r()
+                }
+            }
+        }();
 </script>
 </asp:Content>

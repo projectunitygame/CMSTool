@@ -239,28 +239,6 @@
     <Content Include="bin\AjaxControlToolkit.dll" />
     <Content Include="bin\Telerik.Web.UI.dll" />
     <Content Include="CategoryManage.aspx" />
-    <Content Include="Connected Services\muathe24h\CMS_Tools.muathe24h.APIResult.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\muathe24h\CMS_Tools.muathe24h.BuyCardsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\muathe24h\CMS_Tools.muathe24h.ChotCaCHEntity.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\muathe24h\CMS_Tools.muathe24h.ChotCaCHResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Connected Services\muathe24h\CMS_Tools.muathe24h.TopupMobileResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\muathe24h\MechantServices.disco" />
-    <None Include="Connected Services\muathe24h\configuration91.svcinfo" />
-    <None Include="Connected Services\muathe24h\configuration.svcinfo" />
-    <None Include="Connected Services\muathe24h\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="CreateJson_Chart.aspx" />
     <Content Include="css\bootstrap-grid.css" />
     <Content Include="css\bootstrap-grid.min.css" />
@@ -381,20 +359,19 @@
     <Content Include="TestPage.aspx" />
     <Content Include="Test_GameLogs_LichSuChoi.aspx" />
     <Content Include="Test_GiaoDich_GDTrongGame.aspx" />
-    <Content Include="Test_GiftcodeEvent.aspx" />
-    <Content Include="Test_GiftCodeThongTin.aspx" />
+    <Content Include="Test_GameDT_GiftcodeEvent.aspx" />
+    <Content Include="Test_GameDT_GiftCodeThongTin.aspx" />
     <Content Include="Test_GiaoDich_GDDaiLy.aspx" />
     <Content Include="Test_Naptien.aspx" />
     <Content Include="Test_GameDT_Quythuong.aspx" />
     <Content Include="Test_Taikhoandaily.aspx" />
-    <Content Include="Test_ThongBao.aspx" />
+    <Content Include="Test_GameDT_ThongBao.aspx" />
     <Content Include="Test_TKGame_LichSuKhoaTK.aspx" />
     <Content Include="Test_TKGame_TimTK.aspx" />
     <Content Include="Test_GameDT_TheNap_KhoThe.aspx" />
     <Content Include="Test_TKGame_TKBiKhoa.aspx" />
     <Content Include="Tools.aspx" />
     <Content Include="VetifyResetPassword.aspx" />
-    <None Include="Connected Services\muathe24h\MechantServices.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -491,11 +468,6 @@
     </Compile>
     <Compile Include="CategoryManage.aspx.designer.cs">
       <DependentUpon>CategoryManage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\muathe24h\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="CreateJson_Chart.aspx.cs">
       <DependentUpon>CreateJson_Chart.aspx</DependentUpon>
@@ -771,19 +743,19 @@
     <Compile Include="Test_GiaoDich_GDTrongGame.aspx.designer.cs">
       <DependentUpon>Test_GiaoDich_GDTrongGame.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_GiftcodeEvent.aspx.cs">
-      <DependentUpon>Test_GiftcodeEvent.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_GiftcodeEvent.aspx.cs">
+      <DependentUpon>Test_GameDT_GiftcodeEvent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_GiftcodeEvent.aspx.designer.cs">
-      <DependentUpon>Test_GiftcodeEvent.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_GiftcodeEvent.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_GiftcodeEvent.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_GiftCodeThongTin.aspx.cs">
-      <DependentUpon>Test_GiftCodeThongTin.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_GiftCodeThongTin.aspx.cs">
+      <DependentUpon>Test_GameDT_GiftCodeThongTin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_GiftCodeThongTin.aspx.designer.cs">
-      <DependentUpon>Test_GiftCodeThongTin.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_GiftCodeThongTin.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_GiftCodeThongTin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_GiaoDich_GDDaiLy.aspx.cs">
       <DependentUpon>Test_GiaoDich_GDDaiLy.aspx</DependentUpon>
@@ -813,12 +785,12 @@
     <Compile Include="Test_Taikhoandaily.aspx.designer.cs">
       <DependentUpon>Test_Taikhoandaily.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_ThongBao.aspx.cs">
-      <DependentUpon>Test_ThongBao.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_ThongBao.aspx.cs">
+      <DependentUpon>Test_GameDT_ThongBao.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_ThongBao.aspx.designer.cs">
-      <DependentUpon>Test_ThongBao.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_ThongBao.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_ThongBao.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_TKGame_LichSuKhoaTK.aspx.cs">
       <DependentUpon>Test_TKGame_LichSuKhoaTK.aspx</DependentUpon>
@@ -953,9 +925,6 @@
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\muathe24h\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

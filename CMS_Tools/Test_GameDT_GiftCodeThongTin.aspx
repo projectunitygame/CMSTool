@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GiftCodeThongTin.aspx.cs" Inherits="CMS_Tools.Test_GiftCodeThongKe" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GameDT_GiftCodeThongTin.aspx.cs" Inherits="CMS_Tools.Test_GiftCodeThongKe" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .avatar_u{
