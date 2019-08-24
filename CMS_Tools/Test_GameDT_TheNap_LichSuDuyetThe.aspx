@@ -270,6 +270,7 @@
                                         "<td>" + obj[5] + "</td>" +
                                         "<td>" + obj[6] + "</td>" +
                                         "<td>" + obj[7] + "</td>" +
+                                        "<td>" + obj[8] + "</td>" +
                                         "</tr>");
                                 }
 
@@ -297,8 +298,8 @@
                                 });
 
                                 //an column
-                                var bVis = oTable.fnSettings().aoColumns[7].bVisible;
-                                oTable.fnSetColumnVis(7, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[8].bVisible;
+                                oTable.fnSetColumnVis(8, bVis ? false : true);
 
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input

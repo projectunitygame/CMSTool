@@ -561,6 +561,9 @@ namespace CMS_Tools.Apis
 
                             //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
 
+                            jsonData.AcceptorID = accountInfo.AccountId.ToString();
+                            jsonData.AcceptorName = accountInfo.UserName;
+
                             PayloadApi p = new PayloadApi()
                             {
                                 clientIP = UtilClass.GetIPAddress(),
@@ -1453,6 +1456,8 @@ namespace CMS_Tools.Apis
         public class AcceptCard
         {
             public long CardID;
+            public string AcceptorID;
+            public string AcceptorName;
         }
         public class DeleteCashOutCard
         {
