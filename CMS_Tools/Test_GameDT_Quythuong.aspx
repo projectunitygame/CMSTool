@@ -1,6 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GameDT_Quythuong.aspx.cs" Inherits="CMS_Tools.Test_Quythuong_Minipoker" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+        .easy-autocomplete-container ul li, .easy-autocomplete-container ul .eac-category {
+            font-size: 12px !important;
+        }
+
+        .easy-autocomplete {
+            float: left;
+            margin-right: 10px;
+            width:100% !important;
+        }
         .avatar_u{
     height: 50px;
     border: 1px solid #ddd;
@@ -263,17 +272,162 @@
             </div>
         </div>
     </div>
+    <!--nhập user nổ hủ-->
+    <div id="modal_jackpot_user" class="modal fade" data-backdrop="static" data-keyboard="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="javascript:;" id="form_jackpot_user" class="form-horizontal" novalidate="novalidate">
+                    <div class="modal-body">
+                    	<div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            </button>
+                            <h4 class="modal-title">
+                                <i class="fa fa-edit"></i> NHẬP THÔNG TIN USER NỔ HŨ</h4>
+                        </div>
+                        <div class="form-body">
+                            <div class="alert alert-danger2 display-hide">
+                                <button class="close" data-close="alert"></button>
+                                Vui lòng kiểm tra và nhập đầy đủ thông tin!
+                            </div>
+                            <div class="alert alert-success2 display-hide">
+                                <button class="close" data-close="alert"></button>
+                                Nhập thông tin hợp lệ
+                            </div>
+                            <input id="ID_Game" type="hidden"/>
+                            <input id="ID_Room" type="hidden"/>
+                            <div class=row>
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group  margin-top-20">
+                                        <label class="control-label col-md-4">
+                                            Nhập tên hiển thị: <span class="required" aria-required="true">* </span>
+                                        </label> 
+                                        <div class="col-md-8">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" id="txtAccountID" name="AccountID" class="form-control" value="" />
+                                                <span class="loading1" style="display: none;width: 29px;position: absolute;right: 1px;top: 3px;"><img style='max-width: 100%;' src="assets/global/img/loading_spinner.gif"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn dark btn-outline">Hủy</button>
+                        <button type="submit" class="btn green">Đăng Ký</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </asp:Content>
-<asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">\
+<asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">
     <script src="assets/global/plugins/Base64JS.js"></script>
     <script src="assets/global/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="assets/global/plugins/datatables/DT_bootstrap.js"></script>
+    <script src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
     <script type="text/javascript">
+        $(function () {
+            var options = {
+                url: function (param) {
+                    return "Apis/API_GameAccount.ashx";
+                },
+                getValue: function (element) {
+                    $('.loading1').fadeOut(10);
+                    return element.AccountID + '-' + element.DisplayName;
+                },
+                ajaxSettings: {
+                    dataType: "json",
+                    method: "POST",
+                    data: {
+                        type: 19,
+                        mid: AppManage.getURLParameter('m')
+                    }
+                },
+                preparePostData: function (data) {
+                    $('.loading1').fadeIn();
+                    data.param = $("#txtAccountID").val();
+                    return data;
+                },
+                requestDelay: 500
+            };
+            $("#txtAccountID").easyAutocomplete(options);
+        })
+
         jQuery(document).ready(function () {
             $('.page-toolbar').remove();
             //load danh sach dai ly
             TableEditable.init();
+            FormValidation.init();
         });
+
+        var FormValidation = function () {
+            var r = function () {
+                var e = $("#form_jackpot_user"),
+                    r = $(".alert-danger", e),
+                    i = $(".alert-success", e);
+                e.validate({
+                    errorElement: "span",
+                    errorClass: "help-block help-block-error",
+                    focusInvalid: !1,
+                    ignore: "",
+                    rules: {
+                        AccountID: {
+                            required: !0
+                        }
+                        //MenhGia: {
+                        //    required: !0
+                        //},
+                        //Captcha: {
+                        //    required: !0
+                        //}
+                        //province: {
+                        //    required: !0
+                        //},
+                        //country: {
+                        //    required: !0
+                        //}
+                        //digits: {
+                        //    required: !0,
+                        //    digits: !0
+                        //},
+                        //creditcard: {
+                        //    required: !0,
+                        //    creditcard: !0
+                        //}
+                    },
+                    invalidHandler: function (e, t) {
+                        i.hide(), r.show(), App.scrollTo(r, -200)
+                    },
+                    errorPlacement: function (e, r) {
+                        var i = $(r).parent(".input-icon").children("i");
+                        i.removeClass("fa-check").addClass("fa-warning"), i.attr("data-original-title", e.text()).tooltip({
+                            container: "body"
+                        })
+                    },
+                    highlight: function (e) {
+                        $(e).closest(".form-group").removeClass("has-success").addClass("has-error")
+                    },
+                    unhighlight: function (e) { },
+                    success: function (e, r) {
+                        var i = $(r).parent(".input-icon").children("i");
+                        $(r).closest(".form-group").removeClass("has-error").addClass("has-success"), i.removeClass("fa-warning").addClass("fa-check");
+                    },
+                    submitHandler: function (e) {
+                        //i.show(), 
+                        r.hide(),
+                            SubMitJackpotUser();
+                    }
+                })
+            }
+            return {
+                init: function () {
+                    r()
+                }
+            }
+        }();
+
 
         var _pageSize = 50,
             oTable = null,
@@ -355,13 +509,15 @@
                                     var func = 'ExceptFund(1,"' + obj[0] + '");';
                                     var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
                                     var funcJackpot = 'Jackpot(3,"' + obj[0] + '");';
-                                    var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ</a>";
+                                    var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ(Bot)</a>";
+                                    var funcJackpotUser = 'JackpotUser(3,"' + obj[0] + '");';
+                                    var JackpotUser = "<a class='btn btn-xs green btn-circle btn-outline' onclick='" + funcJackpotUser + "' >Đập hũ (User) </a>";
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
                                         "<td>" + obj[2] + "</td>" +
                                         "<td>" + obj[3] + "</td>" +
-                                        "<td>" + updateGiftcode + Jackpot +  "</td>" +
+                                        "<td>" + updateGiftcode + Jackpot + JackpotUser +  "</td>" +
                                         "</tr>");
                                 }
 
@@ -458,13 +614,15 @@
                                     var func = 'ExceptFund(2,"' + obj[0] + '");';
                                     var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
                                     var funcJackpot = 'Jackpot(1,"' + obj[0] + '");';
-                                    var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ</a>";
+                                    var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ (Bot) </a>";
+                                    var funcJackpotUser = 'JackpotUser(1,"' + obj[0] + '");';
+                                    var JackpotUser = "<a class='btn btn-xs green btn-circle btn-outline' onclick='" + funcJackpotUser + "' >Đập hũ (User) </a>";
                                     $('#tbl_datatable2 tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
                                         "<td>" + obj[2] + "</td>" +
                                         "<td>" + obj[3] + "</td>" +
-                                        "<td>" + updateGiftcode + Jackpot + "</td>" +
+                                        "<td>" + updateGiftcode + Jackpot + JackpotUser + "</td>" +
                                         "</tr>");
                                 }
 
@@ -562,13 +720,15 @@
                                         var func = 'ExceptFund(3,"' + obj[0] + '");';
                                         var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
                                         var funcJackpot = 'Jackpot(2,"' + obj[0] + '");';
-                                        var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ</a>";
+                                        var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ (Bot) </a>";
+                                        var funcJackpotUser = 'JackpotUser(2,"' + obj[0] + '");';
+                                        var JackpotUser = "<a class='btn btn-xs green btn-circle btn-outline' onclick='" + funcJackpotUser + "' >Đập hũ (User) </a>";
                                         $('#tbl_datatable3 tbody').append("<tr>" +
                                             "<td>" + obj[0] + "</td>" +
                                             "<td>" + obj[1] + "</td>" +
                                             "<td>" + obj[2] + "</td>" +
                                             "<td>" + obj[3] + "</td>" +
-                                            "<td>" + updateGiftcode + Jackpot+ "</td>" +
+                                            "<td>" + updateGiftcode + Jackpot + JackpotUser + "</td>" +
                                             "</tr>");
                                     }
 
@@ -667,13 +827,15 @@
                                         var func = 'ExceptFund(4,"' + obj[0] + '");';
                                         var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
                                         var funcJackpot = 'Jackpot(8,"' + obj[0] + '");';
-                                        var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ</a>";
+                                        var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ (Bot)</a>";
+                                        var funcJackpotUser = 'JackpotUser(8,"' + obj[0] + '");';
+                                        var JackpotUser = "<a class='btn btn-xs green btn-circle btn-outline' onclick='" + funcJackpotUser + "' >Đập hũ (User) </a>";
                                         $('#tbl_datatable4 tbody').append("<tr>" +
                                             "<td>" + obj[0] + "</td>" +
                                             "<td>" + obj[1] + "</td>" +
                                             "<td>" + obj[2] + "</td>" +
                                             "<td>" + obj[3] + "</td>" +
-                                            "<td>" + updateGiftcode + Jackpot + "</td>" +
+                                            "<td>" + updateGiftcode + Jackpot + JackpotUser +"</td>" +
                                             "</tr>");
                                     }
 
@@ -771,13 +933,15 @@
                                         var func = 'ExceptFund(5,"' + obj[0] + '");';
                                         var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
                                         var funcJackpot = 'Jackpot(4,"' + obj[0] + '");';
-                                        var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ</a>";
+                                        var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ (Bot)</a>";
+                                        var funcJackpotUser = 'JackpotUser(4,"' + obj[0] + '");';
+                                        var JackpotUser = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpotUser + "' >Đập hũ (User) </a>";
                                         $('#tbl_datatable5 tbody').append("<tr>" +
                                             "<td>" + obj[0] + "</td>" +
                                             "<td>" + obj[1] + "</td>" +
                                             "<td>" + obj[2] + "</td>" +
                                             "<td>" + obj[3] + "</td>" +
-                                            "<td>" + updateGiftcode + Jackpot+ "</td>" +
+                                            "<td>" + updateGiftcode + Jackpot + JackpotUser+ "</td>" +
                                             "</tr>");
                                     }
 
@@ -1165,6 +1329,49 @@
             });
         }
 
+        function JackpotUser(type, roomId) {
+            $('#ID_Game').val(type);
+            $('#ID_Room').val(roomId);
+            $('#modal_jackpot_user').modal('show');
+        }
+        function SubMitJackpotUser() {
+            
+            var json = {
+                "GameId": $('#ID_Game').val(),
+                "RoomId": $('#ID_Room').val(),
+                "AccountName": $("#txtAccountID").val().split('-')[1],
+                "AccountID": $("#txtAccountID").val().split('-')[0]
+            }
+            POST_DATA("Apis/API_GameAccount.ashx", {
+                type: 17,
+                json: JSON.stringify(json)
+            }, function (res) {
+                if (res.status == 1) {
+                    bootbox.alert({
+                        title: "Thông báo",
+                        message: res.msg,
+                        callback: function () {
+                            TableEditable.init();
+                            $('#txtAccountID').val('');
+                            $('#modal_jackpot_user').modal('hide');
+                        }
+                    })
+                }
+                else {
+                    bootbox.alert({
+                        title: "Thông báo",
+                        message: res.msg,
+                        callback: function () {
+
+                        }
+                    })
+                }
+
+                
+
+            });
+        }
+
         function Jackpot(type, roomId) {
             //@_GameId = 1 -- Nong trai
             //@_GameId = 2 -- Mafia
@@ -1174,13 +1381,14 @@
             //@_GameId = 8 -- hai vuong
             bootbox.prompt({
                 size: "small",
-                title: "Nhập tên tài khoản trúng thưởng?",
+                title: "Nhập tên bot trúng thưởng?",
                 callback: function (result) {
                     if (result !== null) {
                         var json = {
                             "GameId": type,
                             "RoomId": roomId,
-                            "AccountName": result
+                            "AccountName": result,
+                            "AccountID": 0
                         }
                         POST_DATA("Apis/API_GameAccount.ashx", {
                             type: 17,

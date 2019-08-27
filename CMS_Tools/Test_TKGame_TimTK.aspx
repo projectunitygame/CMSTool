@@ -317,6 +317,7 @@
                                     if (obj[9] == "True")
                                         lockChat = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnlockChatAcountGame(\"" + obj[0] + "\");'> Mở khóa chat</a>";
                                     var hisAccount = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='ShowHistoryAccount(\"" + obj[0] + "\");'> Xem lịch sử</a>";
+                                    var addMoney = "<a class='btn btn-xs green btn-circle btn-outline' onclick='AddMoney(\"" + obj[0] + "\");'> Nạp tiền</a>";
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
@@ -328,7 +329,7 @@
                                         "<td>" + obj[7] + "</td>" +
                                         "<td>" + obj[8] + "</td>" +
                                         "<td>" + obj[9] + "</td>" +
-                                        "<td>" + linkLock + lockChat + hisAccount +"</td>" +
+                                        "<td>" + linkLock + lockChat + hisAccount + addMoney + "</td>" +
                                         "</tr>");
                                 }
                                 var colHiden = [];
@@ -410,6 +411,41 @@
 
         function replaceAll(str, find, replace) {
             return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+        }
+
+        function AddMoney(ID) {
+            bootbox.prompt({
+                size: "small",
+                title: "Nhập số tiền cộng cho User?",
+                callback: function (result) {
+                    if (result !== null) {
+                        var json = {
+                            "recipientID": ID,
+                            "amount": result
+                        }
+                        POST_DATA("Apis/API_GameAccount.ashx", {
+                            type: 20,
+                            json: JSON.stringify(json)
+                        }, function (res) {
+                            //if (res.status == 1) {
+
+                            //}
+                            //else {
+
+                            //}
+
+                            bootbox.alert({
+                                title: "Thông báo",
+                                message: res.msg,
+                                callback: function () {
+                                    TableEditable.init();
+                                }
+                            })
+
+                        });
+                    }
+                }
+            });
         }
 
         function ShowHistoryAccount(ID) {

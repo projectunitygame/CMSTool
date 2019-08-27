@@ -27,7 +27,18 @@
 .control-label{
 	text-align:left !important;
 }
-
+.content-total-money {
+    border-radius: 5px !important;
+    border-color: #ff7143 !important;
+    background: #ff7143 !important;
+    text-align: center;
+    font-weight: bold;
+    color: #fff !important;
+}
+.content-total-money.style-2 {
+    background: #a2d368 !important;
+    border-color: #a2d368 !important;
+}
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
@@ -99,7 +110,24 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-md-2 col-md-offset-6" style="margin-bottom: 10px;">
+                        <div class="col-md-6">
+                            <div class="col-md-6" style="margin-bottom: 10px;">
+                                <label class="control-label label-balance">Tổng tiền nạp</label>
+                                <div class="input-group" style="width:100%">
+                                    <input class="form-control content-total-money" id="totalTopup" disabled="">
+                                </div>
+ 
+                            </div>
+                            <div class="col-md-6" style="margin-bottom: 10px;">
+                                <label class="control-label label-balance">Tổng tiền đổi</label>
+                                <div class="input-group" style="width:100%">
+                                    <input class="form-control content-total-money style-2" id="totalCastout" disabled="">
+                                </div>
+                            
+                            
+                            </div>
+                        </div>
+                        <div class="col-md-2" style="margin-bottom: 10px;">
                             <label class="control-label label-balance">Tìm kiếm</label>
                             <button id="btnFindData" type="button" class="btn green form-control"><i class="icon-magnifier"></i> Search</button>
                         </div>
@@ -259,16 +287,21 @@
                                     //$('#filterColumn').val("DateCreated");
                                 }
                                 _dataTable = [];
+                                var totalTopUp = 0
+                                var totalCashOut = 0;
                                 for (var i = 0; i < data.data.length; i++) {
-                                    var obj = data.data[i];
+                                    var obj = data.data[i]
+                                    totalTopUp += parseInt(obj[0]);
+                                    totalCashOut += parseInt(obj[1]);
                                     $('#tbl_datatable tbody').append("<tr>" +
-                                        "<td>" + obj[0] + "</td>" +
-                                        "<td>" + obj[1] + "</td>" +
+                                        "<td>" + formatMoney(parseInt(obj[0])) + "</td>" +
+                                        "<td>" + formatMoney(parseInt(obj[1])) + "</td>" +
                                         "<td>" + obj[2] + "</td>" +
                                         "<td>" + obj[3] + "</td>" +
                                         "</tr>");
                                 }
-
+                                $('#totalTopup').val(formatMoney(totalTopUp));
+                                $('#totalCastout').val(formatMoney(totalCashOut));
 
                                 var colHiden = [];
                                 oTable = table.dataTable({

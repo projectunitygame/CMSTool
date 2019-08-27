@@ -283,7 +283,9 @@ namespace CMS_Tools.Lib
             INPUT_CARD,
             CONFIG_CARD,
             SET_JACKPOT_PRIZE,
-            CONFIG_BOT
+            CONFIG_BOT,
+            FIND_GAME_ACCOUNT,
+            TRANFER_MONEY_TO_AGENCY_USER
         }
 
         public enum WEBSOCKET_STATUS: int

@@ -92,6 +92,12 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_GAME_ACOUNT_TYPE.CONFIG_BOT:
                         CONFIG_BOT(context);
                         break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.FIND_GAME_ACCOUNT:
+                        FIND_GAME_ACCOUNT(context);
+                        break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.TRANFER_MONEY_TO_AGENCY_USER:
+                        TRANFER_MONEY_TO_AGENCY_USER(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -108,6 +114,182 @@ namespace CMS_Tools.Apis
             }
         }
 
+        private void TRANFER_MONEY_TO_AGENCY_USER(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["TRANFER_MONEY_TO_AGENCY_USER"] == null || (DateTime.Now - (DateTime)context.Session["TRANFER_MONEY_TO_AGENCY_USER"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    var listMenus = (List<int>)context.Session["menuId"];
+                    var userRules = (List<List<int>>)context.Session["menuRule"];
+                    if (!listMenus.Contains(26))
+                    {
+                        result.status = Constants.NUMBER_CODE.YOU_DO_NOT_PERMISSION_TO_ACCESS;
+                        result.msg = "Tài khoản không có quyền truy cập!";
+                        context.Response.Write(JsonConvert.SerializeObject(result));
+                        return;
+                    }
+                    var indexMenu = listMenus.IndexOf(26);
+                    var myRules = userRules[indexMenu];
+                    if (!myRules.Contains((int)Constants.USER_PERMISSTIONS.CHUYEN_TIEN_USERS))
+                    {
+                        result.status = Constants.NUMBER_CODE.YOU_DO_NOT_PERMISSION_TO_ACCESS;
+                        result.msg = "Tài khoản không có quyền chuyển tiền!";
+                        context.Response.Write(JsonConvert.SerializeObject(result));
+                        return;
+                    }
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<TransferMoneyToUser>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+                        var jsonData = JsonConvert.DeserializeObject<TransferMoneyToUser>(json);
+
+                        if (jsonData != null)
+                        {
+                            Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+
+                            if (string.IsNullOrEmpty(jsonData.recipientID.ToString()))
+                            {
+                                result.status = Constants.NUMBER_CODE.DATA_NULL;
+                                result.msg = "Vui lòng nhập tài khoản người nhận!";
+                            }
+                            else if (string.IsNullOrEmpty(jsonData.amount.ToString()))
+                            {
+                                result.status = Constants.NUMBER_CODE.CAPTCHA_NULL;
+                                result.msg = "Vui lòng nhập số tiền cần chuyển";
+                            }
+                            else
+                            {
+                                //if (jsonData.OTP == "")
+                                //{
+                                //    if (string.IsNullOrEmpty(jsonData.captcha))
+                                //    {
+                                //        result.status = Constants.NUMBER_CODE.CAPTCHA_NULL;
+                                //        result.msg = "Vui lòng nhập captcha!";
+                                //        context.Response.Write(JsonConvert.SerializeObject(result));
+                                //        return;
+                                //    }
+                                //    else
+                                //    {
+                                //        if (context.Session["captcha"] != null && jsonData.captcha != context.Session["captcha"].ToString())
+                                //        {
+                                //            result.status = Constants.NUMBER_CODE.CAPTCHA_ERROR;
+                                //            result.msg = "Mã captcha không đúng!";
+                                //            context.Response.Write(JsonConvert.SerializeObject(result));
+                                //            return;
+                                //        }
+                                //    }
+                                //}
+                                accountInfo = (UserInfo)context.Session["account"];
+                                jsonData.senderID = accountInfo.AccountId.ToString();
+                                if (string.IsNullOrEmpty(jsonData.senderID))
+                                {
+                                    result.status = Constants.NUMBER_CODE.DATA_NULL;
+                                    result.msg = "Không tìn thấy thông tin tài khoản";
+                                    context.Response.Write(JsonConvert.SerializeObject(result));
+                                    return;
+                                }
+                                jsonData.ip = UtilClass.GetIPAddress();
+                                //Logs.SaveLog("jsonData TRANFER_MONEY_TO_AGENCY_USER" + JsonConvert.SerializeObject(jsonData));
+                                PayloadApi p = new PayloadApi()
+                                {
+                                    clientIP = UtilClass.GetIPAddress(),
+                                    data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                                };
+                                var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/TransferMoneyToUser");
+                                context.Response.Write(responseData);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            result.status = Constants.NUMBER_CODE.DATA_NULL;
+                            result.msg = "Thông tin không được để trống";
+                        }
+                    }
+                    else
+                    {
+                        result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                        result.msg = "Không thể kết nối";
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR TRANFER_MONEY_TO_AGENCY_USER: " + ex, ex, true);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = ex.ToString();
+            }
+            finally
+            {
+                context.Session["TRANFER_MONEY_TO_AGENCY_USER"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+        private void FIND_GAME_ACCOUNT(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["FIND_GAME_ACCOUNT"] == null || (DateTime.Now - (DateTime)context.Session["FIND_GAME_ACCOUNT"]).TotalMilliseconds > 200)
+                {
+                    FindAgencyEntity findAgencyEntity = new FindAgencyEntity();
+                    findAgencyEntity.param = context.Request.Form["param"];
+                    findAgencyEntity.topN = 20;
+                    Logs.SaveLog(JsonConvert.SerializeObject(findAgencyEntity));
+                    if (string.IsNullOrEmpty(findAgencyEntity.param))
+                    {
+                        result.status = Constants.NUMBER_CODE.DATA_NULL;
+                        result.msg = "Không có từ khóa tìm kiếm được nhập!";
+                    }
+                    else
+                    {
+                        PayloadApi p = new PayloadApi()
+                        {
+                            clientIP = UtilClass.GetIPAddress(),
+                            data = Encryptor.EncryptString(JsonConvert.SerializeObject(findAgencyEntity), Constants.API_SECRETKEY)
+                        };
+                        var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/FindGameAccount");
+                        var d = JsonConvert.DeserializeObject<ResultSearchUserGame>(responseData);
+                        //{ "status":0,"msg":null,"data":[{"AgencyID":9,"DisplayName":"Đại Lý 1","AgencyCode":"daily1","Phone":"0962474560"}]}
+                        //[{"CustomerID":31,"CustomerCode":"HC1900031","CompanyName":"MR-VIET CO LTD","CompanyName2":"MR-VIET CO LTD","TaxCode":"","Email":"","Phone":"","Contact":"TUAN","Contact2":"TUAN","CreateDate":"2019-07-03T08:59:03.983","Status":1,"Address":"21/1E NGUYEN ANH THU BA DIEM HOC MON","City":56,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":0,"LoaiHinhSX_ID":0,"LastUpdate":"2019-07-03T08:59:03.983"},{"CustomerID":30,"CustomerCode":"BD1900030","CompanyName":"MINH LONG","CompanyName2":"MINH LONG","TaxCode":"","Email":"","Phone":"","Contact":"TUAN","Contact2":"TUAN","CreateDate":"2019-07-02T09:24:20.28","Status":1,"Address":"KCN VIETNAM SINGAGPORE","City":8,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":0,"LastUpdate":"2019-07-02T09:24:20.28"},{"CustomerID":29,"CustomerCode":"BD1900029","CompanyName":"APPAREL","CompanyName2":"APPAREL","TaxCode":"","Email":"","Phone":"","Contact":"TUẤN","Contact2":"TUAN","CreateDate":"2019-07-01T17:03:25.523","Status":1,"Address":"46 DAI LO TU DO VSIP,THUAN AN ,BD","City":8,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":0,"LastUpdate":"2019-07-01T17:03:25.523"},{"CustomerID":28,"CustomerCode":"DN1900028","CompanyName":"NANGYANG","CompanyName2":"NANGYANG","TaxCode":"","Email":"","Phone":"","Contact":"TUẤN","Contact2":"TUAN","CreateDate":"2019-06-25T14:00:23.617","Status":1,"Address":"BLOCK C LONG KHANH,DONG NAI","City":17,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":0,"LoaiHinhSX_ID":2,"LastUpdate":"2019-06-25T14:00:23.617"},{"CustomerID":27,"CustomerCode":"BT1900027","CompanyName":"HOANG LOAN","CompanyName2":"HOANG LOAN","TaxCode":"","Email":"","Phone":"","Contact":"TUAN","Contact2":"TUAN","CreateDate":"2019-06-22T14:07:46.897","Status":0,"Address":"","City":7,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":2,"LastUpdate":"2019-06-22T14:29:22.227"},{"CustomerID":26,"CustomerCode":"BT1900026","CompanyName":"HOÀNG LOAN","CompanyName2":"HOANG LOAN","TaxCode":"","Email":"","Phone":"","Contact":"TUAN","Contact2":"TUAN","CreateDate":"2019-06-22T13:57:47.35","Status":1,"Address":"GIỒNG TRÔM ,BỂN TRE","City":7,"Country":84,"KM":0,"Address1":"","City1":7,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":2,"LastUpdate":"2019-06-22T14:28:58.757"},{"CustomerID":22,"CustomerCode":"HC1900022","CompanyName":"TRANG VANG","CompanyName2":"TRANG VANG","TaxCode":"","Email":"","Phone":"","Contact":"TUẤN","Contact2":"TUAN","CreateDate":"2019-06-13T09:55:48.3","Status":1,"Address":"26/1ATRẦN QUÝ CÁP ,BÌNH THẠNH","City":56,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":2,"LastUpdate":"2019-06-13T09:55:48.3"},{"CustomerID":19,"CustomerCode":"TG1900019","CompanyName":"ITOCHU(HỒNG ÂN)","CompanyName2":"ITOCHU(HONG AN)","TaxCode":"","Email":"","Phone":"","Contact":"TUẤN","Contact2":"TUAN","CreateDate":"2019-06-08T11:58:34.03","Status":1,"Address":"CAI LẬY,TIỀN GIANG","City":51,"Country":84,"KM":0,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":2,"LastUpdate":"2019-06-08T11:58:34.03"},{"CustomerID":13,"CustomerCode":"HC1900013","CompanyName":"TUYẾN HIỆP LỢI","CompanyName2":"TUYEN HIEP LOI","TaxCode":"","Email":"","Phone":"","Contact":"Ms HOA","Contact2":"Ms HOA","CreateDate":"2019-05-31T14:16:57.62","Status":1,"Address":"Ap 3, xã Phạm Văn Cội, Huyện Củ Chi, TP. HCM","City":56,"Country":84,"KM":130,"Address1":"","City1":0,"Country1":84,"KM1":0,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":1,"LastUpdate":"2019-05-31T14:17:20.997"},{"CustomerID":6,"CustomerCode":"HC1900006","CompanyName":"CTY TNHH TM DV TÚ PHÚ","CompanyName2":"CTY TNHH TM DV TU PHU","TaxCode":"0333345774","Email":"","Phone":"0988867676","Contact":"Anh Tú","Contact2":"Anh Tu","CreateDate":"2019-04-07T14:47:45.453","Status":1,"Address":"268 To Hien Thanh","City":56,"Country":84,"KM":10,"Address1":"80/23 Trinh Dinh Thao","City1":1,"Country1":84,"KM1":200,"Address2":"","City2":0,"Country2":84,"KM2":0,"LoaiDon_ID":1,"LoaiHinhSX_ID":1,"LastUpdate":"2019-06-01T00:59:40.683"}]
+                        context.Response.Write(JsonConvert.SerializeObject(d.data));
+                        return;
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR FIND_GAME_ACCOUNT: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = ex.ToString();
+            }
+            finally
+            {
+                context.Session["FIND_GAME_ACCOUNT"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
 
         private void CONFIG_BOT(HttpContext context)
         {
@@ -1492,6 +1674,7 @@ namespace CMS_Tools.Apis
             public int GameId;
             public int RoomId;
             public string AccountName;
+            public long AccountID;
         }
         public class UpdateBotConfigLuckDice
         {
@@ -1512,7 +1695,34 @@ namespace CMS_Tools.Apis
             public int Amount;
             public int Qty;
         }
-
+        public class ResultSearchUserGame
+        {
+            public Constants.NUMBER_CODE status { get; set; }
+            public string msg { get; set; }
+            public List<UserGameInfo> data { get; set; }
+        }
+        public class UserGameInfo
+        {
+            public long AccountID;
+            public string DisplayName;
+            public string Username;
+            public string Tel;
+        }
+        public class TransferMoneyToUser
+        {
+            public TransferMoneyToUser()
+            {
+                OTP = "";
+                reason = "";
+            }
+            public string senderID;
+            public long recipientID;
+            public decimal amount;
+            public string ip;
+            public string reason;
+            public string OTP;
+            public string captcha;
+        }
         #endregion
     }
 }
