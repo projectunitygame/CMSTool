@@ -544,8 +544,10 @@
                                     ]
                                 });
 
-                                //var bVis = oTable.fnSettings().aoColumns[7].bVisible;
-                                //oTable.fnSetColumnVis(7, bVis ? false : true);
+                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                    var bVis = oTable.fnSettings().aoColumns[4].bVisible;
+                                    oTable.fnSetColumnVis(4, bVis ? false : true);
+                                }
                             }
                             else {
                                 bootbox.alert({
@@ -649,8 +651,10 @@
                                     ]
                                 });
 
-                                //var bVis = oTable2.fnSettings().aoColumns[5].bVisible;
-                                //oTable2.fnSetColumnVis(5, bVis ? false : true);
+                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                    var bVis = oTable2.fnSettings().aoColumns[4].bVisible;
+                                    oTable2.fnSetColumnVis(4, bVis ? false : true);
+                                }
 
                             }
                             else {
@@ -755,8 +759,10 @@
                                         ]
                                     });
 
-                                    //var bVis = oTable3.fnSettings().aoColumns[5].bVisible;
-                                    //oTable3.fnSetColumnVis(5, bVis ? false : true);
+                                    if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                        var bVis = oTable3.fnSettings().aoColumns[4].bVisible;
+                                        oTable3.fnSetColumnVis(4, bVis ? false : true);
+                                    }
 
                                 }
                                 else {
@@ -862,8 +868,10 @@
                                         ]
                                     });
 
-                                    //var bVis = oTable4.fnSettings().aoColumns[5].bVisible;
-                                    //oTable4.fnSetColumnVis(5, bVis ? false : true);
+                                    if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                        var bVis = oTable4.fnSettings().aoColumns[4].bVisible;
+                                        oTable4.fnSetColumnVis(4, bVis ? false : true);
+                                    }
 
                                 }
                                 else {
@@ -968,8 +976,10 @@
                                         ]
                                     });
 
-                                    //var bVis = oTable5.fnSettings().aoColumns[5].bVisible;
-                                    //oTable5.fnSetColumnVis(5, bVis ? false : true);
+                                    if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                        var bVis = oTable5.fnSettings().aoColumns[4].bVisible;
+                                        oTable5.fnSetColumnVis(4, bVis ? false : true);
+                                    }
 
                                 }
                                 else {
@@ -1072,8 +1082,10 @@
                                         ]
                                     });
 
-                                    //var bVis = oTable6.fnSettings().aoColumns[5].bVisible;
-                                    //oTable6.fnSetColumnVis(5, bVis ? false : true);
+                                    if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                        var bVis = oTable6.fnSettings().aoColumns[5].bVisible;
+                                        oTable6.fnSetColumnVis(5, bVis ? false : true);
+                                    }
 
                                 }
                                 else {

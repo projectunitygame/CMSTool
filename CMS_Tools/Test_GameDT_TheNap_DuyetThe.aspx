@@ -103,8 +103,8 @@
         });
         var colFilter = null;
         jQuery(document).ready(function () {
-            $('#btnAddNew').remove();
-
+            
+            $('.page-toolbar').remove();
             $('#txtFindData').on('keyup', function (e) {
                 if (e.keyCode == 13) {
                     TableEditable.init();
@@ -236,12 +236,10 @@
                                     ]
                                 });
 
-                                //var bVis = oTable.fnSettings().aoColumns[1].bVisible;
-                                //oTable.fnSetColumnVis(1, bVis ? false : true);
-                                //var bVis = oTable.fnSettings().aoColumns[3].bVisible;
-                                //oTable.fnSetColumnVis(3, bVis ? false : true);
-                                //var bVis = oTable.fnSettings().aoColumns[6].bVisible;
-                                //oTable.fnSetColumnVis(6, bVis ? false : true);
+                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                    var bVis = oTable.fnSettings().aoColumns[11].bVisible;
+                                    oTable.fnSetColumnVis(11, bVis ? false : true);
+                                }
 
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input

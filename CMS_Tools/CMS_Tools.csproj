@@ -262,6 +262,7 @@
     <Content Include="DragDrop.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="SuperNova.aspx" />
+    <Content Include="testenscrypt.aspx" />
     <Content Include="testNaptien.aspx" />
     <Content Include="Test_BaoCaoThongKe.aspx" />
     <Content Include="Test_GameData_GameID.aspx" />
@@ -506,6 +507,13 @@
     </Compile>
     <Compile Include="SuperNova.aspx.designer.cs">
       <DependentUpon>SuperNova.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="testenscrypt.aspx.cs">
+      <DependentUpon>testenscrypt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testenscrypt.aspx.designer.cs">
+      <DependentUpon>testenscrypt.aspx</DependentUpon>
     </Compile>
     <Compile Include="testNaptien.aspx.cs">
       <DependentUpon>testNaptien.aspx</DependentUpon>

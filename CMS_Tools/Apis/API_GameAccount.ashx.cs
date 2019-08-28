@@ -95,8 +95,8 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_GAME_ACOUNT_TYPE.FIND_GAME_ACCOUNT:
                         FIND_GAME_ACCOUNT(context);
                         break;
-                    case Constants.REQUEST_GAME_ACOUNT_TYPE.TRANFER_MONEY_TO_AGENCY_USER:
-                        TRANFER_MONEY_TO_AGENCY_USER(context);
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.ADD_MONEY_USER:
+                        ADD_MONEY_USER(context);
                         break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
@@ -114,36 +114,17 @@ namespace CMS_Tools.Apis
             }
         }
 
-        private void TRANFER_MONEY_TO_AGENCY_USER(HttpContext context)
+        private void ADD_MONEY_USER(HttpContext context)
         {
-            try
-            {
-                if (context.Session["TRANFER_MONEY_TO_AGENCY_USER"] == null || (DateTime.Now - (DateTime)context.Session["TRANFER_MONEY_TO_AGENCY_USER"]).TotalMilliseconds > Constants.TIME_REQUEST)
+            try { 
+                if (context.Session["ADD_MONEY_USER"] == null || (DateTime.Now - (DateTime)context.Session["ADD_MONEY_USER"]).TotalMilliseconds > Constants.TIME_REQUEST)
                 {
-                    var listMenus = (List<int>)context.Session["menuId"];
-                    var userRules = (List<List<int>>)context.Session["menuRule"];
-                    if (!listMenus.Contains(26))
-                    {
-                        result.status = Constants.NUMBER_CODE.YOU_DO_NOT_PERMISSION_TO_ACCESS;
-                        result.msg = "Tài khoản không có quyền truy cập!";
-                        context.Response.Write(JsonConvert.SerializeObject(result));
-                        return;
-                    }
-                    var indexMenu = listMenus.IndexOf(26);
-                    var myRules = userRules[indexMenu];
-                    if (!myRules.Contains((int)Constants.USER_PERMISSTIONS.CHUYEN_TIEN_USERS))
-                    {
-                        result.status = Constants.NUMBER_CODE.YOU_DO_NOT_PERMISSION_TO_ACCESS;
-                        result.msg = "Tài khoản không có quyền chuyển tiền!";
-                        context.Response.Write(JsonConvert.SerializeObject(result));
-                        return;
-                    }
                     string json = context.Request.Form["json"];
                     if (!string.IsNullOrEmpty(json))
                     {
                         try
                         {
-                            JsonConvert.DeserializeObject<TransferMoneyToUser>(json);
+                            JsonConvert.DeserializeObject<AddMoneyUser>(json);
                         }
                         catch (Exception)
                         {
@@ -152,76 +133,31 @@ namespace CMS_Tools.Apis
                             context.Response.Write(JsonConvert.SerializeObject(result));
                             return;
                         }
-                        var jsonData = JsonConvert.DeserializeObject<TransferMoneyToUser>(json);
 
+                        var jsonData = JsonConvert.DeserializeObject<AddMoneyUser>(json);
                         if (jsonData != null)
                         {
-                            Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
-
-
-                            if (string.IsNullOrEmpty(jsonData.recipientID.ToString()))
+                            if (jsonData.Amount < 0)
                             {
-                                result.status = Constants.NUMBER_CODE.DATA_NULL;
-                                result.msg = "Vui lòng nhập tài khoản người nhận!";
-                            }
-                            else if (string.IsNullOrEmpty(jsonData.amount.ToString()))
-                            {
-                                result.status = Constants.NUMBER_CODE.CAPTCHA_NULL;
-                                result.msg = "Vui lòng nhập số tiền cần chuyển";
+                                result.status = Constants.NUMBER_CODE.ADD_MONEY_USER_VALI;
+                                result.msg = "Dữ liệu truyền vào phải từ 0 trờ lên";
+                                context.Response.Write(JsonConvert.SerializeObject(result));
+                                return;
                             }
                             else
                             {
-                                //if (jsonData.OTP == "")
-                                //{
-                                //    if (string.IsNullOrEmpty(jsonData.captcha))
-                                //    {
-                                //        result.status = Constants.NUMBER_CODE.CAPTCHA_NULL;
-                                //        result.msg = "Vui lòng nhập captcha!";
-                                //        context.Response.Write(JsonConvert.SerializeObject(result));
-                                //        return;
-                                //    }
-                                //    else
-                                //    {
-                                //        if (context.Session["captcha"] != null && jsonData.captcha != context.Session["captcha"].ToString())
-                                //        {
-                                //            result.status = Constants.NUMBER_CODE.CAPTCHA_ERROR;
-                                //            result.msg = "Mã captcha không đúng!";
-                                //            context.Response.Write(JsonConvert.SerializeObject(result));
-                                //            return;
-                                //        }
-                                //    }
-                                //}
-                                accountInfo = (UserInfo)context.Session["account"];
-                                jsonData.senderID = accountInfo.AccountId.ToString();
-                                if (string.IsNullOrEmpty(jsonData.senderID))
-                                {
-                                    result.status = Constants.NUMBER_CODE.DATA_NULL;
-                                    result.msg = "Không tìn thấy thông tin tài khoản";
-                                    context.Response.Write(JsonConvert.SerializeObject(result));
-                                    return;
-                                }
-                                jsonData.ip = UtilClass.GetIPAddress();
-                                //Logs.SaveLog("jsonData TRANFER_MONEY_TO_AGENCY_USER" + JsonConvert.SerializeObject(jsonData));
+
                                 PayloadApi p = new PayloadApi()
                                 {
                                     clientIP = UtilClass.GetIPAddress(),
                                     data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
                                 };
-                                var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/TransferMoneyToUser");
+                                var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/AddMoneyUser");
                                 context.Response.Write(responseData);
                                 return;
                             }
+
                         }
-                        else
-                        {
-                            result.status = Constants.NUMBER_CODE.DATA_NULL;
-                            result.msg = "Thông tin không được để trống";
-                        }
-                    }
-                    else
-                    {
-                        result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
-                        result.msg = "Không thể kết nối";
                     }
                 }
                 else
@@ -232,16 +168,17 @@ namespace CMS_Tools.Apis
             }
             catch (Exception ex)
             {
-                Logs.SaveError("ERROR TRANFER_MONEY_TO_AGENCY_USER: " + ex, ex, true);
+                Logs.SaveError("ERROR ADD_MONEY_USER: " + ex);
                 result.status = Constants.NUMBER_CODE.ERROR_EX;
-                result.msg = ex.ToString();
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
             }
             finally
             {
-                context.Session["TRANFER_MONEY_TO_AGENCY_USER"] = DateTime.Now;
+                context.Session["ADD_MONEY_USER"] = DateTime.Now;
             }
-            context.Response.Write(JsonConvert.SerializeObject(result));
+        context.Response.Write(JsonConvert.SerializeObject(result));
         }
+
         private void FIND_GAME_ACCOUNT(HttpContext context)
         {
             try
@@ -259,6 +196,7 @@ namespace CMS_Tools.Apis
                     }
                     else
                     {
+
                         PayloadApi p = new PayloadApi()
                         {
                             clientIP = UtilClass.GetIPAddress(),
@@ -1722,6 +1660,16 @@ namespace CMS_Tools.Apis
             public string reason;
             public string OTP;
             public string captcha;
+        }
+        public class AddMoneyUser
+        {
+            public AddMoneyUser()
+            {
+                Reason = "";
+            }
+            public long UserID;
+            public string Reason;
+            public int Amount;
         }
         #endregion
     }

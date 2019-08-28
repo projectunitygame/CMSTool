@@ -331,6 +331,9 @@
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
+            if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                $('.page-toolbar').remove();
+            }
             $('#btnAddNew').html("<i class='fa fa-plus'></  i> Tạo KH Mới");
             FormValidation.init();
             $('#btnAddNew').click(function () {
@@ -688,7 +691,10 @@
                                 oTable.fnSetColumnVis(28, bVis ? false : true);
                                 var bVis = oTable.fnSettings().aoColumns[29].bVisible;
                                 oTable.fnSetColumnVis(29, bVis ? false : true);
-
+                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                    var bVis = oTable.fnSettings().aoColumns[30].bVisible;
+                                    oTable.fnSetColumnVis(30, bVis ? false : true);
+                                }
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown

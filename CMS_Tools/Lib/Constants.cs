@@ -174,7 +174,8 @@ namespace CMS_Tools.Lib
             NOTIFICATION_VALI,
             EVENT_GIFTCODE_VALI,
             ACCOUNT_NAME_VALI,
-            CONFIG_BOT_VALI
+            CONFIG_BOT_VALI,
+            ADD_MONEY_USER_VALI
         }
 
         public enum REQUEST_TYPE: int
@@ -285,7 +286,7 @@ namespace CMS_Tools.Lib
             SET_JACKPOT_PRIZE,
             CONFIG_BOT,
             FIND_GAME_ACCOUNT,
-            TRANFER_MONEY_TO_AGENCY_USER
+            ADD_MONEY_USER
         }
 
         public enum WEBSOCKET_STATUS: int

@@ -86,6 +86,16 @@
                         <div class="col-md-3" style="margin-bottom: 10px;">
                         	<label class="control-label label-balance">Chọn lọc dữ liệu theo cột</label>
                             <select id="filterColumn" class="form-control">
+                                <option value="AccountID">ID tài khoản</option>
+                                <option value="Username">Tên đăng nhập</option>
+                                <!--<option value="UserType">UserType</option>-->
+                                <option value="DisplayName">Tên hiển thị</option>
+                                <option value="Gold">Số tiền hiện tại</option>
+                                <!--<option value="CreatedTime">Ngày tạo</option>-->
+                                <option value="Tel">Số điện thoại</option>
+                                <!--<option value="LockedGold">LockedGold</option>
+                                <option value="IsBlocked">IsBlocked</option>
+                                <option value="IsMute">IsMute</option>-->
                             </select>
                         </div>
                         <div class="col-md-3" style="margin-bottom: 10px;">
@@ -293,9 +303,9 @@
                                     if (data.data.length > 20) {
                                         $('#tbl_datatable tfoot tr').append(strHtmlColName);
                                     }
-                                    $('#filterColumn').html(selectCol);
-                                    if ($('#filterColumn').val() == "")
-                                        $('#filterColumn').val("AccountID");
+                                    //$('#filterColumn').html(selectCol);
+                                    //if ($('#filterColumn').val() == "")
+                                    //    $('#filterColumn').val("AccountID");
                                 }
                                 else {
                                     $('#tbl_datatable tfoot tr').empty();
@@ -359,7 +369,10 @@
                                 oTable.fnSetColumnVis(8, bVis ? false : true);
                                 var bVis = oTable.fnSettings().aoColumns[9].bVisible;
                                 oTable.fnSetColumnVis(9, bVis ? false : true);
-
+                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                    var bVis = oTable.fnSettings().aoColumns[10].bVisible;
+                                    oTable.fnSetColumnVis(10, bVis ? false : true);
+                                }
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
@@ -420,8 +433,8 @@
                 callback: function (result) {
                     if (result !== null) {
                         var json = {
-                            "recipientID": ID,
-                            "amount": result
+                            "UserID": ID,
+                            "Amount": result
                         }
                         POST_DATA("Apis/API_GameAccount.ashx", {
                             type: 20,
