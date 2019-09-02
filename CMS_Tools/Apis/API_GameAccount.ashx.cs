@@ -98,6 +98,9 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_GAME_ACOUNT_TYPE.ADD_MONEY_USER:
                         ADD_MONEY_USER(context);
                         break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.DEDUCT_GOLD_USER:
+                        DEDUCT_GOLD_USER(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -113,7 +116,72 @@ namespace CMS_Tools.Apis
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
         }
+        private void DEDUCT_GOLD_USER(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["DEDUCT_GOLD_USER"] == null || (DateTime.Now - (DateTime)context.Session["DEDUCT_GOLD_USER"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<DeductGoldUser>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
 
+                        var jsonData = JsonConvert.DeserializeObject<DeductGoldUser>(json);
+                        if (jsonData != null)
+                        {
+                            if (jsonData.Amount < 0)
+                            {
+                                result.status = Constants.NUMBER_CODE.ADD_MONEY_USER_VALI;
+                                result.msg = "Dữ liệu truyền vào phải từ 0 trờ lên";
+                                context.Response.Write(JsonConvert.SerializeObject(result));
+                                return;
+                            }
+                            else
+                            {
+                                jsonData.UserID = accountInfo.AccountId;
+                                jsonData.UserName = accountInfo.UserName;
+                                PayloadApi p = new PayloadApi()
+                                {
+                                    clientIP = UtilClass.GetIPAddress(),
+                                    data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                                };
+                                var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/DeductGoldUser");
+                                context.Response.Write(responseData);
+                                return;
+                            }
+
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR DEDUCT_GOLD_USER: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["ADD_MONEY_USER"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
         private void ADD_MONEY_USER(HttpContext context)
         {
             try { 
@@ -146,7 +214,7 @@ namespace CMS_Tools.Apis
                             }
                             else
                             {
-
+                                jsonData.SenderID = accountInfo.AccountId.ToString();
                                 PayloadApi p = new PayloadApi()
                                 {
                                     clientIP = UtilClass.GetIPAddress(),
@@ -362,6 +430,9 @@ namespace CMS_Tools.Apis
                                 //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
 
                                 //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+
+                                jsonData.CreatorId = accountInfo.AccountId.ToString();
 
                                 PayloadApi p = new PayloadApi()
                                 {
@@ -1613,6 +1684,7 @@ namespace CMS_Tools.Apis
             public int RoomId;
             public string AccountName;
             public long AccountID;
+            public string CreatorId;
         }
         public class UpdateBotConfigLuckDice
         {
@@ -1646,21 +1718,7 @@ namespace CMS_Tools.Apis
             public string Username;
             public string Tel;
         }
-        public class TransferMoneyToUser
-        {
-            public TransferMoneyToUser()
-            {
-                OTP = "";
-                reason = "";
-            }
-            public string senderID;
-            public long recipientID;
-            public decimal amount;
-            public string ip;
-            public string reason;
-            public string OTP;
-            public string captcha;
-        }
+       
         public class AddMoneyUser
         {
             public AddMoneyUser()
@@ -1670,6 +1728,17 @@ namespace CMS_Tools.Apis
             public long UserID;
             public string Reason;
             public int Amount;
+            public string SenderID;
+        }
+        public class DeductGoldUser
+        {
+            public int ID;
+            public long AccountId;
+            public long Amount;
+            public string Description;
+            public string UserName;
+            public int UserID;
+            //public string Balance;
         }
         #endregion
     }

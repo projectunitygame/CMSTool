@@ -286,7 +286,8 @@ namespace CMS_Tools.Lib
             SET_JACKPOT_PRIZE,
             CONFIG_BOT,
             FIND_GAME_ACCOUNT,
-            ADD_MONEY_USER
+            ADD_MONEY_USER,
+            DEDUCT_GOLD_USER
         }
 
         public enum WEBSOCKET_STATUS: int
