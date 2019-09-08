@@ -259,6 +259,10 @@ table.table {
         })
 
         jQuery(document).ready(function () {
+            if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                $('.btnTopup').remove();
+            }
+
             FormValidation.init();
             $('#txt_MenhGia').change(function () {
                 if ($("#txt_MenhGia")[0].selectedIndex > 0) {

@@ -168,7 +168,14 @@ namespace CMS_Tools.Lib
             CAPTCHA_NULL,
             CAPTCHA_ERROR,
             INFO_CREATE_AGENCY_VALI,
-            AMOUNT_WRONG
+            AMOUNT_WRONG,
+            TRYPARSE_ERROR,
+            LOCK_ACCOUNT_GAME_VALI,
+            NOTIFICATION_VALI,
+            EVENT_GIFTCODE_VALI,
+            ACCOUNT_NAME_VALI,
+            CONFIG_BOT_VALI,
+            ADD_MONEY_USER_VALI
         }
 
         public enum REQUEST_TYPE: int
@@ -254,7 +261,33 @@ namespace CMS_Tools.Lib
             UNLOCK_AGENCY,
             AUTO_COMPLETE_SEARCH,
             BUY_CASH,
-            VERIFIRE_CAPTCHA
+            VERIFIRE_CAPTCHA,
+            CHANGE_DISPLAY_AGENCY
+        }
+
+        public enum REQUEST_GAME_ACOUNT_TYPE : int
+        {
+            LOCK_GAME_ACCOUNT = 1,
+            UNLOCK_GAME_ACCOUNT,
+            LOCK_CHAT_GAME_ACCOUNT,
+            UNLOCK_CHAT_GAME_ACCOUNT,
+            CREATE_SCHEME_NOTIFICATION,
+            UPDATE_SCHEME_NOTIFICATION,
+            DELETE_SCHEME_NOTIFICATION,
+            CREATE_EVENT_GIFTCODE,
+            UPDATE_EVENT_GIFTCODE,
+            DELETE_EVENT_GIFTCODE,
+            EXCEPT_FUND_GAME,
+            ACCEPT_CARD,
+            DELETE_CASH_OUT_CARD,
+            DELETE_FAIL_TRANSACTION_CARD,
+            INPUT_CARD,
+            CONFIG_CARD,
+            SET_JACKPOT_PRIZE,
+            CONFIG_BOT,
+            FIND_GAME_ACCOUNT,
+            ADD_MONEY_USER,
+            DEDUCT_GOLD_USER
         }
 
         public enum WEBSOCKET_STATUS: int

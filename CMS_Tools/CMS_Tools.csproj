@@ -57,6 +57,8 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -259,8 +261,24 @@
     <Content Include="Dashboard.aspx" />
     <Content Include="DragDrop.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="SuperNova.aspx" />
+    <Content Include="testenscrypt.aspx" />
+    <Content Include="testNaptien.aspx" />
     <Content Include="Test_BaoCaoThongKe.aspx" />
     <Content Include="Test_GameData_GameID.aspx" />
+    <Content Include="Test_GameDT_CauHinhBotTaiXiu.aspx" />
+    <Content Include="Test_NhanThuong_CauHinh.aspx" />
+    <Content Include="Test_NhanThuong_TyLe.aspx" />
+    <Content Include="Test_NhanThuong_LichSu.aspx" />
+    <Content Include="Test_NhanThuong_DanhSachQuaTang.aspx" />
+    <Content Include="Test_GameDT_LichSuNoHu.aspx" />
+    <Content Include="Test_GameDT_Quythuong_LichSu.aspx" />
+    <Content Include="Test_GameDT_TheNap_CauHinhThe.aspx" />
+    <Content Include="Test_GameDT_TheNap_DuyetThe.aspx" />
+    <Content Include="Test_GameDT_TheNap_LichSuDuyetThe.aspx" />
+    <Content Include="Test_GameDT_TheNap_MuaTheLoi.aspx" />
+    <Content Include="Test_GameDT_TheNap_ThongKeDoiNap.aspx" />
+    <Content Include="Test_GameDT_TheNap_TimThe.aspx" />
     <Content Include="Test_GameLogs_KungfuPanda.aspx" />
     <Content Include="Global.asax" />
     <Content Include="HtmlPage1.html" />
@@ -345,15 +363,27 @@
     <Content Include="TestFunc.aspx" />
     <Content Include="TestPage.aspx" />
     <Content Include="Test_GameLogs_LichSuChoi.aspx" />
-    <Content Include="Test_GiftcodeEvent.aspx" />
-    <Content Include="Test_GiftCodeThongTin.aspx" />
-    <Content Include="Test_LichSuGiaoDich.aspx" />
+    <Content Include="Test_GiaoDich_GDTrongGame.aspx" />
+    <Content Include="Test_GameDT_GiftcodeEvent.aspx" />
+    <Content Include="Test_GameDT_GiftCodeThongTin.aspx" />
+    <Content Include="Test_GiaoDich_GDDaiLy.aspx" />
     <Content Include="Test_Naptien.aspx" />
+    <Content Include="Test_GameDT_Quythuong.aspx" />
+    <Content Include="Test_Vippoint_LichSu.aspx" />
+    <Content Include="Test_Publisher.aspx" />
     <Content Include="Test_Taikhoandaily.aspx" />
-    <Content Include="Test_TaiKhoanGame.aspx" />
-    <Content Include="Test_TheNapThongKe.aspx" />
+    <Content Include="Test_GameDT_ThongBao.aspx" />
+    <Content Include="Test_TKGame_LichSuCongTien.aspx" />
+    <Content Include="Test_TKGame_LichSuKhoaTK.aspx" />
+    <Content Include="Test_TKGame_TimTK.aspx" />
+    <Content Include="Test_GameDT_TheNap_KhoThe.aspx" />
+    <Content Include="Test_TKGame_TKBiKhoa.aspx" />
     <Content Include="Tools.aspx" />
     <Content Include="VetifyResetPassword.aspx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -376,6 +406,9 @@
     </Compile>
     <Compile Include="Apis\API_Customer.ashx.cs">
       <DependentUpon>API_Customer.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Apis\API_GameAccount.ashx.cs">
+      <DependentUpon>API_GameAccount.ashx</DependentUpon>
     </Compile>
     <Compile Include="Apis\API_Order.ashx.cs">
       <DependentUpon>API_Order.ashx</DependentUpon>
@@ -470,6 +503,32 @@
     <Compile Include="Entity\ErrorLogs.cs" />
     <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\SaveLogs.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SuperNova.aspx.cs">
+      <DependentUpon>SuperNova.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperNova.aspx.designer.cs">
+      <DependentUpon>SuperNova.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="testenscrypt.aspx.cs">
+      <DependentUpon>testenscrypt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testenscrypt.aspx.designer.cs">
+      <DependentUpon>testenscrypt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="testNaptien.aspx.cs">
+      <DependentUpon>testNaptien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testNaptien.aspx.designer.cs">
+      <DependentUpon>testNaptien.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Test_BaoCaoThongKe.aspx.cs">
       <DependentUpon>Test_BaoCaoThongKe.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -483,6 +542,97 @@
     </Compile>
     <Compile Include="Test_GameData_GameID.aspx.designer.cs">
       <DependentUpon>Test_GameData_GameID.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_CauHinhBotTaiXiu.aspx.cs">
+      <DependentUpon>Test_GameDT_CauHinhBotTaiXiu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_CauHinhBotTaiXiu.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_CauHinhBotTaiXiu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_NhanThuong_CauHinh.aspx.cs">
+      <DependentUpon>Test_NhanThuong_CauHinh.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_NhanThuong_CauHinh.aspx.designer.cs">
+      <DependentUpon>Test_NhanThuong_CauHinh.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_NhanThuong_TyLe.aspx.cs">
+      <DependentUpon>Test_NhanThuong_TyLe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_NhanThuong_TyLe.aspx.designer.cs">
+      <DependentUpon>Test_NhanThuong_TyLe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_NhanThuong_LichSu.aspx.cs">
+      <DependentUpon>Test_NhanThuong_LichSu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_NhanThuong_LichSu.aspx.designer.cs">
+      <DependentUpon>Test_NhanThuong_LichSu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_NhanThuong_DanhSachQuaTang.aspx.cs">
+      <DependentUpon>Test_NhanThuong_DanhSachQuaTang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_NhanThuong_DanhSachQuaTang.aspx.designer.cs">
+      <DependentUpon>Test_NhanThuong_DanhSachQuaTang.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_LichSuNoHu.aspx.cs">
+      <DependentUpon>Test_GameDT_LichSuNoHu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_LichSuNoHu.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_LichSuNoHu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_Quythuong_LichSu.aspx.cs">
+      <DependentUpon>Test_GameDT_Quythuong_LichSu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_Quythuong_LichSu.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_Quythuong_LichSu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_CauHinhThe.aspx.cs">
+      <DependentUpon>Test_GameDT_TheNap_CauHinhThe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_CauHinhThe.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_TheNap_CauHinhThe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_DuyetThe.aspx.cs">
+      <DependentUpon>Test_GameDT_TheNap_DuyetThe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_DuyetThe.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_TheNap_DuyetThe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_LichSuDuyetThe.aspx.cs">
+      <DependentUpon>Test_GameDT_TheNap_LichSuDuyetThe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_LichSuDuyetThe.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_TheNap_LichSuDuyetThe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_MuaTheLoi.aspx.cs">
+      <DependentUpon>Test_GameDT_TheNap_MuaTheLoi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_MuaTheLoi.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_TheNap_MuaTheLoi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_ThongKeDoiNap.aspx.cs">
+      <DependentUpon>Test_GameDT_TheNap_ThongKeDoiNap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_ThongKeDoiNap.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_TheNap_ThongKeDoiNap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_TimThe.aspx.cs">
+      <DependentUpon>Test_GameDT_TheNap_TimThe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_TimThe.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_TheNap_TimThe.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_GameLogs_KungfuPanda.aspx.cs">
       <DependentUpon>Test_GameLogs_KungfuPanda.aspx</DependentUpon>
@@ -629,26 +779,33 @@
     <Compile Include="Test_GameLogs_LichSuChoi.aspx.designer.cs">
       <DependentUpon>Test_GameLogs_LichSuChoi.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_GiftcodeEvent.aspx.cs">
-      <DependentUpon>Test_GiftcodeEvent.aspx</DependentUpon>
+    <Compile Include="Test_GiaoDich_GDTrongGame.aspx.cs">
+      <DependentUpon>Test_GiaoDich_GDTrongGame.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_GiftcodeEvent.aspx.designer.cs">
-      <DependentUpon>Test_GiftcodeEvent.aspx</DependentUpon>
+    <Compile Include="Test_GiaoDich_GDTrongGame.aspx.designer.cs">
+      <DependentUpon>Test_GiaoDich_GDTrongGame.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_GiftCodeThongTin.aspx.cs">
-      <DependentUpon>Test_GiftCodeThongTin.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_GiftcodeEvent.aspx.cs">
+      <DependentUpon>Test_GameDT_GiftcodeEvent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_GiftCodeThongTin.aspx.designer.cs">
-      <DependentUpon>Test_GiftCodeThongTin.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_GiftcodeEvent.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_GiftcodeEvent.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_LichSuGiaoDich.aspx.cs">
-      <DependentUpon>Test_LichSuGiaoDich.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_GiftCodeThongTin.aspx.cs">
+      <DependentUpon>Test_GameDT_GiftCodeThongTin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_LichSuGiaoDich.aspx.designer.cs">
-      <DependentUpon>Test_LichSuGiaoDich.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_GiftCodeThongTin.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_GiftCodeThongTin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GiaoDich_GDDaiLy.aspx.cs">
+      <DependentUpon>Test_GiaoDich_GDDaiLy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GiaoDich_GDDaiLy.aspx.designer.cs">
+      <DependentUpon>Test_GiaoDich_GDDaiLy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_Naptien.aspx.cs">
       <DependentUpon>Test_Naptien.aspx</DependentUpon>
@@ -657,6 +814,27 @@
     <Compile Include="Test_Naptien.aspx.designer.cs">
       <DependentUpon>Test_Naptien.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Test_GameDT_Quythuong.aspx.cs">
+      <DependentUpon>Test_GameDT_Quythuong.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_Quythuong.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_Quythuong.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_Vippoint_LichSu.aspx.cs">
+      <DependentUpon>Test_Vippoint_LichSu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_Vippoint_LichSu.aspx.designer.cs">
+      <DependentUpon>Test_Vippoint_LichSu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_Publisher.aspx.cs">
+      <DependentUpon>Test_Publisher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_Publisher.aspx.designer.cs">
+      <DependentUpon>Test_Publisher.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Test_Taikhoandaily.aspx.cs">
       <DependentUpon>Test_Taikhoandaily.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -664,19 +842,47 @@
     <Compile Include="Test_Taikhoandaily.aspx.designer.cs">
       <DependentUpon>Test_Taikhoandaily.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_TaiKhoanGame.aspx.cs">
-      <DependentUpon>Test_TaiKhoanGame.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_ThongBao.aspx.cs">
+      <DependentUpon>Test_GameDT_ThongBao.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_TaiKhoanGame.aspx.designer.cs">
-      <DependentUpon>Test_TaiKhoanGame.aspx</DependentUpon>
+    <Compile Include="Test_GameDT_ThongBao.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_ThongBao.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_TheNapThongKe.aspx.cs">
-      <DependentUpon>Test_TheNapThongKe.aspx</DependentUpon>
+    <Compile Include="Test_TKGame_LichSuCongTien.aspx.cs">
+      <DependentUpon>Test_TKGame_LichSuCongTien.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_TheNapThongKe.aspx.designer.cs">
-      <DependentUpon>Test_TheNapThongKe.aspx</DependentUpon>
+    <Compile Include="Test_TKGame_LichSuCongTien.aspx.designer.cs">
+      <DependentUpon>Test_TKGame_LichSuCongTien.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_TKGame_LichSuKhoaTK.aspx.cs">
+      <DependentUpon>Test_TKGame_LichSuKhoaTK.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_TKGame_LichSuKhoaTK.aspx.designer.cs">
+      <DependentUpon>Test_TKGame_LichSuKhoaTK.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_TKGame_TimTK.aspx.cs">
+      <DependentUpon>Test_TKGame_TimTK.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_TKGame_TimTK.aspx.designer.cs">
+      <DependentUpon>Test_TKGame_TimTK.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_KhoThe.aspx.cs">
+      <DependentUpon>Test_GameDT_TheNap_KhoThe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GameDT_TheNap_KhoThe.aspx.designer.cs">
+      <DependentUpon>Test_GameDT_TheNap_KhoThe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_TKGame_TKBiKhoa.aspx.cs">
+      <DependentUpon>Test_TKGame_TKBiKhoa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_TKGame_TKBiKhoa.aspx.designer.cs">
+      <DependentUpon>Test_TKGame_TKBiKhoa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tools.aspx.cs">
       <DependentUpon>Tools.aspx</DependentUpon>
@@ -738,6 +944,7 @@
     <Content Include="css\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="Apis\Captcha.ashx" />
     <Content Include="Apis\API_Agency.ashx" />
+    <Content Include="Apis\API_GameAccount.ashx" />
     <None Include="packages.config" />
     <Content Include="Site1.Master" />
     <Content Include="Server\ServerHandler.ashx" />
@@ -776,6 +983,12 @@
     <Folder Include="assets\layouts\layout2\scripts\" />
     <Folder Include="assets\layouts\layout3\img\" />
     <Folder Include="assets\layouts\layout\img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

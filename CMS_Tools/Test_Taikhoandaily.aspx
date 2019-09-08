@@ -149,6 +149,9 @@
                                     <td>DateLogin</td>
                                     <td>CreatorID</td>
                                     <td>CreatorName</td>
+                                    <td>Display</td>
+                                    <td>Infomation</td>
+                                    <td>FB</td>
                                     <td>Edit</td>
                                 </tr>
                             </thead>
@@ -328,6 +331,9 @@
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
+            if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                $('.page-toolbar').remove();
+            }
             $('#btnAddNew').html("<i class='fa fa-plus'></  i> Tạo KH Mới");
             FormValidation.init();
             $('#btnAddNew').click(function () {
@@ -357,6 +363,22 @@
             });
             ComponentsPickers.init();
         });
+
+        function ChangeDisplayStt(type,id) {
+            //console.log("type:" + type);
+            $('.divLoading').fadeIn();
+            POST_DATA("Apis/API_Agency.ashx", {
+                type: 7,
+                display: type,
+                agencyID : id
+            }, function (res) {
+                if (res.status == 1) {
+                    TableEditable.init();
+                }
+                $('.divLoading').fadeOut();
+
+            });
+        }
 
         var _dateStart = null;
         var _dateEnd = null;
@@ -454,6 +476,9 @@
                                     "<td>DateLogin</td>" +
                                     "<td>CreatorID</td>" +
                                     "<td>CreatorName</td>" +
+                                    "<td>Display</td>" +
+                                    "<td>Infomation</td>" +
+                                    "<td>FB</td>" +
                                     "<td style='width:200px'>Chỉnh sửa</td>";
                                 if (oTable != null) {
                                     oTable.fnDestroy();
@@ -483,9 +508,12 @@
                                 for (var i = 0; i < data.data.length; i++) {
                                     var obj = data.data[i];
                                     var linkLock = "<a class='btn btn-xs red btn-circle btn-outline' onclick='LockAgency(\"" + obj[0].replace('uwin.', '') + "\");'> Khóa</a>";
+                                    var linkLockInfomation = "<a class='btn btn-xs purple btn-circle btn-outline' onclick='ChangeDisplayStt(false,`" + obj[0].replace('uwin.', '')+"`);'> Tắt hiển thị</a>";
                                     var base64Str = Base64.encode(obj[0] + '-' + obj[4]);
                                     if (obj[8] == "True")
                                         linkLock = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnLockAgency(\"" + obj[0].replace('uwin.', '') + "\");'> Mở khóa</a>";
+                                    if (obj[26] == "False") 
+                                        linkLockInfomation = "<a class='btn btn-xs default btn-circle btn-outline' onclick='ChangeDisplayStt(true,`" + obj[0].replace('uwin.', '') +"`);'> Mở hiển thị</a>";
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
@@ -513,7 +541,10 @@
                                         "<td>" + obj[23] + "</td>" +
                                         "<td>" + obj[24] + "</td>" +
                                         "<td>" + obj[25] + "</td>" +
-                                        "<td>" + linkLock +
+                                        "<td>" + obj[26] + "</td>" +
+                                        "<td>" + obj[27] + "</td>" +
+                                        "<td>" + obj[28] + "</td>" +
+                                        "<td>" + linkLock + linkLockInfomation +
                                         "<a class='btn btn-xs blue btn-circle btn-outline' href='Page.aspx?m=30&agencyid=" + base64Str + "' target='_blank'> Lịch sử giao dịch</a>" +
                                         "<a class='btn btn-xs green btn-circle btn-outline' href='Page.aspx?m=27&agencyid=" + base64Str + "' target='_blank'> Nạp tiền</a></td > " +
                                         "</tr>");
@@ -550,6 +581,9 @@
                                     sOut += '<tr><td><i>Ngày đăng nhập:</i></td><td>' + aData[24] + '</td></tr>';
                                     sOut += '<tr><td><i>ID người tạo:</i></td><td>' + aData[25] + '</td></tr>';
                                     sOut += '<tr><td><i>Tài khoản người tạo:</i></td><td>' + aData[26] + '</td></tr>';
+                                    //sOut += '<tr><td><i>Hiển thị:</i></td><td>' + aData[27] + '</td></tr>';
+                                    sOut += '<tr><td><i>Thông tin đại lý:</i></td><td>' + aData[28] + '</td></tr>';
+                                    sOut += '<tr><td><i>Facebook link:</i></td><td>' + aData[29] + '</td></tr>';
                                     sOut += '<tr><td colspan=2 style="text-align: center; background: #ccc;">HẠN MỨC GIAO DỊCH:</td></tr>';
                                     sOut += '<tr><td><i>Hạn mức mỗi lần:</i></td><td>' + aData[16] + '</td></tr>';
                                     sOut += '<tr><td><i>Hạn mức mỗi ngày:</i></td><td>' + aData[17] + '</td></tr>';
@@ -651,7 +685,16 @@
                                 oTable.fnSetColumnVis(25, bVis ? false : true);
                                 var bVis = oTable.fnSettings().aoColumns[26].bVisible;
                                 oTable.fnSetColumnVis(26, bVis ? false : true);
-
+                                var bVis = oTable.fnSettings().aoColumns[27].bVisible;
+                                oTable.fnSetColumnVis(27, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[28].bVisible;
+                                oTable.fnSetColumnVis(28, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[29].bVisible;
+                                oTable.fnSetColumnVis(29, bVis ? false : true);
+                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                    var bVis = oTable.fnSettings().aoColumns[30].bVisible;
+                                    oTable.fnSetColumnVis(30, bVis ? false : true);
+                                }
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown

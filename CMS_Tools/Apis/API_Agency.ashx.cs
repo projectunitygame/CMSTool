@@ -55,6 +55,9 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_AGENCY_TYPE.VERIFIRE_CAPTCHA:
                         VERIFIRE_CAPTCHA(context);
                         break;
+                    case Constants.REQUEST_AGENCY_TYPE.CHANGE_DISPLAY_AGENCY:
+                        CHANGE_DISPLAY_AGENCY(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -69,6 +72,68 @@ namespace CMS_Tools.Apis
                 result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
+        }
+
+        private void CHANGE_DISPLAY_AGENCY(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["CHANGE_DISPLAY_AGENCY"] == null || (DateTime.Now - (DateTime)context.Session["CHANGE_DISPLAY_AGENCY"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    UpdateDisplayAgencyEntity jsonData = new UpdateDisplayAgencyEntity();
+                    bool display = true;
+                    if (string.IsNullOrEmpty(context.Request.Form["display"]))
+                    {
+                        result.status = Constants.NUMBER_CODE.DATA_NULL;
+                        result.msg = "Giá trị chọn không tồn tại!";
+                    }
+                    else if (!bool.TryParse(context.Request.Form["display"], out display))
+                    {
+                        result.status = Constants.NUMBER_CODE.TRYPARSE_ERROR;
+                        result.msg = "Dữ liệu truyền vào không đúng!";
+                    }
+                    else if (string.IsNullOrEmpty(context.Request.Form["agencyID"]))
+                    {
+                        result.status = Constants.NUMBER_CODE.DATA_NULL;
+                        result.msg = "Tài khoản không tồn tại!";
+                    }
+                    
+                    else
+                    {
+                        display = bool.Parse(context.Request.Form["display"]);
+                        jsonData.agencyID = context.Request.Form["agencyID"];
+                        jsonData.display = display;
+                        jsonData.creatorID = accountInfo.AccountId;
+                        jsonData.creatorName = accountInfo.UserName;
+                        jsonData.ip = UtilClass.GetIPAddress();
+                        //Logs.SaveLog("jsonData TRANFER_MONEY_TO_AGENCY_USER" + JsonConvert.SerializeObject(jsonData));
+                        PayloadApi p = new PayloadApi()
+                        {
+                            clientIP = UtilClass.GetIPAddress(),
+                            data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                        };
+                        var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/UpdateDisplay_Agency");
+                        context.Response.Write(responseData);
+                        return;
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR CHANGE_DISPLAY_AGENCY: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = ex.ToString();
+            }
+            finally
+            {
+                context.Session["CHANGE_DISPLAY_AGENCY"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
         }
 
         private void VERIFIRE_CAPTCHA(HttpContext context)
@@ -563,6 +628,15 @@ namespace CMS_Tools.Apis
         public string agencyID;
         public int creatorID;
         public string creatorName;
+    }
+
+    public class UpdateDisplayAgencyEntity
+    {
+        public string agencyID;
+        public bool display;
+        public int creatorID;
+        public string creatorName;
+        public string ip;
     }
     #endregion
 

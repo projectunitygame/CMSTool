@@ -15,6 +15,7 @@ namespace CMS_Tools
         {
             try
             {
+                Response.Redirect("Page.aspx?m=10");
                 //Site1 m = (Site1)Page.Master;
                 //var userData = m.GetUserInfo();
                 //if(userData == null)

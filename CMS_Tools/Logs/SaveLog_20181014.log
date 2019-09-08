@@ -1,5 +1,0 @@
-INFO 2018-10-14 05:44:31 – {"DATE_LOGS":"2018-10-14T17:44:23.6549048+07:00","INFO_LOGS":"LoginWithToken: d5fdc74d460b8eeaf72f726033ae7f26,::1"}
-INFO 2018-10-14 05:44:31 – {"DATE_LOGS":"2018-10-14T17:44:24.1598152+07:00","INFO_LOGS":"Result LoginWithToken: 0"}
-INFO 2018-10-14 05:51:49 – {"DATE_LOGS":"2018-10-14T17:51:44.0556166+07:00","INFO_LOGS":"UPDATE [tbl_articecategory] SET categoryname=@categoryname,description=@description,images=@images,link=@link,parentid=@parentid,publisherid=@publisherid,status=@status,accountid=@accountid,ismenu=@ismenu,displayindex=@displayindex,categorytype=@categorytype,datecreate=@datecreate WHERE categoryid= @categoryid"}
-INFO 2018-10-14 06:15:14 – {"DATE_LOGS":"2018-10-14T18:15:09.069541+07:00","INFO_LOGS":"LoginWithToken: 3f87c730aad3859960b06ff16a291286,::1"}
-INFO 2018-10-14 06:15:14 – {"DATE_LOGS":"2018-10-14T18:15:09.1652708+07:00","INFO_LOGS":"Result LoginWithToken: 1"}

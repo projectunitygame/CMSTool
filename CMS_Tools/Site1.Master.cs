@@ -122,7 +122,7 @@ namespace CMS_Tools
                 string subMenu = GetSubMenu(item.MenuId);
                 string link = item.Onclick == "" ? "Page.aspx?m=" + item.MenuId : item.Onclick;
                 s += "<li class='nav-item' id='m_" + item.MenuId + "'>" +
-                        "<a href='" + (subMenu != "" ? "javascript:;": link) +"' class='nav-link'>" + (item.Icon != "" ? "<i class='" + item.Icon + "'></i> " : "") +
+                        "<a href='" + (subMenu != "" ? "javascript:;": link) + "' class='nav-link nav-toggle'>" + (item.Icon != "" ? "<i class='" + item.Icon + "'></i> " : "") +
                             "<span class='title'>" + item.MenuName + "</span>" +
                         "</a>" + subMenu + 
                     "</li>";
