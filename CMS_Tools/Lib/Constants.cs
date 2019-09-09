@@ -287,7 +287,8 @@ namespace CMS_Tools.Lib
             CONFIG_BOT,
             FIND_GAME_ACCOUNT,
             ADD_MONEY_USER,
-            DEDUCT_GOLD_USER
+            DEDUCT_GOLD_USER,
+            RESET_USER_GAME_PASSWORD
         }
 
         public enum WEBSOCKET_STATUS: int

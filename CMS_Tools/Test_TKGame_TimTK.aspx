@@ -328,6 +328,7 @@
                                         lockChat = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnlockChatAcountGame(\"" + obj[0] + "\");'> Mở khóa chat</a>";
                                     var hisAccount = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='ShowHistoryAccount(\"" + obj[0] + "\");'> Xem lịch sử</a>";
                                     var addMoney = "<a class='btn btn-xs green btn-circle btn-outline' onclick='AddMoney(\"" + obj[0] + "\");'> Nạp tiền</a>";
+                                    var resetPass = "<a class='btn btn-xs yellow btn-circle btn-outline' onclick='ResetPass(\"" + obj[0] + "\");'> Reset Pass</a>";
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
@@ -339,7 +340,7 @@
                                         "<td>" + obj[7] + "</td>" +
                                         "<td>" + obj[8] + "</td>" +
                                         "<td>" + obj[9] + "</td>" +
-                                        "<td>" + linkLock + lockChat + hisAccount + addMoney + "</td>" +
+                                        "<td>" + linkLock + lockChat + hisAccount + addMoney + resetPass +"</td>" +
                                         "</tr>");
                                 }
                                 var colHiden = [];
@@ -424,6 +425,33 @@
 
         function replaceAll(str, find, replace) {
             return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+        }
+
+        function ResetPass(ID) {
+            bootbox.confirm("Xác nhận reset password?", function (result) {
+                if (result) {
+                    $('.divLoading').fadeIn();
+                    var json = {
+                        "AccountID": ID
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "Apis/API_GameAccount.ashx",
+                        data: {
+                            json: JSON.stringify(json),
+                            type: 22
+                        },
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.status == 1)
+                                TableEditable.init();
+                            else
+                                bootbox.alert(res.msg);
+                            $(".divLoading").fadeOut(500);
+                        }
+                    });
+                }
+            });
         }
 
         function AddMoney(ID) {
