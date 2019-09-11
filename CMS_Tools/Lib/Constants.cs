@@ -214,6 +214,8 @@ namespace CMS_Tools.Lib
             UPDATE_CATEGORY,
             REMOVE_CATEGORY,
             GET_CATEGORIES_TAGS,
+            UPDATE_VIEW_PERMISSION,
+
 
 
             API_CREATE_CUSTOMER = 4000,

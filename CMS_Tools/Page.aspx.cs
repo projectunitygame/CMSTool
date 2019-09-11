@@ -1,5 +1,6 @@
 ﻿using CMS_Tools.Apis;
 using CMS_Tools.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -39,6 +40,23 @@ namespace CMS_Tools
                     {
                         Model.ManagerDAO manageDao = new Model.ManagerDAO();
                         int code = 0;
+
+                        string[] listViewMenu = null;
+                        if (userData.GroupID == 6)
+                        {
+                            int resViewMenu = 0;
+                            DataTable dtViewMenu = manageDao.MenuModel.GetListViewMenu(userData.AccountId, ref resViewMenu);
+                            if (dtViewMenu.Rows.Count > 0)
+                            {
+                                listViewMenu = dtViewMenu.Rows[0][1].ToString().Split(',');
+                                //Response.Write("listViewMenu" + JsonConvert.SerializeObject(listViewMenu) + "listViewMenu length:" + listViewMenu.Length);
+                                if (!listViewMenu.Contains(m))
+                                {
+                                    Response.Redirect("Page404.aspx");
+                                }
+                            }
+                        }
+
                         var menuData = manageDao.MenuModel.GetMenuByID(int.Parse(m), ref code);
                         if (code > 0)
                         {

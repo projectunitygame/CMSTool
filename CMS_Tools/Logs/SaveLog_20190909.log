@@ -1,5 +1,0 @@
-INFO 2019-09-09 09:59:15 – {"DATE_LOGS":"09/09/2019 09:59:15","INFO_LOGS":"***** SERVER START *****"}
-INFO 2019-09-09 09:59:25 – {"DATE_LOGS":"09/09/2019 09:59:23","INFO_LOGS":"LoginWithToken: db0d4fa792d5fe20f37b35bb8d309391,IP ::1"}
-INFO 2019-09-09 10:01:22 – {"DATE_LOGS":"09/09/2019 10:01:22","INFO_LOGS":"***** SERVER START *****"}
-INFO 2019-09-09 10:01:32 – {"DATE_LOGS":"09/09/2019 10:01:22","INFO_LOGS":"LoginWithToken: db0d4fa792d5fe20f37b35bb8d309391,IP ::1"}
-INFO 2019-09-09 10:05:22 – {"DATE_LOGS":"09/09/2019 10:05:16","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/GameAccount/CreateEventGiftCode\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"s6/jMnnQCF78X8i9Z+nK47QsiKPMe1zCJ3p7t0st5l5/aR2GNkcDG1fXg0wGt+ablJ8p+sNvBOVAuKgZ/dPhusi7wPLW5mU9OaWAK7MviwCK2Xsi1q4cnua4JSptYoOzmRJTlX32qQ00GrOsOf5PqtWu07BiMF6QW6iLsRAQvIY=\",\"clientIP\":\"::1\",\"sign\":\"1f0a803075af331af6696c9448979efb\"}\r\nResponse Data: {\"status\":1,\"msg\":\"Thêm giftcode thành công\",\"data\":null,\"secreckey\":null}"}

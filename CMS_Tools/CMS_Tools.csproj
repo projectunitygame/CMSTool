@@ -265,9 +265,11 @@
     <Content Include="testenscrypt.aspx" />
     <Content Include="testNaptien.aspx" />
     <Content Include="Test_BaoCaoThongKe.aspx" />
+    <Content Include="Test_BaoMat.aspx" />
     <Content Include="Test_GameData_GameID.aspx" />
     <Content Include="Test_GameDT_CauHinhBotTaiXiu.aspx" />
     <Content Include="Test_NhanThuong_CauHinh.aspx" />
+    <Content Include="Test_NhanThuong_DaiLy.aspx" />
     <Content Include="Test_NhanThuong_TyLe.aspx" />
     <Content Include="Test_NhanThuong_LichSu.aspx" />
     <Content Include="Test_NhanThuong_DanhSachQuaTang.aspx" />
@@ -536,6 +538,13 @@
     <Compile Include="Test_BaoCaoThongKe.aspx.designer.cs">
       <DependentUpon>Test_BaoCaoThongKe.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Test_BaoMat.aspx.cs">
+      <DependentUpon>Test_BaoMat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_BaoMat.aspx.designer.cs">
+      <DependentUpon>Test_BaoMat.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Test_GameData_GameID.aspx.cs">
       <DependentUpon>Test_GameData_GameID.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -556,6 +565,13 @@
     </Compile>
     <Compile Include="Test_NhanThuong_CauHinh.aspx.designer.cs">
       <DependentUpon>Test_NhanThuong_CauHinh.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_NhanThuong_DaiLy.aspx.cs">
+      <DependentUpon>Test_NhanThuong_DaiLy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_NhanThuong_DaiLy.aspx.designer.cs">
+      <DependentUpon>Test_NhanThuong_DaiLy.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_NhanThuong_TyLe.aspx.cs">
       <DependentUpon>Test_NhanThuong_TyLe.aspx</DependentUpon>

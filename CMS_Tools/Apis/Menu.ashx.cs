@@ -92,6 +92,9 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_TYPE.GET_DATA_BY_QUERY:
                         GET_DATA_BY_QUERY(context);
                         break;
+                    case Constants.REQUEST_TYPE.UPDATE_VIEW_PERMISSION:
+                        UPDATE_VIEW_PERMISSION(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -107,6 +110,35 @@ namespace CMS_Tools.Apis
                 result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
+        }
+
+        private void UPDATE_VIEW_PERMISSION(HttpContext context)
+        {
+            try
+            {
+                string listmenu = context.Request.Unvalidated.Form["viewmenu"];
+                //string menuId = "19";
+                if (!string.IsNullOrEmpty(listmenu))
+                {
+                    string msg = "";
+                    int code = manageDao.MenuModel.UpdateListViewMenu(19, listmenu , ref msg);
+
+                    result.status = (Constants.NUMBER_CODE)code;
+                    result.msg = msg;
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.DATA_NULL;
+                    result.msg = result.status.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR UPDATE_VIEW_PERMISSION: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
         }
 
         private void UPDATE_ARTICLE(HttpContext context)
