@@ -101,6 +101,9 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_GAME_ACOUNT_TYPE.DEDUCT_GOLD_USER:
                         DEDUCT_GOLD_USER(context);
                         break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.RESET_USER_GAME_PASSWORD:
+                        RESET_USER_GAME_PASSWORD(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -116,6 +119,64 @@ namespace CMS_Tools.Apis
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
         }
+
+        private void RESET_USER_GAME_PASSWORD(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["RESET_USER_GAME_PASSWORD"] == null || (DateTime.Now - (DateTime)context.Session["RESET_USER_GAME_PASSWORD"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<ResetUserGamePassword>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<ResetUserGamePassword>(json);
+                        if (jsonData != null)
+                        {
+                            //jsonData.UserID = accountInfo.AccountId;
+                            //jsonData.UserName = accountInfo.UserName;
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/ResetUserGamePassword");
+                            context.Response.Write(responseData);
+                            return;
+
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR RESET_USER_GAME_PASSWORD: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["RESET_USER_GAME_PASSWORD"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
         private void DEDUCT_GOLD_USER(HttpContext context)
         {
             try
@@ -178,7 +239,7 @@ namespace CMS_Tools.Apis
             }
             finally
             {
-                context.Session["ADD_MONEY_USER"] = DateTime.Now;
+                context.Session["DEDUCT_GOLD_USER"] = DateTime.Now;
             }
             context.Response.Write(JsonConvert.SerializeObject(result));
         }
@@ -1739,6 +1800,10 @@ namespace CMS_Tools.Apis
             public string UserName;
             public int UserID;
             //public string Balance;
+        }
+        public class ResetUserGamePassword
+        {
+            public long AccountID;
         }
         #endregion
     }
