@@ -154,7 +154,7 @@
                         <!-- BEGIN FORGOT PASSWORD FORM -->
                         <form class="forget-form" action="javascript:Login.resetPassword();" method="post">
                             <h3>Forgot Password ?</h3>
-                            <p> Enter your e-mail address below to reset your password. </p>
+                            <p> Nhập số điện thoại để lấy lại mật khẩu. </p>
                             <div class="form-group">
                                 <input id="txtEmail" class="form-control placeholder-no-fix" type="email" autocomplete="off" placeholder="Email" name="email" required/> </div>
                             <div class="form-actions">

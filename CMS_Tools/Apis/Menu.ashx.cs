@@ -117,11 +117,12 @@ namespace CMS_Tools.Apis
             try
             {
                 string listmenu = context.Request.Unvalidated.Form["viewmenu"];
+                string accountId = context.Request.Unvalidated.Form["id"];
                 //string menuId = "19";
                 if (!string.IsNullOrEmpty(listmenu))
                 {
                     string msg = "";
-                    int code = manageDao.MenuModel.UpdateListViewMenu(19, listmenu , ref msg);
+                    int code = manageDao.MenuModel.UpdateListViewMenu(int.Parse(accountId), listmenu , ref msg);
 
                     result.status = (Constants.NUMBER_CODE)code;
                     result.msg = msg;

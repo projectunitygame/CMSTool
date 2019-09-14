@@ -33,6 +33,13 @@ namespace CMS_Tools.Apis
                     context.Response.Write(JsonConvert.SerializeObject(result));
                     return;
                 }
+                if (accountInfo.GroupID == 6)
+                {
+                    result.status = Constants.NUMBER_CODE.ACCOUNT_NOT_PERMISSION;
+                    result.msg = "Bạn không có quyền để thực hiện thao tác";
+                    context.Response.Write(JsonConvert.SerializeObject(result));
+                    return;
+                }
                 #endregion
 
                 Constants.REQUEST_GAME_ACOUNT_TYPE requestType = (Constants.REQUEST_GAME_ACOUNT_TYPE)int.Parse(context.Request.Form["type"]);
@@ -276,6 +283,7 @@ namespace CMS_Tools.Apis
                             else
                             {
                                 jsonData.SenderID = accountInfo.AccountId.ToString();
+                                jsonData.Reason = "Nạp tiền User - Số tiền:" + jsonData.Amount;
                                 PayloadApi p = new PayloadApi()
                                 {
                                     clientIP = UtilClass.GetIPAddress(),

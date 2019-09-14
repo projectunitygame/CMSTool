@@ -80,9 +80,15 @@
     },
         resetPassword = function () {
             $('.divLoading').fadeIn(0);
+            //email
+            //var param = {
+            //    type: 3,
+            //    email: $('#txtEmail').val(),
+            //};
+            //Phone
             var param = {
                 type: 3,
-                email: $('#txtEmail').val(),
+                phone: $('#txtEmail').val(),
             };
             POST_DATA("Apis/Account.ashx", param, function (data) {
                 bootbox.alert(data.msg);
