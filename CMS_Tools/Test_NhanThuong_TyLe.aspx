@@ -69,6 +69,7 @@ a.delete{
 <script src="assets/global/plugins/datatables/DT_bootstrap.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function () {
+        $('.page-toolbar').remove();
         $('#filterColumn').on('change', function () {
             if ($('#txtFindData').val() != "")
                 TableEditable.init();

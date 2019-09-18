@@ -30,3 +30,5 @@ INFO 2019-09-08 08:57:18 – {"DATE_LOGS":"08/09/2019 08:57:12","INFO_LOGS":"UPDAT
 INFO 2019-09-08 08:57:18 – {"DATE_LOGS":"08/09/2019 08:57:18","INFO_LOGS":"UPDATE [gameportal].[dbo].[tbl_exchangerate] SET gold=@gold,vippoint=@vippoint WHERE idx= @idx"}
 INFO 2019-09-08 08:57:28 – {"DATE_LOGS":"08/09/2019 08:57:24","INFO_LOGS":"UPDATE [gameportal].[dbo].[tbl_exchangerate] SET gold=@gold,vippoint=@vippoint WHERE idx= @idx"}
 INFO 2019-09-08 08:57:38 – {"DATE_LOGS":"08/09/2019 08:57:30","INFO_LOGS":"UPDATE [gameportal].[dbo].[tbl_exchangerate] SET gold=@gold,vippoint=@vippoint WHERE idx= @idx"}
+INFO 2019-09-08 09:32:19 – {"DATE_LOGS":"08/09/2019 09:32:18","INFO_LOGS":"LoginWithToken: 0981d6660af9358e80c63aea810e7cfd,IP ::1"}
+INFO 2019-09-08 09:59:09 – {"DATE_LOGS":"08/09/2019 09:59:04","INFO_LOGS":"LoginWithToken: 0981d6660af9358e80c63aea810e7cfd,IP ::1"}

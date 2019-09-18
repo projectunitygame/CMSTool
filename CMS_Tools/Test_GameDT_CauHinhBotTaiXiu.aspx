@@ -39,6 +39,9 @@
         .dataTables_wrapper > .row{
             display:none;
         }
+        a.delete{
+            display:none;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
