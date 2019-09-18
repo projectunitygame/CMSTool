@@ -38,6 +38,84 @@ namespace CMS_Tools.Model
             connectString = ConnectionDB.GetConnectionDB(name);
         }
 
+        public int UpdateListViewMenu(long accountID , string listMenu, ref string msg)
+        {
+            try
+            {
+                int code = -1;
+                using (SqlConnection connection = new SqlConnection(connectString))
+                {
+                    connection.Open();
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandTimeout = Constants.TIMOUT_CONNECT_SQL;
+                        cmd.Connection = connection;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "SP_TOOL_UPDATE_VIEW_PERMISSION";
+                        cmd.Parameters.Add("@AccountID", SqlDbType.BigInt);
+                        cmd.Parameters["@AccountID"].Value = accountID;
+                        cmd.Parameters.Add("@ListMenu", SqlDbType.VarChar);
+                        cmd.Parameters["@ListMenu"].Value = listMenu;
+                        cmd.Parameters.Add("@Code", SqlDbType.Int);
+                        cmd.Parameters["@Code"].Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add("@Msg", SqlDbType.NVarChar, 500);
+                        cmd.Parameters["@Msg"].Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                        code = int.Parse(cmd.Parameters["@Code"].Value.ToString());
+                        msg = cmd.Parameters["@Msg"].Value.ToString();
+                    }
+                }
+                return code;
+            }
+            catch (Exception ex)
+            {
+                Lib.Logs.SaveError("ERROR UpdateArticle: " + ex);
+                throw new Exception("lỗi: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Lay sanh sach menu hien thi theo quyen
+        /// </summary>
+        /// <param name="AccountID"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public DataTable GetListViewMenu(long AccountID, ref int code)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                using (SqlConnection connection = new SqlConnection(connectString))
+                {
+                    connection.Open();
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandTimeout = Constants.TIMOUT_CONNECT_SQL;
+                        cmd.Connection = connection;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "SP_TOOL_GET_VIEW_PERMISSION";
+                        cmd.Parameters.Add("@AccountID", SqlDbType.BigInt);
+                        cmd.Parameters["@AccountID"].Value = AccountID;
+                        cmd.Parameters.Add("@Code", SqlDbType.Int);
+                        cmd.Parameters["@Code"].Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add("@Msg", SqlDbType.NVarChar, 500);
+                        cmd.Parameters["@Msg"].Direction = ParameterDirection.Output;
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            dt.Load(dr);
+                        }
+                        code = int.Parse(cmd.Parameters["@Code"].Value.ToString());
+                    }
+                }
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Lib.Logs.SaveError("\n\tERROR GetListViewMenu: " + ex);
+                return null;
+            }
+        }
+
         /// <summary>
         /// AddArticleTags
         /// </summary>

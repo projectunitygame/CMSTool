@@ -152,11 +152,21 @@
                             </div>
                         </form>
                         <!-- BEGIN FORGOT PASSWORD FORM -->
-                        <form class="forget-form" action="javascript:Login.resetPassword();" method="post">
+                        <%--<form class="forget-form" action="javascript:Login.resetPasswordWithPhone();" method="post">
                             <h3>Forgot Password ?</h3>
-                            <p> Enter your e-mail address below to reset your password. </p>
+                            <p> Enter your e-mail address below to reset your password.</p>
                             <div class="form-group">
                                 <input id="txtEmail" class="form-control placeholder-no-fix" type="email" autocomplete="off" placeholder="Email" name="email" required/> </div>
+                            <div class="form-actions">
+                                <button type="button" id="back-btn" class="btn blue btn-outline">Back</button>
+                                <button type="submit" class="btn blue uppercase pull-right">Submit</button>                              
+                            </div>
+                        </form>--%>
+                        <form class="forget-form" action="javascript:Login.resetPasswordWithPhone();" method="post">
+                            <h3>Forgot Password ?</h3>
+                            <p> Nhập số điện thoại để reset mật khẩu.</p>
+                            <div class="form-group">
+                                <input id="txtPhone" class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Phone" name="email" required/> </div>
                             <div class="form-actions">
                                 <button type="button" id="back-btn" class="btn blue btn-outline">Back</button>
                                 <button type="submit" class="btn blue uppercase pull-right">Submit</button>                              

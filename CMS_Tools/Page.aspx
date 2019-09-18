@@ -37,6 +37,7 @@
     <div id="PageIncludeJS" runat="server"></div>
     <script>
         $(function () {
+            $('li#m_120').remove();
             var menuId = AppManage.getURLParameter("m");
             if (menuId != null) {
                 $('#m_' + menuId).addClass("active open");

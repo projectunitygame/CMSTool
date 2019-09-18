@@ -175,7 +175,9 @@ namespace CMS_Tools.Lib
             EVENT_GIFTCODE_VALI,
             ACCOUNT_NAME_VALI,
             CONFIG_BOT_VALI,
-            ADD_MONEY_USER_VALI
+            ADD_MONEY_USER_VALI,
+            NOT_A_NUMBER,
+            ACCOUNT_NOT_PERMISSION
         }
 
         public enum REQUEST_TYPE: int
@@ -214,6 +216,9 @@ namespace CMS_Tools.Lib
             UPDATE_CATEGORY,
             REMOVE_CATEGORY,
             GET_CATEGORIES_TAGS,
+            UPDATE_VIEW_PERMISSION,
+            FORGOT_PASSWORD_WITH_PHONE,
+            RESET_PASSWORD_WITH_PHONE,
 
 
             API_CREATE_CUSTOMER = 4000,
@@ -287,7 +292,9 @@ namespace CMS_Tools.Lib
             CONFIG_BOT,
             FIND_GAME_ACCOUNT,
             ADD_MONEY_USER,
-            DEDUCT_GOLD_USER
+            DEDUCT_GOLD_USER,
+            RESET_USER_GAME_PASSWORD,
+            ADD_MONEY_FUND
         }
 
         public enum WEBSOCKET_STATUS: int

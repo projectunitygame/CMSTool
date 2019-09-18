@@ -101,12 +101,14 @@ var _listMenu;
 var count = 0;
 var pageSize = 10;
 var pageNum = 0;
+var _currentPage = 0;
 var MenuManage = function () {
     var l = function () {
         $(".divLoading").fadeIn(0);
         POST_DATA(URL_MENU, { type: 12, dataType: 1, parentId: $("#PageContent_input_parentID").val()}, function (res) {
             if (res.status == 0 || res.status == 5004) {
                 if (oTable != null) {
+                    _currentPage = oTable.fnPagingInfo().iPage;
                     oTable.fnDestroy();
                 }
                 var thead = "<tr role='row'><th><label class='mt-checkbox mt-checkbox-single mt-checkbox-outline'> <input type='checkbox' class='checkboxes checkbox_all'/> <span></span> </label></th>";
@@ -133,8 +135,10 @@ var MenuManage = function () {
                         [10, 30, 50, 100, -1],
                         [10, 30, 50, 100, "All"]
                     ],
-                    "iDisplayLength": pageSize,
-                    "iDisplayStart": pageNum * pageSize,
+                    //"iDisplayLength": pageSize,
+                    //"iDisplayStart": pageNum * pageSize,
+                    "displayStart": _currentPage * pageSize, 
+                    "pageLength": pageSize,
                     "aoColumnDefs": [{
                         "bSortable": false,
                         "aTargets": [0]
@@ -188,8 +192,10 @@ var MenuManage = function () {
             var pNum = AppManage.getURLParameter("pnum");
             if (pSize != null)
                 pageSize = pSize;
-            if (pNum != null)
+            if (pNum != null) {
                 pageNum = pNum;
+                _currentPage = pNum;
+            }
             l();
         },
         CloneMenu: function (menuId) {

@@ -1,4 +1,5 @@
-﻿using CMS_Tools.Lib;
+﻿using CMS_Tools.Entity;
+using CMS_Tools.Lib;
 using CMS_Tools.Model;
 using Newtonsoft.Json;
 using System;
@@ -17,6 +18,7 @@ namespace CMS_Tools
     {
         List<Entity.MenuPage> listMenu = new List<Entity.MenuPage>();
         public UserInfo userData = null;
+        string[] listViewMenu = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             DateTime now = DateTime.Now;
@@ -63,9 +65,21 @@ namespace CMS_Tools
         {
             try
             {
-                if (Session["menu"] == null)
+                ManagerDAO a = new ManagerDAO();
+                
+                if (userData.GroupID == 6)
                 {
-                    ManagerDAO a = new ManagerDAO();
+                    int resViewMenu = 0;
+                    DataTable dtViewMenu = a.MenuModel.GetListViewMenu(userData.AccountId, ref resViewMenu);
+                    if (dtViewMenu!=null && dtViewMenu.Rows.Count > 0)
+                    {
+                        listViewMenu = dtViewMenu.Rows[0][1].ToString().Split(',');
+                        //Response.Write("listViewMenu" + JsonConvert.SerializeObject(listViewMenu) + "listViewMenu length:" + listViewMenu.Length);
+                    }
+                }
+                //if (Session["menu"] == null || (listViewMenu.Length>0 && listViewMenu[0] != ""))
+                {
+                    
                     int code = 0;
                     listMenu = a.MenuModel.GetMenuUser(userData.AccountId, ref code);
                     //string list_menuId = "";
@@ -83,16 +97,51 @@ namespace CMS_Tools
                         var menuIds = listMenu.Select(x => x.MenuId).ToList();
                         StringBuilder strMenu = new StringBuilder();
                         strMenu.Append("<ul class='page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu' data-keep-expanded='false' data-auto-scroll='true' data-slide-speed='200'>");
+
                         var menuParent = listMenu.Where(x => x.ParentID == 0).OrderByDescending(x => x.DisplayIndex);
-                        foreach (var item in menuParent)
+                        //if(listViewMenu !=null && listViewMenu.Length > 0 && listViewMenu[0] != "")
+                        //{
+                        //    foreach (var item in listViewMenu)
+                        //    {
+                        //        MenuPage menu = listMenu.Where(x => x.MenuId.ToString() == item).FirstOrDefault();
+                        //        Response.Write("menu" + JsonConvert.SerializeObject(menu));
+                        //        if (menu != null)
+                        //            listMenu.Remove(menu);
+                        //    }
+                        //}
+                        if (userData.GroupID == 6 &&( listViewMenu.Length < 1 || string.IsNullOrEmpty(listViewMenu[0])))
                         {
-                            listMenu.Remove(item);
-                            string subMenu = GetSubMenu(item.MenuId);
-                            string link = item.Onclick == "" ? "Page.aspx?m=" + item.MenuId : item.Onclick;
-                            strMenu.Append("<li class='nav-item' id='m_" + item.MenuId + "'>" +
-                                "<a href='" + (subMenu != "" ? "javascript:;" : link) + "' class='nav-link nav-toggle'>" + (item.Icon != "" ? "<i class='" + item.Icon + "'></i>" : "") +
-                                "<span class='title'>" + item.MenuName + "</span><span class='arrow'></span></a>" + subMenu +
-                            "</li>");
+                            menuParent = null;
+                            //menuParent = listMenu.Where(x => x.ParentID == 0 && x.MenuId==1).OrderByDescending(x => x.DisplayIndex);
+                        }
+                        if (listViewMenu !=null && listViewMenu.Length > 0 && listViewMenu[0] != "")
+                        {
+                            foreach (var item in menuParent)
+                            {
+                                listMenu.Remove(item);
+                                if (listViewMenu.Contains(item.MenuId.ToString()))
+                                {
+                                    string subMenu = GetSubMenu(item.MenuId);
+                                    string link = item.Onclick == "" ? "Page.aspx?m=" + item.MenuId : item.Onclick;
+                                    strMenu.Append("<li class='nav-item' id='m_" + item.MenuId + "'>" +
+                                        "<a href='" + (subMenu != "" ? "javascript:;" : link) + "' class='nav-link nav-toggle'>" + (item.Icon != "" ? "<i class='" + item.Icon + "'></i>" : "") +
+                                        "<span class='title'>" + item.MenuName + "</span><span class='arrow'></span></a>" + subMenu +
+                                    "</li>");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (var item in menuParent)
+                            {
+                                listMenu.Remove(item);
+                                string subMenu = GetSubMenu(item.MenuId);
+                                string link = item.Onclick == "" ? "Page.aspx?m=" + item.MenuId : item.Onclick;
+                                strMenu.Append("<li class='nav-item' id='m_" + item.MenuId + "'>" +
+                                    "<a href='" + (subMenu != "" ? "javascript:;" : link) + "' class='nav-link nav-toggle'>" + (item.Icon != "" ? "<i class='" + item.Icon + "'></i>" : "") +
+                                    "<span class='title'>" + item.MenuName + "</span><span class='arrow'></span></a>" + subMenu +
+                                "</li>");
+                            }
                         }
                         strMenu.Append("</ul>");
                         this.menuPage.InnerHtml = strMenu.ToString();
@@ -101,9 +150,9 @@ namespace CMS_Tools
                     else
                         Response.Redirect("login.aspx");
                 }
-                else {
-                    this.menuPage.InnerHtml = Session["menu"].ToString();
-                }
+                //else {
+                //    this.menuPage.InnerHtml = Session["menu"].ToString();
+                //}
             }
             catch (ThreadAbortException)
             {
@@ -116,17 +165,39 @@ namespace CMS_Tools
         private string GetSubMenu(int parentId) {
             string s = "";
             var menu = listMenu.Where(x => x.ParentID == parentId).OrderByDescending(x => x.DisplayIndex);
-            foreach (var item in menu)
+            if(listViewMenu !=null && listViewMenu.Length > 0 && listViewMenu[0] != "")
             {
-                listMenu.Remove(item);
-                string subMenu = GetSubMenu(item.MenuId);
-                string link = item.Onclick == "" ? "Page.aspx?m=" + item.MenuId : item.Onclick;
-                s += "<li class='nav-item' id='m_" + item.MenuId + "'>" +
-                        "<a href='" + (subMenu != "" ? "javascript:;": link) + "' class='nav-link nav-toggle'>" + (item.Icon != "" ? "<i class='" + item.Icon + "'></i> " : "") +
-                            "<span class='title'>" + item.MenuName + "</span>" +
-                        "</a>" + subMenu + 
-                    "</li>";
+                foreach (var item in menu)
+                {
+                    listMenu.Remove(item);
+                    if (listViewMenu.Contains(item.MenuId.ToString()))
+                    {
+                        string subMenu = GetSubMenu(item.MenuId);
+                        string link = item.Onclick == "" ? "Page.aspx?m=" + item.MenuId : item.Onclick;
+                        s += "<li class='nav-item' id='m_" + item.MenuId + "'>" +
+                                "<a href='" + (subMenu != "" ? "javascript:;" : link) + "' class='nav-link nav-toggle'>" + (item.Icon != "" ? "<i class='" + item.Icon + "'></i> " : "") +
+                                    "<span class='title'>" + item.MenuName + "</span>" +
+                                "</a>" + subMenu +
+                            "</li>";
+                    }
+                    
+                }
             }
+            else
+            {
+                foreach (var item in menu)
+                {
+                    listMenu.Remove(item);
+                    string subMenu = GetSubMenu(item.MenuId);
+                    string link = item.Onclick == "" ? "Page.aspx?m=" + item.MenuId : item.Onclick;
+                    s += "<li class='nav-item' id='m_" + item.MenuId + "'>" +
+                            "<a href='" + (subMenu != "" ? "javascript:;" : link) + "' class='nav-link nav-toggle'>" + (item.Icon != "" ? "<i class='" + item.Icon + "'></i> " : "") +
+                                "<span class='title'>" + item.MenuName + "</span>" +
+                            "</a>" + subMenu +
+                        "</li>";
+                }
+            }
+            
             
             return s != "" ? "<ul class='sub-menu'>" + s + "</ul>" : "";
         }

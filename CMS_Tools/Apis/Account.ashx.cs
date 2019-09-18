@@ -53,6 +53,12 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_TYPE.LOCK_SCREEN:
                         LOCK_SCREEN(context);
                         break;
+                    case Constants.REQUEST_TYPE.FORGOT_PASSWORD_WITH_PHONE:
+                        FORGOT_PASSWORD_WITH_PHONE(context);
+                        break;
+                    case Constants.REQUEST_TYPE.RESET_PASSWORD_WITH_PHONE:
+                        RESET_PASSWORD_WITH_PHONE(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -67,6 +73,101 @@ namespace CMS_Tools.Apis
                 result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }           
+        }
+
+        private void RESET_PASSWORD_WITH_PHONE(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["opt_reset_pass"] != null && context.Session["phone_login_resetpass"] != null)
+                {
+                    string otp = context.Request.Form["otp"];
+                    if(otp== context.Session["opt_reset_pass"].ToString())
+                    {
+                        string password = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
+                        string phone = context.Session["phone_login_resetpass"].ToString();
+                        int code = manage.AccountModel.ResetPasswordWithPhone(phone, password);
+                        if (code == 0)
+                        {
+                            SMS.SendMessage(phone.ToString(), password + " la mat khau moi cua Ban.");
+                            result.status = Constants.NUMBER_CODE.SUCCESS;
+                            result.msg = "Mật khẩu mới đã được gửi tới số điện thoại của bạn!";
+                        }
+                        else
+                        {
+                            result.status = (Constants.NUMBER_CODE)code;
+                            result.msg = "Cập nhật mật khẩu thất bại!";
+                        }
+                    }
+                    else
+                    {
+                        result.msg = "Nhập mã otp không chính xác!";
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.RESET_PASSWORD_TIMEOUT;
+                    result.msg = "Lỗi hệ thống vui lòng thử lại!";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR CREATE_ACCOUNT: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+        private void FORGOT_PASSWORD_WITH_PHONE(HttpContext context)
+        {
+            try
+            {
+                string phone = context.Request.Form["phone"];
+                if (!string.IsNullOrEmpty(phone))
+                {
+                    phone = phone.Trim();
+                    int num = 0;
+                    if (phone.Length !=10)
+                    {
+                        result.status = Constants.NUMBER_CODE.NOT_A_NUMBER;
+                        result.msg = "Nhập số điện thoại có 10 số";
+                    }
+                    else if(!int.TryParse(phone, out num)){
+                        result.status = Constants.NUMBER_CODE.NOT_A_NUMBER;
+                        result.msg = "Số điện thoại phải là số";
+                    }
+                    else
+                    {
+                        if (manage.AccountModel.CheckPhoneNumber(phone) ==0)
+                        {
+                            string otp = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
+                            context.Session["opt_reset_pass"] = otp;
+                            context.Session["phone_login_resetpass"] = phone;
+                            SMS.SendMessage(phone, "Ma OTP xac thuc reset mat khau la " + otp + ", hieu luc 3 phut");
+                            result.status = Constants.NUMBER_CODE.SUCCESS;
+                            result.msg = "Vui lòng nhập mã OTP để reset mật khẩu";
+                        }
+                        else
+                        {
+                            result.status = Constants.NUMBER_CODE.NOT_A_NUMBER;
+                            result.msg = "Số điện thoại không tồn tại!";
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.DATA_NULL;
+                    result.msg = "Số điện thoại không được để trống!";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR CREATE_ACCOUNT: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
         }
 
         private void RESET_PASSWORD(HttpContext context)

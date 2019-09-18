@@ -228,9 +228,9 @@
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
-            if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                $('.page-toolbar').remove();
-            }
+            //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+            //    $('.page-toolbar').remove();
+            //}
             //$('.page-toolbar').remove();
             FormValidation.init();
             $('#btnAddNew').html("<i class='fa fa-plus'></  i> Mua thẻ");

@@ -320,7 +320,7 @@
                                 _dataTable = [];
                                 for (var i = 0; i < data.data.length; i++) {
                                     var obj = data.data[i];
-                                    var linkLock = "<a class='btn btn-xs red btn-circle btn-outline' onclick='LockAcountGame(\"" + obj[0] +"\");'> Khóa</a>";
+                                    var linkLock = "<a class='btn btn-xs red btn-circle btn-outline' onclick='LockAcountGame(\"" + obj[0] + "\");'> Khóa</a>";
                                     if (obj[8] == "True")
                                         linkLock = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnlockAcountGame(\"" + obj[0] + "\");'> Mở khóa</a>";
                                     var lockChat = "<a class='btn btn-xs yellow btn-circle btn-outline' onclick='LockChatAcountGame(\"" + obj[0] + "\");'> Khóa chat</a>";
@@ -328,6 +328,7 @@
                                         lockChat = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnlockChatAcountGame(\"" + obj[0] + "\");'> Mở khóa chat</a>";
                                     var hisAccount = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='ShowHistoryAccount(\"" + obj[0] + "\");'> Xem lịch sử</a>";
                                     var addMoney = "<a class='btn btn-xs green btn-circle btn-outline' onclick='AddMoney(\"" + obj[0] + "\");'> Nạp tiền</a>";
+                                    var resetPass = "<a class='btn btn-xs yellow btn-circle btn-outline' onclick='ResetPass(\"" + obj[0] + "\");'> Reset Pass</a>";
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
@@ -339,7 +340,10 @@
                                         "<td>" + obj[7] + "</td>" +
                                         "<td>" + obj[8] + "</td>" +
                                         "<td>" + obj[9] + "</td>" +
-                                        "<td>" + linkLock + lockChat + hisAccount + addMoney + "</td>" +
+                                        "<td>" + obj[10] + "</td>" +
+                                        "<td>" + obj[11] + "</td>" +
+                                        "<td>" + obj[12] + "</td>" +
+                                        "<td>" + linkLock + lockChat + hisAccount + addMoney + resetPass + "</td>" +
                                         "</tr>");
                                 }
                                 var colHiden = [];
@@ -369,10 +373,10 @@
                                 oTable.fnSetColumnVis(8, bVis ? false : true);
                                 var bVis = oTable.fnSettings().aoColumns[9].bVisible;
                                 oTable.fnSetColumnVis(9, bVis ? false : true);
-                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                    var bVis = oTable.fnSettings().aoColumns[10].bVisible;
-                                    oTable.fnSetColumnVis(10, bVis ? false : true);
-                                }
+                                //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                //    var bVis = oTable.fnSettings().aoColumns[13].bVisible;
+                                //    oTable.fnSetColumnVis(13, bVis ? false : true);
+                                //}
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
@@ -424,6 +428,33 @@
 
         function replaceAll(str, find, replace) {
             return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+        }
+
+        function ResetPass(ID) {
+            bootbox.confirm("Xác nhận reset password?", function (result) {
+                if (result) {
+                    $('.divLoading').fadeIn();
+                    var json = {
+                        "AccountID": ID
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "Apis/API_GameAccount.ashx",
+                        data: {
+                            json: JSON.stringify(json),
+                            type: 22
+                        },
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.status == 1)
+                                TableEditable.init();
+                            else
+                                bootbox.alert(res.msg);
+                            $(".divLoading").fadeOut(500);
+                        }
+                    });
+                }
+            });
         }
 
         function AddMoney(ID) {
@@ -488,7 +519,7 @@
                         var strHead = '';
                         var strBody = '';
                         $.each(res.columnName, function (i, obj) {
-                            strHead += '<th>' + obj +'</th>';
+                            strHead += '<th>' + obj + '</th>';
                         });
                         $.each(res.data, function (i, obj) {
                             strBody += '<tr>';
@@ -542,11 +573,11 @@
                     }
                 }
             });
-           
+
             $('#modal_history_account').modal('show');
         }
 
-        function LockAcountGame(accountID){
+        function LockAcountGame(accountID) {
 
             bootbox.prompt({
                 title: "Ghi chú nội dung khóa!",
@@ -565,10 +596,10 @@
                             type: 1,
                             json: JSON.stringify(json)
                         }, function (res) {
-                                if (res.status == 1)
-                                    TableEditable.init();
-                                else
-                                    bootbox.alert(res.msg);
+                            if (res.status == 1)
+                                TableEditable.init();
+                            else
+                                bootbox.alert(res.msg);
                             $(".divLoading").fadeOut(500);
 
                         });
@@ -576,8 +607,8 @@
 
                 }
             });
-            
-        } 
+
+        }
 
         function UnlockAcountGame(accountID) {
             bootbox.confirm("Xác nhận mở khóa tài khoản?", function (result) {
@@ -604,7 +635,7 @@
                     });
                 }
             });
-        } 
+        }
 
         function LockChatAcountGame(accountID) {
 

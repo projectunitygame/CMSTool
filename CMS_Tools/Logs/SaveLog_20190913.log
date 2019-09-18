@@ -1,0 +1,4 @@
+INFO 2019-09-13 10:19:19 – {"DATE_LOGS":"13/09/2019 10:19:19","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-13 10:19:29 – {"DATE_LOGS":"13/09/2019 10:19:26","INFO_LOGS":"LoginWithToken: f7fb4ebf945712cbe272f82f8d54888c,IP ::1"}
+INFO 2019-09-13 10:24:09 – {"DATE_LOGS":"13/09/2019 10:24:03","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/GameAccount/AddMoneyUser\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"Yi4Q63LEAEERvNojhsxYblFQ8SjblLXuhuwLe2zgDjj8odTocDyPD5K9UkZUa0HgbV7jK/7QJgyxk/p60LeiZ45mfmDFUrD8Rp1Cnxvx0qsopLCCTLuxbV5qip7DMPS8pg+NSs0DM5bdUSMgx/G6Jg==\",\"clientIP\":\"::1\",\"sign\":\"73f4910039e503df739172f5c42ec460\"}\r\nResponse Data: {\"status\":1,\"msg\":\"Chuy?n ti?n thành công\",\"data\":null,\"secreckey\":null}"}
+INFO 2019-09-13 10:24:19 – {"DATE_LOGS":"13/09/2019 10:24:19","INFO_LOGS":"{\"param\":null,\"topN\":20,\"uwinID\":\"\"}"}
