@@ -373,10 +373,10 @@
                                 oTable.fnSetColumnVis(8, bVis ? false : true);
                                 var bVis = oTable.fnSettings().aoColumns[9].bVisible;
                                 oTable.fnSetColumnVis(9, bVis ? false : true);
-                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                    var bVis = oTable.fnSettings().aoColumns[13].bVisible;
-                                    oTable.fnSetColumnVis(13, bVis ? false : true);
-                                }
+                                //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                //    var bVis = oTable.fnSettings().aoColumns[13].bVisible;
+                                //    oTable.fnSetColumnVis(13, bVis ? false : true);
+                                //}
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown

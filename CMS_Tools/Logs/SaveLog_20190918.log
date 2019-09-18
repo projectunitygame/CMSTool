@@ -1,0 +1,42 @@
+INFO 2019-09-18 02:30:34 – {"DATE_LOGS":"18/09/2019 02:30:34","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 02:30:44 – {"DATE_LOGS":"18/09/2019 02:30:41","INFO_LOGS":"LoginWithToken: 7aa5154cdc9ed916cc5880d44fb2feae,IP ::1"}
+INFO 2019-09-18 02:30:44 – {"DATE_LOGS":"18/09/2019 02:30:42","INFO_LOGS":"LoginWithToken: 7aa5154cdc9ed916cc5880d44fb2feae,IP ::1"}
+INFO 2019-09-18 02:31:54 – {"DATE_LOGS":"18/09/2019 02:31:48","INFO_LOGS":"Send SMS Message: http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=0962474560&Content=Ma OTP xac thuc reset mat khau la 198CCA17, hieu luc 3 phut&ApiKey=3F11E064600D5C3E073FA1B033831B&SecretKey=C8F2CCDA4C9B32CAC4E3EFDD1C08B8&SmsType=2&brandname=Svoucher"}
+INFO 2019-09-18 02:31:54 – {"DATE_LOGS":"18/09/2019 02:31:48","INFO_LOGS":"Message result: {\"CodeResult\":\"100\",\"CountRegenerate\":0,\"SMSID\":\"3ff36dbc-63a7-4d8e-9b2e-b0653c0bd453132\"}"}
+INFO 2019-09-18 02:32:14 – {"DATE_LOGS":"18/09/2019 02:32:06","INFO_LOGS":"Send SMS Message: http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=0962474560&Content=FB183160 la mat khau moi cua Ban.&ApiKey=3F11E064600D5C3E073FA1B033831B&SecretKey=C8F2CCDA4C9B32CAC4E3EFDD1C08B8&SmsType=2&brandname=Svoucher"}
+INFO 2019-09-18 02:32:14 – {"DATE_LOGS":"18/09/2019 02:32:06","INFO_LOGS":"Message result: {\"CodeResult\":\"100\",\"CountRegenerate\":0,\"SMSID\":\"cfc643c1-f25e-4834-978c-a0e7e54e49d9335\"}"}
+INFO 2019-09-18 02:48:34 – {"DATE_LOGS":"18/09/2019 02:48:33","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 02:48:44 – {"DATE_LOGS":"18/09/2019 02:48:37","INFO_LOGS":"LoginWithToken: 056336ad3f637a3eb2b010b06e8c0c00,IP ::1"}
+INFO 2019-09-18 02:52:20 – {"DATE_LOGS":"18/09/2019 02:52:20","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 02:52:30 – {"DATE_LOGS":"18/09/2019 02:52:24","INFO_LOGS":"LoginWithToken: 056336ad3f637a3eb2b010b06e8c0c00,IP ::1"}
+INFO 2019-09-18 02:57:40 – {"DATE_LOGS":"18/09/2019 02:57:40","INFO_LOGS":"***** SERVER END *****"}
+INFO 2019-09-18 02:57:55 – {"DATE_LOGS":"18/09/2019 02:57:55","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 02:58:05 – {"DATE_LOGS":"18/09/2019 02:57:59","INFO_LOGS":"LoginWithToken: 056336ad3f637a3eb2b010b06e8c0c00,IP ::1"}
+INFO 2019-09-18 03:00:34 – {"DATE_LOGS":"18/09/2019 03:00:34","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 03:00:44 – {"DATE_LOGS":"18/09/2019 03:00:39","INFO_LOGS":"LoginWithToken: 056336ad3f637a3eb2b010b06e8c0c00,IP ::1"}
+INFO 2019-09-18 03:01:58 – {"DATE_LOGS":"18/09/2019 03:01:58","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 03:02:08 – {"DATE_LOGS":"18/09/2019 03:02:02","INFO_LOGS":"LoginWithToken: 056336ad3f637a3eb2b010b06e8c0c00,IP ::1"}
+INFO 2019-09-18 03:02:28 – {"DATE_LOGS":"18/09/2019 03:02:27","INFO_LOGS":"LoginWithToken: 056336ad3f637a3eb2b010b06e8c0c00,IP ::1"}
+INFO 2019-09-18 03:02:38 – {"DATE_LOGS":"18/09/2019 03:02:30","INFO_LOGS":"LoginWithToken: 056336ad3f637a3eb2b010b06e8c0c00,IP ::1"}
+INFO 2019-09-18 03:04:08 – {"DATE_LOGS":"18/09/2019 03:04:08","INFO_LOGS":"***** SERVER END *****"}
+INFO 2019-09-18 03:06:29 – {"DATE_LOGS":"18/09/2019 03:06:29","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 03:06:39 – {"DATE_LOGS":"18/09/2019 03:06:33","INFO_LOGS":"LoginWithToken: 056336ad3f637a3eb2b010b06e8c0c00,IP ::1"}
+INFO 2019-09-18 03:08:16 – {"DATE_LOGS":"18/09/2019 03:08:15","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 03:08:26 – {"DATE_LOGS":"18/09/2019 03:08:19","INFO_LOGS":"LoginWithToken: 056336ad3f637a3eb2b010b06e8c0c00,IP ::1"}
+INFO 2019-09-18 03:08:36 – {"DATE_LOGS":"18/09/2019 03:08:27","INFO_LOGS":"LoginWithToken: 746ba127d994ac0bafdca359dffc95bd,IP ::1"}
+INFO 2019-09-18 03:17:56 – {"DATE_LOGS":"18/09/2019 03:17:55","INFO_LOGS":"***** SERVER END *****"}
+INFO 2019-09-18 03:18:35 – {"DATE_LOGS":"18/09/2019 03:18:35","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 03:18:45 – {"DATE_LOGS":"18/09/2019 03:18:39","INFO_LOGS":"LoginWithToken: 5128fc8358114839beaee9100bef2202,IP ::1"}
+INFO 2019-09-18 09:17:32 – {"DATE_LOGS":"18/09/2019 09:17:32","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 09:17:42 – {"DATE_LOGS":"18/09/2019 09:17:40","INFO_LOGS":"LoginWithToken: 5128fc8358114839beaee9100bef2202,IP ::1"}
+INFO 2019-09-18 09:18:56 – {"DATE_LOGS":"18/09/2019 09:18:56","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 09:19:06 – {"DATE_LOGS":"18/09/2019 09:18:59","INFO_LOGS":"LoginWithToken: 5128fc8358114839beaee9100bef2202,IP ::1"}
+INFO 2019-09-18 09:32:46 – {"DATE_LOGS":"18/09/2019 09:32:39","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/GameAccount/CreateEventGiftCode\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"s6/jMnnQCF78X8i9Z+nK47QsiKPMe1zCJ3p7t0st5l5/aR2GNkcDG1fXg0wGt+ablJ8p+sNvBOVAuKgZ/dPhusi7wPLW5mU9OaWAK7MviwCoB0n9Lc435RDxpgJFggnOe7Hm9cVOjrHthSvSjD7RI54WQqr0lg5zbvWFFI1fzDdjHSCSBPNkv2hP9X8VijTI\",\"clientIP\":\"::1\",\"sign\":\"bc3d6f723d4126479717adeca943a016\"}\r\nResponse Data: {\"status\":1,\"msg\":\"Thêm giftcode thành công\",\"data\":null,\"secreckey\":null}"}
+INFO 2019-09-18 09:33:26 – {"DATE_LOGS":"18/09/2019 09:33:19","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/GameAccount/CreateEventGiftCode\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"s6/jMnnQCF78X8i9Z+nK47QsiKPMe1zCJ3p7t0st5l7Gs+Me5h5RMsKT8dICKxiJOuQLd4UHVSQ+fVZxg793Z0Oxg6QcaEBBifQ6kaLYNmbcjdC+suoTQwD9wjsZ+GAkKhCy5FK3dMmdJcn7+CrEANW6OKMsJcpMvgXWM+oB2nmM0u7Fj/ImU4T31h6uHR41\",\"clientIP\":\"::1\",\"sign\":\"345ea31563da0671d91b3ad32e9c2f60\"}\r\nResponse Data: {\"status\":-31,\"msg\":\"Không d? qu? d? t?o giftcode!\",\"data\":null,\"secreckey\":null}"}
+INFO 2019-09-18 09:44:06 – {"DATE_LOGS":"18/09/2019 09:44:05","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/GameAccount/DeleteEventGiftCode\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"QvXxbsDgkGk0TI41icQfcA==\",\"clientIP\":\"::1\",\"sign\":\"98a61df9cc5829bfb59bbfd87a4b60aa\"}\r\nResponse Data: {\"status\":1,\"msg\":\"Xóa giftcode thành công\",\"data\":null,\"secreckey\":null}"}
+INFO 2019-09-18 09:57:56 – {"DATE_LOGS":"18/09/2019 09:57:56","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 09:58:06 – {"DATE_LOGS":"18/09/2019 09:57:57","INFO_LOGS":"LoginWithToken: b4514ae1e216d98f4ff23bde67a6c294,IP ::1"}
+INFO 2019-09-18 10:02:16 – {"DATE_LOGS":"18/09/2019 10:02:08","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/GameAccount/CreateEventGiftCode\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"s6/jMnnQCF78X8i9Z+nK47QsiKPMe1zCJ3p7t0st5l5/aR2GNkcDG1fXg0wGt+ablJ8p+sNvBOVAuKgZ/dPhusi7wPLW5mU9OaWAK7MviwCoB0n9Lc435RDxpgJFggnOe7Hm9cVOjrHthSvSjD7RI54WQqr0lg5zbvWFFI1fzDepDNvsFkPwuxe4mq9pL2Gm\",\"clientIP\":\"::1\",\"sign\":\"6839e5b12c7361b36ef49cd88d09c393\"}\r\nResponse Data: {\"status\":1,\"msg\":\"Thêm giftcode thành công\",\"data\":null,\"secreckey\":null}"}
+INFO 2019-09-18 10:12:03 – {"DATE_LOGS":"18/09/2019 10:12:03","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-18 10:12:13 – {"DATE_LOGS":"18/09/2019 10:12:09","INFO_LOGS":"LoginWithToken: b4514ae1e216d98f4ff23bde67a6c294,IP ::1"}
+INFO 2019-09-19 01:57:24 – {"DATE_LOGS":"19/09/2019 01:57:18","INFO_LOGS":"LoginWithToken: b4514ae1e216d98f4ff23bde67a6c294,IP ::1"}

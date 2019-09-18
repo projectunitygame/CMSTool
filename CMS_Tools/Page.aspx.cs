@@ -46,7 +46,7 @@ namespace CMS_Tools
                         {
                             int resViewMenu = 0;
                             DataTable dtViewMenu = manageDao.MenuModel.GetListViewMenu(userData.AccountId, ref resViewMenu);
-                            if (dtViewMenu.Rows.Count > 0)
+                            if (dtViewMenu!=null && dtViewMenu.Rows.Count > 0)
                             {
                                 listViewMenu = dtViewMenu.Rows[0][1].ToString().Split(',');
                                 //Response.Write("listViewMenu" + JsonConvert.SerializeObject(listViewMenu) + "listViewMenu length:" + listViewMenu.Length);
@@ -54,6 +54,10 @@ namespace CMS_Tools
                                 {
                                     Response.Redirect("Page404.aspx");
                                 }
+                            }
+                            else
+                            {
+                                Response.Redirect("Page404.aspx");
                             }
                         }
 

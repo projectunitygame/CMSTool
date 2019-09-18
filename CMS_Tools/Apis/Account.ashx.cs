@@ -84,15 +84,25 @@ namespace CMS_Tools.Apis
                     string otp = context.Request.Form["otp"];
                     if(otp== context.Session["opt_reset_pass"].ToString())
                     {
-                        //string password = Guid.NewGuid().ToString().Substring(0,10);
-                        //int phone = int.Parse(context.Session["phone_login_resetpass"].ToString());
-                        //int code = manage.AccountModel.ResetPassword(data.loginId, data.loginType, password);
-                        //if (code == 0)
-                        //{
-                        //    SMS.SendMessage(phone.ToString(), password + " la mat khau moi cua Ban.");
-                        //}
+                        string password = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
+                        string phone = context.Session["phone_login_resetpass"].ToString();
+                        int code = manage.AccountModel.ResetPasswordWithPhone(phone, password);
+                        if (code == 0)
+                        {
+                            SMS.SendMessage(phone.ToString(), password + " la mat khau moi cua Ban.");
+                            result.status = Constants.NUMBER_CODE.SUCCESS;
+                            result.msg = "Mật khẩu mới đã được gửi tới số điện thoại của bạn!";
+                        }
+                        else
+                        {
+                            result.status = (Constants.NUMBER_CODE)code;
+                            result.msg = "Cập nhật mật khẩu thất bại!";
+                        }
                     }
-                    
+                    else
+                    {
+                        result.msg = "Nhập mã otp không chính xác!";
+                    }
                 }
                 else
                 {
@@ -118,22 +128,37 @@ namespace CMS_Tools.Apis
                 {
                     phone = phone.Trim();
                     int num = 0;
-                    if(int.TryParse(phone, out num)){
-                        string otp= Guid.NewGuid().ToString().Substring(0,10);
-                        context.Session["opt_reset_pass"] = otp;
-                        context.Session["phone_login_resetpass"] = phone;
-                        SMS.SendMessage(phone, "Ma OTP xac thuc reset mat khau la " + otp + ", hieu luc 3 phut");
+                    if (phone.Length !=10)
+                    {
+                        result.status = Constants.NUMBER_CODE.NOT_A_NUMBER;
+                        result.msg = "Nhập số điện thoại có 10 số";
+                    }
+                    else if(!int.TryParse(phone, out num)){
+                        result.status = Constants.NUMBER_CODE.NOT_A_NUMBER;
+                        result.msg = "Số điện thoại phải là số";
                     }
                     else
                     {
-                        result.status = Constants.NUMBER_CODE.NOT_A_NUMBER;
-                        result.msg = result.status.ToString();
+                        if (manage.AccountModel.CheckPhoneNumber(phone) ==0)
+                        {
+                            string otp = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
+                            context.Session["opt_reset_pass"] = otp;
+                            context.Session["phone_login_resetpass"] = phone;
+                            SMS.SendMessage(phone, "Ma OTP xac thuc reset mat khau la " + otp + ", hieu luc 3 phut");
+                            result.status = Constants.NUMBER_CODE.SUCCESS;
+                            result.msg = "Vui lòng nhập mã OTP để reset mật khẩu";
+                        }
+                        else
+                        {
+                            result.status = Constants.NUMBER_CODE.NOT_A_NUMBER;
+                            result.msg = "Số điện thoại không tồn tại!";
+                        }
                     }
                 }
                 else
                 {
                     result.status = Constants.NUMBER_CODE.DATA_NULL;
-                    result.msg = "Email không được để trống!";
+                    result.msg = "Số điện thoại không được để trống!";
                 }
             }
             catch (Exception ex)

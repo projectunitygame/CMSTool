@@ -27,6 +27,18 @@
 .control-label{
 	text-align:left !important;
 }
+.content-total-money {
+    border-radius: 5px !important;
+    border-color: #ff7143 !important;
+    background: #ff7143 !important;
+    text-align: center;
+    font-weight: bold;
+    color: #fff !important;
+}
+.content-total-money.style-2 {
+    background: #a2d368 !important;
+    border-color: #a2d368 !important;
+}
 
     </style>
 </asp:Content>
@@ -99,7 +111,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-md-3" style="margin-bottom: 10px;visibility:hidden">
+                        <!--<div class="col-md-3" style="margin-bottom: 10px;visibility:hidden">
                             <label class="control-label label-balance">Chọn lọc dữ liệu theo cột</label>
                             <select id="filterColumn" class="form-control">
                                 <option value="Name">Tên Event</option>
@@ -110,8 +122,20 @@
                         <div class="col-md-3" style="margin-bottom: 10px;visibility:hidden">
                             <label class="control-label label-balance">Nhập từ khóa tìm kiếm</label>
                             <input type="text" class="form-control" id="txtFindData" placeholder="Search..." />
+                        </div>-->
+                        <div class="col-md-2 col-md-offset-1" style="margin-bottom: 10px;">
+                            <label class="control-label label-balance">Quỹ game</label>
+                            <div class="input-group" style="width:100%">
+                                <input class="form-control content-total-money" id="gamefund" disabled="">
+                            </div>
                         </div>
                         <div class="col-md-2" style="margin-bottom: 10px;">
+                            <label class="control-label label-balance">Cộng quỹ game</label>
+                            <div class="input-group" style="width:100%">
+                                <button id="btnAddFund" type="button" class="btn yellow form-control"> Cộng quỹ</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-md-offset-1" style="margin-bottom: 10px;">
                             <label class="control-label label-balance">Tìm kiếm</label>
                             <button id="btnFindData" type="button" class="btn green form-control"><i class="icon-magnifier"></i> Search</button>
                         </div>
@@ -207,6 +231,24 @@
                                             <div class="input-icon right">
                                                 <i class="fa"></i>
                                                 <input type="text" style="width:100%;" id="txtQty" class="form-control" name="Qty" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            	<div class="col-xs-10 col-xs-offset-1">
+                                	<div class="form-group">
+                                        <label class="control-label col-md-4">
+                                            Số lượng: <span class="required" aria-required="true">* </span>
+                                        </label>
+                                        <div class="col-md-8">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <select  style="width:100%;" id="selectSubFund" class="form-control" name="SubFund">
+                                                    <option value="true">Trừ quỹ</option>
+                                                    <option value="flase">Không trừ quỹ</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -327,9 +369,9 @@
             $('#form_Create_Giftcode').trigger('reset');
         }
         jQuery(document).ready(function () {
-            if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                $('.page-toolbar').remove();
-            }
+            //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+            //    $('.page-toolbar').remove();
+            //}
             $('#btnAddNew').html("<i class='fa fa-plus'></  i> Tạo GiftCode Mới");
             FormValidation.init();
             FormValidation2.init();
@@ -338,21 +380,21 @@
                 $('#modal_Create_Giftcode').modal('show');
                 $('#txtExpired').val(moment().subtract('day', 0).format('MM/DD/YYYY'))
             });
-            $('#txtFindData').on('keyup', function (e) {
-                if (e.keyCode == 13) {
-                    TableEditable.init();
-                }
-            });
+            //$('#txtFindData').on('keyup', function (e) {
+            //    if (e.keyCode == 13) {
+            //        TableEditable.init();
+            //    }
+            //});
 
-            $('#btnFindData').click(function () {
-                if ($('#txtFindData').val() != "")
-                    TableEditable.init();
-            });
+            //$('#btnFindData').click(function () {
+            //    if ($('#txtFindData').val() != "")
+            //        TableEditable.init();
+            //});
 
-            $('#filterColumn').on('change', function () {
-                if ($('#txtFindData').val() != "")
-                    TableEditable.init();
-            });
+            //$('#filterColumn').on('change', function () {
+            //    if ($('#txtFindData').val() != "")
+            //        TableEditable.init();
+            //});
 
             //load danh sach dai ly
             TableEditable.init();
@@ -360,7 +402,71 @@
                 TableEditable.init();
             });
             ComponentsPickers.init();
+
+            LoadFund();
+
+            $('#btnAddFund').click(function () {
+                bootbox.prompt({
+                    title: "Nhập số tiền cộng quỹ!",
+                    centerVertical: true,
+                    callback: function (result) {
+                        if (result === null) {
+                            // Prompt dismissed
+                        } else {
+                            // result has a value
+                            var json = {
+                                "Amount": result,
+                            }
+                            POST_DATA("Apis/API_GameAccount.ashx", {
+                                type: 23,
+                                json: JSON.stringify(json)
+                            }, function (res) {
+                                if (res.status == 1) {
+                                    bootbox.alert({
+                                        title: "Thông báo",
+                                        message: res.msg,
+                                        callback: function () {
+                                            LoadFund();
+                                        }
+                                    })
+                                }
+                                else
+                                    bootbox.alert(res.msg);
+                            });
+                        }
+
+                    }
+                });
+            });
         });
+
+
+        //Load quỹ thưởng
+        function LoadFund() {
+            $.ajax({
+                type: "POST",
+                url: "Apis/Menu.ashx",
+                data: {
+                    type: 13,
+                    mid: 111,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status == 5005) {
+                        window.location.assign("login.aspx");
+                        return;
+                    }
+                    if (data.status == 0) {
+                        if (data.data != null && data.data.length > 0) {
+                            $('#gamefund').val(formatMoney(parseInt(data.data[0][0])));
+                        }
+                    }
+                },
+                complete: function () {
+                    
+                }
+            });
+        }
 
         var _dateStart = null;
         var _dateEnd = null;
@@ -415,8 +521,8 @@
                     var param = [];
                     param.push(_dateStart);//@0
                     param.push(_dateEnd);//@1
-                    param.push($('#filterColumn').val() != null ? $('#filterColumn').val() : 'UWIN_ID');//@2
-                    param.push($('#txtFindData').val());//@3
+                    //param.push($('#filterColumn').val() != null ? $('#filterColumn').val() : 'UWIN_ID');//@2
+                    //param.push($('#txtFindData').val());//@3
                     $.ajax({
                         type: "POST",
                         url: "Apis/Menu.ashx",
@@ -506,10 +612,10 @@
                                 //an column
                                 var bVis = oTable.fnSettings().aoColumns[7].bVisible;
                                 oTable.fnSetColumnVis(7, bVis ? false : true);
-                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                    var bVis = oTable.fnSettings().aoColumns[8].bVisible;
-                                    oTable.fnSetColumnVis(8, bVis ? false : true);
-                                }
+                                //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                //    var bVis = oTable.fnSettings().aoColumns[8].bVisible;
+                                //    oTable.fnSetColumnVis(8, bVis ? false : true);
+                                //}
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
@@ -574,6 +680,9 @@
                             
                         },
                         Expired: {
+                            required: !0, 
+                        },
+                        SubFund: {
                             required: !0, 
                         },
                         //province: {
@@ -713,7 +822,8 @@
                 "Prefix": $('#txtPrefix').val(),
                 "Price": $('#txtPrice').val(),
                 "Qty": $('#txtQty').val(),
-                "Expired": $('#txtExpired').val()
+                "Expired": $('#txtExpired').val(),
+                "SubFund": $('#selectSubFund').val() =="true"
             }
             POST_DATA("Apis/API_GameAccount.ashx", {
                 type: 8,
@@ -726,6 +836,7 @@
                         callback: function () {
                             $('#modal_Create_Giftcode').modal('hide');
                             TableEditable.init();
+                            LoadFund();
                         }
                     })
                 }

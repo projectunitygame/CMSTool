@@ -340,7 +340,27 @@ namespace CMS_Tools.Lib
 
         private static string WebResponseGet(HttpWebRequest webRequest)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            StreamReader responseReader = null;
+            string responseData = "";
+
+            try
+            {
+                responseReader = new StreamReader(webRequest.GetResponse().GetResponseStream());
+                responseData = responseReader.ReadToEnd();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                webRequest.GetResponse().GetResponseStream().Close();
+                responseReader.Close();
+                responseReader = null;
+            }
+
+            return responseData;
         }
 
         public static string WebRequest(Method method, string url, string postData)

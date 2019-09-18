@@ -33,13 +33,14 @@ namespace CMS_Tools.Apis
                     context.Response.Write(JsonConvert.SerializeObject(result));
                     return;
                 }
-                if (accountInfo.GroupID == 6)
-                {
-                    result.status = Constants.NUMBER_CODE.ACCOUNT_NOT_PERMISSION;
-                    result.msg = "Bạn không có quyền để thực hiện thao tác";
-                    context.Response.Write(JsonConvert.SerializeObject(result));
-                    return;
-                }
+                // Không chặn quyền tk guest nữa
+                //if (accountInfo.GroupID == 6)
+                //{
+                //    result.status = Constants.NUMBER_CODE.ACCOUNT_NOT_PERMISSION;
+                //    result.msg = "Bạn không có quyền để thực hiện thao tác";
+                //    context.Response.Write(JsonConvert.SerializeObject(result));
+                //    return;
+                //}
                 #endregion
 
                 Constants.REQUEST_GAME_ACOUNT_TYPE requestType = (Constants.REQUEST_GAME_ACOUNT_TYPE)int.Parse(context.Request.Form["type"]);
@@ -111,6 +112,9 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_GAME_ACOUNT_TYPE.RESET_USER_GAME_PASSWORD:
                         RESET_USER_GAME_PASSWORD(context);
                         break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.ADD_MONEY_FUND:
+                        ADD_MONEY_FUND(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -126,7 +130,78 @@ namespace CMS_Tools.Apis
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
         }
+        /// <summary>
+        /// Cộng tiền quỹ
+        /// </summary>
+        /// <param name="context"></param>
+        private void ADD_MONEY_FUND(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["ADD_MONEY_FUND"] == null || (DateTime.Now - (DateTime)context.Session["ADD_MONEY_FUND"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        AddMoneyFund jsonData = null;
+                        try
+                        {
+                            jsonData = JsonConvert.DeserializeObject<AddMoneyFund>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+                        if (jsonData != null)
+                        {
+                            jsonData.CreatorID = accountInfo.AccountId;
+                            jsonData.CreatorName = accountInfo.UserName;
+                            jsonData.IP = UtilClass.GetIPAddress();
 
+
+                            if (jsonData.Amount < 0)
+                            {
+                                result.status = Constants.NUMBER_CODE.ADD_MONEY_USER_VALI;
+                                result.msg = "Số tiền cộng quỹ phải từ 0 trờ lên";
+                                context.Response.Write(JsonConvert.SerializeObject(result));
+                                return;
+                            }
+                            else
+                            {
+                                PayloadApi p = new PayloadApi()
+                                {
+                                    clientIP = UtilClass.GetIPAddress(),
+                                    data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                                };
+                                var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/AddMoneyFund");
+                                context.Response.Write(responseData);
+                                return;
+                            }
+
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR RESET_USER_GAME_PASSWORD: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["RESET_USER_GAME_PASSWORD"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
         private void RESET_USER_GAME_PASSWORD(HttpContext context)
         {
             try
@@ -1695,6 +1770,7 @@ namespace CMS_Tools.Apis
             public int Qty;
             public string Prefix;
             public DateTime Expired;
+            public bool SubFund; //1: có trừ quỹ ; 2: không trừ
         }
         public class DeleteEventGiftCode
         {
@@ -1812,6 +1888,13 @@ namespace CMS_Tools.Apis
         public class ResetUserGamePassword
         {
             public long AccountID;
+        }
+        public class AddMoneyFund
+        {
+            public long Amount;
+            public int CreatorID;
+            public string CreatorName;
+            public string IP;
         }
         #endregion
     }

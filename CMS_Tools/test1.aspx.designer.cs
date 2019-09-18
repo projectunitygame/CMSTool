@@ -10,6 +10,6 @@
 namespace CMS_Tools {
     
     
-    public partial class testNaptien {
+    public partial class test1 {
     }
 }

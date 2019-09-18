@@ -32,6 +32,14 @@ namespace CMS_Tools.Apis
                     context.Response.Write(JsonConvert.SerializeObject(result));
                     return;
                 }
+                // Không chặn quyền tk guest nữa
+                //if (accountInfo.GroupID == 6)
+                //{
+                //    result.status = Constants.NUMBER_CODE.ACCOUNT_NOT_PERMISSION;
+                //    result.msg = "Bạn không có quyền để thực hiện thao tác";
+                //    context.Response.Write(JsonConvert.SerializeObject(result));
+                //    return;
+                //}
                 #endregion
 
                 Constants.REQUEST_AGENCY_TYPE requestType = (Constants.REQUEST_AGENCY_TYPE)int.Parse(context.Request.Form["type"]);

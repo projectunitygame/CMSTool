@@ -80,15 +80,9 @@
     },
         resetPassword = function () {
             $('.divLoading').fadeIn(0);
-            //email
-            //var param = {
-            //    type: 3,
-            //    email: $('#txtEmail').val(),
-            //};
-            //Phone
             var param = {
                 type: 3,
-                phone: $('#txtEmail').val(),
+                email: $('#txtEmail').val()
             };
             POST_DATA("Apis/Account.ashx", param, function (data) {
                 bootbox.alert(data.msg);
@@ -97,7 +91,46 @@
                 }
                 $('.divLoading').fadeOut(0);
             });
-        }
+        },
+        resetPasswordWithPhone = function () {
+            $('.divLoading').fadeIn(0);
+            var param = {
+                type: 35,
+                //email: $('#txtEmail').val()
+                phone: $('#txtPhone').val()
+            };
+            POST_DATA("Apis/Account.ashx", param, function (data) {
+                if (data.status == 0) {
+                    bootbox.prompt({
+                        title: "Nhập mã OTP để thiết lập mật khẩu mới",
+                        callback: function (result) {
+                            if (result !== null) {
+                                POST_DATA("Apis/Account.ashx", {
+                                    type: 36,
+                                    otp: result
+                                }, function (res) {
+                                        if (res.status == 0) {
+                                            bootbox.alert({
+                                                message: res.msg,
+                                                callback: function () {
+                                                    window.location.href = 'https://id.uwin369.net/login.aspx';
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            bootbox.alert(res.msg);
+                                        }
+                                });
+                            }
+                        }
+                    });
+                }
+                else {
+                    bootbox.alert(data.msg);
+                }
+                $('.divLoading').fadeOut(0);
+            });
+        };
     return {
         init: function () {
             r(), $(".login-bg").backstretch(["assets/pages/img/login/bg1.jpg", "assets/pages/img/login/bg2.jpg"], {
@@ -107,6 +140,9 @@
         },
         resetPassword: function () {
             resetPassword();
+        },
+        resetPasswordWithPhone: function () {
+            resetPasswordWithPhone();
         }
     }
 }();

@@ -331,9 +331,9 @@
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
-            if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                $('.page-toolbar').remove();
-            }
+            //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+            //    $('.page-toolbar').remove();
+            //}
             $('#btnAddNew').html("<i class='fa fa-plus'></  i> Tạo KH Mới");
             FormValidation.init();
             $('#btnAddNew').click(function () {
@@ -479,6 +479,7 @@
                                     "<td>Display</td>" +
                                     "<td>Infomation</td>" +
                                     "<td>FB</td>" +
+                                    "<td>VipPoint</td>" +
                                     "<td style='width:200px'>Chỉnh sửa</td>";
                                 if (oTable != null) {
                                     oTable.fnDestroy();
@@ -544,6 +545,7 @@
                                         "<td>" + obj[26] + "</td>" +
                                         "<td>" + obj[27] + "</td>" +
                                         "<td>" + obj[28] + "</td>" +
+                                        "<td>" + obj[29] + "</td>" +
                                         "<td>" + linkLock + linkLockInfomation +
                                         "<a class='btn btn-xs blue btn-circle btn-outline' href='Page.aspx?m=30&agencyid=" + base64Str + "' target='_blank'> Lịch sử giao dịch</a>" +
                                         "<a class='btn btn-xs green btn-circle btn-outline' href='Page.aspx?m=27&agencyid=" + base64Str + "' target='_blank'> Nạp tiền</a></td > " +
@@ -691,10 +693,10 @@
                                 oTable.fnSetColumnVis(28, bVis ? false : true);
                                 var bVis = oTable.fnSettings().aoColumns[29].bVisible;
                                 oTable.fnSetColumnVis(29, bVis ? false : true);
-                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                    var bVis = oTable.fnSettings().aoColumns[30].bVisible;
-                                    oTable.fnSetColumnVis(30, bVis ? false : true);
-                                }
+                                //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                //    var bVis = oTable.fnSettings().aoColumns[30].bVisible;
+                                //    oTable.fnSetColumnVis(30, bVis ? false : true);
+                                //}
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown

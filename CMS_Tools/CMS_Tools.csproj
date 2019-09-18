@@ -239,6 +239,11 @@
     <Content Include="bin\AjaxControlToolkit.dll" />
     <Content Include="bin\Telerik.Web.UI.dll" />
     <Content Include="CategoryManage.aspx" />
+    <Content Include="countdown\index.html" />
+    <Content Include="countdown\flipclock.css" />
+    <Content Include="countdown\flipclock.min.js" />
+    <Content Include="countdown\jquery.min.js" />
+    <Content Include="countdown\bg.jpg" />
     <Content Include="CreateJson_Chart.aspx" />
     <Content Include="css\bootstrap-grid.css" />
     <Content Include="css\bootstrap-grid.min.css" />
@@ -262,8 +267,8 @@
     <Content Include="DragDrop.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="SuperNova.aspx" />
+    <Content Include="test1.aspx" />
     <Content Include="testenscrypt.aspx" />
-    <Content Include="testNaptien.aspx" />
     <Content Include="Test_BaoCaoThongKe.aspx" />
     <Content Include="Test_QuanTri_PhanQuyen.aspx" />
     <Content Include="Test_GameData_GameID.aspx" />
@@ -369,7 +374,6 @@
     <Content Include="Test_GameDT_GiftcodeEvent.aspx" />
     <Content Include="Test_GameDT_GiftCodeThongTin.aspx" />
     <Content Include="Test_GiaoDich_GDDaiLy.aspx" />
-    <Content Include="Test_Naptien.aspx" />
     <Content Include="Test_GameDT_Quythuong.aspx" />
     <Content Include="Test_QuanTri_TaiKhoanQuanTri.aspx" />
     <Content Include="Test_Vippoint_LichSu.aspx" />
@@ -519,19 +523,19 @@
     <Compile Include="SuperNova.aspx.designer.cs">
       <DependentUpon>SuperNova.aspx</DependentUpon>
     </Compile>
+    <Compile Include="test1.aspx.cs">
+      <DependentUpon>test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="test1.aspx.designer.cs">
+      <DependentUpon>test1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="testenscrypt.aspx.cs">
       <DependentUpon>testenscrypt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="testenscrypt.aspx.designer.cs">
       <DependentUpon>testenscrypt.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="testNaptien.aspx.cs">
-      <DependentUpon>testNaptien.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="testNaptien.aspx.designer.cs">
-      <DependentUpon>testNaptien.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_BaoCaoThongKe.aspx.cs">
       <DependentUpon>Test_BaoCaoThongKe.aspx</DependentUpon>
@@ -825,13 +829,6 @@
     <Compile Include="Test_GiaoDich_GDDaiLy.aspx.designer.cs">
       <DependentUpon>Test_GiaoDich_GDDaiLy.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_Naptien.aspx.cs">
-      <DependentUpon>Test_Naptien.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test_Naptien.aspx.designer.cs">
-      <DependentUpon>Test_Naptien.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Test_GameDT_Quythuong.aspx.cs">
       <DependentUpon>Test_GameDT_Quythuong.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1030,7 +1027,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51572</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61592/</IISUrl>
+          <IISUrl>http://localhost:61591/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

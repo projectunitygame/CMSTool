@@ -119,7 +119,7 @@ namespace CMS_Tools.Apis
                 string listmenu = context.Request.Unvalidated.Form["viewmenu"];
                 string accountId = context.Request.Unvalidated.Form["id"];
                 //string menuId = "19";
-                if (!string.IsNullOrEmpty(listmenu))
+                //if (!string.IsNullOrEmpty(listmenu))
                 {
                     string msg = "";
                     int code = manageDao.MenuModel.UpdateListViewMenu(int.Parse(accountId), listmenu , ref msg);
@@ -127,11 +127,11 @@ namespace CMS_Tools.Apis
                     result.status = (Constants.NUMBER_CODE)code;
                     result.msg = msg;
                 }
-                else
-                {
-                    result.status = Constants.NUMBER_CODE.DATA_NULL;
-                    result.msg = result.status.ToString();
-                }
+                //else
+                //{
+                //    result.status = Constants.NUMBER_CODE.DATA_NULL;
+                //    result.msg = result.status.ToString();
+                //}
             }
             catch (Exception ex)
             {

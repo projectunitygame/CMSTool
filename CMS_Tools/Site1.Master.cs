@@ -71,7 +71,7 @@ namespace CMS_Tools
                 {
                     int resViewMenu = 0;
                     DataTable dtViewMenu = a.MenuModel.GetListViewMenu(userData.AccountId, ref resViewMenu);
-                    if (dtViewMenu.Rows.Count > 0)
+                    if (dtViewMenu!=null && dtViewMenu.Rows.Count > 0)
                     {
                         listViewMenu = dtViewMenu.Rows[0][1].ToString().Split(',');
                         //Response.Write("listViewMenu" + JsonConvert.SerializeObject(listViewMenu) + "listViewMenu length:" + listViewMenu.Length);
@@ -109,7 +109,12 @@ namespace CMS_Tools
                         //            listMenu.Remove(menu);
                         //    }
                         //}
-                        if(listViewMenu !=null && listViewMenu.Length > 0 && listViewMenu[0] != "")
+                        if (userData.GroupID == 6 &&( listViewMenu.Length < 1 || string.IsNullOrEmpty(listViewMenu[0])))
+                        {
+                            menuParent = null;
+                            //menuParent = listMenu.Where(x => x.ParentID == 0 && x.MenuId==1).OrderByDescending(x => x.DisplayIndex);
+                        }
+                        if (listViewMenu !=null && listViewMenu.Length > 0 && listViewMenu[0] != "")
                         {
                             foreach (var item in menuParent)
                             {

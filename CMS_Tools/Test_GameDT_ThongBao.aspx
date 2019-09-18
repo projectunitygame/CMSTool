@@ -341,9 +341,9 @@
         });
         var colFilter = null;
         jQuery(document).ready(function () {
-            if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                $('.page-toolbar').remove();
-            }
+            //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+            //    $('.page-toolbar').remove();
+            //}
 
             FormValidation.init();
             FormValidation2.init();
@@ -521,10 +521,10 @@
                                 oTable.fnSetColumnVis(3, bVis ? false : true);
                                 var bVis = oTable.fnSettings().aoColumns[6].bVisible;
                                 oTable.fnSetColumnVis(6, bVis ? false : true);
-                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                    var bVis = oTable.fnSettings().aoColumns[8].bVisible;
-                                    oTable.fnSetColumnVis(8, bVis ? false : true);
-                                }
+                                //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                //    var bVis = oTable.fnSettings().aoColumns[8].bVisible;
+                                //    oTable.fnSetColumnVis(8, bVis ? false : true);
+                                //}
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown

@@ -293,7 +293,8 @@ namespace CMS_Tools.Lib
             FIND_GAME_ACCOUNT,
             ADD_MONEY_USER,
             DEDUCT_GOLD_USER,
-            RESET_USER_GAME_PASSWORD
+            RESET_USER_GAME_PASSWORD,
+            ADD_MONEY_FUND
         }
 
         public enum WEBSOCKET_STATUS: int
