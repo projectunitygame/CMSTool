@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_BaoCaoThongKe.aspx.cs" Inherits="CMS_Tools.Test_BaoCaoThongKe" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_BaoCaoThongKe_2.aspx.cs" Inherits="CMS_Tools.Test_BaoCaoThongKe" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <style>
     .af-kpi-box-footer{

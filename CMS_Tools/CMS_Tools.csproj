@@ -269,7 +269,8 @@
     <Content Include="SuperNova.aspx" />
     <Content Include="test1.aspx" />
     <Content Include="testenscrypt.aspx" />
-    <Content Include="Test_BaoCaoThongKe.aspx" />
+    <Content Include="Test_BaoCaoThongKe_2.aspx" />
+    <Content Include="Test_DuyetYeuCauRutTien.aspx" />
     <Content Include="Test_QuanTri_PhanQuyen.aspx" />
     <Content Include="Test_GameData_GameID.aspx" />
     <Content Include="Test_GameDT_CauHinhBotTaiXiu.aspx" />
@@ -376,6 +377,7 @@
     <Content Include="Test_GiaoDich_GDDaiLy.aspx" />
     <Content Include="Test_GameDT_Quythuong.aspx" />
     <Content Include="Test_QuanTri_TaiKhoanQuanTri.aspx" />
+    <Content Include="Test_ThongKe.aspx" />
     <Content Include="Test_Vippoint_LichSu.aspx" />
     <Content Include="Test_Publisher.aspx" />
     <Content Include="Test_Taikhoandaily.aspx" />
@@ -537,12 +539,19 @@
     <Compile Include="testenscrypt.aspx.designer.cs">
       <DependentUpon>testenscrypt.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Test_BaoCaoThongKe.aspx.cs">
-      <DependentUpon>Test_BaoCaoThongKe.aspx</DependentUpon>
+    <Compile Include="Test_BaoCaoThongKe_2.aspx.cs">
+      <DependentUpon>Test_BaoCaoThongKe_2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test_BaoCaoThongKe.aspx.designer.cs">
-      <DependentUpon>Test_BaoCaoThongKe.aspx</DependentUpon>
+    <Compile Include="Test_BaoCaoThongKe_2.aspx.designer.cs">
+      <DependentUpon>Test_BaoCaoThongKe_2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_DuyetYeuCauRutTien.aspx.cs">
+      <DependentUpon>Test_DuyetYeuCauRutTien.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_DuyetYeuCauRutTien.aspx.designer.cs">
+      <DependentUpon>Test_DuyetYeuCauRutTien.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_QuanTri_PhanQuyen.aspx.cs">
       <DependentUpon>Test_QuanTri_PhanQuyen.aspx</DependentUpon>
@@ -842,6 +851,13 @@
     </Compile>
     <Compile Include="Test_QuanTri_TaiKhoanQuanTri.aspx.designer.cs">
       <DependentUpon>Test_QuanTri_TaiKhoanQuanTri.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_ThongKe.aspx.cs">
+      <DependentUpon>Test_ThongKe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_ThongKe.aspx.designer.cs">
+      <DependentUpon>Test_ThongKe.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_Vippoint_LichSu.aspx.cs">
       <DependentUpon>Test_Vippoint_LichSu.aspx</DependentUpon>

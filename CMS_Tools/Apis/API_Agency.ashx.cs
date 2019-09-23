@@ -66,6 +66,9 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_AGENCY_TYPE.CHANGE_DISPLAY_AGENCY:
                         CHANGE_DISPLAY_AGENCY(context);
                         break;
+                    case Constants.REQUEST_AGENCY_TYPE.ACCEPT_REQUEST_GET_MONEY_AGENCY:
+                        ACCEPT_REQUEST_GET_MONEY_AGENCY(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -80,6 +83,67 @@ namespace CMS_Tools.Apis
                 result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
+        }
+
+        private void ACCEPT_REQUEST_GET_MONEY_AGENCY(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["ACCEPT_REQUEST_GET_MONEY_AGENCY"] == null || (DateTime.Now - (DateTime)context.Session["ACCEPT_REQUEST_GET_MONEY_AGENCY"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        AgencyReturnGoldToUser jsonData = null;
+                        try
+                        {
+                            jsonData = JsonConvert.DeserializeObject<AgencyReturnGoldToUser>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        if (jsonData != null)
+                        {
+
+                            jsonData.RecipientID = accountInfo.MasterID;
+                            jsonData.Key = Constants.KEY_SQL;
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/AgencyReturnGoldToUser");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR ACCEPT_REQUEST_GET_MONEY_AGENCY: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["ACCEPT_REQUEST_GET_MONEY_AGENCY"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
         }
 
         private void CHANGE_DISPLAY_AGENCY(HttpContext context)
@@ -645,8 +709,14 @@ namespace CMS_Tools.Apis
         public int creatorID;
         public string creatorName;
         public string ip;
+
+
+        public class AcceptGetMoneyAgency
+        {
+            public string TransactionID;
+            public string Key;
+        }
+        #endregion
+
+        }
     }
-    #endregion
-
-
-}

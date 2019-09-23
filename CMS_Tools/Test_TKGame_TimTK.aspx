@@ -173,7 +173,7 @@
             </div>
         </div>
     </div>  
-
+    </div>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="PageJSAdd" runat="server">
     <script src="assets/global/plugins/Base64JS.js"></script>
@@ -329,6 +329,11 @@
                                     var hisAccount = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='ShowHistoryAccount(\"" + obj[0] + "\");'> Xem lịch sử</a>";
                                     var addMoney = "<a class='btn btn-xs green btn-circle btn-outline' onclick='AddMoney(\"" + obj[0] + "\");'> Nạp tiền</a>";
                                     var resetPass = "<a class='btn btn-xs yellow btn-circle btn-outline' onclick='ResetPass(\"" + obj[0] + "\");'> Reset Pass</a>";
+                                    var offLoginOTP = '';
+                                    if (obj[10] == 'True') {
+                                        var offLoginOTP = "<a class='btn btn-xs red btn-circle btn-outline' onclick='OftLoginOTP(\"" + obj[0] + "\");'> Tắt đăng nhập bảo mật</a>";
+                                    }
+                                    
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
@@ -343,7 +348,8 @@
                                         "<td>" + obj[10] + "</td>" +
                                         "<td>" + obj[11] + "</td>" +
                                         "<td>" + obj[12] + "</td>" +
-                                        "<td>" + linkLock + lockChat + hisAccount + addMoney + resetPass + "</td>" +
+                                        "<td>" + obj[13] + "</td>" +
+                                        "<td>" + linkLock + lockChat + hisAccount + addMoney + resetPass + offLoginOTP + "</td>" +
                                         "</tr>");
                                 }
                                 var colHiden = [];
@@ -373,6 +379,8 @@
                                 oTable.fnSetColumnVis(8, bVis ? false : true);
                                 var bVis = oTable.fnSettings().aoColumns[9].bVisible;
                                 oTable.fnSetColumnVis(9, bVis ? false : true);
+                                var bVis = oTable.fnSettings().aoColumns[10].bVisible;
+                                oTable.fnSetColumnVis(10, bVis ? false : true);
                                 //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
                                 //    var bVis = oTable.fnSettings().aoColumns[13].bVisible;
                                 //    oTable.fnSetColumnVis(13, bVis ? false : true);
@@ -443,6 +451,32 @@
                         data: {
                             json: JSON.stringify(json),
                             type: 22
+                        },
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.status == 1)
+                                TableEditable.init();
+                            else
+                                bootbox.alert(res.msg);
+                            $(".divLoading").fadeOut(500);
+                        }
+                    });
+                }
+            });
+        }
+        function OftLoginOTP(ID) {
+            bootbox.confirm("Xác nhận reset password?", function (result) {
+                if (result) {
+                    $('.divLoading').fadeIn();
+                    var json = {
+                        "AccountID": ID
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "Apis/API_GameAccount.ashx",
+                        data: {
+                            json: JSON.stringify(json),
+                            type: 24
                         },
                         dataType: 'json',
                         success: function (res) {
