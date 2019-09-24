@@ -1,32 +1,40 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_DuyetYeuCauRutTien.aspx.cs" Inherits="CMS_Tools.Test_DuyetYeuCauRutTien" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Test_GiaoDich_DuyetGiaoDich.aspx.cs" Inherits="CMS_Tools.Test_GiaoDich_DuyetGiaoDich" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .avatar_u{
-    height: 50px;
-    border: 1px solid #ddd;
-    border-radius: 50% !important;
-}
-.form-section {
-    margin: 20px 0;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #eee;
-    font-size: 12px;
-    color: #333;
-    text-transform: uppercase;
-}
-.btn-group-xs>.btn, .btn-xs{
-	font-size:11px !important;
-}
-.table td, .table th {
-    font-size: 12px !important;
-}
-.select2-container--bootstrap .select2-selection, .form-control, output{
-	font-size: 12px !important;
-}
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 50% !important;
+        }
+        .form-section {
+            margin: 20px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            font-size: 12px;
+            color: #333;
+            text-transform: uppercase;
+        }
+        .btn-group-xs>.btn, .btn-xs{
+	        font-size:11px !important;
+        }
+        .table td, .table th {
+            font-size: 12px !important;
+        }
+        .select2-container--bootstrap .select2-selection, .form-control, output{
+	        font-size: 12px !important;
+        }
 
-.control-label{
-	text-align:left !important;
-}
+        .control-label{
+	        text-align:left !important;
+        }
+        .label-balance{
+            font-weight:bold;
+        }
+        #balance_before, #balance_after{
+            font-weight:bold;
+            color:#3598dc;
+            background:#fff;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
@@ -40,10 +48,6 @@
                 <div class="portlet-title">
                     <div class="caption">
                         Lịch sử giao dịch
-                    </div>
-                    <div class="tools">
-                        <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
-                        <a href="javascript:;" class="reload" data-original-title="" title=""></a>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -63,6 +67,22 @@
                             <div></div>
                         </div>
                         <span>Đang xử lý...</span>
+                    </div>
+                    <div class="row" style="display:none">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="col-md-6">
+                        	    <div class="form-group">
+                                   <label class="control-label label-balance">Số dư đầu kỳ</label>
+                            	    <input type="text" disabled class="form-control blue" id="balance_before">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                        	    <div class="form-group">
+                                   <label class="control-label label-balance">Số dư cuối kỳ</label>
+                            	    <input type="text" disabled class="form-control blue" id="balance_after">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4" style="margin-bottom: 10px;">
@@ -111,18 +131,14 @@
     <script src="assets/global/plugins/Base64JS.js"></script>
     <script src="assets/global/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="assets/global/plugins/datatables/DT_bootstrap.js"></script>
+    <script src="assets/global/plugins/amcharts/v4/core.js"></script>
+    <script src="assets/global/plugins/amcharts/v4/charts.js"></script>
+    <script src="assets/global/plugins/amcharts/v4/animated.js"></script>
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
             $('.page-toolbar').remove();
-
-            var d = AppManage.getURLParameter('agencyid');
-            console.log(d);
-            if (d != null) {
-                var s = Base64.decode(d).split('-')[0];
-                $("#txtFindData").val(s);
-                $('#filterColumn').val('TK_NGUOI_NHAN');
-            }
+            $('#btnAddAction').remove();
             $('#txtFindData').on('keyup', function (e) {
                 if (e.keyCode == 13) {
                     TableEditable.init();
@@ -138,7 +154,6 @@
                 if ($('#txtFindData').val() != "")
                     TableEditable.init();
             });
-
             //load danh sach dai ly
             TableEditable.init();
             $('body').on('click', '.portlet > .portlet-title > .tools > a.reload', function (e) {
@@ -217,6 +232,14 @@
                                 return;
                             }
                             if (data.status == 0) {
+                                if (data.data != null && data.data.length > 0) {
+                                    $('#balance_before').val(data.data[0][10]);
+                                    $('#balance_after').val(data.data[(data.data.length - 1)][11]);
+                                }
+                                else {
+                                    $('#balance_before').val('0');
+                                    $('#balance_after').val('0');
+                                }
                                 if (oTable != null) {
                                     oTable.fnDestroy();
                                 }
@@ -224,6 +247,10 @@
                                 if (colFilter == null) {
                                     $('#tbl_datatable thead tr').html("");
                                     colFilter = _dataColumn;
+                                    //$.each(_dataColumn, function (key, obj) {
+                                    //    $('#tbl_datatable thead tr').append("<th>" + obj + "</th>");
+                                    //});
+
                                     var strHtmlColName = "";
                                     $.each(_dataColumn, function (key, obj) {
                                         strHtmlColName += "<td>" + obj + "</td>";
@@ -232,7 +259,8 @@
                                     if (data.data.length > 20) {
                                         $('#tbl_datatable tfoot tr').append(strHtmlColName);
                                     }
-                                } else {
+                                }
+                                else {
                                     $('#tbl_datatable tfoot tr').empty();
                                     if (data.data.length > 20) {
                                         var strHtmlColName = "";
@@ -242,12 +270,23 @@
                                         $('#tbl_datatable tfoot tr').append(strHtmlColName);
                                     }
                                 }
-
                                 $.each(data.data, function (i, obj) {
-                                    var func = "javascript:AcceptAgencygetMoney(`" + obj[0] + "`);";
-                                    obj[obj.length - 1] = "<a class='btn btn-xs green' href='" + func + "'>Chấp nhận</a>"
+                                    if ((obj[6] == "1" || obj[6] == "2") && obj[8] == "success") {
+                                        obj[obj.length - 1] = "";
+                                        var func = "javascript:RevokeMoney(`" + obj[0] + "`,`" + obj[1] + "`);";
+                                        obj[obj.length - 1] = "<a class='btn btn-xs green' href='" + func + "'>Thu hồi tiền</a>";
+                                    } 
+                                    else if ((obj[6] == "3") && obj[8] == "success") {
+                                        obj[obj.length - 1] = "";
+                                        var func = "javascript:ReturnGoldUser(`" + obj[0] + "`,`" + obj[3] + "`);";
+                                        obj[obj.length - 1] = "<a class='btn btn-xs red' href='" + func + "'>Hoàn trả tiền</a>";
+                                    }
+                                    else if ((obj[6] == "4") && obj[8] == "processing"){
+                                        obj[obj.length - 1] = "";
+                                        var func = "javascript:CancleRequestGetMoney(`" + obj[0] + "`,`" + obj[1] + "`);";
+                                        obj[obj.length - 1] = "<a class='btn btn-xs red' href='" + func + "'>Hủy yêu cầu</a>";
+                                    }
                                 });
-
                                 var colHiden = [];
                                 oTable = table.dataTable({
                                     "data": data.data,
@@ -270,7 +309,7 @@
                                         [0, "desc"]
                                     ]
                                 });
-
+                                
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
@@ -314,15 +353,17 @@
             else
                 return num;
         }
-        function AcceptAgencygetMoney(TransactionID) {
-            bootbox.confirm("Chấp nhận yêu cầu rút tiền của đại lý?", function (result) {
+
+        function CancleRequestGetMoney(TransactionID, SenderID) {
+            bootbox.confirm("Xác nhận hủy yêu cầu?", function (result) {
                 if (result) {
                     $('.divLoading').fadeIn();
                     var json = {
-                        "TransactionID": TransactionID
+                        "TransactionID": TransactionID,
+                        "SenderID": SenderID
                     }
                     POST_DATA("Apis/API_Agency.ashx", {
-                        type: 8,
+                        type: 11,
                         json: JSON.stringify(json)
                     }, function (res) {
                         //if (res.status == 1) {
@@ -343,6 +384,71 @@
                     });
                 }
             });
+        } 
+        function RevokeMoney(TransactionID,SenderID) {
+            bootbox.confirm("Xác nhận thu hồi tiền?", function (result) {
+                if (result) {
+                    $('.divLoading').fadeIn();
+                    var json = {
+                        "TransactionID": TransactionID,
+                        "SenderID": SenderID
+                    }
+                    POST_DATA("Apis/API_Agency.ashx", {
+                        type: 9,
+                        json: JSON.stringify(json)
+                    }, function (res) {
+                        //if (res.status == 1) {
+
+                        //}
+                        //else {
+
+                        //}
+
+                        bootbox.alert({
+                            title: "Thông báo",
+                            message: res.msg,
+                            callback: function () {
+                                TableEditable.init();
+                            }
+                        })
+                            $('.divLoading').fadeOut();
+                    });
+                }
+            });
+
+
+        }
+        function ReturnGoldUser(TransactionID, RecipientID) {
+            bootbox.confirm("Xác nhận hoàn tiền user?", function (result) {
+                if (result) {
+                    $('.divLoading').fadeIn();
+                    var json = {
+                        "TransactionID": TransactionID,
+                        "RecipientID": RecipientID
+                    }
+                    POST_DATA("Apis/API_Agency.ashx", {
+                        type: 10,
+                        json: JSON.stringify(json)
+                    }, function (res) {
+                        //if (res.status == 1) {
+
+                        //}
+                        //else {
+
+                        //}
+
+                        bootbox.alert({
+                            title: "Thông báo",
+                            message: res.msg,
+                            callback: function () {
+                                TableEditable.init();
+                            }
+                        })
+                            $('.divLoading').fadeOut();
+                    });
+                }
+            });
+
         }
 </script>
 </asp:Content>

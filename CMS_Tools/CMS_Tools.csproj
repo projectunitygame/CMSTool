@@ -271,6 +271,7 @@
     <Content Include="testenscrypt.aspx" />
     <Content Include="Test_BaoCaoThongKe_2.aspx" />
     <Content Include="Test_DuyetYeuCauRutTien.aspx" />
+    <Content Include="Test_GiaoDich_DuyetGiaoDich.aspx" />
     <Content Include="Test_QuanTri_PhanQuyen.aspx" />
     <Content Include="Test_GameData_GameID.aspx" />
     <Content Include="Test_GameDT_CauHinhBotTaiXiu.aspx" />
@@ -552,6 +553,13 @@
     </Compile>
     <Compile Include="Test_DuyetYeuCauRutTien.aspx.designer.cs">
       <DependentUpon>Test_DuyetYeuCauRutTien.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_GiaoDich_DuyetGiaoDich.aspx.cs">
+      <DependentUpon>Test_GiaoDich_DuyetGiaoDich.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_GiaoDich_DuyetGiaoDich.aspx.designer.cs">
+      <DependentUpon>Test_GiaoDich_DuyetGiaoDich.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test_QuanTri_PhanQuyen.aspx.cs">
       <DependentUpon>Test_QuanTri_PhanQuyen.aspx</DependentUpon>

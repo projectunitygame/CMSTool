@@ -1,0 +1,13 @@
+INFO 2019-09-23 07:27:27 – {"DATE_LOGS":"23/09/2019 07:27:27","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-23 07:27:37 – {"DATE_LOGS":"23/09/2019 07:27:35","INFO_LOGS":"LoginWithToken: f9689d0305389e10c68e97b0f848161d,IP ::1"}
+INFO 2019-09-23 07:27:37 – {"DATE_LOGS":"23/09/2019 07:27:35","INFO_LOGS":"LoginWithToken: f9689d0305389e10c68e97b0f848161d,IP ::1"}
+INFO 2019-09-23 08:00:27 – {"DATE_LOGS":"23/09/2019 08:00:18","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/AgencyReturnGoldToUser\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"H+ahuMzQlMHZzwwBZ4MfItyo5OoiOZS/qRhlUiX6MJQ6Tl+NiGLVgeEtlN/oKdhQoVNT6LTIy5+KnP1XU1V6706bMC0UmZvaJmGr5TRe0q4=\",\"clientIP\":\"::1\",\"sign\":\"e3bb3aff692c6c8a3166ccd0017e6f35\"}\r\nResponse Data: {\"status\":-9999,\"msg\":\"Procedure or function 'SP_TOOL_AGENCY_RETURN_GOLD_TO_USER' expects parameter '@RecipientID', which was not supplied.\",\"data\":null,\"secreckey\":null}"}
+INFO 2019-09-23 08:01:09 – {"DATE_LOGS":"23/09/2019 08:01:09","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-23 08:01:29 – {"DATE_LOGS":"23/09/2019 08:01:19","INFO_LOGS":"LoginWithToken: e5999dd4b5d9ac7fd59673b3fd32d83a,IP ::1"}
+INFO 2019-09-23 08:01:29 – {"DATE_LOGS":"23/09/2019 08:01:27","INFO_LOGS":"SendPost: http://local.api_cms/api/v1/Agency/AcceptGetMoneyAgency\r\nJSON DATA: {\"publickey\":\"AD09E842DDF1B07BF4288C5A86C791B0\",\"serviceID\":0,\"data\":\"H+ahuMzQlMHZzwwBZ4MfItyo5OoiOZS/qRhlUiX6MJQ6Tl+NiGLVgeEtlN/oKdhQoVNT6LTIy5+KnP1XU1V6706bMC0UmZvaJmGr5TRe0q4=\",\"clientIP\":\"::1\",\"sign\":\"e3bb3aff692c6c8a3166ccd0017e6f35\"}\r\nResponse Data: {\"status\":1,\"msg\":\"Xác nh?n d?i lý rút ti?n thành công\",\"data\":null,\"secreckey\":null}"}
+INFO 2019-09-23 08:26:49 – {"DATE_LOGS":"23/09/2019 08:26:49","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-23 08:27:09 – {"DATE_LOGS":"23/09/2019 08:26:59","INFO_LOGS":"LoginWithToken: e5999dd4b5d9ac7fd59673b3fd32d83a,IP ::1"}
+INFO 2019-09-23 08:28:19 – {"DATE_LOGS":"23/09/2019 08:28:14","INFO_LOGS":"{\"param\":null,\"topN\":20,\"uwinID\":\"\"}"}
+INFO 2019-09-23 08:28:29 – {"DATE_LOGS":"23/09/2019 08:28:26","INFO_LOGS":"{\"param\":null,\"topN\":20,\"uwinID\":\"\"}"}
+INFO 2019-09-23 11:57:39 – {"DATE_LOGS":"23/09/2019 11:57:39","INFO_LOGS":"***** SERVER START *****"}
+INFO 2019-09-23 11:57:49 – {"DATE_LOGS":"23/09/2019 11:57:49","INFO_LOGS":"LoginWithToken: e5999dd4b5d9ac7fd59673b3fd32d83a,IP ::1"}

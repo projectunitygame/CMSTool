@@ -123,7 +123,7 @@
                                 });
                             }
                             $.each(data.data, function (i, obj) {
-                                obj[obj.length - 1] += "<a class='btn btn-xs green' href='https://id.uwin369.net/Page.aspx?m=120&id=" + obj[0] +" '>Phân quyền</a>";
+                                obj[obj.length - 1] += "<a class='btn btn-xs green' href='Page.aspx?m=120&id=" + obj[0] +" '>Phân quyền</a>";
                             });
 
                             var colHiden = [];

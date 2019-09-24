@@ -118,6 +118,9 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_GAME_ACOUNT_TYPE.OFF_LOGIN_OTP:
                         OFF_LOGIN_OTP(context);
                         break;
+                    case Constants.REQUEST_GAME_ACOUNT_TYPE.ADD_FUND_GAME:
+                        ADD_FUND_GAME(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -133,6 +136,66 @@ namespace CMS_Tools.Apis
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
         }
+
+        private void ADD_FUND_GAME(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["ADD_FUND_GAME"] == null || (DateTime.Now - (DateTime)context.Session["ADD_FUND_GAME"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        try
+                        {
+                            JsonConvert.DeserializeObject<AddFundGame>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        var jsonData = JsonConvert.DeserializeObject<AddFundGame>(json);
+                        if (jsonData != null)
+                        {
+                            jsonData.AccountName = accountInfo.UserName;
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/GameAccount/AddFundGame");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR ADD_FUND_GAME: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["ADD_FUND_GAME"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
         /// <summary>
         /// Tắt đăng nhập bao mật
         /// </summary>
@@ -1963,6 +2026,14 @@ namespace CMS_Tools.Apis
         public class OffLoginOTP
         {
             public long AccountID;
+        }
+
+        public class AddFundGame
+        {
+            public int GameID;
+            public int RoomID;
+            public long Value;
+            public string AccountName;
         }
         #endregion
     }

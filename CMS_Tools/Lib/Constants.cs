@@ -268,7 +268,11 @@ namespace CMS_Tools.Lib
             BUY_CASH,
             VERIFIRE_CAPTCHA,
             CHANGE_DISPLAY_AGENCY,
-            ACCEPT_REQUEST_GET_MONEY_AGENCY
+            ACCEPT_REQUEST_GET_MONEY_AGENCY,
+            DEDUCT_GOLD_AGENCY,
+            AGENCY_RETURN_GOLD_TO_USER,
+            CANCLE_REQUEST_GET_MONEY_AGENCY,
+            EXCEPT_MONEY_AGENCY
         }
 
         public enum REQUEST_GAME_ACOUNT_TYPE : int
@@ -296,7 +300,8 @@ namespace CMS_Tools.Lib
             DEDUCT_GOLD_USER,
             RESET_USER_GAME_PASSWORD,
             ADD_MONEY_FUND,
-            OFF_LOGIN_OTP
+            OFF_LOGIN_OTP,
+            ADD_FUND_GAME
         }
 
         public enum WEBSOCKET_STATUS: int

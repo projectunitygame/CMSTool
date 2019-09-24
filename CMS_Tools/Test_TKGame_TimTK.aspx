@@ -328,6 +328,7 @@
                                         lockChat = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnlockChatAcountGame(\"" + obj[0] + "\");'> Mở khóa chat</a>";
                                     var hisAccount = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='ShowHistoryAccount(\"" + obj[0] + "\");'> Xem lịch sử</a>";
                                     var addMoney = "<a class='btn btn-xs green btn-circle btn-outline' onclick='AddMoney(\"" + obj[0] + "\");'> Nạp tiền</a>";
+                                    var revokeMoney = "<a class='btn btn-xs red btn-circle btn-outline' onclick='RevokeMoney(\"" + obj[0] + "\");'> Trừ tiền</a>";
                                     var resetPass = "<a class='btn btn-xs yellow btn-circle btn-outline' onclick='ResetPass(\"" + obj[0] + "\");'> Reset Pass</a>";
                                     var offLoginOTP = '';
                                     if (obj[10] == 'True') {
@@ -349,7 +350,7 @@
                                         "<td>" + obj[11] + "</td>" +
                                         "<td>" + obj[12] + "</td>" +
                                         "<td>" + obj[13] + "</td>" +
-                                        "<td>" + linkLock + lockChat + hisAccount + addMoney + resetPass + offLoginOTP + "</td>" +
+                                        "<td>" + linkLock + lockChat + hisAccount + addMoney + revokeMoney + resetPass + offLoginOTP + "</td>" +
                                         "</tr>");
                                 }
                                 var colHiden = [];
@@ -491,6 +492,42 @@
             });
         }
 
+        function RevokeMoney(ID) {
+            bootbox.prompt({
+                size: "small",
+                title: "Nhập số tiền cần trừ User?",
+                callback: function (result) {
+                    if (result !== null) {
+                        var json = {
+                            "ID": 0,
+                            "AccountId": ID,
+                            "Amount": result,
+                            "Description": 'Trừ tiền user số tiền:' + result
+                        }
+                        POST_DATA("Apis/API_GameAccount.ashx", {
+                            type: 21,
+                            json: JSON.stringify(json)
+                        }, function (res) {
+                            //if (res.status == 1) {
+
+                            //}
+                            //else {
+
+                            //}
+
+                            bootbox.alert({
+                                title: "Thông báo",
+                                message: res.msg,
+                                callback: function () {
+                                    TableEditable.init();
+                                }
+                            })
+
+                        });
+                    }
+                }
+            });
+        }
         function AddMoney(ID) {
             bootbox.prompt({
                 size: "small",
