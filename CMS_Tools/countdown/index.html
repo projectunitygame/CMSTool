@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="jquery.min.js"></script>
+    <link href="flipclock.css" rel="stylesheet" />
+    <script src="flipclock.min.js"></script>
+    <style>
+        #show-countdown{
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            position:fixed;
+            background: url('bg.jpg') center center no-repeat rgba(0,0,0,.8);
+            background-size:auto 100%;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        jQuery(document).ready(function () {
+            // Grab the current date
+        var currentDate = new Date();
+
+        // Set some date in the future. In this case, it's always Jan 1
+        //var futureDate = new Date("July 18, 2019 13:00:00");
+        var futureDate = new Date('09/18/2019 8:00 AM');
+        // Calculate the difference in seconds between the future and current date
+        var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
+        //console.log("diff"+diff);
+        if (diff > 0) {
+            // Instantiate a coutdown FlipClock
+            clock = $('.clock').FlipClock(diff, {
+                clockFace: 'DailyCounter',
+                countdown: true,
+                defaultLanguage: 'vn',
+                //showSeconds: false,
+                //showSeconds: false,
+                // The onStart callback
+                onStart: function () {
+                    //$('.flip-clock-label').text('Ngày');
+                }
+            });
+            $('.clock').prepend('<div class="intro-count-down"><span>Ngày 18/09</span></div><div class="clearfix"></div>');
+            $('.flip-clock-label').eq(0).text('Ngày');
+            $('.flip-clock-label').eq(1).text('Giờ');
+            $('.flip-clock-label').eq(2).text('Phút');
+            $('.flip-clock-label').eq(3).text('Giây');
+        }
+        });
+
+    </script>
+    <div id="show-countdown">
+        <div class="clock"></div>
+    </div>
+</body>
+</html>

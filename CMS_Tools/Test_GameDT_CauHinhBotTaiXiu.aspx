@@ -39,6 +39,9 @@
         .dataTables_wrapper > .row{
             display:none;
         }
+        a.delete{
+            display:none;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
@@ -481,10 +484,10 @@
                                     ]
                                 });
 
-                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                    var bVis = oTable.fnSettings().aoColumns[10].bVisible;
-                                    oTable.fnSetColumnVis(10, bVis ? false : true);
-                                }
+                                //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                //    var bVis = oTable.fnSettings().aoColumns[10].bVisible;
+                                //    oTable.fnSetColumnVis(10, bVis ? false : true);
+                                //}
 
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input

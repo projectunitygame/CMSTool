@@ -506,8 +506,10 @@
 
                                 for (var i = 0; i < data.data.length; i++) {
                                     var obj = data.data[i];
-                                    var func = 'ExceptFund(1,"' + obj[0] + '");';
-                                    var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
+                                    var funcExceptFun = 'ExceptFund(1,"' + obj[0] + '");';
+                                    var exceptFun = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + funcExceptFun + "' >Trừ quỹ game</a>";
+                                    var funcAddFun = 'AddFund(1,"' + obj[0] + '");';
+                                    var addFun = "<a class='btn btn-xs purple btn-circle btn-outline' onclick='" + funcAddFun + "' >Cộng quỹ game</a>";
                                     var funcJackpot = 'Jackpot(3,"' + obj[0] + '");';
                                     var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ(Bot)</a>";
                                     var funcJackpotUser = 'JackpotUser(3,"' + obj[0] + '");';
@@ -517,7 +519,7 @@
                                         "<td>" + obj[1] + "</td>" +
                                         "<td>" + obj[2] + "</td>" +
                                         "<td>" + obj[3] + "</td>" +
-                                        "<td>" + updateGiftcode + Jackpot + JackpotUser +  "</td>" +
+                                        "<td>" + exceptFun + addFun + Jackpot + JackpotUser +  "</td>" +
                                         "</tr>");
                                 }
 
@@ -544,10 +546,10 @@
                                     ]
                                 });
 
-                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                    var bVis = oTable.fnSettings().aoColumns[4].bVisible;
-                                    oTable.fnSetColumnVis(4, bVis ? false : true);
-                                }
+                                //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                //    var bVis = oTable.fnSettings().aoColumns[4].bVisible;
+                                //    oTable.fnSetColumnVis(4, bVis ? false : true);
+                                //}
                             }
                             else {
                                 bootbox.alert({
@@ -613,8 +615,10 @@
 
                                 for (var i = 0; i < data.data.length; i++) {
                                     var obj = data.data[i];
-                                    var func = 'ExceptFund(2,"' + obj[0] + '");';
-                                    var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
+                                    var funcExceptFun = 'ExceptFund(2,"' + obj[0] + '");';
+                                    var exceptFun = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + funcExceptFun + "' >Trừ quỹ game</a>";
+                                    var funcAddFun = 'AddFund(2,"' + obj[0] + '");';
+                                    var addFun = "<a class='btn btn-xs purple btn-circle btn-outline' onclick='" + funcAddFun + "' >Cộng quỹ game</a>";
                                     var funcJackpot = 'Jackpot(1,"' + obj[0] + '");';
                                     var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ (Bot) </a>";
                                     var funcJackpotUser = 'JackpotUser(1,"' + obj[0] + '");';
@@ -624,7 +628,7 @@
                                         "<td>" + obj[1] + "</td>" +
                                         "<td>" + obj[2] + "</td>" +
                                         "<td>" + obj[3] + "</td>" +
-                                        "<td>" + updateGiftcode + Jackpot + JackpotUser + "</td>" +
+                                        "<td>" + exceptFun + addFun + Jackpot + JackpotUser + "</td>" +
                                         "</tr>");
                                 }
 
@@ -651,10 +655,10 @@
                                     ]
                                 });
 
-                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                    var bVis = oTable2.fnSettings().aoColumns[4].bVisible;
-                                    oTable2.fnSetColumnVis(4, bVis ? false : true);
-                                }
+                                //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                //    var bVis = oTable2.fnSettings().aoColumns[4].bVisible;
+                                //    oTable2.fnSetColumnVis(4, bVis ? false : true);
+                                //}
 
                             }
                             else {
@@ -721,8 +725,10 @@
 
                                     for (var i = 0; i < data.data.length; i++) {
                                         var obj = data.data[i];
-                                        var func = 'ExceptFund(3,"' + obj[0] + '");';
-                                        var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
+                                        var funcExceptFun = 'ExceptFund(3,"' + obj[0] + '");';
+                                        var exceptFun = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + funcExceptFun + "' >Trừ quỹ game</a>";
+                                        var funcAddFun = 'AddFund(3,"' + obj[0] + '");';
+                                        var addFun = "<a class='btn btn-xs purple btn-circle btn-outline' onclick='" + funcAddFun + "' >Cộng quỹ game</a>";
                                         var funcJackpot = 'Jackpot(2,"' + obj[0] + '");';
                                         var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ (Bot) </a>";
                                         var funcJackpotUser = 'JackpotUser(2,"' + obj[0] + '");';
@@ -732,7 +738,7 @@
                                             "<td>" + obj[1] + "</td>" +
                                             "<td>" + obj[2] + "</td>" +
                                             "<td>" + obj[3] + "</td>" +
-                                            "<td>" + updateGiftcode + Jackpot + JackpotUser + "</td>" +
+                                            "<td>" + exceptFun + addFun + Jackpot + JackpotUser + "</td>" +
                                             "</tr>");
                                     }
 
@@ -759,10 +765,10 @@
                                         ]
                                     });
 
-                                    if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                        var bVis = oTable3.fnSettings().aoColumns[4].bVisible;
-                                        oTable3.fnSetColumnVis(4, bVis ? false : true);
-                                    }
+                                    //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                    //    var bVis = oTable3.fnSettings().aoColumns[4].bVisible;
+                                    //    oTable3.fnSetColumnVis(4, bVis ? false : true);
+                                    //}
 
                                 }
                                 else {
@@ -830,8 +836,10 @@
 
                                     for (var i = 0; i < data.data.length; i++) {
                                         var obj = data.data[i];
-                                        var func = 'ExceptFund(4,"' + obj[0] + '");';
-                                        var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
+                                        var funcExceptFun = 'ExceptFund(4,"' + obj[0] + '");';
+                                        var exceptFun = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + funcExceptFun + "' >Trừ quỹ game</a>";
+                                        var funcAddFun = 'AddFund(4,"' + obj[0] + '");';
+                                        var addFun = "<a class='btn btn-xs purple btn-circle btn-outline' onclick='" + funcAddFun + "' >Cộng quỹ game</a>";
                                         var funcJackpot = 'Jackpot(8,"' + obj[0] + '");';
                                         var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ (Bot)</a>";
                                         var funcJackpotUser = 'JackpotUser(8,"' + obj[0] + '");';
@@ -841,7 +849,7 @@
                                             "<td>" + obj[1] + "</td>" +
                                             "<td>" + obj[2] + "</td>" +
                                             "<td>" + obj[3] + "</td>" +
-                                            "<td>" + updateGiftcode + Jackpot + JackpotUser +"</td>" +
+                                            "<td>" + exceptFun + addFun + Jackpot + JackpotUser +"</td>" +
                                             "</tr>");
                                     }
 
@@ -868,10 +876,10 @@
                                         ]
                                     });
 
-                                    if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                        var bVis = oTable4.fnSettings().aoColumns[4].bVisible;
-                                        oTable4.fnSetColumnVis(4, bVis ? false : true);
-                                    }
+                                    //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                    //    var bVis = oTable4.fnSettings().aoColumns[4].bVisible;
+                                    //    oTable4.fnSetColumnVis(4, bVis ? false : true);
+                                    //}
 
                                 }
                                 else {
@@ -938,8 +946,10 @@
 
                                     for (var i = 0; i < data.data.length; i++) {
                                         var obj = data.data[i];
-                                        var func = 'ExceptFund(5,"' + obj[0] + '");';
-                                        var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
+                                        var funcExceptFun = 'ExceptFund(5,"' + obj[0] + '");';
+                                        var exceptFun = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + funcExceptFun + "' >Trừ quỹ game</a>";
+                                        var funcAddFun = 'AddFund(5,"' + obj[0] + '");';
+                                        var addFun = "<a class='btn btn-xs purple btn-circle btn-outline' onclick='" + funcAddFun + "' >Cộng quỹ game</a>";
                                         var funcJackpot = 'Jackpot(4,"' + obj[0] + '");';
                                         var Jackpot = "<a class='btn btn-xs blue btn-circle btn-outline' onclick='" + funcJackpot + "' >Đập hũ (Bot)</a>";
                                         var funcJackpotUser = 'JackpotUser(4,"' + obj[0] + '");';
@@ -949,7 +959,7 @@
                                             "<td>" + obj[1] + "</td>" +
                                             "<td>" + obj[2] + "</td>" +
                                             "<td>" + obj[3] + "</td>" +
-                                            "<td>" + updateGiftcode + Jackpot + JackpotUser+ "</td>" +
+                                            "<td>" + exceptFun + addFun + Jackpot + JackpotUser+ "</td>" +
                                             "</tr>");
                                     }
 
@@ -976,10 +986,10 @@
                                         ]
                                     });
 
-                                    if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                        var bVis = oTable5.fnSettings().aoColumns[4].bVisible;
-                                        oTable5.fnSetColumnVis(4, bVis ? false : true);
-                                    }
+                                    //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                    //    var bVis = oTable5.fnSettings().aoColumns[4].bVisible;
+                                    //    oTable5.fnSetColumnVis(4, bVis ? false : true);
+                                    //}
 
                                 }
                                 else {
@@ -1046,8 +1056,10 @@
 
                                     for (var i = 0; i < data.data.length; i++) {
                                         var obj = data.data[i];
-                                        var func = 'ExceptFund(6,"' + obj[0] + '");';
-                                        var updateGiftcode = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + func + "' >Trừ quỹ game</a>";
+                                        var funcExceptFun = 'ExceptFund(6,"' + obj[0] + '");';
+                                        var exceptFun = "<a class='btn btn-xs red btn-circle btn-outline' onclick='" + funcExceptFun + "' >Trừ quỹ game</a>";
+                                        var funcAddFun = 'AddFund(6,"' + obj[0] + '");';
+                                        var addFun = "<a class='btn btn-xs purple btn-circle btn-outline' onclick='" + funcAddFun + "' >Cộng quỹ game</a>";
 
                                         $('#tbl_datatable6 tbody').append("<tr>" +
                                             "<td>" + obj[0] + "</td>" +
@@ -1055,7 +1067,7 @@
                                             "<td>" + obj[2] + "</td>" +
                                             "<td>" + obj[3] + "</td>" +
                                             "<td>" + obj[4] + "</td>" +
-                                            "<td>" + updateGiftcode + "</td>" +
+                                            "<td>" + exceptFun + addFun + "</td>" +
                                             "</tr>");
                                     }
 
@@ -1082,10 +1094,10 @@
                                         ]
                                     });
 
-                                    if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                        var bVis = oTable6.fnSettings().aoColumns[5].bVisible;
-                                        oTable6.fnSetColumnVis(5, bVis ? false : true);
-                                    }
+                                    //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                    //    var bVis = oTable6.fnSettings().aoColumns[5].bVisible;
+                                    //    oTable6.fnSetColumnVis(5, bVis ? false : true);
+                                    //}
 
                                 }
                                 else {
@@ -1318,6 +1330,41 @@
                         }
                         POST_DATA("Apis/API_GameAccount.ashx", {
                             type: 11,
+                            json: JSON.stringify(json)
+                        }, function (res) {
+                            //if (res.status == 1) {
+                                
+                            //}
+                            //else {
+
+                            //}
+
+                            bootbox.alert({
+                                title: "Thông báo",
+                                message: res.msg,
+                                callback: function () {
+                                    TableEditable.init();
+                                }
+                            })
+
+                        });
+                    }
+                }
+            });
+        }
+        function AddFund(type, roomId) {
+            bootbox.prompt({
+                size: "small",
+                title: "Nhập số tiền cộng quỹ?",
+                callback: function (result) {
+                    if (result !== null) {
+                        var json = {
+                            "GameID": type,
+                            "RoomID": roomId,
+                            "Value": result
+                        }
+                        POST_DATA("Apis/API_GameAccount.ashx", {
+                            type: 25,
                             json: JSON.stringify(json)
                         }, function (res) {
                             //if (res.status == 1) {

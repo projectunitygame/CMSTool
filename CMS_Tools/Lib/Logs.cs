@@ -23,7 +23,7 @@ namespace CMS_Tools.Lib
         /// <param name="sendMail"></param>
         public static void SaveError(string msg, Exception ex = null, bool sendMail = true) {
             try
-            {
+           {
                 Entity.SaveLogs.AddLogs(new Entity.LogInfo()
                 {
                     logType = Constants.LOG_TYPE.ERROR_LOGS,

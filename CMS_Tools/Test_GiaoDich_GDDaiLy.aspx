@@ -242,6 +242,25 @@
                                         $('#tbl_datatable tfoot tr').append(strHtmlColName);
                                     }
                                 }
+
+                                $.each(data.data, function (i, obj) {
+                                    if (obj[5] == "-" && (obj[6] == "1" || obj[6] == "2") && obj[10] == "success") {
+                                        obj[obj.length - 1] = "";
+                                        var func = "javascript:RevokeMoney(`" + obj[0] + "`);";
+                                        obj[obj.length - 1] = "<a class='btn btn-xs green' href='" + func + "'>Thu hồi tiền</a>";
+                                    }
+                                    else if (obj[5] == "+" && (obj[6] == "3") && obj[10] == "success") {
+                                        obj[obj.length - 1] = "";
+                                        var func = "javascript:ReturnGoldUser(`" + obj[0] + "`);";
+                                        obj[obj.length - 1] = "<a class='btn btn-xs red' href='" + func + "'>Hoàn trả tiền</a>";
+                                    }
+                                    else if ((obj[6] == "4") && obj[10] == "processing") {
+                                        obj[obj.length - 1] = "";
+                                        var func = "javascript:CancleRequestGetMoney(`" + obj[0] + "`);";
+                                        obj[obj.length - 1] = "<a class='btn btn-xs red' href='" + func + "'>Hủy yêu cầu</a>";
+                                    }
+                                });
+
                                 var colHiden = [];
                                 oTable = table.dataTable({
                                     "data": data.data,
@@ -264,7 +283,6 @@
                                         [0, "desc"]
                                     ]
                                 });
-
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown

@@ -236,10 +236,10 @@
                                     ]
                                 });
 
-                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                    var bVis = oTable.fnSettings().aoColumns[11].bVisible;
-                                    oTable.fnSetColumnVis(11, bVis ? false : true);
-                                }
+                                //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                //    var bVis = oTable.fnSettings().aoColumns[11].bVisible;
+                                //    oTable.fnSetColumnVis(11, bVis ? false : true);
+                                //}
 
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input

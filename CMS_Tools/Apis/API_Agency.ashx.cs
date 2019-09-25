@@ -32,6 +32,14 @@ namespace CMS_Tools.Apis
                     context.Response.Write(JsonConvert.SerializeObject(result));
                     return;
                 }
+                // Không chặn quyền tk guest nữa
+                //if (accountInfo.GroupID == 6)
+                //{
+                //    result.status = Constants.NUMBER_CODE.ACCOUNT_NOT_PERMISSION;
+                //    result.msg = "Bạn không có quyền để thực hiện thao tác";
+                //    context.Response.Write(JsonConvert.SerializeObject(result));
+                //    return;
+                //}
                 #endregion
 
                 Constants.REQUEST_AGENCY_TYPE requestType = (Constants.REQUEST_AGENCY_TYPE)int.Parse(context.Request.Form["type"]);
@@ -58,6 +66,21 @@ namespace CMS_Tools.Apis
                     case Constants.REQUEST_AGENCY_TYPE.CHANGE_DISPLAY_AGENCY:
                         CHANGE_DISPLAY_AGENCY(context);
                         break;
+                    case Constants.REQUEST_AGENCY_TYPE.ACCEPT_REQUEST_GET_MONEY_AGENCY:
+                        ACCEPT_REQUEST_GET_MONEY_AGENCY(context);
+                        break;
+                    case Constants.REQUEST_AGENCY_TYPE.DEDUCT_GOLD_AGENCY:
+                        DEDUCT_GOLD_AGENCY(context);
+                        break;
+                    case Constants.REQUEST_AGENCY_TYPE.AGENCY_RETURN_GOLD_TO_USER:
+                        AGENCY_RETURN_GOLD_TO_USER(context);
+                        break;
+                    case Constants.REQUEST_AGENCY_TYPE.CANCLE_REQUEST_GET_MONEY_AGENCY:
+                        CANCLE_REQUEST_GET_MONEY_AGENCY(context);
+                        break;
+                    case Constants.REQUEST_AGENCY_TYPE.EXCEPT_MONEY_AGENCY:
+                        EXCEPT_MONEY_AGENCY(context);
+                        break;
                     default:
                         result.status = Constants.NUMBER_CODE.REQUEST_NOT_FOUND;
                         result.msg = Constants.NUMBER_CODE.REQUEST_NOT_FOUND.ToString();
@@ -72,6 +95,322 @@ namespace CMS_Tools.Apis
                 result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
                 context.Response.Write(JsonConvert.SerializeObject(result));
             }
+        }
+
+        private void EXCEPT_MONEY_AGENCY(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["EXCEPT_MONEY_AGENCY"] == null || (DateTime.Now - (DateTime)context.Session["EXCEPT_MONEY_AGENCY"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        ExceptMoneyAgency jsonData = null;
+                        try
+                        {
+                            jsonData = JsonConvert.DeserializeObject<ExceptMoneyAgency>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        if (jsonData != null)
+                        {
+
+                            //jsonData.UwinID = accountInfo.MasterID;
+                            jsonData.Key = Constants.KEY_SQL;
+                            jsonData.IP = UtilClass.GetIPAddress();
+                            jsonData.Reason = "Tổng đại lý thu hồi: " + jsonData.Amount;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/ExceptMoneyAgency");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR EXCEPT_MONEY_AGENCY: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["EXCEPT_MONEY_AGENCY"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+        private void CANCLE_REQUEST_GET_MONEY_AGENCY(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["CANCLE_REQUEST_GET_MONEY_AGENCY"] == null || (DateTime.Now - (DateTime)context.Session["CANCLE_REQUEST_GET_MONEY_AGENCY"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        CancleGetMoneyAgency jsonData = null;
+                        try
+                        {
+                            jsonData = JsonConvert.DeserializeObject<CancleGetMoneyAgency>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        if (jsonData != null)
+                        {
+
+                            //jsonData.SenderID = accountInfo.MasterID;
+                            jsonData.Key = Constants.KEY_SQL;
+                            jsonData.CreatorID = accountInfo.AccountId.ToString();
+                            jsonData.CreatorName = accountInfo.UserName;
+                            jsonData.IP = UtilClass.GetIPAddress();
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/CancleGetMoneyAgency");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR CANCLE_REQUEST_GET_MONEY_AGENCY: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["AGENCY_RETURN_GOLD_TO_USER"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+        private void AGENCY_RETURN_GOLD_TO_USER(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["AGENCY_RETURN_GOLD_TO_USER"] == null || (DateTime.Now - (DateTime)context.Session["AGENCY_RETURN_GOLD_TO_USER"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        AgencyReturnGoldToUser jsonData = null;
+                        try
+                        {
+                            jsonData = JsonConvert.DeserializeObject<AgencyReturnGoldToUser>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        if (jsonData != null)
+                        {
+
+                            //jsonData.RecipientID = accountInfo.MasterID;
+                            jsonData.Key = Constants.KEY_SQL;
+                            jsonData.CreatorID = accountInfo.AccountId.ToString();
+                            jsonData.CreatorName = accountInfo.UserName;
+                            jsonData.IP = UtilClass.GetIPAddress();
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/AgencyReturnGoldToUser");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR AGENCY_RETURN_GOLD_TO_USER: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["AGENCY_RETURN_GOLD_TO_USER"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+        private void DEDUCT_GOLD_AGENCY(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["DEDUCT_GOLD_AGENCY"] == null || (DateTime.Now - (DateTime)context.Session["DEDUCT_GOLD_AGENCY"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        DeductGoldAgency jsonData = null;
+                        try
+                        {
+                            jsonData = JsonConvert.DeserializeObject<DeductGoldAgency>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        if (jsonData != null)
+                        {
+
+                            //jsonData.SenderID = accountInfo.MasterID;
+                            jsonData.Key = Constants.KEY_SQL;
+                            jsonData.CreatorID = accountInfo.AccountId.ToString();
+                            jsonData.CreatorName = accountInfo.UserName;
+                            jsonData.IP = UtilClass.GetIPAddress();
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/DeductGoldAgency");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR DEDUCT_GOLD_AGENCY: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["DEDUCT_GOLD_AGENCY"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
+        }
+
+        private void ACCEPT_REQUEST_GET_MONEY_AGENCY(HttpContext context)
+        {
+            try
+            {
+                if (context.Session["ACCEPT_REQUEST_GET_MONEY_AGENCY"] == null || (DateTime.Now - (DateTime)context.Session["ACCEPT_REQUEST_GET_MONEY_AGENCY"]).TotalMilliseconds > Constants.TIME_REQUEST)
+                {
+                    string json = context.Request.Form["json"];
+                    if (!string.IsNullOrEmpty(json))
+                    {
+                        AcceptGetMoneyAgency jsonData = null;
+                        try
+                        {
+                            jsonData = JsonConvert.DeserializeObject<AcceptGetMoneyAgency>(json);
+                        }
+                        catch (Exception)
+                        {
+                            result.status = Constants.NUMBER_CODE.ERROR_EX;
+                            result.msg = "Sai thông tin nhập vào";
+                            context.Response.Write(JsonConvert.SerializeObject(result));
+                            return;
+                        }
+
+                        if (jsonData != null)
+                        {
+                            jsonData.Key = Constants.KEY_SQL;
+                            jsonData.CreatorID = accountInfo.AccountId.ToString();
+                            jsonData.CreatorName = accountInfo.UserName;
+                            jsonData.IP = UtilClass.GetIPAddress();
+                            //jsonData.Reason = "Tài khoản mở khóa chat: " + accountInfo.UserName;
+
+                            //Logs.SaveLog(JsonConvert.SerializeObject(jsonData));
+
+                            PayloadApi p = new PayloadApi()
+                            {
+                                clientIP = UtilClass.GetIPAddress(),
+                                data = Encryptor.EncryptString(JsonConvert.SerializeObject(jsonData), Constants.API_SECRETKEY)
+                            };
+                            var responseData = UtilClass.SendPost(JsonConvert.SerializeObject(p), Constants.API_URL + "api/v1/Agency/AcceptGetMoneyAgency");
+                            context.Response.Write(responseData);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    result.status = Constants.NUMBER_CODE.ERROR_CONNECT_SERVER;
+                    result.msg = "Thao tác quá nhanh! vui lòng thử lại";
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.SaveError("ERROR ACCEPT_REQUEST_GET_MONEY_AGENCY: " + ex);
+                result.status = Constants.NUMBER_CODE.ERROR_EX;
+                result.msg = Constants.NUMBER_CODE.ERROR_EX.ToString();
+            }
+            finally
+            {
+                context.Session["ACCEPT_REQUEST_GET_MONEY_AGENCY"] = DateTime.Now;
+            }
+            context.Response.Write(JsonConvert.SerializeObject(result));
         }
 
         private void CHANGE_DISPLAY_AGENCY(HttpContext context)
@@ -637,8 +976,50 @@ namespace CMS_Tools.Apis
         public int creatorID;
         public string creatorName;
         public string ip;
+
+    }
+    public class AcceptGetMoneyAgency
+    {
+        public string TransactionID;
+        public string Key;
+        public string CreatorID;
+        public string CreatorName;
+        public string IP;
+    }
+    public class DeductGoldAgency
+    {
+        public string SenderID;
+        public long TransactionID;
+        public string Key;
+        public string CreatorID;
+        public string CreatorName;
+        public string IP;
+    }
+    public class AgencyReturnGoldToUser
+    {
+        public string RecipientID;
+        public long TransactionID;
+        public string Key;
+        public string CreatorID;
+        public string CreatorName;
+        public string IP;
+    }
+    public class CancleGetMoneyAgency
+    {
+        public string SenderID;
+        public string TransactionID;
+        public string Key;
+        public string CreatorID;
+        public string CreatorName;
+        public string IP;
+    }
+    public class ExceptMoneyAgency
+    {
+        public string UwinID;
+        public string Reason;
+        public string Amount;
+        public string IP;
+        public string Key;
     }
     #endregion
-
-
 }

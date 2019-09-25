@@ -27,7 +27,7 @@ a.delete{
             <div class="portlet box blue ">
                 <div class="portlet-title">
                     <div class="caption">
-                        Publisher
+                        Cấu hình
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="collapse" data-original-title="" title=""></a>
@@ -69,6 +69,7 @@ a.delete{
 <script src="assets/global/plugins/datatables/DT_bootstrap.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function () {
+        $('.page-toolbar').remove();
         $('#filterColumn').on('change', function () {
             if ($('#txtFindData').val() != "")
                 TableEditable.init();

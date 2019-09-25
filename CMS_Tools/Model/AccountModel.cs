@@ -42,6 +42,159 @@ namespace CMS_Tools.Model
         //    connectString = ConnectionDB.GetConnectionDB(connect);
         //}
 
+        public int ResetPasswordWithPhone(string phone,string password)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectString2))
+                {
+                    connection.Open();
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandTimeout = Constants.TIMOUT_CONNECT_SQL;
+                        cmd.Connection = connection;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "sp_ResetNewPassword_WithPhone";
+                        cmd.Parameters.Add("@Phone", SqlDbType.VarChar, 10);
+                        cmd.Parameters["@Phone"].Value = phone;
+                        cmd.Parameters.Add("@Password", SqlDbType.VarChar, 20);
+                        cmd.Parameters["@Password"].Value = password;
+                        cmd.Parameters.Add("@Key", SqlDbType.VarChar, 100);
+                        cmd.Parameters["@Key"].Value = Lib.Constants.KEY_SQL;
+                        cmd.Parameters.Add("@Code", SqlDbType.Int);
+                        cmd.Parameters["@Code"].Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                        int code = int.Parse(cmd.Parameters["@Code"].Value.ToString());
+                        return code;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Lib.Logs.SaveError("Error ResetPasswordWithPhone: " + ex, ex);
+                throw new Exception(ex.Message);
+            }
+        }
+        /// <summary>
+        /// Check Email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="phone"></param>
+        /// <returns></returns>
+        public int CheckEmail(string email, ref string phone)
+        {
+            try
+            {
+                //using (SqlConnection connection = new SqlConnection(connectString2))
+                //{
+                //    connection.Open();
+                //    using (SqlCommand cmd = new SqlCommand())
+                //    {
+                //        cmd.CommandTimeout = Constants.TIMOUT_CONNECT_SQL;
+                //        cmd.Connection = connection;
+                //        cmd.CommandType = CommandType.StoredProcedure;
+                //        cmd.CommandText = "sp_CheckPhoneNumber";
+                //        cmd.Parameters.Add("@Phone", SqlDbType.VarChar, 10);
+                //        cmd.Parameters["@Phone"].Value = phone;
+                //        cmd.Parameters.Add("@Key", SqlDbType.VarChar, 100);
+                //        cmd.Parameters["@Key"].Value = Lib.Constants.KEY_SQL;
+                //        cmd.Parameters.Add("@Code", SqlDbType.Int);
+                //        cmd.Parameters["@Code"].Direction = ParameterDirection.Output;
+                //        cmd.ExecuteNonQuery();
+                //        int code = int.Parse(cmd.Parameters["@Code"].Value.ToString());
+                //        return code;
+                //    }
+                //}
+                using (SqlConnection connection = new SqlConnection(connectString2))
+                {
+                    connection.Open();
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandTimeout = Constants.TIMOUT_CONNECT_SQL;
+                        cmd.Connection = connection;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "sp_CheckEmail";
+                        cmd.Parameters.Add("@Email", SqlDbType.VarChar, 10);
+                        cmd.Parameters["@Email"].Value = email;
+                        cmd.Parameters.Add("@Key", SqlDbType.VarChar, 100);
+                        cmd.Parameters["@Key"].Value = Lib.Constants.KEY_SQL;
+                        cmd.Parameters.Add("@Code", SqlDbType.Int);
+                        cmd.Parameters["@Code"].Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add("@Phone", SqlDbType.VarChar, 10);
+                        cmd.Parameters["@Phone"].Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                        int code = int.Parse(cmd.Parameters["@Code"].Value.ToString());
+                        phone = cmd.Parameters["@Phone"].Value.ToString();
+                        return code;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Lib.Logs.SaveError("Error CheckPhoneNumber: " + ex, ex);
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Kiem tra sdt ton tai
+        /// </summary>
+        /// <param name="loginId"></param>
+        /// <param name="loginType"></param>
+        /// <returns></returns>
+        public int CheckPhoneNumber(string phone)
+        {
+            try
+            {
+                //using (SqlConnection connection = new SqlConnection(connectString2))
+                //{
+                //    connection.Open();
+                //    using (SqlCommand cmd = new SqlCommand())
+                //    {
+                //        cmd.CommandTimeout = Constants.TIMOUT_CONNECT_SQL;
+                //        cmd.Connection = connection;
+                //        cmd.CommandType = CommandType.StoredProcedure;
+                //        cmd.CommandText = "sp_CheckPhoneNumber";
+                //        cmd.Parameters.Add("@Phone", SqlDbType.VarChar, 10);
+                //        cmd.Parameters["@Phone"].Value = phone;
+                //        cmd.Parameters.Add("@Key", SqlDbType.VarChar, 100);
+                //        cmd.Parameters["@Key"].Value = Lib.Constants.KEY_SQL;
+                //        cmd.Parameters.Add("@Code", SqlDbType.Int);
+                //        cmd.Parameters["@Code"].Direction = ParameterDirection.Output;
+                //        cmd.ExecuteNonQuery();
+                //        int code = int.Parse(cmd.Parameters["@Code"].Value.ToString());
+                //        return code;
+                //    }
+                //}
+                using (SqlConnection connection = new SqlConnection(connectString2))
+                {
+                    connection.Open();
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandTimeout = Constants.TIMOUT_CONNECT_SQL;
+                        cmd.Connection = connection;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "sp_CheckPhoneNumber";
+                        cmd.Parameters.Add("@Phone", SqlDbType.VarChar, 10);
+                        cmd.Parameters["@Phone"].Value = phone;
+                        cmd.Parameters.Add("@Key", SqlDbType.VarChar, 100);
+                        cmd.Parameters["@Key"].Value = Lib.Constants.KEY_SQL;
+                        cmd.Parameters.Add("@Code", SqlDbType.Int);
+                        cmd.Parameters["@Code"].Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                        int code = int.Parse(cmd.Parameters["@Code"].Value.ToString());
+                        return code;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Lib.Logs.SaveError("Error CheckPhoneNumber: " + ex, ex);
+                throw new Exception(ex.Message);
+            }
+        }
+
+
         /// <summary>
         /// ResetPassword
         /// </summary>

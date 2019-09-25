@@ -15,7 +15,7 @@
     text-transform: uppercase;
 }
 .btn-group-xs>.btn, .btn-xs{
-	font-size:11px !important;
+	font-size:11x !important;
 }
 .table td, .table th {
     font-size: 12px !important;
@@ -33,32 +33,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitle" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="PageBar" runat="server">
-    <div class="page-bar">
-        <ul class="page-breadcrumb">
-            <li>
-                <i class="icon-home"></i>
-                <a href="Home.aspx">Home</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <span><label id="PageBar_lblMenuName">Tài khoản đại lý</label></span>
-            </li>
-        </ul>
-        <div class="page-toolbar">
-            <div class="btn-group pull-right">
-                <button id="btnAddAction" type="button" class="btn btn-fit-height blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false">
-                    Chức năng <i class="fa fa-angle-down"></i>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                    <li>
-                        <a href="javascript:;" id="btnAddNew"><i class="fa fa-plus"><!--  i--> Tạo KH Mới</i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="PageContent" runat="server">
     <div class="row">
         <div class="col-md-12">
             <div class="portlet box blue ">
@@ -152,6 +126,7 @@
                                     <td>Display</td>
                                     <td>Infomation</td>
                                     <td>FB</td>
+                                    <td>Vippoint</td>
                                     <td>Edit</td>
                                 </tr>
                             </thead>
@@ -331,9 +306,9 @@
     <script type="text/javascript">
         var colFilter = null;
         jQuery(document).ready(function () {
-            if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                $('.page-toolbar').remove();
-            }
+            //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+            //    $('.page-toolbar').remove();
+            //}
             $('#btnAddNew').html("<i class='fa fa-plus'></  i> Tạo KH Mới");
             FormValidation.init();
             $('#btnAddNew').click(function () {
@@ -364,13 +339,13 @@
             ComponentsPickers.init();
         });
 
-        function ChangeDisplayStt(type,id) {
+        function ChangeDisplayStt(type, id) {
             //console.log("type:" + type);
             $('.divLoading').fadeIn();
             POST_DATA("Apis/API_Agency.ashx", {
                 type: 7,
                 display: type,
-                agencyID : id
+                agencyID: id
             }, function (res) {
                 if (res.status == 1) {
                     TableEditable.init();
@@ -479,6 +454,7 @@
                                     "<td>Display</td>" +
                                     "<td>Infomation</td>" +
                                     "<td>FB</td>" +
+                                    "<td>VipPoint</td>" +
                                     "<td style='width:200px'>Chỉnh sửa</td>";
                                 if (oTable != null) {
                                     oTable.fnDestroy();
@@ -508,12 +484,13 @@
                                 for (var i = 0; i < data.data.length; i++) {
                                     var obj = data.data[i];
                                     var linkLock = "<a class='btn btn-xs red btn-circle btn-outline' onclick='LockAgency(\"" + obj[0].replace('uwin.', '') + "\");'> Khóa</a>";
-                                    var linkLockInfomation = "<a class='btn btn-xs purple btn-circle btn-outline' onclick='ChangeDisplayStt(false,`" + obj[0].replace('uwin.', '')+"`);'> Tắt hiển thị</a>";
+                                    var linkLockInfomation = "<a class='btn btn-xs purple btn-circle btn-outline' onclick='ChangeDisplayStt(false,`" + obj[0].replace('uwin.', '') + "`);'> Tắt hiển thị</a>";
                                     var base64Str = Base64.encode(obj[0] + '-' + obj[4]);
                                     if (obj[8] == "True")
                                         linkLock = "<a class='btn btn-xs default btn-circle btn-outline' onclick='UnLockAgency(\"" + obj[0].replace('uwin.', '') + "\");'> Mở khóa</a>";
-                                    if (obj[26] == "False") 
-                                        linkLockInfomation = "<a class='btn btn-xs default btn-circle btn-outline' onclick='ChangeDisplayStt(true,`" + obj[0].replace('uwin.', '') +"`);'> Mở hiển thị</a>";
+                                    if (obj[26] == "False")
+                                        linkLockInfomation = "<a class='btn btn-xs default btn-circle btn-outline' onclick='ChangeDisplayStt(true,`" + obj[0].replace('uwin.', '') + "`);'> Mở hiển thị</a>";
+                                    var linkExcept = "<a class='btn btn-xs yellow btn-circle btn-outline' onclick='ExceptMoneyAgency(\"" + obj[0] +"\");'> Trừ tiền</a>";
                                     $('#tbl_datatable tbody').append("<tr>" +
                                         "<td>" + obj[0] + "</td>" +
                                         "<td>" + obj[1] + "</td>" +
@@ -544,9 +521,11 @@
                                         "<td>" + obj[26] + "</td>" +
                                         "<td>" + obj[27] + "</td>" +
                                         "<td>" + obj[28] + "</td>" +
+                                        "<td>" + obj[29] + "</td>" +
                                         "<td>" + linkLock + linkLockInfomation +
                                         "<a class='btn btn-xs blue btn-circle btn-outline' href='Page.aspx?m=30&agencyid=" + base64Str + "' target='_blank'> Lịch sử giao dịch</a>" +
-                                        "<a class='btn btn-xs green btn-circle btn-outline' href='Page.aspx?m=27&agencyid=" + base64Str + "' target='_blank'> Nạp tiền</a></td > " +
+                                        "<a class='btn btn-xs green btn-circle btn-outline' href='Page.aspx?m=27&agencyid=" + base64Str + "' target='_blank'> Nạp tiền</a>" +
+                                        linkExcept +
                                         "</tr>");
                                 }
 
@@ -691,10 +670,10 @@
                                 oTable.fnSetColumnVis(28, bVis ? false : true);
                                 var bVis = oTable.fnSettings().aoColumns[29].bVisible;
                                 oTable.fnSetColumnVis(29, bVis ? false : true);
-                                if (JSON.parse($('#_userdata').val()).GroupID == 6) {
-                                    var bVis = oTable.fnSettings().aoColumns[30].bVisible;
-                                    oTable.fnSetColumnVis(30, bVis ? false : true);
-                                }
+                                //if (JSON.parse($('#_userdata').val()).GroupID == 6) {
+                                //    var bVis = oTable.fnSettings().aoColumns[30].bVisible;
+                                //    oTable.fnSetColumnVis(30, bVis ? false : true);
+                                //}
                                 var tableWrapper = $("#tbl_datatable_wrapper");
                                 jQuery('#tbl_datatable_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
                                 jQuery('#tbl_datatable_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
@@ -811,6 +790,47 @@
             }
         }();
 
+        function ExceptMoneyAgency(UwinID) {
+            bootbox.prompt({
+                title: "Nhập số tiền cần trừ!",
+                centerVertical: true,
+                callback: function (result) {
+                    if (result === null) {
+                        // Prompt dismissed
+                    } else {
+                        // result has a value
+                        $('.divLoading').fadeIn();
+                        var json = {
+                            "UwinID": UwinID,
+                            "Amount": result,
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "Apis/API_Agency.ashx",
+                            data: {
+                                json: JSON.stringify(json),
+                                type: 12
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                $(".divLoading").fadeOut(500);
+                                if (data.status == 1)
+                                    bootbox.alert({
+                                        message: data.msg,
+                                        callback: function () {
+                                            TableEditable.init();
+                                        }
+                                    });
+                                    
+                                else
+                                    bootbox.alert(data.msg);
+                            }
+                        });
+                    }
+
+                }
+            });
+        }
 
         function LockAgency(AgencyId) {
             bootbox.prompt({
