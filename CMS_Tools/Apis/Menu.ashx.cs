@@ -988,7 +988,7 @@ namespace CMS_Tools.Apis
             }
             catch (Exception ex)
             {
-                Logs.SaveError("ERROR GET_DATA_BY_MENU", ex);
+                Logs.SaveError("ERROR GET_DATA_BY_MENU", ex, false);
                 result.msg = ex.Message;
                 result.status = (int)Constants.NUMBER_CODE.ERROR_EX;
             }
